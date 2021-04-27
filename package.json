@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "pm2 start ./src/app.js -n 'Weiss'",
-    "staging": "pm2 reload ./src/app.js -n 'Weiss' --update-env",
-    "production": "pm2 reload ./src/app.js -n 'Weiss' --update-env",
+    "start": "npm run build && pm2 start ./src/app.js -n 'Weiss'",
+    "staging": "npm run build && pm2 reload ./src/app.js -n 'Weiss' --update-env",
+    "production": "npm run build && pm2 reload ./src/app.js -n 'Weiss' --update-env",
     "start_db": "rethinkdb --bind all",
     "fix_style": "stylelint '**/*.scss' --syntax scss --fix"
   },

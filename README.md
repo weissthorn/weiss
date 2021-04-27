@@ -12,12 +12,13 @@ Forum based on React and NodeJS
 - [NodeJS 12 LTS upward](https://github.com/nvm-sh/nvm/blob/master/README.md)
 - [RethinkDB 2.4 upward](https://rethinkdb.com/docs/install/)
 - Nginx
-- Apache server 2.4
 
 ### Installation
 
 ```
-npm i
+npx weiss weiss
+cd weiss
+npm start
 ```
 
 ### Goal
