@@ -1,37 +1,13 @@
-@import "../base";
-@import "../variables";
+@import '../base';
+@import '../variables';
 
-body{
-.navbar{
+body {
+  .navbar {
     background-color: $default;
-    .inner{
-        width: 1200px;
-        margin: 0 auto;
+
+    .inner {
+      margin: 0 auto;
+      width: 1200px;
     }
-    
-}
-
-.container{
-
-}
-
-.form-container{
-
-}
-
-.post{
-
-}
-
-.comment{
-
-}
-
-.single-post{
-
-}
-
-.footer{
-
-}
+  }
 }

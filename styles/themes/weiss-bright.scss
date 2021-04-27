@@ -6,11 +6,12 @@ body {
     'Open Sans', 'Helvetica Neue', sans-serif;
 
   .page {
+    height: 100%;
     position: absolute;
     width: 100%;
-    height: 100%;
+
     &.grey {
-      background: #f2f4ff;
+      background: #ebf6f7;
     }
 
     &.top {
@@ -19,23 +20,24 @@ body {
   }
 
   .navbar {
+    background-color: $default;
+    min-height: 50px;
     position: fixed;
     top: 0;
-    background-color: $default;
     width: 100%;
-    min-height: 50px;
     z-index: 5000;
+
     .inner {
-      width: 1200px;
       margin: 0 auto;
+      width: 1200px;
       // margin-top: 5px;
 
       .logo {
         color: $accent;
         float: left;
         font-size: 16px;
-        text-align: center;
         padding: 14px 16px;
+        text-align: center;
         text-decoration: none;
       }
 
@@ -43,12 +45,13 @@ body {
         &.right {
           float: right;
         }
+
         a {
           color: $accent;
           float: left;
           font-size: 16px;
-          text-align: center;
           padding: 14px 16px;
+          text-align: center;
           text-decoration: none;
         }
 
@@ -57,14 +60,14 @@ body {
           overflow: hidden;
 
           .dropbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
             background-color: inherit;
+            border: none;
+            color: white;
             font-family: inherit;
+            font-size: 16px;
             margin: 0;
+            outline: none;
+            padding: 14px 16px;
           }
         }
 
@@ -74,20 +77,20 @@ body {
         }
 
         .dropdown-content {
-          display: none;
-          position: absolute;
           background-color: #f9f9f9;
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          display: none;
           min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          position: absolute;
           z-index: 1;
 
           a {
-            float: none;
             color: black;
-            padding: 12px 16px;
-            text-decoration: none;
             display: block;
+            float: none;
+            padding: 12px 16px;
             text-align: left;
+            text-decoration: none;
 
             &:hover {
               background-color: #ddd;
@@ -104,53 +107,54 @@ body {
     .search {
       float: left;
       font-size: 16px;
-      padding: 10px;
       margin-left: 10px;
+      padding: 10px;
       text-decoration: none;
       width: 400px;
 
       input {
-        width: 100%;
-        height: 30px;
-        outline: none;
         border: none;
         border-radius: 3px;
+        height: 30px;
+        outline: none;
         padding: 10px;
+        width: 100%;
       }
+
       .results {
-        position: absolute;
         background-color: #fff;
-        width: 400px;
-        padding: 10px;
-        margin-top: 5px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
-        min-height: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
         display: none;
+        margin-top: 5px;
+        min-height: 160px;
+        padding: 10px;
+        position: absolute;
+        width: 400px;
+        z-index: 1;
       }
     }
   }
 
   .container {
-    width: 1200px;
     margin: 0 auto;
+    width: 1200px;
   }
 
   .form-container {
-    width: 500px;
-    margin: 0 auto;
-    margin-top: 100px;
+    background: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background: #fff;
+    margin: 0 auto;
+    margin-top: 100px;
     padding: 15px;
+    width: 500px;
   }
 
   .single-post {
+    display: block;
     margin-bottom: 20px;
     text-decoration: none;
-    display: block;
 
     &:visited,
     &:active {
@@ -159,20 +163,22 @@ body {
 
     .post {
       h3 {
-        font-size: 16px;
         color: #444;
+        font-size: 16px;
         margin: 0;
         margin-bottom: 10px;
       }
+
       .name {
-        font-size: 14px;
         color: #777;
+        font-size: 14px;
         font-weight: bold;
       }
+
       .date,
       .reply {
-        font-size: 14px;
         color: #999;
+        font-size: 14px;
         margin-left: 10px;
       }
     }
@@ -182,18 +188,22 @@ body {
         margin-left: -7px;
         z-index: 1;
       }
+
       img:nth-child(4) {
         margin-left: -7px;
         z-index: 2;
       }
+
       img:nth-child(3) {
         margin-left: -7px;
         z-index: 3;
       }
+
       img:nth-child(2) {
         margin-left: -7px;
         z-index: 4;
       }
+
       img:nth-child(1) {
         margin-left: -7px;
         z-index: 5;
@@ -207,6 +217,7 @@ body {
       margin: 0;
       margin-bottom: 10px;
     }
+
     .meta {
       margin-bottom: 10px;
 
@@ -216,14 +227,14 @@ body {
     }
 
     .post-thread {
-      margin-top: 40px;
-      margin-bottom: 20px;
       border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
+      margin-top: 40px;
 
       img {
-        width: 60px;
-        height: 60px;
         border-radius: 50%;
+        height: 60px;
+        width: 60px;
       }
 
       .name {
@@ -244,31 +255,31 @@ body {
 
   .dropbtn {
     background: transparent;
-    color: #444;
-    padding: 16px;
-    padding-left: 0px;
-    font-size: 16px;
     border: none;
+    color: #444;
+    font-size: 16px;
+    padding: 16px;
+    padding-left: 0;
   }
 
   .dropdown {
-    position: relative;
     display: inline-block;
+    position: relative;
   }
 
   .dropdown-content {
-    display: none;
-    position: absolute;
     background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    display: none;
     min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
     z-index: 1;
 
     a {
       color: black;
+      display: block;
       padding: 12px 16px;
       text-decoration: none;
-      display: block;
 
       &:hover {
         background-color: #ddd;
@@ -278,33 +289,113 @@ body {
 
   input,
   textarea {
-    resize: none;
-    outline: none;
+    &:focus {
+      border: 1px solid $default;
+      box-shadow: 0 8px 16px 0 rgba(46, 204, 113, 0.2);
+    }
+
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 5px;
+    box-sizing: border-box;
     font-size: 15px;
     height: 40px;
-    box-sizing: border-box;
     margin-bottom: 20px;
+    outline: none;
+    padding: 5px;
+    resize: none;
 
     &.block {
       width: 100%;
     }
-
-    &:focus {
-      border: 1px solid $default;
-    }
   }
 
   .dropdown:hover {
-    .dropdown-content {
-      display: block;
-    }
-
     .dropbtn {
       opacity: 0.8;
     }
+
+    .dropdown-content {
+      display: block;
+    }
+  }
+
+  .btn {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+
+  /* Green */
+
+  .success {
+    border-color: #4caf50;
+    color: green;
+
+    &:hover {
+      background-color: #4caf50;
+      color: white;
+    }
+  }
+
+  /* Blue */
+
+  .info {
+    border-color: #2196f3;
+    color: dodgerblue;
+
+    &:hover {
+      background: #2196f3;
+      color: white;
+    }
+  }
+
+  /* Orange */
+
+  .warning {
+    border-color: #ff9800;
+    color: orange;
+
+    &:hover {
+      background: #ff9800;
+      color: white;
+    }
+  }
+
+  /* Red */
+
+  .danger {
+    border-color: #f44336;
+    color: red;
+
+    &:hover {
+      background: #f44336;
+      color: white;
+    }
+  }
+
+  /* Gray */
+
+  .default {
+    border-color: #e7e7e7;
+    color: black;
+
+    &:hover {
+      background: #e7e7e7;
+    }
+  }
+
+  .facebook {
+    background: #3b5998;
+    color: white;
+  }
+
+  .twitter {
+    background: #55acee;
+    color: white;
   }
 
   .footer {
@@ -313,8 +404,8 @@ body {
 
   @media (max-width: 768px) {
     .container {
-      width: 100%;
       padding: 15px;
+      width: 100%;
     }
   }
 }

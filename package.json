@@ -9,7 +9,8 @@
     "start": "pm2 start ./src/app.js -n 'Weiss'",
     "staging": "pm2 reload ./src/app.js -n 'Weiss' --update-env",
     "production": "pm2 reload ./src/app.js -n 'Weiss' --update-env",
-    "start_db": "rethinkdb --bind all"
+    "start_db": "rethinkdb --bind all",
+    "fix_style": "stylelint '**/*.scss' --syntax scss --fix"
   },
   "author": "Olalekan Animashaun <kim.olalekan@gmail.com> (https://kimolalekan.github.io/)",
   "license": "MIT",
@@ -44,6 +45,10 @@
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "sass": "^1.32.11",
+    "stylelint": "^13.13.0",
+    "stylelint-config-standard-scss": "^1.1.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.19.0",
     "supertest": "^4.0.2"
   }
 }
