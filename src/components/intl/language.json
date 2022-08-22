@@ -1,0 +1,37 @@
+{
+  "en": [
+    "light",
+    "dark",
+    "Search....",
+    "Profile",
+    "Admin",
+    "Log out",
+    "Start a discussion",
+    "Discussion",
+    "Discussions",
+    "comment",
+    "comments",
+    "reply",
+    "replies",
+    "moderator",
+    "moderators"
+  ],
+  "es": [
+    "Ligera",
+    "Oscura",
+    "Búsqueda...",
+    "Perfil",
+    "Administración",
+    "Cerrar sesión",
+    "Iniciar una discusión",
+    "Discusión",
+    "Discusiónes",
+    "comentario",
+    "comentarios",
+    "respuesta",
+    "respuestas",
+    "moderador",
+    "moderadores"
+  ],
+  "fr": [""]
+}
