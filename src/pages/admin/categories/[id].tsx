@@ -14,6 +14,7 @@ import { ChromePicker } from 'react-color';
 import { useRouter } from 'next/router';
 import AdminNavbar from 'components/admin/Navbar';
 import Sidebar from 'components/admin/Sidebar';
+import Auth from 'components/admin/Auth';
 import CategoryStore from 'stores/category';
 import UserStore from 'stores/user';
 
@@ -55,7 +56,7 @@ const EditCategory = observer(() => {
   };
 
   return (
-    <div>
+    <Auth>
       <Toaster />
       <AdminNavbar title="Edit a category" description="Edit a category" />
 
@@ -153,7 +154,7 @@ const EditCategory = observer(() => {
           </div>
         </main>
       </div>
-    </div>
+    </Auth>
   );
 });
 

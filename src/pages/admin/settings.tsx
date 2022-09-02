@@ -13,6 +13,7 @@ import { Image } from '@geist-ui/icons';
 import AdminNavbar from 'components/admin/Navbar';
 import Sidebar from 'components/admin/Sidebar';
 import SettingsStore from 'stores/settings';
+import Auth from 'components/admin/Auth';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Settings = observer(() => {
@@ -71,7 +72,7 @@ const Settings = observer(() => {
   };
 
   return (
-    <div>
+    <Auth>
       <AdminNavbar title="Settings" description="Settings - Weiss" />
       <Toaster />
       <div className="page-container top-100">
@@ -513,7 +514,7 @@ const Settings = observer(() => {
           </Collapse.Group>
         </main>
       </div>
-    </div>
+    </Auth>
   );
 });
 

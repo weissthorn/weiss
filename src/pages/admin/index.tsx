@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Card, Text, Grid, Select } from '@geist-ui/core';
+import moment from 'moment';
+import { Card, Text, Grid, Input } from '@geist-ui/core';
 import CountUp from 'react-countup';
 import dynamic from 'next/dynamic';
 const Chart = dynamic(() => import('react-apexcharts'), {
@@ -8,23 +9,70 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 });
 import Navbar from 'components/admin/Navbar';
 import Sidebar from 'components/admin/Sidebar';
+import Auth from 'components/admin/Auth';
 import DateModal from 'components/modals/DateModal';
+import AnalyticsStore from 'stores/analytics';
 
 const Dashboard = observer(() => {
+  const [modal, toggleDate] = useState(false);
+  const [
+    {
+      loading,
+      users,
+      discussions,
+      pageviews,
+      getUsers,
+      getDiscussions,
+      getPageviews
+    }
+  ] = useState(() => new AnalyticsStore());
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
+
+  useEffect(() => {
+    let from = moment(date[0].startDate).format('YYYY-MM-DD');
+    let to = moment(date[0].endDate).format('YYYY-MM-DD');
+    getUsers(from, to);
+    getDiscussions(from, to);
+    getPageviews(from, to);
+  }, []);
+
+  const processAnalytics = async () => {
+    let from = moment(date[0].startDate).format('YYYY-MM-DD');
+    let to = moment(date[0].endDate).format('YYYY-MM-DD');
+    getUsers(from, to);
+    getDiscussions(from, to);
+    getPageviews(from, to);
+    toggleDate(false);
+  };
+
   const series = [
     {
+      name: 'Users',
+      data: users.map((item: any) => item.count)
+    },
+    {
       name: 'Discussions',
-      data: [31, 40, 28, 51, 42, 109, 100]
+      data: discussions.map((item: any) => item.count)
     },
     {
       name: 'Pageviews',
-      data: [11, 32, 45, 32, 34, 52, 41]
+      data: pageviews.map((item: any) => item.count)
     }
   ];
   const options: any = {
     chart: {
       height: 350,
       type: 'area'
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left'
     },
     dataLabels: {
       enabled: false
@@ -34,15 +82,7 @@ const Dashboard = observer(() => {
     },
     xaxis: {
       type: 'datetime',
-      categories: [
-        '2018-09-19T00:00:00.000Z',
-        '2018-09-19T01:30:00.000Z',
-        '2018-09-19T02:30:00.000Z',
-        '2018-09-19T03:30:00.000Z',
-        '2018-09-19T04:30:00.000Z',
-        '2018-09-19T05:30:00.000Z',
-        '2018-09-19T06:30:00.000Z'
-      ]
+      categories: discussions.map((item: any) => item.day)
     },
     tooltip: {
       x: {
@@ -51,10 +91,28 @@ const Dashboard = observer(() => {
     }
   };
 
+  const userTotal = users
+    .map((item: any) => item.count)
+    .reduce((a: number, b: number) => a + b, 0);
+
+  const discussionTotal = discussions
+    .map((item: any) => item.count)
+    .reduce((a: number, b: number) => a + b, 0);
+
+  const pageviewTotal = pageviews
+    .map((item: any) => item.count)
+    .reduce((a: number, b: number) => a + b, 0);
+
   return (
-    <div>
-      <Navbar title="Users" description="Weiss" />
-      <DateModal show={true} />
+    <Auth>
+      <Navbar title="Dashboard" description="Dashboard" />
+      <DateModal
+        show={modal}
+        date={date}
+        toggleModal={() => toggleDate(!modal)}
+        setDate={setDate}
+        actionTrigger={processAnalytics}
+      />
       <div className="page-container top-100">
         <Sidebar active="dashboard" />
 
@@ -64,15 +122,13 @@ const Dashboard = observer(() => {
               <Text h3>Dashboard</Text>
             </div>
             <div className="item">
-              <Select value={'today'}>
-                <Select.Option value="today">Today</Select.Option>
-                <Select.Option value="yesterday">Yesterday</Select.Option>
-                <Select.Option value="week">This week</Select.Option>
-                <Select.Option value="last-week">Last week</Select.Option>
-                <Select.Option value="month">This month</Select.Option>
-                <Select.Option value="last-month">Last month</Select.Option>
-                <Select.Option value="custom">Date range</Select.Option>
-              </Select>
+              <Input
+                width="100%"
+                placeholder={`${moment(date[0].startDate).format(
+                  'MMM D, YYYY'
+                )} - ${moment(date[0].endDate).format('MMM D, YYYY')}`}
+                onClick={() => toggleDate(true)}
+              />
             </div>
           </div>
 
@@ -80,7 +136,7 @@ const Dashboard = observer(() => {
             <Grid xs={24} md={8}>
               <Card shadow width={'100%'}>
                 <Text h3 my={0}>
-                  <CountUp prefix="" start={0} end={134449} separator="," />
+                  <CountUp prefix="" start={0} end={userTotal} separator="," />
                 </Text>
                 <Text h6 my={0}>
                   Users
@@ -90,7 +146,12 @@ const Dashboard = observer(() => {
             <Grid xs={24} md={8}>
               <Card shadow width={'100%'}>
                 <Text h3 my={0}>
-                  <CountUp prefix="" start={0} end={5699439} separator="," />
+                  <CountUp
+                    prefix=""
+                    start={0}
+                    end={discussionTotal}
+                    separator=","
+                  />
                 </Text>
                 <Text h6 my={0}>
                   Discussions
@@ -103,7 +164,7 @@ const Dashboard = observer(() => {
                   <CountUp
                     prefix=""
                     start={0}
-                    end={45348499439}
+                    end={pageviewTotal}
                     separator=","
                   />
                 </Text>
@@ -120,7 +181,7 @@ const Dashboard = observer(() => {
           </Grid.Container>
         </main>
       </div>
-    </div>
+    </Auth>
   );
 });
 

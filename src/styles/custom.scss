@@ -32,6 +32,10 @@ body {
   .right-side {
     float: left;
     width: 230px;
+
+    &.max {
+      width: 300px;
+    }
   }
 
   .caret {
@@ -46,6 +50,10 @@ body {
     min-height: 100vh;
     height: 100%;
     overflow: auto;
+
+    &.max-width {
+      width: 300px;
+    }
 
     .collapse {
       border: none;
@@ -101,10 +109,10 @@ body {
     }
 
     .post-link {
-      font-size: 16px !important;
+      font-size: 13px !important;
       width: 100%;
       color: inherit;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
   }
 
@@ -202,7 +210,8 @@ body {
   }
 
   .notification-container {
-    max-width: 600px;
+    box-sizing: border-box;
+    max-width: 650px;
     margin: 0 auto;
   }
 
@@ -228,15 +237,24 @@ body {
     }
   }
 
+  .text-category {
+    color: #fff !important;
+    // text-shadow: 0 1px 0 rgb(0, 0, 0, 0.5);
+  }
+
+  .search-input {
+    width: 320px !important;
+  }
+
   .post {
     width: 100%;
     display: grid;
-    grid-template-columns: 50px 500px 140px;
+    grid-template-columns: 50px auto 140px;
     grid-gap: 20px;
     margin-top: 15px;
 
     &.without-right {
-      grid-template-columns: 50px auto;
+      grid-template-columns: 6vh auto;
     }
 
     &.minimal {
@@ -265,7 +283,7 @@ body {
   .discussion-container {
     width: 100%;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: auto 350px;
     grid-gap: 50px;
     margin-top: 15px;
   }
@@ -314,10 +332,10 @@ body {
         border: none;
       }
 
-      .sun-editor .se-menu-list li,
-      li {
+      .se-menu-list ul li,
+      ul li {
         &::before {
-          content: '';
+          content: '' !important;
         }
       }
 
@@ -333,6 +351,24 @@ body {
     }
   }
 
+  .editor {
+    .ql-toolbar {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .ql-container {
+      border-top: 0;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+
+  ul li {
+    &::before {
+      content: '' !important;
+    }
+  }
+
   .column {
     width: 100%;
     display: grid;
@@ -344,10 +380,68 @@ body {
   .dashboard-header {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 20px;
     margin-top: 15px;
     margin-bottom: 50px;
+  }
+
+  .discuss-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  .custom-tab {
+    margin-bottom: 10px;
+    .link {
+      font-size: 14px;
+      padding: 5px 10px;
+      margin-right: 5px;
+
+      &.active,
+      &:hover {
+        border-bottom: 2px solid #000;
+      }
+    }
+  }
+
+  .custom-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    // background-color: rgba(255, 255, 255, 1);
+    backdrop-filter: saturate(180%) blur(5px);
+    background-color: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
+    z-index: 5000;
+
+    &.all {
+      z-index: 10000;
+
+      .inner {
+        margin-top: 15%;
+        padding: 10px;
+      }
+    }
+
+    .close {
+      float: right;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .inner {
+      max-width: 500px;
+      height: 100%;
+      margin: 0 auto;
+      overflow: auto;
+    }
   }
 
   .custom-badge {
@@ -432,6 +526,11 @@ body {
     }
   }
 
+  .username {
+    font-size: 0.875em !important;
+    text-transform: lowercase;
+  }
+
   .pointer {
     cursor: pointer;
   }
@@ -444,7 +543,15 @@ body {
     text-align: center !important;
   }
 
+  .mobile {
+    display: none;
+  }
+
   @media (max-width: 768px) {
+    .mobile {
+      display: initial;
+    }
+
     .navbar {
       .inner {
         width: 100% !important;
@@ -487,9 +594,17 @@ body {
       grid-template-columns: auto;
     }
 
+    .dashboard-header {
+      grid-template-columns: 1fr 2fr;
+    }
+
     .post {
       display: grid;
       grid-template-columns: 50px auto !important;
+
+      &.minimal {
+        grid-template-columns: auto !important;
+      }
 
       .item {
         &.last {

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import NextLink from 'next/link';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import {
   Text,
   Popover,
-  AutoComplete,
   Link,
   Button,
   Grid,
@@ -12,22 +12,28 @@ import {
   User,
   Spacer,
   Badge,
-  Image
+  Image,
+  Input,
+  Tabs
 } from '@geist-ui/core';
 import {
   Sun,
   Moon,
   Bell,
-  Power,
   Search,
   Menu,
   ChevronDown,
-  Edit
+  Edit,
+  XCircleFill
 } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import useToken from './Token';
+import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import DiscussionStore from 'stores/discussion';
+import NotificationStore from 'stores/notification';
+// import { useAnalytics } from './Analytics';
 
 type navbarProps = {
   title?: string;
@@ -38,16 +44,27 @@ type navbarProps = {
 
 const Navbar = observer((props: navbarProps) => {
   const token = useToken();
+  // const trackPage = useAnalytics();
   const router = useRouter();
   const cookie = parseCookies();
   const [theme, setTheme] = useState('weiss-light');
   const [show, setMenu] = useState(false);
+  const [modal, toggleSearch] = useState<any>(false);
   const { title, description, hide, startConversation } = props;
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
+  const [{ unread, getUnreadNotification }] = useState(
+    () => new NotificationStore()
+  );
+  const [{ users, setUsers, searchUsers }] = useState(() => new UserStore());
+  const [{ discussions, setDiscussions, publicDiscussionSearch }] = useState(
+    () => new DiscussionStore()
+  );
 
   useEffect(() => {
     cookie && cookie.theme ? setTheme(cookie.theme) : '';
     getSettings();
+    // trackPage();
+    token.id ? getUnreadNotification(token.id) : null;
   }, [theme, token]);
 
   const switchTheme = (val: string) => {
@@ -61,6 +78,17 @@ const Navbar = observer((props: navbarProps) => {
     return first[0];
   };
 
+  const handleSearch = async (val: string) => {
+    val = val.trim();
+    if (val.length) {
+      await publicDiscussionSearch(val);
+      await searchUsers(val);
+    } else {
+      setDiscussions([]);
+      setUsers([]);
+    }
+  };
+
   const logout = () => {
     destroyCookie(null, '_w_auth');
     router.push('/login');
@@ -69,13 +97,17 @@ const Navbar = observer((props: navbarProps) => {
   const menu = () => (
     <div>
       <Popover.Item>
-        <Link href={`/u/${token.username}`}>Profile</Link>
+        <NextLink href={`/u/${token.username}`}>
+          <Link>Profile</Link>
+        </NextLink>
       </Popover.Item>
       <Popover.Item line />
       {token.role === 'admin' ? (
         <>
           <Popover.Item>
-            <Link href="/admin">Admin</Link>
+            <NextLink href="/admin">
+              <Link>Admin</Link>
+            </NextLink>
           </Popover.Item>
           <Popover.Item line />
         </>
@@ -83,7 +115,9 @@ const Navbar = observer((props: navbarProps) => {
         ''
       )}
       <Popover.Item>
-        <Link href="/settings">Settings</Link>
+        <NextLink href="/settings">
+          <Link>Settings</Link>
+        </NextLink>
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
@@ -122,30 +156,41 @@ const Navbar = observer((props: navbarProps) => {
             src={token.photo ? `/storage/${token.photo}` : '/images/avatar.png'}
             name={getFirstName(token.name)}
           />
-          <Spacer w={0.5} />
-          <AutoComplete
-            width={'100%'}
-            iconRight={<Search />}
-            placeholder="Search....."
-            clearable
-            options={options}
-          />
+
           <Text p>
-            <Link href="/">Discussions</Link>
+            <NextLink href="/start-discussion">
+              <Link>Start a Discussion</Link>
+            </NextLink>
           </Text>
           <Text p>
-            <Link href="/categories">Category</Link>
+            <NextLink href="/">
+              <Link>Discussions</Link>
+            </NextLink>
           </Text>
           <Text p>
-            <Link href={`/u/${token.username}`}>Profile</Link>
+            <NextLink href="/category">
+              <Link>Categories</Link>
+            </NextLink>
+          </Text>
+          <Text p>
+            <NextLink href={`/u/${token.username}`}>
+              <Link>Profile</Link>
+            </NextLink>
           </Text>
           {token.role === 'admin' ? (
             <Text p>
-              <Link href="/admin">Admin</Link>
+              <NextLink href="/admin">
+                <Link>Admin</Link>
+              </NextLink>
             </Text>
           ) : (
             ''
           )}
+          <Text p>
+            <NextLink href="/settings">
+              <Link>Settings</Link>
+            </NextLink>
+          </Text>
           <Text p>
             <Link href="#" icon onClick={logout}>
               Log out <Spacer w={0.5} inline />
@@ -155,27 +200,29 @@ const Navbar = observer((props: navbarProps) => {
       ) : (
         <>
           <Text p>
-            <Link href="/">Discussions</Link>
+            <NextLink href="/">
+              <Link>Discussions</Link>
+            </NextLink>
           </Text>
           <Text p>
-            <Link href="/categories">Category</Link>
+            <NextLink href="/category">
+              <Link>Categories</Link>
+            </NextLink>
           </Text>
           <Text p>
-            <Link href="/signup">Signup</Link>
+            <NextLink href="/signup">
+              <Link>Signup</Link>
+            </NextLink>
           </Text>
           <Text p>
-            <Link href="/login">Login</Link>
+            <NextLink href="/login">
+              <Link>Login</Link>
+            </NextLink>
           </Text>
         </>
       )}
     </div>
   );
-
-  const options = [
-    { label: 'London', value: 'london' },
-    { label: 'Sydney', value: 'sydney' },
-    { label: 'Shanghai', value: 'shanghai' }
-  ];
 
   return (
     <div className="navbar">
@@ -188,31 +235,125 @@ const Navbar = observer((props: navbarProps) => {
         <link rel="icon" href={`/storage/${settings.siteFavicon}`} />
       </Head>
 
+      {modal ? (
+        <div className="custom-modal">
+          <span className="close" onClick={() => toggleSearch(!modal)}>
+            <XCircleFill size={30} />
+          </span>
+          <div className="inner">
+            <Spacer h={3} />
+            <Input
+              scale={4 / 3}
+              width="100%"
+              iconRight={<Search />}
+              placeholder="Search discussion, user, email....."
+              clearable
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+            <Spacer h={3} />
+
+            <div>
+              <Tabs initialValue="1" leftSpace="0">
+                <Tabs.Item value="1" label="Discussion">
+                  {discussions.map((item) => (
+                    <div key={item.id}>
+                      <NextLink href={`/d/${item.slug}`}>
+                        <Link width="100%">
+                          <Text h4 mb="0">
+                            {item.title}
+                          </Text>
+                        </Link>
+                      </NextLink>
+                    </div>
+                  ))}
+                </Tabs.Item>
+                <Tabs.Item value="2" label="User">
+                  <Spacer h={2} />
+                  {users.map((item) => (
+                    <div key={item.id}>
+                      <NextLink href={`/u/${item.username}`}>
+                        <Link width="100%" mb={1}>
+                          <User
+                            scale={3}
+                            src={`${
+                              item.photo
+                                ? '/storage/' + item.photo
+                                : '/images/avatar.png'
+                            }`}
+                            name={
+                              <h4 style={{ marginTop: 10 }}>
+                                {item.name} &nbsp;&nbsp;
+                                <Text small className="username">
+                                  @{item.username}
+                                </Text>
+                              </h4>
+                            }
+                          ></User>
+                        </Link>
+                      </NextLink>
+                    </div>
+                  ))}
+                </Tabs.Item>
+              </Tabs>
+              <Spacer h={3} />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+
       <Card shadow width="100%" style={{ display: hide ? 'none' : 'inherit' }}>
         <div className="inner">
           <Grid.Container gap={0}>
-            <Grid xs={18} md={5}>
-              <Link href="/">
-                {settings.siteLogo ? (
-                  <Image
-                    className="site-logo"
-                    src={`/storage/${settings.siteLogo}`}
-                    style={{ width: 'auto', height: 30 }}
-                  />
-                ) : (
-                  <Text span>{settings.siteName}</Text>
-                )}
-              </Link>
+            <Grid xs={16} md={4}>
+              <NextLink href="/">
+                <Link>
+                  {settings.siteLogo ? (
+                    <Image
+                      className="site-logo"
+                      src={`/storage/${settings.siteLogo}`}
+                      style={{ width: 'auto', height: 30 }}
+                    />
+                  ) : (
+                    <Text span>{settings.siteName}</Text>
+                  )}
+                </Link>
+              </NextLink>
             </Grid>
-            <Grid xs={6} md={0}>
+            <Grid xs={0} md={9}>
+              <NextLink href="/">
+                <Link>Discussions</Link>
+              </NextLink>
+
+              <Spacer inline />
+              <NextLink href="/category">
+                <Link>Categories</Link>
+              </NextLink>
+              <Spacer inline />
+              <NextLink href="/members">
+                <Link>Members</Link>
+              </NextLink>
+            </Grid>
+            <Grid xs={8} md={0}>
+              <span className="pointer" onClick={() => toggleSearch(!modal)}>
+                <Search />
+              </span>
+              <Spacer w={3} inline />
               {token.id ? (
                 <Badge.Anchor>
-                  <Badge type="error" scale={0.5}>
-                    10
-                  </Badge>
-                  <Link href="/notification">
-                    <Bell />
-                  </Link>
+                  {unread ? (
+                    <Badge type="error" scale={0.5}>
+                      {unread}
+                    </Badge>
+                  ) : (
+                    ''
+                  )}
+                  <NextLink href="/notifications">
+                    <Link>
+                      <Bell />
+                    </Link>
+                  </NextLink>
                 </Badge.Anchor>
               ) : (
                 ''
@@ -226,33 +367,40 @@ const Navbar = observer((props: navbarProps) => {
               />
               <Spacer w={2} inline />
             </Grid>
-            <Grid xs={0} md={8}>
-              <AutoComplete
-                width={'100%'}
-                iconRight={<Search />}
-                placeholder="Search....."
-                clearable
-                options={options}
-              />
-            </Grid>
-            <Grid xs={0} md={8}>
+
+            <Grid xs={0} md={7}>
               {token.id ? (
                 <>
-                  <Spacer w={6} inline />
-                  <Link href="#" onClick={startConversation}>
-                    <Edit />
-                  </Link>
-                  <Spacer w={2} inline />
-                  <Badge.Anchor>
-                    <Badge type="error" scale={0.5}>
-                      10
-                    </Badge>
-                    <Link href="/notifications">
-                      <Bell />
+                  <span
+                    className="pointer"
+                    onClick={() => toggleSearch(!modal)}
+                  >
+                    <Search />
+                  </span>
+                  <Spacer w={1.5} inline />
+                  <NextLink href="/start-discussion">
+                    <Link>
+                      <Edit />
                     </Link>
+                  </NextLink>
+
+                  <Spacer w={1.5} inline />
+                  <Badge.Anchor>
+                    {unread ? (
+                      <Badge type="error" scale={0.5}>
+                        {unread}
+                      </Badge>
+                    ) : (
+                      ''
+                    )}
+                    <NextLink href="/notifications">
+                      <Link>
+                        <Bell />
+                      </Link>
+                    </NextLink>
                   </Badge.Anchor>
-                  <Spacer w={2} inline />
-                  <Popover content={menu}>
+                  <Spacer w={1.5} inline />
+                  <Popover offset={0} content={menu}>
                     <User
                       className="pointer"
                       src={
@@ -268,9 +416,20 @@ const Navbar = observer((props: navbarProps) => {
               ) : (
                 <>
                   <Spacer w={4} inline />
-                  <Link href="/signup">Signup</Link>
+                  <span
+                    className="pointer"
+                    onClick={() => toggleSearch(!modal)}
+                  >
+                    <Search />
+                  </span>
                   <Spacer w={2} inline />
-                  <Link href="/login">Login</Link>
+                  <NextLink href="/signup">
+                    <Link>Signup</Link>
+                  </NextLink>
+                  <Spacer w={2} inline />
+                  <NextLink href="/login">
+                    <Link>Login</Link>
+                  </NextLink>
                 </>
               )}
             </Grid>

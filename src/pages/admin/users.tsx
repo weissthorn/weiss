@@ -17,6 +17,7 @@ import Sidebar from 'components/admin/Sidebar';
 import UserStore from 'stores/user';
 import { userProp } from 'interfaces/user';
 import toast, { Toaster } from 'react-hot-toast';
+import Auth from 'components/admin/Auth';
 
 const Admin = observer(() => {
   const [modal, toggleModal] = useState(false);
@@ -105,7 +106,7 @@ const Admin = observer(() => {
   };
 
   return (
-    <div>
+    <Auth>
       <AdminNavbar title="Users" description="Weiss" />
       <Toaster />
       <UserModal
@@ -174,7 +175,7 @@ const Admin = observer(() => {
           )}
         </main>
       </div>
-    </div>
+    </Auth>
   );
 });
 

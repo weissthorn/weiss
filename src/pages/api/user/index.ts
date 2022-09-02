@@ -1,8 +1,9 @@
 import signale from 'signale';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { r, User } from '../../../components/api/model';
-import { withAuth } from '../../../components/api/utils';
+import { r, User, Discussion } from '../../../components/api/model';
+import { asyncForEach, withAuth } from '../../../components/api/utils';
 import { userProp } from 'interfaces/user';
+import { discussionProp } from 'interfaces/discussion';
 
 const index = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {
@@ -20,14 +21,26 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
       await User.orderBy(r.desc('createdAt'))
         .skip(offset)
         .limit(limit)
-        .then(async (data: any) => {
+        .then(async (data: userProp[]) => {
           data = data.map((item: userProp) => ({
             ...item,
             ...{ password: undefined }
           }));
 
-          await User.orderBy(r.desc('createdAt')).then((c: any) => {
-            res.status(200).json({ success: true, data, count: c.length });
+          await User.orderBy(r.desc('createdAt')).then(async (c: any) => {
+            let members: userProp[] = [];
+            await asyncForEach(data, async (item: userProp) => {
+              await Discussion.filter({ userId: item.id }).then(
+                (discussions: discussionProp[]) => {
+                  item = { ...item, discussion: discussions.length };
+                  members.push(item);
+                }
+              );
+            }).finally(() => {
+              res
+                .status(200)
+                .json({ success: true, data: members, count: c.length });
+            });
           });
         })
         .catch((err: any) => signale.fatal(err));

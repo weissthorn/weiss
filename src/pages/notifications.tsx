@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Spacer, Text, User, Card, Link, Button, Avatar } from '@geist-ui/core';
 import {
-  ChevronRightCircle,
-  ChevronLeftCircle,
-  Circle,
-  ChevronDown
-} from '@geist-ui/icons';
+  Spacer,
+  Text,
+  User,
+  Card,
+  Loading,
+  Button,
+  Avatar
+} from '@geist-ui/core';
+import { ChevronDown } from '@geist-ui/icons';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import NotificationStore from 'stores/notification';
@@ -16,31 +19,71 @@ import moment from 'moment';
 const Notifications = observer(() => {
   const token = useToken();
   const router = useRouter();
-  const [store] = useState(() => new NotificationStore());
-  const { loading, page, limit, notifications, getNotifications } = store;
+  const [
+    {
+      loading,
+      page,
+      limit,
+      notifications,
+      setPage,
+      getNotifications,
+      markAllRead,
+      markRead
+    }
+  ] = useState(() => new NotificationStore());
 
   useEffect(() => {
     token.id ? getNotifications(token.id, true) : null;
   }, [token]);
 
-  const read = (id: string, action: any) => {};
+  const read = async (id: string, action: string) => {
+    await markRead(id).then((res: any) => {
+      if (res.success) {
+        router.push(action);
+      }
+    });
+  };
 
-  const notification = notifications.map((item, key) => (
+  const readAll = async () => {
+    await markAllRead(token.id).then((res: any) => {
+      if (res.success) {
+        getNotifications(token.id, true);
+      }
+    });
+  };
+
+  const paginate = () => {
+    setPage(page + 1);
+    getNotifications(token.id, true);
+  };
+
+  const notification = notifications.map((item) => (
     <div
       className="pointer"
-      key={key}
-      onClick={() => read(item.id!, item.action)}
+      key={item.id}
+      onClick={() => read(item.id!, item.action!)}
     >
-      <Card color={item.read ? 'white rq-opacity' : 'white'}>
-        <User src={'/avatar.png'} name="Shola Akinlade liked your discussions.">
-          <Text small>{moment(item.createdAt).fromNow()}</Text>
-        </User>
+      <Card className={`notification-card ${item.read ? 'greyed' : 'white'}`}>
+        <div className="notification">
+          <div className="one">
+            <Avatar src={'/images/avatar.png'} w={2} h={2} />
+          </div>
+          <div className="two">
+            <Text p className="text">
+              {item.message}
+            </Text>
+            <Text small className="date">
+              {moment(item.createdAt).fromNow()}
+            </Text>
+          </div>
+        </div>
       </Card>
     </div>
   ));
+
   return (
     <div>
-      <Navbar title="Notifications" description="Notifications - Weiss" />
+      <Navbar title="Notifications" description="Notifications" />
       <div className="page-container top-100">
         <div className="notification-container">
           <div className="column">
@@ -48,76 +91,35 @@ const Notifications = observer(() => {
               <Text h3>Notifications</Text>
             </div>
             <div>
-              <Button type="secondary" scale={0.35} loading={loading}>
+              <Button
+                type="secondary"
+                scale={0.35}
+                loading={loading}
+                onClick={readAll}
+              >
                 Mark all read
               </Button>
             </div>
           </div>
 
           <Spacer h={2} />
-          <Card shadow className="notification-card">
-            {notification}
-            <div className="notification">
-              <div
-                className="one"
-                // key={key}
-                // onClick={() => read(item.id, item.action)}
-              >
-                <Avatar src={'/images/avatar.png'} w={2} h={2} />
-              </div>
-              <div className="two">
-                <Text p className="text">
-                  Shola Akinlade liked your discussions.
-                </Text>
-                <Text small className="date">
-                  {moment().fromNow()}
-                </Text>
-              </div>
-            </div>
-          </Card>
-          <Card shadow className="notification-card greyed">
-            <div className="notification">
-              <div
-                className="one"
-                // key={key}
-                // onClick={() => read(item.id, item.action)}
-              >
-                <Avatar src={'/images/avatar.png'} w={2} h={2} />
-              </div>
-              <div className="two">
-                <Text p className="text">
-                  Shola Akinlade liked your discussions.
-                </Text>
-                <Text small className="date">
-                  {moment().fromNow()}
-                </Text>
-              </div>
-            </div>
-          </Card>
-          <Card shadow className="notification-card">
-            <div className="notification">
-              <div
-                className="one"
-                // key={key}
-                // onClick={() => read(item.id, item.action)}
-              >
-                <Avatar src={'/images/avatar.png'} w={2} h={2} />
-              </div>
-              <div className="two">
-                <Text p className="text">
-                  Shola Akinlade liked your discussions.
-                </Text>
-                <Text small className="date">
-                  {moment().fromNow()}
-                </Text>
-              </div>
-            </div>
-          </Card>
-
+          {loading ? <Loading>Loading </Loading> : notification}
+          {!loading && notifications.length === 0 ? (
+            <Text h4 className="center">
+              No notification
+            </Text>
+          ) : (
+            ''
+          )}
           <Spacer />
           <div className="pagination">
             {notification.length >= limit ? (
-              <Button auto type="abort" iconRight={<ChevronDown />}>
+              <Button
+                auto
+                type="abort"
+                iconRight={<ChevronDown />}
+                onClick={paginate}
+              >
                 Load more
               </Button>
             ) : (

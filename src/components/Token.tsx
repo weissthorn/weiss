@@ -11,7 +11,7 @@ export default function useToken() {
   });
 
   useEffect(() => {
-    let user = cookie;
+    let user: any = cookie;
     user = user && user._w_auth ? JSON.parse(user._w_auth) : null;
     user ? setToken(user) : null;
   }, []);

@@ -13,6 +13,7 @@ import Link from 'next/link';
 import AdminNavbar from 'components/admin/Navbar';
 import SearchHeading from 'components/SearchHeading';
 import Sidebar from 'components/admin/Sidebar';
+import Auth from 'components/admin/Auth';
 import CategoryStore from 'stores/category';
 import UserStore from 'stores/user';
 
@@ -69,7 +70,7 @@ const Categories = observer(() => {
   };
 
   return (
-    <div>
+    <Auth>
       <AdminNavbar title="Categories" description="Categories - Weiss" />
 
       <div className="page-container top-100">
@@ -123,7 +124,7 @@ const Categories = observer(() => {
           )}
         </main>
       </div>
-    </div>
+    </Auth>
   );
 });
 

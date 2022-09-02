@@ -6,11 +6,12 @@ type searchProps = {
   title: string;
   placeholder?: string;
   value?: string;
+  withoutSearch?: boolean;
   onChange?: (e: any) => void;
 };
 
 const SearchHeading = (props: searchProps) => {
-  const { title, placeholder, onChange } = props;
+  const { title, placeholder, withoutSearch, onChange } = props;
 
   return (
     <div className="search-heading">
@@ -18,12 +19,16 @@ const SearchHeading = (props: searchProps) => {
         <Text h3>{title}</Text>
       </div>
       <div className="item">
-        <Input
-          width={'100%'}
-          placeholder={placeholder ? placeholder : 'Search....'}
-          iconRight={<Search />}
-          onChange={onChange}
-        />
+        {withoutSearch === false || withoutSearch === undefined ? (
+          <Input
+            width={'100%'}
+            placeholder={placeholder ? placeholder : 'Search....'}
+            iconRight={<Search />}
+            onChange={onChange}
+          />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

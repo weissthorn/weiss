@@ -1,38 +1,32 @@
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { useState } from "react";
-import { Badge, Modal, Text, Select } from "@geist-ui/core";
-import { DateRangePicker } from "react-date-range";
-import moment from "moment";
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { Modal, Text } from '@geist-ui/core';
+import { DateRangePicker } from 'react-date-range';
 
 type dateModalProps = {
   show: boolean;
+  date: any;
   toggleModal?: () => void;
+  setDate?: (value: any) => void;
   actionTrigger?: () => void;
 };
 
 const DateModal = (props: dateModalProps) => {
-  const { show, toggleModal, actionTrigger } = props;
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: moment().add(1, "M"),
-      key: "selection",
-    },
-  ]);
+  const { show, date, toggleModal, setDate, actionTrigger } = props;
 
   return (
     <>
       <Modal
-        width={"650px"}
+        width={'650px'}
         className="modal"
         visible={show}
+        disableBackdropClick={true}
         onClose={toggleModal}
       >
         <Modal.Content>
           <DateRangePicker
             onChange={(item: any) => setDate([item.selection])}
-            showSelectionPreview={true}
+            // showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
             months={1}
             ranges={date}

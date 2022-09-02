@@ -11,7 +11,10 @@ export default class UserStore {
   @observable page: number = 1;
   @observable limit: number = 30;
   @observable total?: number = 0;
-  @observable user: userProp = {};
+  @observable user: userProp = {
+    id: '',
+    name: ''
+  };
   @observable users: userProp[] = [];
   @observable files: any = [];
 
@@ -21,6 +24,10 @@ export default class UserStore {
 
   @action setPage = (data: number) => {
     this.page = data;
+  };
+
+  @action setUsers = (data: userProp[]) => {
+    this.users = data;
   };
 
   @action setUser = (data: userProp) => {
@@ -243,6 +250,30 @@ export default class UserStore {
         if (res.success) {
           this.users = res.data;
           this.total = res.count;
+          this.loading = false;
+        } else {
+          this.loading = false;
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action getContributors = async () => {
+    this.loading = true;
+    this.users = [];
+
+    let url = `${API_URL}/user/contributors`;
+
+    await fetch(url, {
+      headers: {
+        'content-type': 'application/json',
+        apikey: API_KEY
+      }
+    })
+      .then((res) => res.json())
+      .then((res: resProp) => {
+        if (res.success) {
+          this.users = res.data;
           this.loading = false;
         } else {
           this.loading = false;

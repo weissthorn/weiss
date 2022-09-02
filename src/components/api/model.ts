@@ -1,7 +1,6 @@
 'use strict';
 const config = require('./config');
 const validator = require('validator');
-
 const thinky = require('thinky')(config.api);
 const r = thinky.r;
 const type = thinky.type;
@@ -70,6 +69,14 @@ const Comment = thinky.createModel('comments', {
   updatedAt: type.date().default(r.now)
 });
 
+const Report = thinky.createModel('reports', {
+  type: type.string(),
+  discussionId: type.string(),
+  userId: type.string(),
+  createdAt: type.date().default(r.now),
+  updatedAt: type.date().default(r.now)
+});
+
 const Notification = thinky.createModel('notifications', {
   slug: type.string(),
   message: type.string(),
@@ -98,6 +105,7 @@ const Settings = thinky.createModel('settings', {
 });
 
 const Pageview = thinky.createModel('pageviews', {
+  agent: type.string(),
   url: type.string(),
   referrer: type.string(),
   type: type.string().enum(['view', 'click']).default('view'),
@@ -108,7 +116,9 @@ const Pageview = thinky.createModel('pageviews', {
 
 //Associations
 Discussion.belongsTo(User, 'profile', 'userId', 'id');
+Discussion.hasOne(Category, 'category', 'categoryId', 'id');
 Comment.belongsTo(User, 'author', 'userId', 'id');
+Report.hasOne(Discussion, 'post', 'discussionId', 'id');
 
 User.ensureIndex('slug');
 User.ensureIndex('name');
@@ -152,6 +162,12 @@ Comment.ensureIndex('userId');
 Comment.ensureIndex('createdAt');
 Comment.ensureIndex('updatedAt');
 
+Report.ensureIndex('type');
+Report.ensureIndex('discussionId');
+Report.ensureIndex('userId');
+Report.ensureIndex('createdAt');
+Report.ensureIndex('updatedAt');
+
 Notification.ensureIndex('slug');
 Notification.ensureIndex('message');
 Notification.ensureIndex('sender');
@@ -174,6 +190,7 @@ Upload.ensureIndex('createdAt');
 Upload.ensureIndex('updatedAt');
 
 Pageview.ensureIndex('url');
+Pageview.ensureIndex('agent');
 Pageview.ensureIndex('referrer');
 Pageview.ensureIndex('ipAddress');
 Pageview.ensureIndex('type');
@@ -186,7 +203,9 @@ export {
   Category,
   Discussion,
   Comment,
+  Report,
   Notification,
   Upload,
-  Settings
+  Settings,
+  Pageview
 };

@@ -7,24 +7,19 @@ type postProps = {
   title: string;
   comment?: number;
   slug: string;
-  category: string;
+  category?: string;
   date: Date;
 };
 
 const MinimalPost = (props: postProps) => {
   const { title, comment, category, slug, date } = props;
 
-  const ellipsis = (val: string) => {
-    val = val.length >= 100 ? val.substring(0, 65) + '....' : val;
-    return val;
-  };
-
   return (
     <Link href={`/d/${slug}`}>
       <div className="post minimal pointer without-right">
         <div className="item">
           <Text h1 className="title">
-            {ellipsis(title)}
+            {title}
           </Text>
           <Text b className="name">
             {category}

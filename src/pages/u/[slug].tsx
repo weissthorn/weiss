@@ -58,32 +58,38 @@ const User = observer(() => {
           background: '#2A222E'
         }}
       >
-        <div className="gridlock">
-          <div className="item">
-            <Avatar
-              w={3}
-              h={3}
-              src={user.photo ? `/storage/${user.photo}` : '/images/avatar.png'}
-            />
+        {user.id ? (
+          <div className="gridlock">
+            <div className="item">
+              <Avatar
+                w={3}
+                h={3}
+                src={
+                  user.photo ? `/storage/${user.photo}` : '/images/avatar.png'
+                }
+              />
+            </div>
+            <div className="item">
+              <Text h3 className="capitalize">
+                {user.name}
+              </Text>
+              <Text small>
+                Joined {moment(user.createdAt).format('MMM D, YYYY')}
+              </Text>
+              <Spacer w={1} inline />
+              <Text small>
+                {formatNumber(user.discussion!)} Discussion
+                {pluralize(user.discussion!)}
+              </Text>
+              <Spacer w={1} inline />
+              <Text small>
+                {formatNumber(user.coin!)} Coin{pluralize(user.coin!)}
+              </Text>
+            </div>
           </div>
-          <div className="item">
-            <Text h3 className="capitalize">
-              {user.name}
-            </Text>
-            <Text small>
-              Joined {moment(user.createdAt).format('MMM D, YYYY')}
-            </Text>
-            <Spacer w={1} inline />
-            <Text small>
-              {formatNumber(user.discussion!)} Discussion
-              {pluralize(user.discussion!)}
-            </Text>
-            <Spacer w={1} inline />
-            <Text small>
-              {formatNumber(user.coin!)} Coin {pluralize(user.coin!)}
-            </Text>
-          </div>
-        </div>
+        ) : (
+          ''
+        )}
       </div>
       <div className="page-container">
         <div className="discussion-container">
@@ -98,12 +104,23 @@ const User = observer(() => {
 
             {discussions.map((item: any) => (
               <MinimalPost
-                category="Movies"
                 title={item.title}
                 slug={item.slug}
+                category={item.category?.title}
+                comment={item.comment}
                 date={item.createdAt}
               />
             ))}
+            {!loading && discussions.length === 0 ? (
+              <div className="center">
+                <Spacer h={3} />
+                <Text h4 className="center">
+                  No discussion
+                </Text>
+              </div>
+            ) : (
+              ''
+            )}
             <Spacer />
             {total! >= limit ? (
               <div className="pagination">

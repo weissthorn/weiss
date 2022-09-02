@@ -19,13 +19,15 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
       await Category.then(async (data: any) => {
         let category: any = [];
         await asyncForEach(data, async (item: any) => {
-          await Discussion.filter({ categoryId: item.id }).then((m: any) => {
-            item = {
-              ...item,
-              discussion: m.length
-            };
-            category.push(item);
-          });
+          await Discussion.orderBy(r.desc('createdAt'))
+            .filter({ categoryId: item.id })
+            .then((m: any) => {
+              item = {
+                ...item,
+                discussion: m.length
+              };
+              category.push(item);
+            });
         }).finally(() => {
           res
             .status(200)

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import NextLink from 'next/link';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import {
   Text,
@@ -18,6 +19,7 @@ import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import useToken from '../Token';
 import SettingsStore from 'stores/settings';
+import NotificationStore from 'stores/notification';
 
 type navbarProps = {
   title: string;
@@ -33,6 +35,9 @@ const Navbar = observer((props: navbarProps) => {
   const [show, setMenu] = useState(false);
   const { title, description, hide } = props;
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
+  const [{ unread, getUnreadNotification }] = useState(
+    () => new NotificationStore()
+  );
 
   useEffect(() => {
     cookie && cookie.theme ? setTheme(cookie.theme) : '';
@@ -58,13 +63,17 @@ const Navbar = observer((props: navbarProps) => {
   const menu = () => (
     <div>
       <Popover.Item>
-        <Link href={`/u/${token.username}`}>Profile</Link>
+        <NextLink href={`/u/${token.username}`}>
+          <Link>Profile</Link>
+        </NextLink>
       </Popover.Item>
       <Popover.Item line />
       {token.id ? (
         <>
           <Popover.Item>
-            <Link href="/admin">Admin</Link>
+            <NextLink href="/admin">
+              <Link>Admin</Link>
+            </NextLink>
           </Popover.Item>
           <Popover.Item line />
         </>
@@ -76,7 +85,7 @@ const Navbar = observer((props: navbarProps) => {
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
-        <Link href="#" icon={<Power />} onClick={logout}>
+        <Link href="#" icon onClick={logout}>
           Log out <Spacer w={0.5} inline />
         </Link>
       </Popover.Item>
@@ -111,18 +120,26 @@ const Navbar = observer((props: navbarProps) => {
       />
 
       <Text p>
-        <Link href={`/u/${token.username}`}>Profile</Link>
+        <NextLink href={`/u/${token.username}`}>
+          <Link>Profile</Link>
+        </NextLink>
       </Text>
       {token.role === 'admin' ? (
         <Text p>
-          <Link href="/admin">Admin</Link>
+          <NextLink href="/admin">
+            <Link>Admin</Link>
+          </NextLink>
         </Text>
       ) : (
         ''
       )}
-
       <Text p>
-        <Link href="#" icon={<Power />} onClick={logout}>
+        <NextLink href="/settings">
+          <Link>Settings</Link>
+        </NextLink>
+      </Text>
+      <Text p>
+        <Link href="#" icon onClick={logout}>
           Log out <Spacer w={0.5} inline />
         </Link>
       </Text>
@@ -141,26 +158,34 @@ const Navbar = observer((props: navbarProps) => {
         <div className="inner">
           <Grid.Container gap={0}>
             <Grid xs={18} md={5}>
-              <Link href="/">
-                {settings.siteLogo ? (
-                  <Image
-                    className="site-logo"
-                    src={`/storage/${settings.siteLogo}`}
-                    style={{ width: 'auto', height: 32 }}
-                  />
-                ) : (
-                  <Text span>{settings.siteName}</Text>
-                )}
-              </Link>
+              <NextLink href="/">
+                <Link>
+                  {settings.siteLogo ? (
+                    <Image
+                      className="site-logo"
+                      src={`/storage/${settings.siteLogo}`}
+                      style={{ width: 'auto', height: 32 }}
+                    />
+                  ) : (
+                    <Text span>{settings.siteName}</Text>
+                  )}
+                </Link>
+              </NextLink>
             </Grid>
             <Grid xs={6} md={0}>
               <Badge.Anchor>
-                <Badge type="error" scale={0.5}>
-                  10
-                </Badge>
-                <Link href="/notifications">
-                  <Bell />
-                </Link>
+                {unread ? (
+                  <Badge type="error" scale={0.5}>
+                    {unread}
+                  </Badge>
+                ) : (
+                  ''
+                )}
+                <NextLink href="/notifications">
+                  <Link>
+                    <Bell />
+                  </Link>
+                </NextLink>
               </Badge.Anchor>
               <Spacer w={3} inline />
               <Button
@@ -179,12 +204,18 @@ const Navbar = observer((props: navbarProps) => {
                 <>
                   <Spacer w={5} inline />
                   <Badge.Anchor>
-                    <Badge type="error" scale={0.5}>
-                      10
-                    </Badge>
-                    <Link href="/notification">
-                      <Bell />
-                    </Link>
+                    {unread ? (
+                      <Badge type="error" scale={0.5}>
+                        {unread}
+                      </Badge>
+                    ) : (
+                      ''
+                    )}
+                    <NextLink href="/notifications">
+                      <Link>
+                        <Bell />
+                      </Link>
+                    </NextLink>
                   </Badge.Anchor>
                   <Spacer w={2} inline />
                   <Popover content={menu}>

@@ -44,7 +44,7 @@ export default class NotificationStore {
       .catch((err) => console.log(err));
   };
 
-  @action markRead = async (id: notificationProp) => {
+  @action markRead = async (id: string) => {
     let url = `${API_URL}/notification/read`;
 
     return await fetch(url, {
@@ -111,7 +111,7 @@ export default class NotificationStore {
   };
 
   @action getUnreadNotification = async (id?: string) => {
-    let url = `${API_URL}/notifications/unread/?userId=${id}`;
+    let url = `${API_URL}/notification/unread/?userId=${id}`;
 
     await fetch(url, {
       headers: {
@@ -130,7 +130,7 @@ export default class NotificationStore {
 
   @action getNotifications = async (id: string, paginate: boolean) => {
     this.loading = true;
-    let url = `${API_URL}/notifications?page=${this.page}&limit=${this.limit}&userId=${id}`;
+    let url = `${API_URL}/notification?page=${this.page}&limit=${this.limit}&userId=${id}`;
 
     await fetch(url, {
       headers: {

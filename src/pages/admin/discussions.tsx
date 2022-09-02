@@ -13,11 +13,12 @@ import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import AdminNavbar from 'components/admin/Navbar';
 import SearchHeading from 'components/SearchHeading';
 import Sidebar from 'components/admin/Sidebar';
+import Auth from 'components/admin/Auth';
 import DiscussionStore from 'stores/discussion';
 import { discussionProp } from 'interfaces/discussion';
 import toast, { Toaster } from 'react-hot-toast';
 
-const Posts = observer(() => {
+const Discussions = observer(() => {
   const [
     {
       loading,
@@ -94,7 +95,7 @@ const Posts = observer(() => {
   };
 
   return (
-    <div>
+    <Auth>
       <AdminNavbar title="Discussions" description="Weiss" />
       <Toaster />
       <div className="page-container top-100">
@@ -142,8 +143,8 @@ const Posts = observer(() => {
           )}
         </main>
       </div>
-    </div>
+    </Auth>
   );
 });
 
-export default Posts;
+export default Discussions;

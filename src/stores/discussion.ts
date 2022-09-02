@@ -8,7 +8,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export default class DiscussionStore {
   @observable page: number = 1;
-  @observable limit: number = 30;
+  @observable limit: number = 20;
   @observable total: number = 0;
   @observable loading: boolean = false;
   @observable commentLoading: boolean = false;
@@ -27,6 +27,10 @@ export default class DiscussionStore {
 
   @action setDiscussion = (data: discussionProp) => {
     this.discussion = data;
+  };
+
+  @action setDiscussions = (data: discussionProp[]) => {
+    this.discussions = data;
   };
 
   headers: HeadersInit | any = {
@@ -68,7 +72,61 @@ export default class DiscussionStore {
   @action
   getDiscussions = async () => {
     let uri = `${API_URL}/discussion?page=${this.page}&limit=${this.limit}`;
+    this.loading = true;
+
+    await fetch(uri, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        let data = res.data;
+        this.loading = false;
+        this.discussions = data;
+        this.total = res.count;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action
+  getRecommendation = async (title: string, category: string) => {
+    let uri = `${API_URL}/discussion/recommend?title=${title}&category=${category}`;
+    this.loading = true;
+
+    await fetch(uri, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        let data = res.data;
+        this.loading = false;
+        this.discussions = data;
+        this.total = res.count;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action
+  getUnansweredDiscussions = async () => {
+    let uri = `${API_URL}/discussion/unanswered?page=${this.page}&limit=${this.limit}`;
     this.loading = false;
+
+    await fetch(uri, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        let data = res.data;
+        this.loading = false;
+        this.discussions = data;
+        this.total = res.count;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action
+  getPopularDiscussions = async () => {
+    let uri = `${API_URL}/discussion/popular?page=${this.page}&limit=${this.limit}`;
+    this.loading = true;
 
     await fetch(uri, {
       headers: this.headers
@@ -121,7 +179,7 @@ export default class DiscussionStore {
 
   @action
   getDiscussionsByCategory = async (slug?: string) => {
-    let uri = `${API_URL}/discussion/category?slug=${slug}&page=${this.page}&limit=${this.limit}`;
+    let uri = `${API_URL}/discussion/category?category=${slug}&page=${this.page}&limit=${this.limit}`;
     this.loading = true;
     this.discussions = [];
 
@@ -140,7 +198,9 @@ export default class DiscussionStore {
 
   @action
   getDiscussion = async (id?: any) => {
+    this.loading = true;
     let uri = `${API_URL}/discussion/${id}`;
+
     return await fetch(uri, {
       headers: this.headers
     })
@@ -150,7 +210,7 @@ export default class DiscussionStore {
 
         if (res.success) {
           this.discussion = res.data;
-          return res.data.id;
+          return res.data;
         } else {
           return false;
         }
@@ -162,6 +222,29 @@ export default class DiscussionStore {
     this.loading = true;
     this.discussions = [];
     let url = `${API_URL}/discussion/search?search=${query}`;
+
+    await fetch(url, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res: resProp) => {
+        if (res.success) {
+          setTimeout(() => {
+            this.discussions = res.data;
+            this.loading = false;
+            this.total = res.count!;
+          }, 1000);
+        } else {
+          this.loading = false;
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action publicDiscussionSearch = async (query: string) => {
+    this.loading = true;
+    this.discussions = [];
+    let url = `${API_URL}/discussion/public-search?search=${query}`;
 
     await fetch(url, {
       headers: this.headers

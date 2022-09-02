@@ -1,37 +1,39 @@
 import signale from 'signale';
-import moment from 'moment';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { r, User } from '../../../components/api/model';
+import { r, Pageview } from '../../../components/api/model';
 import { withAuth } from '../../../components/api/utils';
 
-const search = async (req: NextApiRequest, res: NextApiResponse) => {
+const analytics = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {
     if (auth.success) {
-      let { begin, end } = req.query;
+      let { from, to }: any = req.query;
 
-      let f1 = Number(moment(begin).format('YYYY')),
-        f2 = Number(moment(begin).format('M')),
-        f3 = Number(moment(begin).format('D'));
-      let t1 = Number(moment(end).format('YYYY')),
-        t2 = Number(moment(end).format('M')),
-        t3 = Number(moment(end).format('D'));
-
-      await User.orderBy(r.desc('createdAt'))
-        .filter((profile: any) =>
-          profile('createdAt').during(
-            r.time(f1, f2, f3, 'Z'),
-            r.time(t1, t2, t3, 'Z')
-          )
-        )
+      await Pageview.filter((analytics: any) =>
+        analytics('createdAt')
+          .date()
+          .ge(new Date(from))
+          .and(analytics('createdAt').date().le(new Date(to)))
+      )
         .group('createdAt')
+        .ungroup()
         .then((data: any) => {
-          res.status(200).json({ success: true, total: data.length });
+          data = data.map((item: any) => ({
+            day: item.group,
+            count: item.reduction.length
+          }));
+          res.send({ success: true, data });
         })
-        .catch((err: any) => signale.fatal(err));
+        .catch((err: any) => {
+          signale.fatal(err, req, res);
+          res.send({
+            success: false,
+            message: 'Error fetching pageview analytics!'
+          });
+        });
     } else {
       res.send(auth);
     }
   });
 };
 
-export default search;
+export default analytics;

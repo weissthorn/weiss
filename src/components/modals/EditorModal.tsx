@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { Spacer, Button, Select, Popover } from '@geist-ui/core';
 import { Maximize, Minimize, XCircleFill } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
@@ -11,6 +12,7 @@ type editorProps = {
   category?: string;
   content?: string;
   show: boolean;
+  isAuthenticate: boolean;
   toggleModal: () => void;
   actionTrigger: (value: any) => void;
   save: (value: any) => void;
@@ -23,6 +25,7 @@ const EditorModal = observer((props: editorProps) => {
     category,
     content,
     show,
+    isAuthenticate,
     actionTrigger,
     toggleModal,
     save
@@ -41,7 +44,7 @@ const EditorModal = observer((props: editorProps) => {
     if (editor.current.requestFullscreen) {
       setWidth('100%');
       setHeight('100vh');
-      _setHeight('calc(100% - 100px)');
+      _setHeight('70vh');
       editor.current.requestFullscreen();
     }
   };
@@ -59,7 +62,7 @@ const EditorModal = observer((props: editorProps) => {
     <>
       {show ? (
         <div className="editor-container" ref={editor}>
-          <div className="content" style={{ width, height }}>
+          <div className="content" style={{ maxWidth: width, height }}>
             <div className="close">
               {_height === '150px' ? (
                 <Maximize size={28} onClick={toggleFullScreen} />
@@ -79,7 +82,7 @@ const EditorModal = observer((props: editorProps) => {
               <Select
                 h={0.75}
                 initialValue="general"
-                onChange={(val) => actionTrigger({ category: val })}
+                onChange={(val) => actionTrigger({ categoryId: val })}
                 value={category}
               >
                 {categories.map((item: any) => (
@@ -92,7 +95,7 @@ const EditorModal = observer((props: editorProps) => {
             <input
               width="100%"
               placeholder="Discussion Title"
-              defaultValue={title}
+              value={title}
               onChange={(e) => actionTrigger({ title: e.target.value })}
             />
             <Spacer h={1} />
@@ -103,9 +106,17 @@ const EditorModal = observer((props: editorProps) => {
                 actionTrigger({ content: value });
               }}
             />
-            <Button loading={loading} type="success-light" onClick={save}>
-              Publish
-            </Button>
+            {isAuthenticate ? (
+              <Button loading={loading} type="success-light" onClick={save}>
+                Publish
+              </Button>
+            ) : (
+              <Link href="/login">
+                <Button loading={loading} type="success-light">
+                  Sign in to Publish
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       ) : (

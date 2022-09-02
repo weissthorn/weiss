@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import {
-  Spacer,
-  Text,
-  Tabs,
-  Pagination,
-  Link,
-  Button,
-  User
-} from '@geist-ui/core';
-import { ChevronRightCircle, ChevronLeftCircle, Circle } from '@geist-ui/icons';
+import { Spacer, Text, Button } from '@geist-ui/core';
 import Navbar from 'components/Navbar';
+import Link from 'next/link';
 
 export default function PageNotFound() {
   return (
     <div>
       <Navbar title="Page not found" description="Page not found" />
-      <div className="page-container top-100">
+      <div className="page-container top-100 center">
+        <Spacer h={4} />
         <Text h3>Oops! Page not found or has been deleted.</Text>
+        <Spacer h={2} />
+        <Link href="/">
+          <Button type="secondary">&larr; Back to Home</Button>
+        </Link>
       </div>
     </div>
   );

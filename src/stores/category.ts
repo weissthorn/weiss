@@ -76,7 +76,7 @@ export default class CategoryStore {
   @action getCategory = async (slug: string) => {
     let url = `${API_URL}/category/${slug}`;
 
-    await fetch(url, {
+    return await fetch(url, {
       headers: {
         'content-type': 'application/json',
         apikey: API_KEY
@@ -86,6 +86,9 @@ export default class CategoryStore {
       .then((res: resProp) => {
         if (res.success) {
           this.category = res.data;
+          return res.data.id;
+        } else {
+          return false;
         }
       })
       .catch((err) => console.log(err));

@@ -1,12 +1,5 @@
 'use strict';
 
-const slugify = (slug: string) => {
-  slug = slug.trim();
-  slug = slug.toLowerCase();
-  slug = slug.replace(/[^\w]/g, '-');
-  return slug;
-};
-
 const slug = () => {
   return (
     Math.random().toString(36).substring(2, 7) +
@@ -57,8 +50,8 @@ const validateEmail = (email: any) => {
 };
 
 const withAuth = async (req: any) => {
-  var allowlist: string[] | any =
-    process.env.NEXT_PUBLIC_CLIENT_ORIGINS.split(',');
+  var allowlist: string[] | any = process.env.NEXT_PUBLIC_CLIENT_ORIGINS;
+  allowlist = allowlist.split(',');
 
   if (allowlist.indexOf(req.headers.host) !== -1) {
     const apikey = req.headers.apikey;
@@ -118,7 +111,6 @@ const pluralize = (val: number) => {
 };
 
 export {
-  slugify,
   slug,
   code,
   guid,
