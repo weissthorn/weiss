@@ -9,7 +9,7 @@ export default class CommentStore {
   @observable _loading: boolean = false;
   @observable more: boolean = false;
   @observable page: number = 1;
-  @observable limit: number = 5;
+  @observable limit: number = 20;
   @observable comment: commentProp = {};
   @observable comments: commentProp[] = [];
 

@@ -1,13 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Spacer,
-  Text,
-  User,
-  Card,
-  Loading,
-  Button,
-  Avatar
-} from '@geist-ui/core';
+import { Spacer, Text, Card, Loading, Button, Avatar } from '@geist-ui/core';
 import { ChevronDown } from '@geist-ui/icons';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
@@ -24,6 +16,7 @@ const Notifications = observer(() => {
       loading,
       page,
       limit,
+      total,
       notifications,
       setPage,
       getNotifications,
@@ -33,40 +26,52 @@ const Notifications = observer(() => {
   ] = useState(() => new NotificationStore());
 
   useEffect(() => {
-    token.id ? getNotifications(token.id, true) : null;
+    token.id ? getNotifications(token.id, false) : null;
   }, [token]);
 
-  const read = async (id: string, action: string) => {
+  const read = async (id: string, action: string, type: string) => {
     await markRead(id).then((res: any) => {
       if (res.success) {
-        router.push(action);
+        let t = type === 'user' ? '/u' : '/d';
+        router.push(`${t}/${action}`);
       }
     });
   };
 
   const readAll = async () => {
-    await markAllRead(token.id).then((res: any) => {
+    await markAllRead(token.id!).then((res: any) => {
       if (res.success) {
-        getNotifications(token.id, true);
+        getNotifications(token.id!, true);
       }
     });
   };
 
   const paginate = () => {
     setPage(page + 1);
-    getNotifications(token.id, true);
+    getNotifications(token.id!, true);
   };
 
   const notification = notifications.map((item) => (
     <div
       className="pointer"
       key={item.id}
-      onClick={() => read(item.id!, item.action!)}
+      onClick={() => read(item.id!, item.action!, item.type!)}
     >
-      <Card className={`notification-card ${item.read ? 'greyed' : 'white'}`}>
+      <Card
+        shadow
+        className={`notification-card ${item.read ? 'greyed' : 'white'}`}
+      >
         <div className="notification">
           <div className="one">
-            <Avatar src={'/images/avatar.png'} w={2} h={2} />
+            <Avatar
+              src={
+                item.profile && item.profile.photo
+                  ? `/storage/${item.profile.photo}`
+                  : '/images/avatar.png'
+              }
+              w={2}
+              h={2}
+            />
           </div>
           <div className="two">
             <Text p className="text">
@@ -103,7 +108,8 @@ const Notifications = observer(() => {
           </div>
 
           <Spacer h={2} />
-          {loading ? <Loading>Loading </Loading> : notification}
+          {notification}
+          {loading ? <Loading>Loading </Loading> : ''}
           {!loading && notifications.length === 0 ? (
             <Text h4 className="center">
               No notification
@@ -113,7 +119,7 @@ const Notifications = observer(() => {
           )}
           <Spacer />
           <div className="pagination">
-            {notification.length >= limit ? (
+            {total > notification.length ? (
               <Button
                 auto
                 type="abort"

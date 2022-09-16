@@ -49,6 +49,7 @@ const Discussion = thinky.createModel('discussions', {
     .string()
     .enum(['answered', 'unanswered', 'banned'])
     .default('unanswered'),
+  view: type.number().default(0),
   userId: type.string(),
   createdAt: type.date().default(r.now),
   updatedAt: type.date().default(r.now)
@@ -57,14 +58,20 @@ const Discussion = thinky.createModel('discussions', {
 const Comment = thinky.createModel('comments', {
   slug: type.string(),
   content: type.string(),
-  type: type.string().enum(['comment', 'reply']),
-  status: type
-    .string()
-    .enum(['answer', 'flag', 'normal'])
-    .default('unanswered'),
+  type: type.string().enum(['comment', 'reply']).default('comment'),
+  status: type.string().enum(['answer', 'flag', 'normal']).default('normal'),
   replyId: type.string(),
   userId: type.string(),
   discussionId: type.string(),
+  createdAt: type.date().default(r.now),
+  updatedAt: type.date().default(r.now)
+});
+
+const Like = thinky.createModel('likes', {
+  type: type.string().enum(['discussion', 'comment', 'reply']),
+  postId: type.string(),
+  discussionId: type.string(),
+  userId: type.string(),
   createdAt: type.date().default(r.now),
   updatedAt: type.date().default(r.now)
 });
@@ -83,6 +90,7 @@ const Notification = thinky.createModel('notifications', {
   sender: type.string(),
   receiver: type.string(),
   action: type.string(),
+  type: type.string().enum(['admin', 'post', 'user']),
   read: type.boolean().default(false),
   createdAt: type.date().default(r.now),
   updatedAt: type.date().default(r.now)
@@ -118,6 +126,7 @@ const Pageview = thinky.createModel('pageviews', {
 Discussion.belongsTo(User, 'profile', 'userId', 'id');
 Discussion.hasOne(Category, 'category', 'categoryId', 'id');
 Comment.belongsTo(User, 'author', 'userId', 'id');
+Like.belongsTo(User, 'profile', 'userId', 'id');
 Report.hasOne(Discussion, 'post', 'discussionId', 'id');
 
 User.ensureIndex('slug');
@@ -147,7 +156,7 @@ Discussion.ensureIndex('title');
 Discussion.ensureIndex('content');
 Discussion.ensureIndex('type');
 Discussion.ensureIndex('color');
-Discussion.ensureIndex('moderators');
+Discussion.ensureIndex('view');
 Discussion.ensureIndex('userId');
 Discussion.ensureIndex('createdAt');
 Discussion.ensureIndex('updatedAt');
@@ -162,6 +171,12 @@ Comment.ensureIndex('userId');
 Comment.ensureIndex('createdAt');
 Comment.ensureIndex('updatedAt');
 
+Like.ensureIndex('type');
+Like.ensureIndex('postId');
+Like.ensureIndex('userId');
+Like.ensureIndex('createdAt');
+Like.ensureIndex('updatedAt');
+
 Report.ensureIndex('type');
 Report.ensureIndex('discussionId');
 Report.ensureIndex('userId');
@@ -173,6 +188,7 @@ Notification.ensureIndex('message');
 Notification.ensureIndex('sender');
 Notification.ensureIndex('receiver');
 Notification.ensureIndex('read');
+Notification.ensureIndex('type');
 Notification.ensureIndex('action');
 Notification.ensureIndex('createdAt');
 Notification.ensureIndex('updatedAt');
@@ -203,6 +219,7 @@ export {
   Category,
   Discussion,
   Comment,
+  Like,
   Report,
   Notification,
   Upload,

@@ -8,9 +8,7 @@ const API_KEY: any = process.env.NEXT_PUBLIC_API_KEY;
 
 export default class SettingsStore {
   @observable loading: boolean = false;
-  @observable settings: settingsProp = {
-    email: { host: '', email: '', password: '' }
-  };
+  @observable settings: settingsProp = {};
   @observable admin: userProp = {};
   @observable files: any = [];
 

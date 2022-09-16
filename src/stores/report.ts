@@ -9,7 +9,7 @@ export default class ReportStore {
   @observable loading: boolean = false;
   @observable total: number = 0;
   @observable page: number = 1;
-  @observable limit: number = 100;
+  @observable limit: number = 20;
   @observable report: reportProp = {};
   @observable reports: reportProp[] = [];
 

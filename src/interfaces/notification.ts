@@ -1,4 +1,5 @@
 export interface notificationProp {
+  profile?: any;
   id?: string;
   slug?: string;
   message?: string;
@@ -6,6 +7,7 @@ export interface notificationProp {
   receiver?: string;
   action?: string;
   read?: boolean;
+  type?: string;
   user?: any;
   createdAt?: string;
   updatedAt?: string;

@@ -11,7 +11,9 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await User.orderBy(r.desc('createdAt'))
         .filter((profile: any) =>
-          profile('name').match(query).or(profile('email').match(query))
+          profile('name')
+            .match('(?i)' + query)
+            .or(profile('email').match('(?i)' + query))
         )
         .getJoin()
         .then((data: any) => {

@@ -17,6 +17,7 @@ import SettingsStore from 'stores/settings';
 import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from 'components/api/utils';
 import { setCookie, parseCookies } from 'nookies';
+import SetupVerify from 'components/admin/SetupVerify';
 
 const Setup = observer(() => {
   const cookie = parseCookies();
@@ -38,11 +39,11 @@ const Setup = observer(() => {
 
     if (!settings.language) {
       toast.error('Please select a language!');
-    } else if (username.length < 3) {
+    } else if (!username || username.length < 3) {
       toast.error('Username is too short!');
     } else if (validateEmail(email) === false) {
       toast.error('Invalid email address!');
-    } else if (password.length < 6) {
+    } else if (!password || password.length < 6) {
       toast.error('Password is too short! Minimum character is six.');
     } else {
       admin.name = admin.username;
@@ -56,7 +57,7 @@ const Setup = observer(() => {
   };
 
   return (
-    <div>
+    <SetupVerify>
       <Navbar
         title="Welcome - Setup Weiss"
         description="Welcome - Setup Weiss"
@@ -132,7 +133,7 @@ const Setup = observer(() => {
           </Grid.Container>
         </div>
       </Page>
-    </div>
+    </SetupVerify>
   );
 });
 

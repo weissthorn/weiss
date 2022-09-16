@@ -7,7 +7,7 @@ type dateModalProps = {
   show: boolean;
   date: any;
   toggleModal?: () => void;
-  setDate?: (value: any) => void;
+  setDate: (value: any) => void;
   actionTrigger?: () => void;
 };
 

@@ -14,8 +14,8 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
             .ne('banned')
             .and(
               profile('title')
-                .match(search)
-                .or(profile('content').match(search))
+                .match('(?i)' + search)
+                .or(profile('content').match('(?i)' + search))
             )
         )
         .getJoin()

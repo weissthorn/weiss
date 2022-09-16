@@ -1,104 +1,111 @@
-import React, { useRef, useState } from "react";
-import { Spacer, Button } from "@geist-ui/core";
-import { Maximize, Minimize, XCircleFill } from "@geist-ui/icons";
-import toast, { Toaster } from "react-hot-toast";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
-const Quill = dynamic(() => import("react-quill"), {
-  ssr: false,
-});
+import { useRef, useState } from 'react';
+import Link from 'next/link';
+import { Spacer, Button, Select, Popover, Text } from '@geist-ui/core';
+import { Maximize, Minimize, XCircleFill } from '@geist-ui/icons';
+import { observer } from 'mobx-react-lite';
+import Editor from 'components/Editor';
 
 type editorProps = {
-  title?: string;
+  loading: boolean;
   content?: string;
   show: boolean;
+  isAuthenticate: boolean;
+  replyUsername?: string;
+  replyId?: string;
+  commentNumber?: number;
   toggleModal: () => void;
-  save: () => void;
+  actionTrigger: (value: any) => void;
+  save: (value: any) => void;
 };
 
-const CommentModal = (props: editorProps) => {
-  const editor = useRef<any>(null);
-  const [value, setValue] = useState("");
-  const [width, setWidth] = useState("700px");
-  const [height, setHeight] = useState("auto");
-  const [_height, _setHeight] = useState("150px");
+const ReplyModal = observer((props: editorProps) => {
+  const {
+    loading,
+    content,
+    show,
+    isAuthenticate,
+    replyId,
+    replyUsername,
+    commentNumber,
+    actionTrigger,
+    toggleModal,
+    save
+  } = props;
 
-  const { title, content, show, toggleModal, save } = props;
+  const editor = useRef<any>(null);
+  const [width, setWidth] = useState('720px');
+  const [height, setHeight] = useState('auto');
+  const [_height, _setHeight] = useState('150px');
 
   const toggleFullScreen = () => {
     if (editor.current.requestFullscreen) {
-      setWidth("100%");
-      setHeight("100vh");
-      _setHeight("calc(100% - 100px)");
+      setWidth('100%');
+      setHeight('100vh');
+      _setHeight('80vh');
       editor.current.requestFullscreen();
     }
   };
 
   const closeFullscreen = () => {
     if (document.exitFullscreen) {
-      setWidth("700px");
-      setHeight("auto");
-      _setHeight("150px");
+      setWidth('720px');
+      setHeight('auto');
+      _setHeight('150px');
       document.exitFullscreen();
     }
   };
 
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ color: [] }, { background: [] }],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-      ["clean"],
-    ],
-  };
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
-
   return (
-    <div className="editor-container" ref={editor}>
-      <div className="container" style={{ width, height }}>
-        <div className="close">
-          {_height === "150px" ? (
-            <Maximize size={28} onClick={toggleFullScreen} />
-          ) : (
-            <Minimize size={28} onClick={closeFullscreen} />
-          )}
-          <Spacer w={1} inline />
-          <XCircleFill size={30} />
+    <>
+      {show ? (
+        <div className="editor-container" ref={editor}>
+          <div className="content" style={{ maxWidth: width, height }}>
+            <div className="close">
+              {_height === '150px' ? (
+                <Maximize size={28} onClick={toggleFullScreen} />
+              ) : (
+                <Minimize size={28} onClick={closeFullscreen} />
+              )}
+              <Spacer w={1} inline />
+              <XCircleFill
+                size={30}
+                onClick={() => {
+                  closeFullscreen();
+                  toggleModal();
+                }}
+              />
+            </div>
+            <Text>
+              {replyUsername
+                ? `In reply to @${replyUsername} comment #${commentNumber}`
+                : ''}
+            </Text>
+            <Spacer />
+            <Editor
+              height={_height}
+              value={content}
+              onChange={(value) => {
+                actionTrigger(value);
+              }}
+            />
+            {isAuthenticate ? (
+              <Button loading={loading} type="success-light" onClick={save}>
+                Send Reply
+              </Button>
+            ) : (
+              <Link href="/login">
+                <Button loading={loading} type="success-light">
+                  Sign in to Reply
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
-        <Quill
-          style={{ "--height": _height }}
-          theme="snow"
-          modules={modules}
-          formats={formats}
-          value={value}
-          onChange={setValue}
-        ></Quill>
-        <Button type="success-light" onClick={save}>
-          Publish
-        </Button>
-      </div>
-    </div>
+      ) : (
+        ''
+      )}
+    </>
   );
-};
+});
 
-export default CommentModal;
+export default ReplyModal;

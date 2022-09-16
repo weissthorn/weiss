@@ -21,12 +21,14 @@ const Login = observer(() => {
   const cookie = parseCookies();
   const router = useRouter();
   const [code, setCode] = useState('');
-  const [_code, _setCode] = useState('');
+  const [_code, _setCode] = useState<{ data?: string; code?: number }>({});
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ user, getUser, updateUser }] = useState(() => new UserStore());
 
   useEffect(() => {
-    let _code = cookie && cookie._w_code ? JSON.parse(cookie._w_code) : null;
+    getSettings();
+    let _code: any =
+      cookie && cookie._w_code ? JSON.parse(cookie._w_code) : null;
     _setCode(_code);
   }, []);
 
@@ -34,7 +36,7 @@ const Login = observer(() => {
     if (Number(code) !== _code.code) {
       toast.error('Code is incorrect or expired.');
     } else {
-      await getUser(_code.data).then(async (res: any) => {
+      await getUser(_code.data!).then(async (res: any) => {
         if (res.success) {
           await updateUser({ id: _code.data, status: 'active' });
           destroyCookie(null, '_w_code');

@@ -18,6 +18,7 @@ import UserStore from 'stores/user';
 import { userProp } from 'interfaces/user';
 import toast, { Toaster } from 'react-hot-toast';
 import Auth from 'components/admin/Auth';
+import moment from 'moment';
 
 const Admin = observer(() => {
   const [modal, toggleModal] = useState(false);
@@ -69,15 +70,22 @@ const Admin = observer(() => {
     toggleModal(true);
   };
 
-  const renderStatus = (value: string, rowData: any[], index: number) => {
-    return value === 'active' ? (
-      <Badge type="success">{value}</Badge>
-    ) : (
-      <Badge type="error">{value}</Badge>
-    );
+  const renderStatus = (value: string, rowData: any[]) => {
+    let status: any =
+      value === 'active' ? (
+        <Badge type="success">{value}</Badge>
+      ) : (
+        <Badge type="error">{value}</Badge>
+      );
+    return status;
   };
 
-  const renderAction = (value: string, rowData: any, index: number) => {
+  const renderDate = (value: string, rowData: any) => {
+    const date: any = moment(rowData.createdAt).format('MMM D, YYYY @ h:mm A');
+    return date;
+  };
+
+  const renderAction = (value: string, rowData: any) => {
     return (
       <Button
         type="secondary"
@@ -91,7 +99,7 @@ const Admin = observer(() => {
     );
   };
 
-  const renderView = (value: string, rowData: any, index: number) => {
+  const renderView = (value: string, rowData: any) => {
     return (
       <Link
         target="_blank"
@@ -107,7 +115,7 @@ const Admin = observer(() => {
 
   return (
     <Auth>
-      <AdminNavbar title="Users" description="Weiss" />
+      <AdminNavbar title="Users" description="Users" />
       <Toaster />
       <UserModal
         loading={loading}
@@ -119,30 +127,32 @@ const Admin = observer(() => {
       <div className="page-container top-100">
         <Sidebar active="users" />
 
-        <main className="main">
+        <main className="main for-admin">
           <SearchHeading
             title={`Users (${users.length})`}
             onChange={handleSearch}
           />
 
-          <Table
-            width={'100%'}
-            data={users}
-            // onChange={(value: any) => setData(value)}
-          >
+          <Table width={'100%'} data={users}>
             <Table.Column prop="name" label="Name" className="capitalize" />
             <Table.Column prop="role" label="Role" />
-            <Table.Column prop="status" label="status" render={renderStatus} />
+            <Table.Column prop="status" label="Status" render={renderStatus} />
+            <Table.Column
+              // width={220}
+              prop="createdAt"
+              label="Date"
+              render={renderDate}
+            />
             <Table.Column
               prop="action"
               label="action"
-              width={150}
+              // width={100}
               render={renderAction}
             />
             <Table.Column
               prop="action2"
               label=""
-              width={150}
+              // width={50}
               render={renderView}
             />
           </Table>

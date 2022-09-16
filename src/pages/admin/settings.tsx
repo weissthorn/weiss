@@ -7,7 +7,8 @@ import {
   Button,
   Textarea,
   Tabs,
-  Spacer
+  Spacer,
+  Select
 } from '@geist-ui/core';
 import { Image } from '@geist-ui/icons';
 import AdminNavbar from 'components/admin/Navbar';
@@ -62,7 +63,7 @@ const Settings = observer(() => {
   };
 
   const save = async () => {
-    await update(settings).then((res) => {
+    await update(settings).then((res: any) => {
       if (res.success) {
         toast.success('Settings updated!');
       } else {
@@ -73,12 +74,12 @@ const Settings = observer(() => {
 
   return (
     <Auth>
-      <AdminNavbar title="Settings" description="Settings - Weiss" />
+      <AdminNavbar title="Settings" description="Settings" />
       <Toaster />
       <div className="page-container top-100">
         <Sidebar active="settings" />
 
-        <main className="main">
+        <main className="main for-admin">
           <Collapse.Group width={'100%'}>
             <Text h3>Settings</Text>
             <Collapse title={<h4>Metadata</h4>} initialVisible>
@@ -161,6 +162,41 @@ const Settings = observer(() => {
                       })
                     }
                   />
+                </div>
+              </div>
+              <div className="column">
+                <div className="item">
+                  <Text h6></Text>
+                </div>
+                <div className="item">
+                  <Button
+                    shadow
+                    type="secondary"
+                    loading={loading}
+                    onClick={save}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </Collapse>
+            <Collapse title={<h4>Language</h4>}>
+              <div className="column">
+                <div className="item">
+                  <Text h6>Site language</Text>
+                </div>
+                <div className="item">
+                  <Select
+                    width={'100%'}
+                    value={settings.language}
+                    onChange={(value) =>
+                      setSettings({ ...settings, language: value })
+                    }
+                  >
+                    <Select.Option value="en">English</Select.Option>
+                    <Select.Option value="fr">French</Select.Option>
+                    <Select.Option value="es">Spanish</Select.Option>
+                  </Select>
                 </div>
               </div>
               <div className="column">

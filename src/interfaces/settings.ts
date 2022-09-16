@@ -7,7 +7,7 @@ export interface settingsProp {
   github?: string;
   facebook?: string;
   google?: string;
-  advert?: { top: ''; left: ''; right: ''; inner: '' };
+  advert?: { top: string; left: string; right: string; inner: string };
   email?: {
     host: string;
     email: string;
@@ -19,5 +19,5 @@ export interface settingsProp {
     comment: number;
     bestAnswer: number;
   };
-  banWords: string;
+  banWords?: string;
 }

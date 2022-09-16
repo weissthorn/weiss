@@ -58,12 +58,12 @@ const CreateCategory = observer(() => {
   return (
     <Auth>
       <Toaster />
-      <AdminNavbar title="Categories" description="Categories - Weiss" />
+      <AdminNavbar title="Add Category" description="Add Category" />
 
       <div className="page-container top-100">
         <Sidebar active="categories" />
 
-        <main className="main">
+        <main className="main for-admin">
           <div className="boxed">
             <h3>Create a Category</h3>
             <Spacer />

@@ -18,7 +18,7 @@ body {
     z-index: 999;
 
     .inner {
-      width: 1100px;
+      width: 1200px;
       margin: 0 auto;
     }
 
@@ -66,9 +66,12 @@ body {
     .link {
       font-size: 18px !important;
       width: 100%;
-      color: inherit;
       margin-bottom: 15px;
       display: block !important;
+
+      .sidelink {
+        padding-left: 16px;
+      }
 
       &.small {
         font-size: 14px !important;
@@ -113,6 +116,12 @@ body {
       width: 100%;
       color: inherit;
       margin-bottom: 10px;
+    }
+
+    &.for-admin {
+      .link {
+        color: #999 !important;
+      }
     }
   }
 
@@ -168,7 +177,7 @@ body {
     margin-bottom: 20px;
 
     .gridlock {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 100px auto;
@@ -211,7 +220,7 @@ body {
 
   .notification-container {
     box-sizing: border-box;
-    max-width: 650px;
+    max-width: 670px;
     margin: 0 auto;
   }
 
@@ -293,8 +302,30 @@ body {
     display: grid;
     grid-template-columns: 60px auto;
     grid-gap: 20px;
-    margin-top: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+
+    h5 {
+      margin-bottom: 0 !important;
+      line-height: 5px !important;
+    }
+
+    .collapse {
+      border: none;
+    }
+
+    ul li {
+      list-style-type: disc;
+    }
+
+    ol li {
+      list-style-type: decimal;
+    }
+  }
+
+  ul li {
+    &::before {
+      content: '' !important;
+    }
   }
 
   .editor-container {
@@ -302,7 +333,7 @@ body {
     left: 0;
     bottom: -20px;
     width: 100%;
-    z-index: 1100;
+    z-index: 1200;
 
     .content {
       box-sizing: border-box;
@@ -332,8 +363,7 @@ body {
         border: none;
       }
 
-      .se-menu-list ul li,
-      ul li {
+      .se-menu-list ul li {
         &::before {
           content: '' !important;
         }
@@ -363,12 +393,6 @@ body {
     }
   }
 
-  ul li {
-    &::before {
-      content: '' !important;
-    }
-  }
-
   .column {
     width: 100%;
     display: grid;
@@ -389,7 +413,7 @@ body {
   .discuss-grid {
     width: 100%;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 10px;
     margin-top: 15px;
     margin-bottom: 20px;
@@ -407,6 +431,23 @@ body {
         border-bottom: 2px solid #000;
       }
     }
+  }
+
+  .reply-btn {
+    position: relative;
+    top: -3px;
+    font-size: 13px;
+    color: #666 !important;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+
+  .like-btn {
+    position: relative;
+    top: -3px;
+    font-size: 14px;
+    padding-left: 10px;
+    cursor: pointer;
   }
 
   .custom-modal {
@@ -495,7 +536,7 @@ body {
 
   .page-container {
     box-sizing: border-box;
-    width: 1100px;
+    width: 1200px;
     margin: 0 auto;
     display: block;
   }
@@ -561,14 +602,29 @@ body {
     }
     aside {
       display: none;
-      .sidenav {
-        display: none;
+
+      &.for-admin {
+        display: block;
+        .sidenav {
+          top: 70px;
+          width: 50px;
+          padding-top: 20px;
+          border-right: 1px solid #ededed;
+          span {
+            display: none;
+          }
+        }
       }
     }
 
     .main {
       width: 100% !important;
       margin-left: 0;
+
+      &.for-admin {
+        width: calc(100% - 50px) !important;
+        margin-left: 50px;
+      }
     }
 
     .modal {
@@ -592,6 +648,12 @@ body {
 
     .discussion-container {
       grid-template-columns: auto;
+    }
+
+    .discuss-grid {
+      &.block {
+        display: block;
+      }
     }
 
     .dashboard-header {

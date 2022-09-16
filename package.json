@@ -14,7 +14,7 @@
     "@geist-ui/core": "^2.3.8",
     "@geist-ui/icons": "^1.0.2",
     "apexcharts": "^3.35.3",
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "csvjson": "^5.1.0",
     "dotenv": "^16.0.1",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.25.0",
-    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "18.0.3",
     "@types/react": "18.0.15",
     "@types/react-color": "^3.0.6",

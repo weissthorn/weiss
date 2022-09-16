@@ -4,7 +4,9 @@ export interface commentProp {
   comment?: string;
   document?: string;
   userId?: string;
-  profile?: any;
+  author?: any;
+  slug?: string;
+  replies?: any[];
   createdAt?: string;
   updatedAt?: string;
 }

@@ -12,9 +12,10 @@ export interface discussionProp {
   category?: categoryProp;
   profile?: userProp;
   authRequired?: boolean;
+  likes?: any[];
   status?: string;
   action?: any;
-  view?: any;
+  view?: number;
   createdAt?: string;
   updatedAt?: string;
 }

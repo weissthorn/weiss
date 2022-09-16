@@ -160,17 +160,32 @@ export default class DiscussionStore {
   };
 
   @action
-  getReplies = async (id: string) => {
-    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}`;
+  getReplies = async (id: string, type: string) => {
+    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}&type=${type}`;
     this.commentLoading = false;
 
-    await fetch(uri, {
+    return await fetch(uri, {
       headers: this.headers
     })
       .then((res) => res.json())
       .then((res) => {
         let data = res.data;
         this.commentLoading = false;
+        this.comments = data;
+        this.total = res.count;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action
+  refreshReplies = async (id: string, type: string) => {
+    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}&type=${type}`;
+    return await fetch(uri, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        let data = res.data;
         this.comments = data;
         this.total = res.count;
       })
@@ -208,6 +223,25 @@ export default class DiscussionStore {
       .then((res) => {
         this.loading = false;
 
+        if (res.success) {
+          this.discussion = res.data;
+          return res.data;
+        } else {
+          return false;
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action
+  refreshDiscussion = async (id?: any) => {
+    let uri = `${API_URL}/discussion/${id}`;
+
+    return await fetch(uri, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res) => {
         if (res.success) {
           this.discussion = res.data;
           return res.data;

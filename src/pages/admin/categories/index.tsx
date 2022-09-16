@@ -71,12 +71,12 @@ const Categories = observer(() => {
 
   return (
     <Auth>
-      <AdminNavbar title="Categories" description="Categories - Weiss" />
+      <AdminNavbar title="Categories" description="Categories" />
 
       <div className="page-container top-100">
         <Sidebar active="categories" />
 
-        <main className="main">
+        <main className="main for-admin">
           <SearchHeading
             title={`Categories (${categories.length})`}
             onChange={handleSearch}

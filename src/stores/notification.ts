@@ -10,6 +10,7 @@ export default class NotificationStore {
   @observable more: boolean = false;
   @observable page: number = 1;
   @observable limit: number = 20;
+  @observable total: number = 0;
   @observable unread: number = 0;
   @observable notification: notificationProp = {};
   @observable notifications: notificationProp[] = [];
@@ -139,15 +140,17 @@ export default class NotificationStore {
       }
     })
       .then((res) => res.json())
-      .then((res: resProp) => {
+      .then((res: any) => {
         if (res.success) {
           setTimeout(() => {
             if (paginate) {
-              this.more = res.data.length < this.limit;
+              this.more = res.count > this.limit;
               let newNotification = this.notifications;
               this.notifications = [...newNotification, ...res.data];
+              this.total = res.count;
             } else {
               this.notifications = res.data;
+              this.total = res.count;
             }
             this.loading = false;
           }, 3000);

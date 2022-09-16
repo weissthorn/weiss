@@ -19,6 +19,7 @@ import SettingsStore from 'stores/settings';
 import { validateEmail } from 'components/api/utils';
 import UserStore from 'stores/user';
 import CategoryStore from 'stores/category';
+import SetupVerify from 'components/admin/SetupVerify';
 
 const EmailSetup = observer(() => {
   const cookie = parseCookies();
@@ -83,7 +84,7 @@ const EmailSetup = observer(() => {
   };
 
   return (
-    <div>
+    <SetupVerify>
       <Navbar
         title="Email settings - Setup Weiss"
         description="Email settings - Setup Weiss"
@@ -172,7 +173,7 @@ const EmailSetup = observer(() => {
           </Grid.Container>
         </div>
       </Page>
-    </div>
+    </SetupVerify>
   );
 });
 

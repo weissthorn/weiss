@@ -10,6 +10,7 @@ import {
   Text
 } from '@geist-ui/core';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
+import moment from 'moment';
 import AdminNavbar from 'components/admin/Navbar';
 import SearchHeading from 'components/SearchHeading';
 import Sidebar from 'components/admin/Sidebar';
@@ -96,22 +97,29 @@ const Discussions = observer(() => {
 
   return (
     <Auth>
-      <AdminNavbar title="Discussions" description="Weiss" />
+      <AdminNavbar title="Discussions" description="Discussions" />
       <Toaster />
       <div className="page-container top-100">
         <Sidebar active="discussions" />
 
-        <main className="main">
+        <main className="main for-admin">
           <SearchHeading
             title={`Discussions (${discussions.length})`}
             onChange={handleSearch}
           />
 
-          <Table width={'100%'} data={discussions}>
+          <Table
+            width={'100%'}
+            data={discussions.map((item) => ({
+              ...item,
+              view: item.view?.toString()
+            }))}
+          >
             <Table.Column prop="title" label="Title" />
+            <Table.Column prop="view" label="View" />
             <Table.Column prop="status" label="status" render={renderStatus} />
             <Table.Column prop="action" label="action" render={renderAction} />
-            <Table.Column prop="view" label="" render={renderView} />
+            <Table.Column prop="updatedAt" label="" render={renderView} />
           </Table>
 
           {loading ? (

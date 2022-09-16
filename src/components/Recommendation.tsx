@@ -28,13 +28,15 @@ const Recommendation = observer((props: recommendProps) => {
       <Text h4>Recommend Discussions</Text>
       {loading ? <Loading /> : ''}
 
-      {discussions.map((item, key) => (
-        <div>
-          <NextLink key={item.id} href={`/d/${item.slug}`}>
-            <Link className="post-link">{ellipsis(item.title!)}</Link>
-          </NextLink>
-        </div>
-      ))}
+      {discussions
+        .filter((item) => item.title !== props.title)
+        .map((item) => (
+          <div key={item.id}>
+            <NextLink href={`/d/${item.slug}`}>
+              <Link className="post-link">{ellipsis(item.title!)}</Link>
+            </NextLink>
+          </div>
+        ))}
 
       <Spacer />
     </>

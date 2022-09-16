@@ -17,8 +17,11 @@ import Auth from 'components/admin/Auth';
 import ReportStore from 'stores/report';
 import { reportProp } from 'interfaces/report';
 import toast, { Toaster } from 'react-hot-toast';
+import moment from 'moment';
+import DiscussionStore from 'stores/discussion';
 
 const Reports = observer(() => {
+  const [{ updateDiscussion }] = useState(() => new DiscussionStore());
   const [
     {
       loading,
@@ -43,9 +46,9 @@ const Reports = observer(() => {
   };
 
   const handleChange = async (status: string, id: string) => {
-    await updateReport({ status, id }).then((res: any) => {
+    await updateDiscussion({ status, id }).then((res: any) => {
       if (res.success) {
-        toast.success('Report status updated');
+        toast.success('Discussion status updated');
         getReports();
       } else {
         toast.error('Unable to update status! Please try again later.');
@@ -65,6 +68,11 @@ const Reports = observer(() => {
     );
   };
 
+  const renderDate = (value: string, rowData: any) => {
+    const date: any = moment(rowData.createdAt).format('MMM D, YYYY @ h:mm A');
+    return date;
+  };
+
   const renderView = (value: string, rowData: reportProp) => {
     return (
       <Link target={'_blank'} icon href={`/d/${rowData.slug}`}>
@@ -77,8 +85,7 @@ const Reports = observer(() => {
     return (
       <Select
         placeholder="Change status"
-        value={value}
-        onChange={(value: any) => handleChange(value, rowData.id!)}
+        onChange={(value: any) => handleChange(value, rowData.discussionId!)}
       >
         <Select.Option value="answered">Answered</Select.Option>
         <Select.Option value="unanswered">Unanswered</Select.Option>
@@ -94,7 +101,7 @@ const Reports = observer(() => {
       <div className="page-container top-100">
         <Sidebar active="reports" />
 
-        <main className="main">
+        <main className="main for-admin">
           <SearchHeading
             title={`Reports (${reports.length})`}
             withoutSearch={true}
@@ -104,8 +111,9 @@ const Reports = observer(() => {
             <Table.Column prop="title" label="Title" />
             <Table.Column prop="type" label="Type" />
             <Table.Column prop="status" label="status" render={renderStatus} />
-            <Table.Column prop="action" label="action" render={renderAction} />
-            <Table.Column prop="view" label="" render={renderView} />
+            <Table.Column prop="createdAt" label="Date" render={renderDate} />
+            <Table.Column prop="slug" label="action" render={renderAction} />
+            <Table.Column prop="post" label="" render={renderView} />
           </Table>
 
           {loading ? (

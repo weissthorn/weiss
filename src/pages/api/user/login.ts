@@ -2,7 +2,7 @@ import signale from 'signale';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { User } from '../../../components/api/model';
 import { withAuth, validateEmail } from '../../../components/api/utils';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {

@@ -10,7 +10,9 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await Discussion.orderBy(r.desc('createdAt'))
         .filter((profile: any) =>
-          profile('title').match(search).or(profile('content').match(search))
+          profile('title')
+            .match('(?i)' + search)
+            .or(profile('content').match('(?i)' + search))
         )
         .getJoin()
         .then((data: any) => {

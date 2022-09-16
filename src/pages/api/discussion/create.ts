@@ -31,7 +31,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
         .then(async (data: any) => {
           if (data.id) {
             let config: settingsProp = await getSettings();
-            await User.get(data.userId).then(async (p) => {
+            await User.get(data.userId).then(async (p: any) => {
               await User.get(data.userId)
                 .update({
                   coin: Number(p.coin + config.coin?.discussion)

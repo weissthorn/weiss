@@ -10,7 +10,9 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await Report.orderBy(r.desc('createdAt'))
         .filter((profile: any) =>
-          profile('title').match(query).or(profile('description').match(query))
+          profile('title')
+            .match('(?i)' + query)
+            .or(profile('description').match('(?i)' + query))
         )
         .then(async (data: any) => {
           let report: any = [];

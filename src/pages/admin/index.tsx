@@ -65,6 +65,7 @@ const Dashboard = observer(() => {
       data: pageviews.map((item: any) => item.count)
     }
   ];
+
   const options: any = {
     chart: {
       height: 350,
@@ -82,7 +83,7 @@ const Dashboard = observer(() => {
     },
     xaxis: {
       type: 'datetime',
-      categories: discussions.map((item: any) => item.day)
+      categories: pageviews.map((item: any) => item.day)
     },
     tooltip: {
       x: {
@@ -116,7 +117,7 @@ const Dashboard = observer(() => {
       <div className="page-container top-100">
         <Sidebar active="dashboard" />
 
-        <main className="main">
+        <main className="main for-admin">
           <div className="dashboard-header">
             <div className="item">
               <Text h3>Dashboard</Text>

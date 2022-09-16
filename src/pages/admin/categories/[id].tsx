@@ -63,7 +63,7 @@ const EditCategory = observer(() => {
       <div className="page-container top-100">
         <Sidebar active="categories" />
 
-        <main className="main">
+        <main className="main for-admin">
           <div className="boxed">
             <h3>Edit category</h3>
             <Spacer />

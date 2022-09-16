@@ -16,6 +16,7 @@ import { setCookie, parseCookies } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 import { ChevronLeft, ChevronRight, Image } from '@geist-ui/icons';
 import Navbar from 'components/Navbar';
+import SetupVerify from 'components/admin/SetupVerify';
 import SettingsStore from 'stores/settings';
 
 const MetaSetup = observer(() => {
@@ -68,9 +69,9 @@ const MetaSetup = observer(() => {
 
     if (!settings.siteLogo) {
       toast.error('Please add a logo');
-    } else if (siteName.length < 3) {
+    } else if (!siteName || siteName.length < 3) {
       toast.error('Username is too short!');
-    } else if (siteDescription.length < 10) {
+    } else if (!siteDescription || siteDescription.length < 10) {
       toast.error('Description is too short! Minimum character is 10.');
     } else {
       const setup = { settings, admin };
@@ -83,7 +84,7 @@ const MetaSetup = observer(() => {
   };
 
   return (
-    <div>
+    <SetupVerify>
       <Navbar
         title="Metadata - Setup Weiss"
         description="Metadata - Setup Weiss"
@@ -169,7 +170,7 @@ const MetaSetup = observer(() => {
           </Grid.Container>
         </div>
       </Page>
-    </div>
+    </SetupVerify>
   );
 });
 

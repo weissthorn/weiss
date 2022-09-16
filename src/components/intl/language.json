@@ -9,12 +9,14 @@
     "Start a discussion",
     "Discussion",
     "Discussions",
+    "Members",
     "comment",
     "comments",
     "reply",
     "replies",
     "moderator",
-    "moderators"
+    "moderators",
+    "Loading"
   ],
   "es": [
     "Ligera",
@@ -26,6 +28,7 @@
     "Iniciar una discusión",
     "Discusión",
     "Discusiónes",
+    "Members",
     "comentario",
     "comentarios",
     "respuesta",

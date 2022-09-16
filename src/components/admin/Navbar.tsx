@@ -196,7 +196,7 @@ const Navbar = observer((props: navbarProps) => {
               />
               <Spacer w={2} inline />
             </Grid>
-            <Grid xs={0} md={9}>
+            <Grid xs={0} md={10}>
               &nbsp;
             </Grid>
             <Grid xs={0} md={6}>
@@ -226,7 +226,7 @@ const Navbar = observer((props: navbarProps) => {
                           ? `/storage/${token.photo}`
                           : '/images/avatar.png'
                       }
-                      name={getFirstName(token.name)}
+                      name={getFirstName(token.name!)}
                     />
                     <ChevronDown size={16} className="caret" />
                   </Popover>
@@ -235,29 +235,17 @@ const Navbar = observer((props: navbarProps) => {
                 <></>
               )}
             </Grid>
-            <Grid xs={0} lg={3}>
+            <Grid xs={0} lg={1}>
               <Spacer w={3} inline />
               <Popover content={themeMenu}>
-                <Button
-                  icon={
-                    theme === 'weiss-dark' ? (
-                      <Moon />
-                    ) : theme === 'weiss-light' ? (
-                      <Sun />
-                    ) : (
-                      <Sun />
-                    )
-                  }
-                  auto
-                  scale={2 / 3}
-                >
-                  <Text span>
-                    {theme === 'weiss-dark'
-                      ? 'dark'
-                      : theme === 'weiss-light'
-                      ? 'light'
-                      : 'light'}
-                  </Text>
+                <Button type="abort" auto scale={2 / 3}>
+                  {theme === 'weiss-dark' ? (
+                    <Moon />
+                  ) : theme === 'weiss-light' ? (
+                    <Sun />
+                  ) : (
+                    <Sun />
+                  )}
                 </Button>
               </Popover>
             </Grid>

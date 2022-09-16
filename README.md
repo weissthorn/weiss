@@ -11,7 +11,11 @@ Forum based on NextJS and NodeJS
 
 - [NodeJS 12 LTS upward](https://github.com/nvm-sh/nvm/blob/master/README.md)
 - [RethinkDB 2.4 upward](https://rethinkdb.com/docs/install/)
-- Nginx
+
+![image5](./public/screenshots/5.png)
+![image1](./public/screenshots/1.png)
+![image2](./public//screenshots/2.png)
+![image3](./public//screenshots/3.png)
 
 ### Installation
 
@@ -33,9 +37,14 @@ yarn dev
 - &#x2611; Post and comment
 - &#x2611; Social share
 - &#x2610; Email notification
-- &#x2610; Web notification
-- &#x2610; Translation (English, Arabic, Spanish etc)
-- &#x2610; Coin and reward
+- &#x2611; Web notification
+- &#x2610; Push notification
+- &#x2611; Theming: Light and Dark
+- &#x2610; Language & Translation (English, French, Arabic, Spanish etc)
+- &#x2611; Coin and reward
+- &#x2611; Reports and flag
+- &#x2611; Advert settings
+- &#x2611; Analytics, pageviews and post views.
 
 ### How to contribute
 
