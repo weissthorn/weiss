@@ -7,7 +7,6 @@ import {
   Input,
   Grid,
   Card,
-  Page,
   Loading,
   Tooltip
 } from '@geist-ui/core';
@@ -88,105 +87,102 @@ const Signup = observer(() => {
     <div>
       <Navbar title="Signup" description="Signup" hide />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5} dotSize={'1px'}>
+      <div className="polkadot">
         <div className="page-container">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <div className="logo-container center">
-                {settings.siteLogo ? (
-                  <img src={`/storage/${settings.siteLogo}`} />
-                ) : (
-                  <Text h2 width={'100%'}>
-                    {settings.siteName}
-                  </Text>
-                )}
-              </div>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Create your account</Text>
-                <Spacer h={2} />
-                <Input
-                  placeholder="Fullname"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) => {
-                    setUser({ ...user, name: e.target.value });
-                  }}
-                />
-                <Spacer h={1.5} />
-                <Input
-                  placeholder="Username"
-                  width="100%"
-                  scale={4 / 3}
-                  iconClickable
-                  onChange={(e) => processUsername(e.target.value)}
-                  minLength={3}
-                  iconRight={
-                    status === 'success' ? (
-                      <Tooltip
-                        placement="topEnd"
-                        text="Username is available."
-                        type="success"
-                      >
-                        <CheckInCircleFill color="#0070F3" />
-                      </Tooltip>
-                    ) : status === 'error' ? (
-                      <Tooltip
-                        placement="topEnd"
-                        text="Username is not available. Try another name."
-                        trigger="click"
-                        type="error"
-                      >
-                        <XCircleFill color="#cb0000" />
-                      </Tooltip>
-                    ) : status === 'loading' ? (
-                      <Loading />
-                    ) : (
-                      <CheckInCircle />
-                    )
-                  }
-                />
-                <Spacer h={1.5} />
-                <Input
-                  placeholder="Email"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) => {
-                    setUser({ ...user, email: e.target.value });
-                  }}
-                />
-                <Spacer h={1.5} />
-                <Input.Password
-                  placeholder="Password"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) => {
-                    setUser({ ...user, password: e.target.value });
-                  }}
-                />
-                <Spacer h={1.5} />
-                <Button
-                  shadow
-                  type="secondary"
-                  width="100%"
-                  loading={loading}
-                  onClick={save}
-                >
-                  Signup
-                </Button>
-                <Spacer h={1} />
-                <Text font="14px">
-                  Have an account? &nbsp;
-                  <Link href="/login" color underline>
-                    Login here
-                  </Link>
+          <div className="boxed">
+            <div className="logo-container center">
+              {settings.siteLogo ? (
+                <img src={`/storage/${settings.siteLogo}`} />
+              ) : (
+                <Text h2 width={'100%'}>
+                  {settings.siteName}
                 </Text>
-              </Card>
-            </Grid>
-          </Grid.Container>
+              )}
+            </div>
+
+            <Card shadow width="100%">
+              <Text h3>Create your account</Text>
+              <Spacer h={2} />
+              <Input
+                placeholder="Fullname"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) => {
+                  setUser({ ...user, name: e.target.value });
+                }}
+              />
+              <Spacer h={1.5} />
+              <Input
+                placeholder="Username"
+                width="100%"
+                scale={4 / 3}
+                iconClickable
+                onChange={(e) => processUsername(e.target.value)}
+                minLength={3}
+                iconRight={
+                  status === 'success' ? (
+                    <Tooltip
+                      placement="topEnd"
+                      text="Username is available."
+                      type="success"
+                    >
+                      <CheckInCircleFill color="#0070F3" />
+                    </Tooltip>
+                  ) : status === 'error' ? (
+                    <Tooltip
+                      placement="topEnd"
+                      text="Username is not available. Try another name."
+                      trigger="click"
+                      type="error"
+                    >
+                      <XCircleFill color="#cb0000" />
+                    </Tooltip>
+                  ) : status === 'loading' ? (
+                    <Loading />
+                  ) : (
+                    <CheckInCircle />
+                  )
+                }
+              />
+              <Spacer h={1.5} />
+              <Input
+                placeholder="Email"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) => {
+                  setUser({ ...user, email: e.target.value });
+                }}
+              />
+              <Spacer h={1.5} />
+              <Input.Password
+                placeholder="Password"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) => {
+                  setUser({ ...user, password: e.target.value });
+                }}
+              />
+              <Spacer h={1.5} />
+              <Button
+                shadow
+                type="secondary"
+                width="100%"
+                loading={loading}
+                onClick={save}
+              >
+                Signup
+              </Button>
+              <Spacer h={1} />
+              <Text font="14px">
+                Have an account? &nbsp;
+                <Link href="/login" color underline>
+                  Login here
+                </Link>
+              </Text>
+            </Card>
+          </div>
         </div>
-      </Page>
+      </div>
     </div>
   );
 });

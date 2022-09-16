@@ -25,6 +25,7 @@ import Navbar from 'components/Navbar';
 import UserStore from 'stores/user';
 import useToken from 'components/Token';
 import { validateEmail } from 'components/api/utils';
+import Auth from 'components/Auth';
 
 const Settings = observer(() => {
   const token = useToken();
@@ -178,7 +179,7 @@ const Settings = observer(() => {
   };
 
   return (
-    <div>
+    <Auth>
       <Navbar title="Account settings" description="Account settings" />
       <Toaster />
       <div className="page-container top-100">
@@ -336,7 +337,7 @@ const Settings = observer(() => {
           </Grid>
         </Grid.Container>
       </div>
-    </div>
+    </Auth>
   );
 });
 

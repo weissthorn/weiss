@@ -5,6 +5,17 @@ body {
     box-sizing: border-box;
   }
 
+  .polkadot {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#e3e3e3 1px, transparent 0),
+      radial-gradient(#e3e3e3 1px, transparent 0);
+    background-position: 0 0, calc(0.5 * 25px) calc(0.5 * 25px);
+    background-attachment: fixed;
+    background-size: calc(0.5 * 50px) calc(0.5 * 50px);
+  }
+
   .navbar {
     position: fixed;
     top: 0;
@@ -18,7 +29,7 @@ body {
     z-index: 999;
 
     .inner {
-      width: 1200px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -152,6 +163,7 @@ body {
 
   .boxed {
     max-width: 500px;
+    margin: 0 auto;
   }
 
   .file-upload {
@@ -466,6 +478,7 @@ body {
       z-index: 10000;
 
       .inner {
+        box-sizing: border-box;
         margin-top: 15%;
         padding: 10px;
       }
@@ -478,6 +491,7 @@ body {
     }
 
     .inner {
+      box-sizing: border-box;
       max-width: 500px;
       height: 100%;
       margin: 0 auto;
@@ -536,7 +550,7 @@ body {
 
   .page-container {
     box-sizing: border-box;
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
     display: block;
   }

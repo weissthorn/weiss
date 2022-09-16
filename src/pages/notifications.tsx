@@ -7,6 +7,7 @@ import NotificationStore from 'stores/notification';
 import useToken from 'components/Token';
 import { useRouter } from 'next/router';
 import moment from 'moment';
+import Auth from 'components/Auth';
 
 const Notifications = observer(() => {
   const token = useToken();
@@ -87,7 +88,7 @@ const Notifications = observer(() => {
   ));
 
   return (
-    <div>
+    <Auth>
       <Navbar title="Notifications" description="Notifications" />
       <div className="page-container top-100">
         <div className="notification-container">
@@ -135,7 +136,7 @@ const Notifications = observer(() => {
           <Spacer h={5} />
         </div>
       </div>
-    </div>
+    </Auth>
   );
 });
 

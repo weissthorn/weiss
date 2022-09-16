@@ -1,14 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Spacer,
-  Text,
-  Button,
-  Input,
-  Grid,
-  Card,
-  Page,
-  Select
-} from '@geist-ui/core';
+import { Spacer, Text, Button, Input, Card, Select } from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { ChevronRight } from '@geist-ui/icons';
@@ -64,75 +55,70 @@ const Setup = observer(() => {
         hide
       />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5} dotSize={'1px'}>
-        <div className="page-container">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
-                Weiss
-              </Text>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Welcome, Let's setup blazingly!</Text>
-                <Spacer h={2} />
-                <Select
-                  scale={4 / 3}
-                  placeholder="Select language"
-                  width="100%"
-                  value={settings.language}
-                  onChange={(val) => handleSettings({ language: val })}
-                >
-                  <Select.Option value="en">English</Select.Option>
-                  <Select.Option value="fr">French</Select.Option>
-                  <Select.Option value="es">Spanish</Select.Option>
-                </Select>
-                <Spacer h={1.5} />
-                <Input
-                  placeholder="Admin Username"
-                  width="100%"
-                  scale={4 / 3}
-                  value={admin.username}
-                  onChange={(e) =>
-                    setAdmin({ ...admin, username: e.target.value })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Input
-                  htmlType={'email'}
-                  placeholder="Admin Email"
-                  width="100%"
-                  scale={4 / 3}
-                  value={admin.email}
-                  onChange={(e) =>
-                    setAdmin({ ...admin, email: e.target.value })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Input.Password
-                  placeholder="Admin Password"
-                  width="100%"
-                  scale={4 / 3}
-                  value={admin.password}
-                  onChange={(e) =>
-                    setAdmin({ ...admin, password: e.target.value })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Button
-                  shadow
-                  type="secondary"
-                  width="100%"
-                  iconRight={<ChevronRight />}
-                  onClick={_next}
-                >
-                  Continue (2/3)
-                </Button>
-              </Card>
-            </Grid>
-          </Grid.Container>
+      <div className="polkadot">
+        <div className="page-container top-100">
+          <div className="boxed">
+            <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
+              Weiss
+            </Text>
+
+            <Card shadow width="100%">
+              <Text h3>Welcome, Let's setup blazingly!</Text>
+              <Spacer h={2} />
+              <Select
+                scale={4 / 3}
+                placeholder="Select language"
+                width="100%"
+                value={settings.language}
+                onChange={(val) => handleSettings({ language: val })}
+              >
+                <Select.Option value="en">English</Select.Option>
+                <Select.Option value="fr">French</Select.Option>
+                <Select.Option value="es">Spanish</Select.Option>
+              </Select>
+              <Spacer h={1.5} />
+              <Input
+                placeholder="Admin Username"
+                width="100%"
+                scale={4 / 3}
+                value={admin.username}
+                onChange={(e) =>
+                  setAdmin({ ...admin, username: e.target.value })
+                }
+              />
+              <Spacer h={1.5} />
+              <Input
+                htmlType={'email'}
+                placeholder="Admin Email"
+                width="100%"
+                scale={4 / 3}
+                value={admin.email}
+                onChange={(e) => setAdmin({ ...admin, email: e.target.value })}
+              />
+              <Spacer h={1.5} />
+              <Input.Password
+                placeholder="Admin Password"
+                width="100%"
+                scale={4 / 3}
+                value={admin.password}
+                onChange={(e) =>
+                  setAdmin({ ...admin, password: e.target.value })
+                }
+              />
+              <Spacer h={1.5} />
+              <Button
+                shadow
+                type="secondary"
+                width="100%"
+                iconRight={<ChevronRight />}
+                onClick={_next}
+              >
+                Continue (2/3)
+              </Button>
+            </Card>
+          </div>
         </div>
-      </Page>
+      </div>
     </SetupVerify>
   );
 });

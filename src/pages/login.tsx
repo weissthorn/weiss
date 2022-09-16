@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Spacer,
-  Text,
-  Link,
-  Button,
-  Input,
-  Grid,
-  Card,
-  Page
-} from '@geist-ui/core';
+import { Spacer, Text, Link, Button, Input, Card } from '@geist-ui/core';
 import dynamic from 'next/dynamic';
 const Github = dynamic(() => import('react-login-github'), {
   ssr: false
@@ -56,79 +47,77 @@ const Login = observer(() => {
   };
 
   return (
-    <div>
+    <div className="polkadot">
       <Navbar title="Login" description="Login" hide />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5}>
+      <div>
         <div className="page-container top-100">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <div className="logo-container center">
-                {settings.siteLogo ? (
-                  <img src={`/storage/${settings.siteLogo}`} />
-                ) : (
-                  <Text h2 width={'100%'}>
-                    {settings.siteName}
-                  </Text>
-                )}
-              </div>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Sign into your account</Text>
-                <Spacer h={2} />
-                <Input
-                  placeholder="Email or username"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) =>
-                    setUser({ ...user, ...{ email: e.target.value } })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Input.Password
-                  placeholder="Password"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) =>
-                    setUser({ ...user, ...{ password: e.target.value } })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Button
-                  shadow
-                  type="secondary"
-                  width="100%"
-                  loading={loading}
-                  onClick={signIn}
-                >
-                  Log in
-                </Button>
-                {/* <Github
+          <div className="boxed">
+            <div className="logo-container center">
+              {settings.siteLogo ? (
+                <img src={`/storage/${settings.siteLogo}`} />
+              ) : (
+                <Text h2 width={'100%'}>
+                  {settings.siteName}
+                </Text>
+              )}
+            </div>
+
+            <Card width="100%">
+              <Text h3>Sign into your account</Text>
+              <Spacer h={2} />
+              <Input
+                placeholder="Email or username"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) =>
+                  setUser({ ...user, ...{ email: e.target.value } })
+                }
+              />
+              <Spacer h={1.5} />
+              <Input.Password
+                placeholder="Password"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) =>
+                  setUser({ ...user, ...{ password: e.target.value } })
+                }
+              />
+              <Spacer h={1.5} />
+              <Button
+                shadow
+                type="secondary"
+                width="100%"
+                loading={loading}
+                onClick={signIn}
+              >
+                Log in
+              </Button>
+              {/* <Github
                   className="button"
                   clientId="ac56fad434a3a3c1561e"
                   onSuccess={onSuccess}
                   onFailure={onFailure}
                 /> */}
-                {/* <Spacer h={1} /> */}
-                <Text font={'14px'}>
-                  Forgotten Password? &nbsp;
-                  <Link href="/forgot" color underline>
-                    Reset here
-                  </Link>
-                </Text>
+              {/* <Spacer h={1} /> */}
+              <Text font={'14px'}>
+                Forgotten Password? &nbsp;
+                <Link href="/forgot" color underline>
+                  Reset here
+                </Link>
+              </Text>
 
-                <Text font={'14px'}>
-                  Not a member? &nbsp;
-                  <Link href="/signup" color underline>
-                    Signup here
-                  </Link>
-                </Text>
-              </Card>
-            </Grid>
-          </Grid.Container>
+              <Text font={'14px'}>
+                Not a member? &nbsp;
+                <Link href="/signup" color underline>
+                  Signup here
+                </Link>
+              </Text>
+            </Card>
+            <Spacer h={4} />
+          </div>
         </div>
-      </Page>
+      </div>
     </div>
   );
 });

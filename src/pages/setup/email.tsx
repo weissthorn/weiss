@@ -1,14 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Spacer,
-  Text,
-  Link,
-  Button,
-  Input,
-  Grid,
-  Card,
-  Page
-} from '@geist-ui/core';
+import { Spacer, Text, Button, Input, Card } from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
@@ -91,88 +82,85 @@ const EmailSetup = observer(() => {
         hide
       />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5} dotSize={'1px'}>
-        <div className="page-container">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
-                Weiss
-              </Text>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Email settings</Text>
-                <Spacer h={2} />
+      <div className="polkadot">
+        <div className="page-container top-100">
+          <div className="boxed">
+            <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
+              Weiss
+            </Text>
 
-                <Input
-                  htmlType="url"
-                  placeholder="SMTP Host"
-                  width="100%"
-                  scale={4 / 3}
-                  value={email?.host}
-                  onChange={(e) =>
-                    handleSettings({
-                      email: {
-                        ...email,
-                        ...{ host: e.target.value }
-                      }
-                    })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Input
-                  placeholder="SMTP Email"
-                  width="100%"
-                  scale={4 / 3}
-                  value={email?.email}
-                  onChange={(e) =>
-                    handleSettings({
-                      email: {
-                        ...email,
-                        ...{ email: e.target.value }
-                      }
-                    })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Input.Password
-                  placeholder="SMTP Password"
-                  width="100%"
-                  scale={4 / 3}
-                  value={email?.password}
-                  onChange={(e) =>
-                    handleSettings({
-                      email: {
-                        ...email,
-                        ...{ password: e.target.value }
-                      }
-                    })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Button
-                  onClick={() => router.back()}
-                  type="secondary"
-                  width="48%"
-                  icon={<ChevronLeft />}
-                >
-                  Back
-                </Button>
-                <Button
-                  loading={loading}
-                  shadow
-                  type="secondary"
-                  width="50%"
-                  ml={'5px'}
-                  onClick={save}
-                >
-                  Save &amp; Launch
-                </Button>
-              </Card>
-            </Grid>
-          </Grid.Container>
+            <Card shadow width="100%">
+              <Text h3>Email settings</Text>
+              <Spacer h={2} />
+
+              <Input
+                htmlType="url"
+                placeholder="SMTP Host"
+                width="100%"
+                scale={4 / 3}
+                value={email?.host}
+                onChange={(e) =>
+                  handleSettings({
+                    email: {
+                      ...email,
+                      ...{ host: e.target.value }
+                    }
+                  })
+                }
+              />
+              <Spacer h={1.5} />
+              <Input
+                placeholder="SMTP Email"
+                width="100%"
+                scale={4 / 3}
+                value={email?.email}
+                onChange={(e) =>
+                  handleSettings({
+                    email: {
+                      ...email,
+                      ...{ email: e.target.value }
+                    }
+                  })
+                }
+              />
+              <Spacer h={1.5} />
+              <Input.Password
+                placeholder="SMTP Password"
+                width="100%"
+                scale={4 / 3}
+                value={email?.password}
+                onChange={(e) =>
+                  handleSettings({
+                    email: {
+                      ...email,
+                      ...{ password: e.target.value }
+                    }
+                  })
+                }
+              />
+              <Spacer h={1.5} />
+              <Button
+                onClick={() => router.back()}
+                type="secondary"
+                width="48%"
+                icon={<ChevronLeft />}
+              >
+                Back
+              </Button>
+              <Button
+                loading={loading}
+                shadow
+                type="secondary"
+                width="50%"
+                ml={'5px'}
+                onClick={save}
+              >
+                Save &amp; Launch
+              </Button>
+            </Card>
+          </div>
         </div>
-      </Page>
+      </div>
     </SetupVerify>
   );
 });

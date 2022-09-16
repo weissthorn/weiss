@@ -1,15 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Spacer,
-  Text,
-  Link,
-  Button,
-  Input,
-  Grid,
-  Card,
-  Page,
-  Textarea
-} from '@geist-ui/core';
+import { Spacer, Text, Button, Input, Card, Textarea } from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { setCookie, parseCookies } from 'nookies';
@@ -91,85 +81,82 @@ const MetaSetup = observer(() => {
         hide
       />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5} dotSize={'1px'}>
-        <div className="page-container">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
-                Weiss
-              </Text>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Site metadata</Text>
-                <Spacer h={2} />
-                <Button icon={<Image />} auto>
-                  Upload logo
-                  <input
-                    type="file"
-                    className="file-upload"
-                    onChange={handleUpload}
-                  />
-                </Button>{' '}
-                <Spacer inline />
-                {settings.siteLogo ? (
-                  <img
-                    src={`/storage/${settings.siteLogo}`}
-                    style={{ width: 'auto', height: 20 }}
-                  />
-                ) : (
-                  ''
-                )}
-                <Spacer h={1.5} />
-                <Input
-                  placeholder="Site Name"
-                  width="100%"
-                  scale={4 / 3}
-                  value={settings.siteName}
-                  onChange={(e) =>
-                    handleSettings({
-                      ...settings,
-                      siteName: e.target.value
-                    })
-                  }
+      <div className="polkadot">
+        <div className="page-container top-100">
+          <div className="boxed">
+            <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
+              Weiss
+            </Text>
+
+            <Card shadow width="100%">
+              <Text h3>Site metadata</Text>
+              <Spacer h={2} />
+              <Button icon={<Image />} auto>
+                Upload logo
+                <input
+                  type="file"
+                  className="file-upload"
+                  onChange={handleUpload}
                 />
-                <Spacer h={1.5} />
-                <Textarea
-                  placeholder="Site Description"
-                  width="100%"
-                  scale={4 / 3}
-                  value={settings.siteDescription}
-                  onChange={(e) =>
-                    handleSettings({
-                      ...settings,
-                      siteDescription: e.target.value
-                    })
-                  }
+              </Button>{' '}
+              <Spacer inline />
+              {settings.siteLogo ? (
+                <img
+                  src={`/storage/${settings.siteLogo}`}
+                  style={{ width: 'auto', height: 20 }}
                 />
-                <Spacer h={1.5} />
-                <Button
-                  onClick={() => router.back()}
-                  type="secondary"
-                  width="48%"
-                  icon={<ChevronLeft />}
-                >
-                  Back
-                </Button>
-                <Button
-                  shadow
-                  type="secondary"
-                  width="50%"
-                  ml={'5px'}
-                  iconRight={<ChevronRight />}
-                  onClick={_next}
-                >
-                  Continue (3 / 3)
-                </Button>
-              </Card>
-            </Grid>
-          </Grid.Container>
+              ) : (
+                ''
+              )}
+              <Spacer h={1.5} />
+              <Input
+                placeholder="Site Name"
+                width="100%"
+                scale={4 / 3}
+                value={settings.siteName}
+                onChange={(e) =>
+                  handleSettings({
+                    ...settings,
+                    siteName: e.target.value
+                  })
+                }
+              />
+              <Spacer h={1.5} />
+              <Textarea
+                placeholder="Site Description"
+                width="100%"
+                scale={4 / 3}
+                value={settings.siteDescription}
+                onChange={(e) =>
+                  handleSettings({
+                    ...settings,
+                    siteDescription: e.target.value
+                  })
+                }
+              />
+              <Spacer h={1.5} />
+              <Button
+                onClick={() => router.back()}
+                type="secondary"
+                width="48%"
+                icon={<ChevronLeft />}
+              >
+                Back
+              </Button>
+              <Button
+                shadow
+                type="secondary"
+                width="50%"
+                ml={'5px'}
+                iconRight={<ChevronRight />}
+                onClick={_next}
+              >
+                Continue (3 / 3)
+              </Button>
+            </Card>
+          </div>
         </div>
-      </Page>
+      </div>
     </SetupVerify>
   );
 });

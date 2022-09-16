@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Spacer,
-  Text,
-  Link,
-  Button,
-  Input,
-  Grid,
-  Card,
-  Page
-} from '@geist-ui/core';
+import { Spacer, Text, Link, Button, Input, Card } from '@geist-ui/core';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
@@ -49,56 +40,53 @@ const Login = observer(() => {
   };
 
   return (
-    <div>
+    <div className="polkadot">
       <Navbar title="Forgot password" description="Forgot password" hide />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5}>
+      <div>
         <div className="page-container top-100">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <div className="logo-container center">
-                {settings.siteLogo ? (
-                  <img src={`/storage/${settings.siteLogo}`} />
-                ) : (
-                  <Text h2 width={'100%'}>
-                    {settings.siteName}
-                  </Text>
-                )}
-              </div>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Password retrieval</Text>
-                <Spacer h={2} />
-                <Input
-                  placeholder="Email address"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) =>
-                    setUser({ ...user, ...{ email: e.target.value } })
-                  }
-                />
-                <Spacer h={1.5} />
-                <Button
-                  shadow
-                  type="secondary"
-                  width="100%"
-                  loading={loading}
-                  onClick={signIn}
-                >
-                  Reset Password
-                </Button>
-
-                <Text font={'14px'}>
-                  <Link href="/login" underline>
-                    &larr; Back to Login
-                  </Link>
+          <div className="boxed">
+            <div className="logo-container center">
+              {settings.siteLogo ? (
+                <img src={`/storage/${settings.siteLogo}`} />
+              ) : (
+                <Text h2 width={'100%'}>
+                  {settings.siteName}
                 </Text>
-              </Card>
-            </Grid>
-          </Grid.Container>
+              )}
+            </div>
+
+            <Card shadow width="100%">
+              <Text h3>Password retrieval</Text>
+              <Spacer h={2} />
+              <Input
+                placeholder="Email address"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) =>
+                  setUser({ ...user, ...{ email: e.target.value } })
+                }
+              />
+              <Spacer h={1.5} />
+              <Button
+                shadow
+                type="secondary"
+                width="100%"
+                loading={loading}
+                onClick={signIn}
+              >
+                Reset Password
+              </Button>
+
+              <Text font={'14px'}>
+                <Link href="/login" underline>
+                  &larr; Back to Login
+                </Link>
+              </Text>
+            </Card>
+          </div>
         </div>
-      </Page>
+      </div>
     </div>
   );
 });

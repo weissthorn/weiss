@@ -61,48 +61,45 @@ const Login = observer(() => {
   };
 
   return (
-    <div>
+    <div className="polkadot">
       <Navbar
         title="Account verification"
         description="Account verification"
         hide
       />
       <Toaster />
-      <Page dotBackdrop dotSpace={0.5}>
+      <div>
         <div className="page-container top-100">
-          <Grid.Container width="100%" justify="center" mb="100px">
-            <Grid xs={24} lg={24}>
-              <div className="logo-container center">
-                {settings.siteLogo ? (
-                  <img src={`/storage/${settings.siteLogo}`} />
-                ) : (
-                  <Text h2 width={'100%'}>
-                    {settings.siteName}
-                  </Text>
-                )}
-              </div>
-            </Grid>
-            <Grid xs={24} lg={10}>
-              <Card shadow width="100%">
-                <Text h3>Verify your account</Text>
-                <Spacer h={2} />
-                <Input
-                  className="uppercase"
-                  width="100%"
-                  scale={4 / 3}
-                  onChange={(e) => setCode(e.target.value)}
-                >
-                  Enter code sent to your email
-                </Input>
-                <Spacer h={1.5} />
-                <Button shadow type="secondary" width="100%" onClick={verify}>
-                  Continue
-                </Button>
-              </Card>
-            </Grid>
-          </Grid.Container>
+          <div className="boxed">
+            <div className="logo-container center">
+              {settings.siteLogo ? (
+                <img src={`/storage/${settings.siteLogo}`} />
+              ) : (
+                <Text h2 width={'100%'}>
+                  {settings.siteName}
+                </Text>
+              )}
+            </div>
+
+            <Card shadow width="100%">
+              <Text h3>Verify your account</Text>
+              <Spacer h={2} />
+              <Input
+                className="uppercase"
+                width="100%"
+                scale={4 / 3}
+                onChange={(e) => setCode(e.target.value)}
+              >
+                Enter code sent to your email
+              </Input>
+              <Spacer h={1.5} />
+              <Button shadow type="secondary" width="100%" onClick={verify}>
+                Continue
+              </Button>
+            </Card>
+          </div>
         </div>
-      </Page>
+      </div>
     </div>
   );
 });
