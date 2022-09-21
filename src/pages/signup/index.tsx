@@ -74,7 +74,9 @@ const Signup = observer(() => {
               path: '/'
             }
           );
-          toast.success('Account created successfully!');
+          toast.success(
+            'Account created successfully! Please verify account to continue.'
+          );
           Router.push('/signup/verify');
         } else {
           toast.error(res.message);
@@ -88,7 +90,7 @@ const Signup = observer(() => {
       <Navbar title="Signup" description="Signup" hide />
       <Toaster />
       <div className="polkadot">
-        <div className="page-container">
+        <div className="page-container top-100">
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (

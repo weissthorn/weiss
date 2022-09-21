@@ -14,15 +14,13 @@ import SettingsStore from 'stores/settings';
 
 const Login = observer(() => {
   const router = useRouter();
+  const [status, setStatus] = useState('');
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ loading, user, setUser, login }] = useState(() => new UserStore());
 
   useEffect(() => {
     getSettings();
-  }, []);
-
-  // const onSuccess = (response) => console.log(response);
-  // const onFailure = (response) => console.error(response);
+  }, [status]);
 
   const signIn = async () => {
     const { email, password } = user;
@@ -41,7 +39,8 @@ const Login = observer(() => {
         toast.success('Successfully signed in!');
         router.push('/');
       } else {
-        toast.error('Incorrect username/email or password!');
+        setStatus(res.status);
+        toast.error(res.message);
       }
     });
   };
@@ -65,6 +64,17 @@ const Login = observer(() => {
 
             <Card width="100%">
               <Text h3>Sign into your account</Text>
+              {status === 'inactive' ? (
+                <Text>
+                  Account is inactive. Click{' '}
+                  <Link href="/account/verify" color>
+                    here
+                  </Link>{' '}
+                  to verify account.
+                </Text>
+              ) : (
+                ''
+              )}
               <Spacer h={2} />
               <Input
                 placeholder="Email or username"

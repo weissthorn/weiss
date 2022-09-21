@@ -74,6 +74,8 @@ const Admin = observer(() => {
     let status: any =
       value === 'active' ? (
         <Badge type="success">{value}</Badge>
+      ) : value === 'pending' ? (
+        <Badge type="warning">pending verification</Badge>
       ) : (
         <Badge type="error">{value}</Badge>
       );

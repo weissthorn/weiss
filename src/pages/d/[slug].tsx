@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import {
   Text,
   Popover,
+  Tooltip,
   Link,
   User,
   Avatar,
@@ -407,49 +408,54 @@ const Discussion = observer(() => {
                   <div
                     dangerouslySetInnerHTML={{ __html: discussion.content! }}
                   ></div>
-                  {discussion.id ? (
-                    <span
-                      className="pointer"
-                      onClick={() => like(discussion.id!)}
-                    >
-                      {isActiveLiked(discussion.likes) ? (
-                        <HeartFill size={16} />
-                      ) : (
-                        <Heart size={16} />
-                      )}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                  <Popover
-                    content={
-                      <div style={{ maxHeight: 100, overflow: 'auto' }}>
-                        {discussion.id
-                          ? discussion.likes.map((item: any) => (
-                              <NextLink
-                                href={`/u/${item.profile.username}`}
-                                key={item.id}
-                              >
-                                <Link style={{ display: 'block' }}>
-                                  <User
-                                    src={
-                                      item.profile && item.profile.photo
-                                        ? `/storage/${item.profile.photo}`
-                                        : '/images/avatar.png'
-                                    }
-                                    name={item.profile.name}
-                                  />
-                                </Link>
-                              </NextLink>
-                            ))
-                          : ''}
-                      </div>
-                    }
+                  <Tooltip
+                    placement="right"
+                    text="Click on the number count to who see liked."
                   >
-                    <Text className="like-btn" span>
-                      {discussion.id ? discussion.likes.length : 0}
-                    </Text>
-                  </Popover>
+                    {discussion.id ? (
+                      <span
+                        className="pointer"
+                        onClick={() => like(discussion.id!)}
+                      >
+                        {isActiveLiked(discussion.likes!) ? (
+                          <HeartFill size={16} />
+                        ) : (
+                          <Heart size={16} />
+                        )}
+                      </span>
+                    ) : (
+                      ''
+                    )}
+                    <Popover
+                      content={
+                        <div style={{ maxHeight: 100, overflow: 'auto' }}>
+                          {discussion.id
+                            ? discussion.likes!.map((item: any) => (
+                                <NextLink
+                                  href={`/u/${item.profile.username}`}
+                                  key={item.id}
+                                >
+                                  <Link style={{ display: 'block' }}>
+                                    <User
+                                      src={
+                                        item.profile && item.profile.photo
+                                          ? `/storage/${item.profile.photo}`
+                                          : '/images/avatar.png'
+                                      }
+                                      name={item.profile.name}
+                                    />
+                                  </Link>
+                                </NextLink>
+                              ))
+                            : ''}
+                        </div>
+                      }
+                    >
+                      <Text className="like-btn" span>
+                        {discussion.id ? discussion.likes!.length : 0}
+                      </Text>
+                    </Popover>
+                  </Tooltip>
                   <Text
                     small
                     className="reply-btn"

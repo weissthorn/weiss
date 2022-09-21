@@ -17,11 +17,18 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
           if (match) {
             delete data.password;
-            data.status !== 'active'
+            data.status === 'banned'
               ? res.send({
                   success: false,
+                  status: 'banned',
                   message:
-                    'Account is not active. Please contact the community admin.'
+                    'Account is banned. Please contact the community admin.'
+                })
+              : data.status === 'pending'
+              ? res.send({
+                  success: false,
+                  status: 'inactive',
+                  message: 'Account is inactive. Please verify account.'
                 })
               : res.send({ success: true, data });
           } else {

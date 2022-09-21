@@ -8,27 +8,29 @@ import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 
-const Forgot = observer(() => {
+const Verify = observer(() => {
   const router = useRouter();
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
-  const [{ loading, user, setUser, forgot }] = useState(() => new UserStore());
+  const [{ loading, user, setUser, verifyAccount }] = useState(
+    () => new UserStore()
+  );
 
   useEffect(() => {
     getSettings();
   }, []);
 
-  const resetPass = async () => {
+  const verifyEmail = async () => {
     const { email } = user;
-    await forgot({ email }).then((res: any) => {
+    await verifyAccount({ email }).then((res: any) => {
       if (res.success) {
-        let reset = { type: 'forgot', code: res.code, data: res.data };
+        let reset = { type: 'verification', code: res.code, data: res.data };
 
         setCookie(null, '_w_code', JSON.stringify(reset), {
           maxAge: 2 * 60 * 60,
           path: '/'
         });
         toast.success('Please verify account to continue.');
-        router.push('/reset');
+        router.push('/account/confirm');
       } else {
         toast.error(res.message);
       }
@@ -37,7 +39,11 @@ const Forgot = observer(() => {
 
   return (
     <div className="polkadot">
-      <Navbar title="Forgot password" description="Forgot password" hide />
+      <Navbar
+        title="Account verification"
+        description="Account verification"
+        hide
+      />
       <Toaster />
       <div>
         <div className="page-container top-100">
@@ -53,7 +59,7 @@ const Forgot = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Password retrieval</Text>
+              <Text h3>Account verification</Text>
               <Spacer h={2} />
               <Input
                 placeholder="Email address"
@@ -69,9 +75,9 @@ const Forgot = observer(() => {
                 type="secondary"
                 width="100%"
                 loading={loading}
-                onClick={resetPass}
+                onClick={verifyEmail}
               >
-                Reset Password
+                Continue &rarr;
               </Button>
 
               <Text font={'14px'}>
@@ -87,4 +93,4 @@ const Forgot = observer(() => {
   );
 });
 
-export default Forgot;
+export default Verify;

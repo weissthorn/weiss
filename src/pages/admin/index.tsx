@@ -176,7 +176,7 @@ const Dashboard = observer(() => {
             </Grid>
             <Grid xs={24} md={24}>
               <Card shadow width={'100%'}>
-                <Chart series={series} options={options} />
+                <Chart series={series} options={options} type="area" />
               </Card>
             </Grid>
           </Grid.Container>

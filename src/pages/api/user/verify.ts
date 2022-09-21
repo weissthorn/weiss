@@ -1,18 +1,25 @@
-import { userProp } from '../../../interfaces/user';
 import signale from 'signale';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { User } from '../../../components/api/model';
 import { withAuth, code } from '../../../components/api/utils';
 import { verifyTemplate } from '../../../components/api/mail-template';
 
-const create = async (req: NextApiRequest, res: NextApiResponse) => {
+const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {
     if (auth.success) {
-      await User.get(req.body.id)
-        .then(async (data: userProp) => {
-          const _code = code();
-          verifyTemplate(data.email!, data.name!, _code);
-          res.send({ success: true, data: data.id, code: _code });
+      await User.filter({ email: req.body.email })
+        .then(async (data: any) => {
+          if (data.length === 1) {
+            data = data[0];
+            const _code = code();
+            await verifyTemplate(data.email, data.name, _code);
+            res.send({ success: true, data: data.id, code: _code });
+          } else {
+            res.send({
+              success: false,
+              message: 'Email does not exists in our record.'
+            });
+          }
         })
         .catch((err: any) => signale.fatal(err));
     } else {
@@ -21,4 +28,4 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 };
 
-export default create;
+export default verify;

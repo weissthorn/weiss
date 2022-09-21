@@ -43,6 +43,7 @@ const Notifications = observer(() => {
     await markAllRead(token.id!).then((res: any) => {
       if (res.success) {
         getNotifications(token.id!, true);
+        router.reload();
       }
     });
   };

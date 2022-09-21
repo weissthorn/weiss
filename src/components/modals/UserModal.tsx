@@ -49,7 +49,7 @@ const UserModal = (props: userModalProps) => {
               >
                 <Select.Option value="active">Active</Select.Option>
                 <Select.Option value="banned">Banned</Select.Option>
-                <Select.Option value="disabled">Disabled</Select.Option>
+                <Select.Option value="pending">Disabled</Select.Option>
               </Select>
             </div>
           </div>

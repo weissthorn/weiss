@@ -2,8 +2,8 @@ import signale from 'signale';
 import bcrypt from 'bcryptjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { User } from '../../../components/api/model';
-import { withAuth, code } from '../../../components/api/utils';
-// import { signupTemplate } from "../../../components/api/mail-template";
+import { withAuth, code, guid } from '../../../components/api/utils';
+import { signupTemplate } from '../../../components/api/mail-template';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   /*
@@ -33,14 +33,15 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
           const password = bcrypt.hashSync(req.body.password, salt);
           req.body.password = password;
+          req.body.id = guid();
 
           let user = new User(req.body);
           await user
             .save()
-            .then((data: any) => {
+            .then(async (data: any) => {
               if (data.id) {
                 const _code = code();
-                // signupTemplate(data.email, data.name, _code);
+                await signupTemplate(data.email, data.name, _code);
                 res.send({ success: true, data: data.id, code: _code });
               } else {
                 res.send({

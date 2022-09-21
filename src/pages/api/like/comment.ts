@@ -33,7 +33,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
                         type: 'post',
                         sender: data.userId,
                         receiver: d.userId,
-                        message: `${p.name} liked to your discussion.`,
+                        message: `${p.name} liked your discussion.`,
                         action: `${d.slug}`
                       });
                       await notify.save().then(() => {});

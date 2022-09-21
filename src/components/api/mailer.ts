@@ -1,30 +1,39 @@
-'use strict';
-let _public = process.env.NEXT_PUBLIC_EMAIL_PUBLIC;
-let secret = process.env.NEXT_PUBLIC_EMAIL_SECRET;
-let sender = process.env.NEXT_PUBLIC_EMAIL_SENDER;
+import nodemailer from 'nodemailer';
+import { r, Settings } from './model';
 
-const mailjet = require('node-mailjet').connect(_public, secret);
+const sendMail = async (
+  emailAddress: string,
+  title: string,
+  template: string
+) => {
+  await Settings.orderBy(r.asc('createdAt'))
+    .then(async (data: any) => {
+      data = data.length ? data[0] : {};
 
-const mailer = async (email: string, subject: string, template: string) => {
-  return await mailjet.post('send', { version: 'v3.1' }).request({
-    Messages: [
-      {
-        From: {
-          Email: sender,
-          Name: 'Bilbord'
-        },
-        To: [
-          {
-            Email: email
-            // Name: "Bilbord",
+      if (data.id) {
+        const { email } = data;
+
+        let transporter = nodemailer.createTransport({
+          host: email.host,
+          port: 465,
+          secure: true,
+          auth: {
+            user: email.email,
+            pass: email.password
           }
-        ],
-        Subject: subject,
-        HTMLPart: template,
-        CustomID: 'BLK_' + Math.random()
+        });
+
+        await transporter
+          .sendMail({
+            from: `${data.siteName} <no-reply@caudal.tech>`,
+            to: emailAddress,
+            subject: title,
+            html: template
+          })
+          .then((mail: any) => console.log(mail));
       }
-    ]
-  });
+    })
+    .catch((err: any) => console.log(err));
 };
 
-export default mailer;
+export default sendMail;

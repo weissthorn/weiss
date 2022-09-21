@@ -12,7 +12,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
           if (data.length === 1) {
             data = data[0];
             const _code = code();
-            forgotTemplate(data.email, data.name, _code);
+            await forgotTemplate(data.email, data.name, _code);
             res.send({ success: true, data: data.id, code: _code });
           } else {
             res.send({

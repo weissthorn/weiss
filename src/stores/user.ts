@@ -55,6 +55,7 @@ export default class UserStore {
 
   @action forgot = async (body: any) => {
     let url = `${API_URL}/user/forgot`;
+    this.loading = true;
 
     return await fetch(url, {
       method: 'POST',
@@ -66,11 +67,8 @@ export default class UserStore {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.success) {
-          return { success: true, data: res.data };
-        } else {
-          return { success: false, message: res.message };
-        }
+        this.loading = false;
+        return res;
       })
       .catch((err) => console.log(err));
   };
@@ -97,8 +95,9 @@ export default class UserStore {
       .catch((err) => console.log(err));
   };
 
-  @action verifyToken = async (body: any) => {
-    let url = `${API_URL}/user/token`;
+  @action verifyAccount = async (body: any) => {
+    let url = `${API_URL}/user/verify`;
+    this.loading = true;
 
     return await fetch(url, {
       method: 'POST',
@@ -110,11 +109,8 @@ export default class UserStore {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.success) {
-          return { success: true, data: res.data };
-        } else {
-          return { success: false, message: res.message };
-        }
+        this.loading = false;
+        return res;
       })
       .catch((err) => console.log(err));
   };
@@ -199,11 +195,7 @@ export default class UserStore {
       .then((res) => res.json())
       .then((res: resProp) => {
         this.loading = false;
-        if (res.success) {
-          return res;
-        } else {
-          return { success: false, message: res.message };
-        }
+        return res;
       })
       .catch((err) => console.log(err));
   };

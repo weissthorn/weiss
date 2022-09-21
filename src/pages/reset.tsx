@@ -2,42 +2,56 @@ import { useEffect, useState } from 'react';
 import { Spacer, Text, Button, Input, Card } from '@geist-ui/core';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
-import { setCookie } from 'nookies';
+import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 
 const Reset = observer(() => {
+  const cookie = parseCookies();
   const router = useRouter();
-  const { verify } = router.query;
+  const [verify, setVerify] = useState(false);
+  const [code, setCode] = useState('');
+  const [_password, setPassword] = useState('');
+  const [_code, _setCode] = useState<{ data?: string; code?: number }>({});
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
-  const [{ loading, user, setUser, login }] = useState(() => new UserStore());
+  const [{ loading, user, setUser, getUser, updateUser }] = useState(
+    () => new UserStore()
+  );
 
   useEffect(() => {
     getSettings();
+    let _code: any =
+      cookie && cookie._w_code ? JSON.parse(cookie._w_code) : null;
+
+    _setCode(_code);
   }, [router]);
 
-  const signIn = async () => {
-    const { email, password } = user;
-    await login({ email, password }).then((res: any) => {
-      if (res.success) {
-        const { name, id, role, photo, username } = res.data;
-        setCookie(
-          null,
-          '_w_auth',
-          JSON.stringify({ name, id, role, photo, username }),
-          {
-            maxAge: 30 * 24 * 60 * 60,
-            path: '/'
-          }
-        );
-        toast.success('Successfully signed in!');
-        router.push('/');
-      } else {
-        toast.error('Incorrect username/email or password!');
-      }
-    });
+  const verifyAccount = () => {
+    if (Number(code) !== _code.code) {
+      toast.error('Code is incorrect or expired.');
+    } else {
+      setVerify(true);
+    }
+  };
+
+  const updatePass = async () => {
+    if (user.password !== _password) {
+      toast.error('Passwords does not matched!');
+    } else {
+      await getUser(_code.data!).then(async (res: any) => {
+        if (res.success) {
+          await updateUser({ id: res.data.id, password: user.password });
+          destroyCookie(null, '_w_code');
+
+          toast.success('Password reset successfully!');
+          router.push('/login');
+        } else {
+          toast.error('Unable to update user. Please try again later');
+        }
+      });
+    }
   };
 
   return (
@@ -60,15 +74,13 @@ const Reset = observer(() => {
             <Card shadow width="100%">
               <Text h3>Reset your password</Text>
               <Spacer h={2} />
-              {verify ? (
+              {verify === false ? (
                 <>
                   <Input
                     placeholder=""
                     width="100%"
                     scale={4 / 3}
-                    onChange={(e) =>
-                      setUser({ ...user, ...{ email: e.target.value } })
-                    }
+                    onChange={(e) => setCode(e.target.value)}
                   >
                     Enter code sent to your email
                   </Input>
@@ -78,7 +90,7 @@ const Reset = observer(() => {
                     type="secondary"
                     width="100%"
                     loading={loading}
-                    onClick={signIn}
+                    onClick={verifyAccount}
                   >
                     Continue &rarr;
                   </Button>
@@ -98,9 +110,7 @@ const Reset = observer(() => {
                     placeholder="Retype Password"
                     width="100%"
                     scale={4 / 3}
-                    onChange={(e) =>
-                      setUser({ ...user, ...{ password: e.target.value } })
-                    }
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <Spacer h={1.5} />
                   <Button
@@ -108,7 +118,7 @@ const Reset = observer(() => {
                     type="secondary"
                     width="100%"
                     loading={loading}
-                    onClick={signIn}
+                    onClick={updatePass}
                   >
                     Reset Password
                   </Button>

@@ -1,6 +1,7 @@
 import {
   Text,
   Popover,
+  Tooltip,
   Link,
   User,
   Avatar,
@@ -81,40 +82,46 @@ const Reply = (props: replyProp) => {
           dangerouslySetInnerHTML={{ __html: content! }}
         ></div>
         <div style={{ margin: 0 }}>
-          <span className="pointer" onClick={() => likeTrigger(id)}>
-            {isActiveLiked(likes) ? (
-              <HeartFill size={16} />
-            ) : (
-              <Heart size={16} />
-            )}
-          </span>
-          <Popover
-            content={
-              <div style={{ maxHeight: 100, overflow: 'auto' }}>
-                {likes
-                  ? likes.map((item: any) => (
-                      <NextLink
-                        href={`/u/${item.profile.username}`}
-                        key={item.id}
-                      >
-                        <Link style={{ display: 'block' }}>
-                          <User
-                            src={
-                              item.profile && item.profile.photo
-                                ? `/storage/${item.profile.photo}`
-                                : '/images/avatar.png'
-                            }
-                            name={item.profile.name}
-                          />
-                        </Link>
-                      </NextLink>
-                    ))
-                  : ''}
-              </div>
-            }
+          <Tooltip
+            placement="right"
+            text="Click on the number count to who see liked."
           >
-            <Text className="like-btn">{likes ? likes.length : 0}</Text>
-          </Popover>
+            <span className="pointer" onClick={() => likeTrigger(id)}>
+              {isActiveLiked(likes) ? (
+                <HeartFill size={16} />
+              ) : (
+                <Heart size={16} />
+              )}
+            </span>
+            <Popover
+              content={
+                <div style={{ maxHeight: 100, overflow: 'auto' }}>
+                  {likes
+                    ? likes.map((item: any) => (
+                        <NextLink
+                          href={`/u/${item.profile.username}`}
+                          key={item.id}
+                        >
+                          <Link style={{ display: 'block' }}>
+                            <User
+                              src={
+                                item.profile && item.profile.photo
+                                  ? `/storage/${item.profile.photo}`
+                                  : '/images/avatar.png'
+                              }
+                              name={item.profile.name}
+                            />
+                          </Link>
+                        </NextLink>
+                      ))
+                    : ''}
+                </div>
+              }
+            >
+              <Text className="like-btn">{likes ? likes.length : 0}</Text>
+            </Popover>
+          </Tooltip>
+
           <Text small className="reply-btn" onClick={() => replyTrigger()}>
             Reply
           </Text>

@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 
-const Verify = observer(() => {
+const Confirm = observer(() => {
   const cookie = parseCookies();
   const router = useRouter();
   const [code, setCode] = useState('');
@@ -40,19 +40,11 @@ const Verify = observer(() => {
         if (res.success) {
           await updateUser({ id: _code.data, status: 'active' });
           destroyCookie(null, '_w_code');
-          const { name, id, role, photo, username } = res.data;
-          setCookie(
-            null,
-            '_w_auth',
-            JSON.stringify({ name, id, role, photo, username }),
-            {
-              maxAge: 30 * 24 * 60 * 60,
-              path: '/'
-            }
-          );
 
-          toast.success('Account verified successfully!');
-          router.push('/');
+          toast.success(
+            'Account verified successfully! Please sign in to continue.'
+          );
+          router.push('/login');
         } else {
           toast.error('Unable to verify user. Please try again later');
         }
@@ -82,8 +74,6 @@ const Verify = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Verify your account</Text>
-              <Spacer h={2} />
               <Input
                 className="uppercase"
                 width="100%"
@@ -104,4 +94,4 @@ const Verify = observer(() => {
   );
 });
 
-export default Verify;
+export default Confirm;
