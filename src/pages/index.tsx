@@ -19,6 +19,7 @@ import useToken from 'components/Token';
 import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import Contributors from 'components/Contributors';
+import isSetup from 'components/Setup';
 
 const Home = observer(() => {
   const token = useToken();
@@ -29,6 +30,7 @@ const Home = observer(() => {
   const [modal, toggleModal] = useState(false);
 
   useEffect(() => {
+    isSetup();
     getSettings();
     getDiscussions();
   }, [token]);
@@ -41,8 +43,8 @@ const Home = observer(() => {
   return (
     <div>
       <Navbar
-        title="Home"
-        description="Home"
+        title={settings.siteName}
+        description={settings.siteDescription}
         startConversation={() => toggleModal(!modal)}
       />
       <Toaster />

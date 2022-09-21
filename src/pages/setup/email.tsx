@@ -46,7 +46,7 @@ const EmailSetup = observer(() => {
         bestAnswer: 5
       };
 
-      const _settings = { ...settings, ...{ coin } };
+      const _settings = { ...settings, ...{ coin }, status: 'completed' };
 
       await userStore
         .signup({ ...admin, ...{ coin: 1 }, ...{ status: 'active' } })

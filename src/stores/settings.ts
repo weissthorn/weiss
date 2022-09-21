@@ -79,7 +79,7 @@ export default class SettingsStore {
   @action getSettings = async () => {
     let url = `${API_URL}/settings`;
 
-    await fetch(url, {
+    return await fetch(url, {
       headers: {
         'content-type': 'application/json',
         apikey: API_KEY
@@ -89,6 +89,7 @@ export default class SettingsStore {
       .then((res: resProp) => {
         if (res.success) {
           this.settings = res.data;
+          return res;
         }
       })
       .catch((err) => console.log(err));

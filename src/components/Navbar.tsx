@@ -173,6 +173,11 @@ const Navbar = observer((props: navbarProps) => {
             </NextLink>
           </Text>
           <Text p>
+            <NextLink href="/members">
+              <Link>Members</Link>
+            </NextLink>
+          </Text>
+          <Text p>
             <NextLink href={`/u/${token.username}`}>
               <Link>Profile</Link>
             </NextLink>
