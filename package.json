@@ -25,7 +25,6 @@
     "mobx-react-lite": "^3.4.0",
     "moment": "^2.29.3",
     "next": "12.2.2",
-    "next-swagger-doc": "^0.3.6",
     "nodemailer": "^6.7.8",
     "nookies": "^2.5.2",
     "plyr": "^3.7.2",
@@ -63,5 +62,8 @@
     "eslint-config-next": "12.2.2",
     "sass": "^1.53.0",
     "typescript": "4.7.4"
+  },
+  "resolutions": {
+    "validator": "^13.7.0"
   }
 }
