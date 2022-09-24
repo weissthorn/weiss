@@ -29,7 +29,29 @@ export default class LikeStore {
     this.like = data;
   };
 
-  @action newLike = async (body: likeProp) => {
+  @action likeDiscussion = async (body: likeProp) => {
+    let url = `${API_URL}/like/discussion`;
+
+    return await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        apikey: API_KEY
+      },
+      body: JSON.stringify(body)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          return { success: true, data: res.data };
+        } else {
+          return { success: false, message: res.message };
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action likeComment = async (body: likeProp) => {
     let url = `${API_URL}/like/comment`;
 
     return await fetch(url, {
@@ -51,7 +73,7 @@ export default class LikeStore {
       .catch((err) => console.log(err));
   };
 
-  @action replyLike = async (body: likeProp) => {
+  @action likeReply = async (body: likeProp) => {
     let url = `${API_URL}/like/reply`;
 
     return await fetch(url, {

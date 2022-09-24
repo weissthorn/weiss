@@ -43,6 +43,28 @@ export default class CommentStore {
       .catch((err) => console.log(err));
   };
 
+  @action newReply = async (body: any) => {
+    let url = `${API_URL}/comment/reply`;
+
+    return await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        apikey: API_KEY
+      },
+      body: JSON.stringify(body)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          return { success: true, data: res.data };
+        } else {
+          return { success: false, message: res.message };
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   @action updateComment = async (body: any) => {
     let url = `${API_URL}/comment/update`;
 

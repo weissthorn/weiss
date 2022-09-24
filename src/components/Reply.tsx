@@ -24,7 +24,8 @@ type replyProp = {
   likes?: any;
   date?: Date | string;
   replyTrigger: () => void;
-  likeTrigger: () => void;
+  likeTrigger: (val: string) => void;
+  likeTriggerX: (val: string) => void;
 };
 
 const Reply = (props: replyProp) => {
@@ -40,7 +41,8 @@ const Reply = (props: replyProp) => {
     likes,
     date,
     replyTrigger,
-    likeTrigger
+    likeTrigger,
+    likeTriggerX
   } = props;
 
   const isActiveLiked = (data: any[]) => {
@@ -142,8 +144,8 @@ const Reply = (props: replyProp) => {
             }
           >
             {replies?.length
-              ? replies.map((item: any) => (
-                  <div className="discussion" id={item.id}>
+              ? replies.map((i: any) => (
+                  <div className="discussion" id={i.slug} key={i.id}>
                     <div className="item first">
                       <Popover
                         trigger="hover"
@@ -152,14 +154,14 @@ const Reply = (props: replyProp) => {
                             <Link color href="#">
                               <User
                                 src={
-                                  item.author.photo
-                                    ? `/storage/${item.author.photo}`
+                                  i.author.photo
+                                    ? `/storage/${i.author.photo}`
                                     : `/images/avatar.png`
                                 }
-                                name={item.author.name}
+                                name={i.author.name}
                               >
                                 <Text p>
-                                  {item.author.role} - {item.author.coin} coins
+                                  {i.author.role} - {i.author.coin} coins
                                 </Text>
                               </User>
                             </Link>
@@ -168,8 +170,8 @@ const Reply = (props: replyProp) => {
                       >
                         <Avatar
                           src={
-                            item.author.photo
-                              ? `/storage/${item.author.photo}`
+                            i.author.photo
+                              ? `/storage/${i.author.photo}`
                               : `/images/avatar.png`
                           }
                           w={2}
@@ -179,20 +181,57 @@ const Reply = (props: replyProp) => {
                     </div>
                     <div className="item">
                       <Text h5>
-                        {name} &nbsp;
-                        <Text small>{moment(item.createdAt).fromNow()}</Text>
+                        {i.author.name} &nbsp;
+                        <Text small>{moment(i.createdAt).fromNow()}</Text>
                       </Text>
                       <div
                         style={{ margin: 0, position: 'relative', top: -10 }}
-                        dangerouslySetInnerHTML={{ __html: item.comment! }}
+                        dangerouslySetInnerHTML={{ __html: i.comment! }}
                       ></div>
-                      {/* <span className="pointer">
-                        {likes.length ? (
-                          <HeartFill size={46} />
-                        ) : (
-                          <Heart size={46} />
-                        )}
-                      </span> */}
+                      <Tooltip
+                        placement="right"
+                        text="Click on the number count to who see liked."
+                      >
+                        <span
+                          className="pointer"
+                          onClick={() => likeTriggerX(i.id)}
+                        >
+                          {isActiveLiked(i.likes) ? (
+                            <HeartFill size={16} />
+                          ) : (
+                            <Heart size={16} />
+                          )}
+                        </span>
+                        <Popover
+                          content={
+                            <div style={{ maxHeight: 100, overflow: 'auto' }}>
+                              {i.likes && i.likes.length
+                                ? i.likes.map((l: any) => (
+                                    <NextLink
+                                      href={`/u/${l.profile.username}`}
+                                      key={l.id}
+                                    >
+                                      <Link style={{ display: 'block' }}>
+                                        <User
+                                          src={
+                                            l.profile && l.profile.photo
+                                              ? `/storage/${l.profile.photo}`
+                                              : '/images/avatar.png'
+                                          }
+                                          name={l.profile.name}
+                                        />
+                                      </Link>
+                                    </NextLink>
+                                  ))
+                                : ''}
+                            </div>
+                          }
+                        >
+                          <Text className="like-btn">
+                            {i.likes ? i.likes.length : 0}
+                          </Text>
+                        </Popover>
+                      </Tooltip>
                     </div>
                   </div>
                 ))

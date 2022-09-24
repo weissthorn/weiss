@@ -1,6 +1,10 @@
 import signale from 'signale';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Discussion, Category, Like } from '../../../components/api/model';
+import {
+  Discussion,
+  Category,
+  LikeDiscussion
+} from '../../../components/api/model';
 import { withAuth } from '../../../components/api/utils';
 
 const discussion = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,9 +19,8 @@ const discussion = async (req: NextApiRequest, res: NextApiResponse) => {
           if (data.id) {
             await Category.filter({ slug: data.categoryId }).then(
               async (category: any) => {
-                await Like.filter({
-                  discussionId: data.id,
-                  type: 'discussion'
+                await LikeDiscussion.filter({
+                  discussionId: data.id
                 })
                   .getJoin()
                   .then((likes: any) => {

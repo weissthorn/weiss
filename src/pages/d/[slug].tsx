@@ -36,7 +36,7 @@ import LikeStore from 'stores/like';
 const Discussion = observer(() => {
   const token = useToken();
   const router = useRouter();
-  const { slug } = router.query;
+  const { slug }: any = router.query;
   const [modal, toggleModal] = useState(false);
   const [reply, toggleReply] = useState<any>({
     modal: false,
@@ -46,8 +46,10 @@ const Discussion = observer(() => {
   });
   const [content, setContent] = useState('');
   const [{ newReport }] = useState(() => new ReportStore());
-  const [{ newComment }] = useState(() => new CommentStore());
-  const [{ newLike, replyLike }] = useState(() => new LikeStore());
+  const [{ newComment, newReply }] = useState(() => new CommentStore());
+  const [{ likeDiscussion, likeComment, likeReply }] = useState(
+    () => new LikeStore()
+  );
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [
     {
@@ -60,8 +62,8 @@ const Discussion = observer(() => {
       comments,
       getDiscussion,
       refreshDiscussion,
-      getReplies,
-      refreshReplies,
+      getComments,
+      refreshComments,
       updateDiscussion
     }
   ] = useState(() => new DiscussionStore());
@@ -69,11 +71,16 @@ const Discussion = observer(() => {
   const { profile, category } = discussion;
 
   useEffect(() => {
+    let hash: any = router.isReady ? window.location.hash : '';
+    hash = hash.replace('#', '');
+
     getSettings();
     router.isReady
       ? getDiscussion(slug).then((data: any) => {
           if (data.id) {
-            getReplies(data.id, 'comment');
+            getComments(data.id).then((_comments) => {
+              _comments.length ? scrollToDiv(hash) : null;
+            });
             updateDiscussion({ id: data.id, view: data.view + 1 });
           }
         })
@@ -139,12 +146,12 @@ const Discussion = observer(() => {
       })
         .then((res: any) => {
           if (res.success) {
-            getReplies(discussion.id!, 'comment').then(() => {
+            getComments(discussion.id!).then(() => {
               toggleModal(!modal);
               scrollToDiv(res.data.slug);
             });
           } else {
-            toast.error('Unable to update comment.');
+            toast.error('Unable to save comment.');
           }
         })
         .catch((err) => console.log(err));
@@ -155,7 +162,7 @@ const Discussion = observer(() => {
     if (!content) {
       toast.error('Comment is blank!');
     } else {
-      await newComment({
+      await newReply({
         comment: content,
         discussionId: discussion.id,
         userId: token.id,
@@ -164,24 +171,22 @@ const Discussion = observer(() => {
       })
         .then((res: any) => {
           if (res.success) {
-            getReplies(discussion.id!, 'comment').then(() => {
+            getComments(discussion.id!).then(() => {
               toggleModal(!modal);
               scrollToDiv(res.data.slug);
             });
           } else {
-            toast.error('Unable to update comment.');
+            toast.error('Unable to save reply.');
           }
         })
         .catch((err) => console.log(err));
     }
   };
 
-  const like = async (postId: string) => {
-    await newLike({
-      postId,
+  const likeDiscussionAction = async (id: string) => {
+    await likeDiscussion({
       userId: token.id,
-      discussionId: postId,
-      type: 'discussion'
+      discussionId: id
     }).then((res: any) => {
       if (res.success) {
         refreshDiscussion(slug);
@@ -189,15 +194,26 @@ const Discussion = observer(() => {
     });
   };
 
-  const likeReply = async (postId: string) => {
-    await replyLike({
+  const likeCommentAction = async (postId: string) => {
+    await likeComment({
       postId,
       userId: token.id,
-      discussionId: discussion.id,
-      type: 'comment'
+      discussionId: discussion.id
     }).then((res: any) => {
       if (res.success) {
-        refreshReplies(discussion.id!, 'comment');
+        refreshComments(discussion.id!, 'comment');
+      }
+    });
+  };
+
+  const likeReplyAction = async (postId: string) => {
+    await likeReply({
+      postId,
+      userId: token.id,
+      discussionId: discussion.id
+    }).then((res: any) => {
+      if (res.success) {
+        refreshComments(discussion.id!, 'comment');
       }
     });
   };
@@ -415,7 +431,7 @@ const Discussion = observer(() => {
                     {discussion.id ? (
                       <span
                         className="pointer"
-                        onClick={() => like(discussion.id!)}
+                        onClick={() => likeDiscussionAction(discussion.id!)}
                       >
                         {isActiveLiked(discussion.likes!) ? (
                           <HeartFill size={16} />
@@ -487,7 +503,8 @@ const Discussion = observer(() => {
                   replyTrigger={() =>
                     toggleCommentBox(item.id, item.author.username, key + 1)
                   }
-                  likeTrigger={() => likeReply(item.id!)}
+                  likeTrigger={() => likeCommentAction(item.id!)}
+                  likeTriggerX={(val: string) => likeReplyAction(val)}
                 />
               ))}
               <Spacer />

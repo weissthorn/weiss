@@ -2,10 +2,10 @@ import signale from 'signale';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   r,
-  Like,
+  LikeReply,
   Discussion,
   User,
-  Comment,
+  Reply,
   Notification
 } from '../../../components/api/model';
 import { withAuth } from '../../../components/api/utils';
@@ -13,24 +13,24 @@ import { withAuth } from '../../../components/api/utils';
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {
     if (auth.success) {
-      const { postId, userId } = req.body;
-      await Like.filter({ postId, userId })
+      const { discussionId, postId, userId } = req.body;
+      await LikeReply.filter({ postId, userId })
         .then(async (likeCount: any) => {
           if (likeCount.length === 1) {
-            await Like.filter({ postId, userId })
+            await LikeReply.filter({ postId, userId })
               .delete()
               .then(() => {
                 res.send({ success: true, data: {}, like: false });
               });
           } else {
-            let like = new Like(req.body);
+            let like = new LikeReply(req.body);
             await like.save().then(async (data: any) => {
               if (data.id) {
                 await User.get(data.userId).then(async (p: any) => {
-                  await Comment.get(req.body.postId)
+                  await Reply.get(req.body.postId)
                     .getJoin()
                     .then(async (d: any) => {
-                      await Discussion.get(req.body.discussionId).then(
+                      await Discussion.get(discussionId).then(
                         async (disc: any) => {
                           const notify = new Notification({
                             type: 'post',

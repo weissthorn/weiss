@@ -1,9 +1,15 @@
-import { settingsProp } from './../../../interfaces/settings';
 import signale from 'signale';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { r, Discussion, Settings, User } from '../../../components/api/model';
+import {
+  r,
+  Reply,
+  Settings,
+  User,
+  Discussion,
+  Notification
+} from '../../../components/api/model';
 import { withAuth, slug } from '../../../components/api/utils';
-import slugify from 'slugify';
+import { settingsProp } from './../../../interfaces/settings';
 
 const getSettings = async () => {
   return await Settings.orderBy(r.asc('createdAt'))
@@ -17,18 +23,9 @@ const getSettings = async () => {
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {
     if (auth.success) {
-      req.body.slug = slugify(req.body.title, {
-        replacement: '-', // replace spaces with replacement character, defaults to `-`
-        remove: /[*+~.()'"!:@#]/g, // remove characters that match regex, defaults to `undefined`
-        lower: true, // convert to lower case, defaults to `false`
-        strict: false, // strip special characters except replacement, defaults to `false`
-        locale: 'vi' // language code of the locale to use
-      });
-
-      req.body.slug = req.body.slug + '-' + slug();
-
-      let discussion = new Discussion(req.body);
-      await discussion
+      req.body.slug = slug();
+      let comment = new Reply(req.body);
+      await comment
         .save()
         .then(async (data: any) => {
           if (data.id) {
@@ -36,9 +33,20 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
             await User.get(data.userId).then(async (p: any) => {
               await User.get(data.userId)
                 .update({
-                  coin: Number(p.coin + config.coin?.discussion)
+                  coin: Number(p.coin + config.coin?.comment)
                 })
-                .then(() => {
+                .then(async () => {
+                  await Discussion.get(req.body.discussionId)
+                    .getJoin()
+                    .then(async (d: any) => {
+                      const notify = new Notification({
+                        sender: data.userId,
+                        receiver: d.userId,
+                        message: `${p.name} replied to your comment.`,
+                        action: `${d.slug}#${data.slug}`
+                      });
+                      await notify.save().then(() => {});
+                    });
                   res.send({ success: true, data });
                 });
             });
@@ -54,14 +62,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       res.send(auth);
     }
   });
-};
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '50mb' // Set desired value here
-    }
-  }
 };
 
 export default create;

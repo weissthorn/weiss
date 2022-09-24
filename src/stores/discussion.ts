@@ -160,8 +160,8 @@ export default class DiscussionStore {
   };
 
   @action
-  getReplies = async (id: string, type: string) => {
-    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}&type=${type}`;
+  getComments = async (id: string) => {
+    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}`;
     this.commentLoading = false;
 
     return await fetch(uri, {
@@ -173,19 +173,38 @@ export default class DiscussionStore {
         this.commentLoading = false;
         this.comments = data;
         this.total = res.count;
+        return res;
       })
       .catch((err) => console.log(err));
   };
 
   @action
-  refreshReplies = async (id: string, type: string) => {
-    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}&type=${type}`;
+  refreshComments = async (id: string, type: string) => {
+    let uri = `${API_URL}/discussion/comment?id=${id}&page=${this.page}&limit=${this.limit}`;
     return await fetch(uri, {
       headers: this.headers
     })
       .then((res) => res.json())
       .then((res) => {
         let data = res.data;
+        this.comments = data;
+        this.total = res.count;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  @action
+  getReplies = async (id: string) => {
+    let uri = `${API_URL}/discussion/reply?id=${id}&page=${this.page}&limit=${this.limit}`;
+    this.commentLoading = false;
+
+    return await fetch(uri, {
+      headers: this.headers
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        let data = res.data;
+        this.commentLoading = false;
         this.comments = data;
         this.total = res.count;
       })

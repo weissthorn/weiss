@@ -58,17 +58,40 @@ const Discussion = thinky.createModel('discussions', {
 const Comment = thinky.createModel('comments', {
   slug: type.string(),
   content: type.string(),
-  type: type.string().enum(['comment', 'reply']).default('comment'),
   status: type.string().enum(['answer', 'flag', 'normal']).default('normal'),
-  replyId: type.string(),
   userId: type.string(),
   discussionId: type.string(),
   createdAt: type.date().default(r.now),
   updatedAt: type.date().default(r.now)
 });
 
-const Like = thinky.createModel('likes', {
-  type: type.string().enum(['discussion', 'comment', 'reply']),
+const Reply = thinky.createModel('replies', {
+  slug: type.string(),
+  content: type.string(),
+  status: type.string().enum(['answer', 'flag', 'normal']).default('normal'),
+  commentId: type.string(),
+  userId: type.string(),
+  discussionId: type.string(),
+  createdAt: type.date().default(r.now),
+  updatedAt: type.date().default(r.now)
+});
+
+const LikeDiscussion = thinky.createModel('post-likes', {
+  discussionId: type.string(),
+  userId: type.string(),
+  createdAt: type.date().default(r.now),
+  updatedAt: type.date().default(r.now)
+});
+
+const LikeComment = thinky.createModel('comment-likes', {
+  postId: type.string(),
+  discussionId: type.string(),
+  userId: type.string(),
+  createdAt: type.date().default(r.now),
+  updatedAt: type.date().default(r.now)
+});
+
+const LikeReply = thinky.createModel('reply-likes', {
   postId: type.string(),
   discussionId: type.string(),
   userId: type.string(),
@@ -123,10 +146,21 @@ const Pageview = thinky.createModel('pageviews', {
 });
 
 //Associations
+LikeDiscussion.belongsTo(User, 'profile', 'userId', 'id');
+LikeComment.belongsTo(User, 'profile', 'userId', 'id');
+LikeReply.belongsTo(User, 'profile', 'userId', 'id');
+
 Discussion.belongsTo(User, 'profile', 'userId', 'id');
 Discussion.hasOne(Category, 'category', 'categoryId', 'id');
+Discussion.hasMany(LikeDiscussion, 'likes', 'discussionId', 'id');
+
 Comment.belongsTo(User, 'author', 'userId', 'id');
-Like.belongsTo(User, 'profile', 'userId', 'id');
+Comment.hasMany(Reply, 'replies', 'commentId', 'id');
+Comment.hasMany(LikeComment, 'likes', 'postId', 'id');
+
+Reply.belongsTo(User, 'author', 'userId', 'id');
+Reply.hasMany(LikeReply, 'likes', 'postId', 'id');
+
 Report.hasOne(Discussion, 'post', 'discussionId', 'id');
 
 User.ensureIndex('slug');
@@ -171,11 +205,20 @@ Comment.ensureIndex('userId');
 Comment.ensureIndex('createdAt');
 Comment.ensureIndex('updatedAt');
 
-Like.ensureIndex('type');
-Like.ensureIndex('postId');
-Like.ensureIndex('userId');
-Like.ensureIndex('createdAt');
-Like.ensureIndex('updatedAt');
+LikeDiscussion.ensureIndex('discussionId');
+LikeDiscussion.ensureIndex('userId');
+LikeDiscussion.ensureIndex('createdAt');
+LikeDiscussion.ensureIndex('updatedAt');
+
+LikeComment.ensureIndex('postId');
+LikeComment.ensureIndex('userId');
+LikeComment.ensureIndex('createdAt');
+LikeComment.ensureIndex('updatedAt');
+
+LikeReply.ensureIndex('postId');
+LikeReply.ensureIndex('userId');
+LikeReply.ensureIndex('createdAt');
+LikeReply.ensureIndex('updatedAt');
 
 Report.ensureIndex('type');
 Report.ensureIndex('discussionId');
@@ -219,7 +262,10 @@ export {
   Category,
   Discussion,
   Comment,
-  Like,
+  Reply,
+  LikeDiscussion,
+  LikeComment,
+  LikeReply,
   Report,
   Notification,
   Upload,

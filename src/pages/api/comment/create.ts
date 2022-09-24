@@ -40,11 +40,10 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
                     .getJoin()
                     .then(async (d: any) => {
                       const notify = new Notification({
-                        type: 'post',
                         sender: data.userId,
                         receiver: d.userId,
-                        message: `${p.name} replied to your discussion.`,
-                        action: `${d.slug}`
+                        message: `${p.name} replied to your post.`,
+                        action: `${d.slug}#${data.slug}`
                       });
                       await notify.save().then(() => {});
                     });
