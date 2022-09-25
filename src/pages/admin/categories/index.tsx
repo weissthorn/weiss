@@ -90,7 +90,7 @@ const Categories = observer(() => {
           <Table width={'100%'} data={categories}>
             <Table.Column prop="title" label="Title" />
             <Table.Column prop="color" label="color" render={renderColor} />
-            <Table.Column prop="discussion" label="discussion" />
+            <Table.Column prop="discussion" label="discussions" />
             <Table.Column prop="authRequired" label="Authentication" />
             <Table.Column prop="action" label="action" render={renderAction} />
           </Table>

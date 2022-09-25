@@ -20,7 +20,7 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
         let category: any = [];
         await asyncForEach(data, async (item: any) => {
           await Discussion.orderBy(r.desc('createdAt'))
-            .filter({ categoryId: item.id })
+            .filter({ categoryId: item.slug })
             .then((m: any) => {
               item = {
                 ...item,
