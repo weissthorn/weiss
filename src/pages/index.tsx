@@ -40,6 +40,22 @@ const Home = observer(() => {
     getDiscussions();
   };
 
+  const removeBanWords = (data: string) => {
+    let banWords: any = settings && settings.banWords ? settings.banWords : '';
+    banWords = banWords.replace(/\s/gi, '');
+    banWords = banWords.split(',');
+
+    data
+      ? banWords.forEach((item: string) => {
+          let regEx: any = `${item}`;
+          regEx = new RegExp(regEx, 'gi');
+          data = data.replace(regEx, '*****');
+        })
+      : '';
+
+    return data;
+  };
+
   return (
     <div>
       <Navbar
@@ -113,7 +129,7 @@ const Home = observer(() => {
                   : '/images/avatar.png'
               }
               author={item.profile?.name}
-              title={item.title}
+              title={removeBanWords(item.title)}
               comment={item.comment}
               date={item.createdAt}
             />

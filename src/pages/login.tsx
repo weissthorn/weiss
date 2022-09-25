@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Spacer, Text, Link, Button, Input, Card } from '@geist-ui/core';
+import {
+  Spacer,
+  Text,
+  Link,
+  Button,
+  Input,
+  Card,
+  Divider
+} from '@geist-ui/core';
 import dynamic from 'next/dynamic';
 const Github = dynamic(() => import('react-login-github'), {
   ssr: false
@@ -9,6 +17,7 @@ import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 
@@ -21,6 +30,10 @@ const Login = observer(() => {
   useEffect(() => {
     getSettings();
   }, [status]);
+
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
 
   const signIn = async () => {
     const { email, password } = user;
@@ -103,6 +116,25 @@ const Login = observer(() => {
               >
                 Log in
               </Button>
+              <Spacer />
+              <Divider>OR</Divider>
+              <Spacer />
+              <FacebookLogin
+                appId="575710046478104"
+                autoLoad={true}
+                fields="name,email,picture"
+                // onClick={componentClicked}
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <Button
+                    type="success"
+                    width="100%"
+                    onClick={renderProps.onClick}
+                  >
+                    Continue with Facebook
+                  </Button>
+                )}
+              />
               {/* <Github
                   className="button"
                   clientId="ac56fad434a3a3c1561e"

@@ -16,6 +16,7 @@ import Navbar from 'components/Navbar';
 import Post from 'components/Post';
 import Sidebar from 'components/Sidebar';
 import CategoryStore from 'stores/category';
+import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import useToken from 'components/Token';
 import Contributors from 'components/Contributors';
@@ -25,6 +26,7 @@ const Category = observer(() => {
   const router = useRouter();
   const { slug }: any = router.query;
   const [modal, toggleModal] = useState(false);
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ category, getCategory }] = useState(() => new CategoryStore());
   const [
     {
@@ -39,6 +41,7 @@ const Category = observer(() => {
   ] = useState(() => new DiscussionStore());
 
   useEffect(() => {
+    getSettings();
     router.isReady
       ? getCategory(slug).then(() => {
           getDiscussionsByCategory(slug);
@@ -49,6 +52,22 @@ const Category = observer(() => {
   const paginate = (val: number) => {
     setPage(val);
     getDiscussionsByCategory(slug);
+  };
+
+  const removeBanWords = (data: string) => {
+    let banWords: any = settings && settings.banWords ? settings.banWords : '';
+    banWords = banWords.replace(/\s/gi, '');
+    banWords = banWords.split(',');
+
+    data
+      ? banWords.forEach((item: string) => {
+          let regEx: any = `${item}`;
+          regEx = new RegExp(regEx, 'gi');
+          data = data.replace(regEx, '*****');
+        })
+      : '';
+
+    return data;
   };
 
   return (
@@ -136,7 +155,7 @@ const Category = observer(() => {
                   : '/images/avatar.png'
               }
               author={item.profile?.name}
-              title={item.title}
+              title={removeBanWords(item.title)}
               comment={item.comment}
               date={item.createdAt}
             />

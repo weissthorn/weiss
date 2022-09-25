@@ -91,6 +91,22 @@ const Discussion = observer(() => {
       : null;
   }, [router]);
 
+  const removeBanWords = (data: string) => {
+    let banWords: any = settings && settings.banWords ? settings.banWords : '';
+    banWords = banWords.replace(/\s/gi, '');
+    banWords = banWords.split(',');
+
+    data
+      ? banWords.forEach((item: string) => {
+          let regEx: any = `${item}`;
+          regEx = new RegExp(regEx, 'gi');
+          data = data.replace(regEx, '*****');
+        })
+      : '';
+
+    return data;
+  };
+
   const toggleCommentBox = (
     replyId?: string,
     replyUsername?: string,
@@ -271,7 +287,7 @@ const Discussion = observer(() => {
             <Loading>Loading</Loading>
           ) : (
             <div className="item">
-              <Text h2>{discussion.title} </Text>
+              <Text h2>{removeBanWords(discussion.title)} </Text>
               <div className="discuss-grid block">
                 <div className="item">
                   <NextLink href={`/category/${category?.slug}`}>
@@ -435,7 +451,9 @@ const Discussion = observer(() => {
                     <Text small>{moment(discussion.createdAt).fromNow()}</Text>
                   </Text>
                   <div
-                    dangerouslySetInnerHTML={{ __html: discussion.content! }}
+                    dangerouslySetInnerHTML={{
+                      __html: removeBanWords(discussion.content!)
+                    }}
                   ></div>
                   <Tooltip
                     placement="right"
