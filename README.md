@@ -45,7 +45,7 @@ yarn dev
 - &#x2611; Reports and flag
 - &#x2611; Advert settings
 - &#x2611; Analytics, pageviews and post views.
-- &#x2610; Ban words.
+- &#x2611; Ban words.
 
 ### How to contribute
 

@@ -432,6 +432,14 @@ body {
     }
   }
 
+  .git-button {
+    background-color: transparent;
+    padding: 0;
+    width: 100%;
+    appearance: none;
+    border: none;
+  }
+
   .column {
     width: 100%;
     display: grid;
@@ -619,6 +627,14 @@ body {
 
   .top-100 {
     margin-top: 100px;
+  }
+
+  .top-50 {
+    margin-top: 50px;
+  }
+
+  .top-30 {
+    margin-top: 30px;
   }
 
   .center {

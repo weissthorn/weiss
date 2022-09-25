@@ -12,14 +12,17 @@ import dynamic from 'next/dynamic';
 const Github = dynamic(() => import('react-login-github'), {
   ssr: false
 });
+import TwitterLogin from 'react-twitter-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import { Facebook, Twitter, Github as GithubIcon } from '@geist-ui/icons';
 
 const Login = observer(() => {
   const router = useRouter();
@@ -34,6 +37,10 @@ const Login = observer(() => {
   const responseFacebook = (response) => {
     console.log(response);
   };
+
+  const onSuccess = () => {};
+
+  const onFailure = () => {};
 
   const signIn = async () => {
     const { email, password } = user;
@@ -63,7 +70,7 @@ const Login = observer(() => {
       <Navbar title="Login" description="Login" hide />
       <Toaster />
       <div>
-        <div className="page-container top-100">
+        <div className="page-container top-50">
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
@@ -127,7 +134,9 @@ const Login = observer(() => {
                 callback={responseFacebook}
                 render={(renderProps) => (
                   <Button
-                    type="success"
+                    icon={<Facebook color="#fff" />}
+                    type="abort"
+                    style={{ backgroundColor: '#3b5998', color: '#fff' }}
                     width="100%"
                     onClick={renderProps.onClick}
                   >
@@ -135,12 +144,34 @@ const Login = observer(() => {
                   </Button>
                 )}
               />
-              {/* <Github
-                  className="button"
-                  clientId="ac56fad434a3a3c1561e"
-                  onSuccess={onSuccess}
-                  onFailure={onFailure}
-                /> */}
+              <Spacer />
+              <TwitterLogin>
+                <Button
+                  style={{ backgroundColor: '#1D9BF0', color: '#fff' }}
+                  icon={<Twitter color="#fff" />}
+                  width="100%"
+                  type="abort"
+                >
+                  Continue with Twitter
+                </Button>
+              </TwitterLogin>
+              <Spacer />
+              <Github
+                className="git-button"
+                disabled
+                clientId="ac56fad434a3a3c1561e"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+              >
+                <Button
+                  icon={<GithubIcon color="#fff" />}
+                  width="100%"
+                  type="abort"
+                  style={{ backgroundColor: '#171515', color: '#fff' }}
+                >
+                  Continue to Github
+                </Button>
+              </Github>
               {/* <Spacer h={1} /> */}
               <Text font={'14px'}>
                 Forgotten Password? &nbsp;
@@ -158,6 +189,7 @@ const Login = observer(() => {
             </Card>
             <Spacer h={4} />
           </div>
+          <Spacer h={4} />
         </div>
       </div>
     </div>

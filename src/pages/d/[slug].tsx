@@ -452,7 +452,7 @@ const Discussion = observer(() => {
                   </Text>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: removeBanWords(discussion.content!)
+                      __html: discussion.content
                     }}
                   ></div>
                   <Tooltip

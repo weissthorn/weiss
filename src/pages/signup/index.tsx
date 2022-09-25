@@ -8,12 +8,26 @@ import {
   Grid,
   Card,
   Loading,
+  Divider,
   Tooltip
 } from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
-import { CheckInCircle, CheckInCircleFill, XCircleFill } from '@geist-ui/icons';
+import {
+  CheckInCircle,
+  CheckInCircleFill,
+  XCircleFill,
+  Facebook,
+  Twitter,
+  Github as GithubIcon
+} from '@geist-ui/icons';
+import dynamic from 'next/dynamic';
+const Github = dynamic(() => import('react-login-github'), {
+  ssr: false
+});
+import TwitterLogin from 'react-twitter-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import Navbar from 'components/Navbar';
 import UserStore from 'stores/user';
 import useToken from 'components/Token';
@@ -32,6 +46,14 @@ const Signup = observer(() => {
   useEffect(() => {
     getSettings();
   }, [token]);
+
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
+
+  const onSuccess = () => {};
+
+  const onFailure = () => {};
 
   const processUsername = (val: string) => {
     if (val.length) {
@@ -90,7 +112,7 @@ const Signup = observer(() => {
       <Navbar title="Signup" description="Signup" hide />
       <Toaster />
       <div className="polkadot">
-        <div className="page-container top-100">
+        <div className="page-container top-30">
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
@@ -104,7 +126,7 @@ const Signup = observer(() => {
 
             <Card shadow width="100%">
               <Text h3>Create your account</Text>
-              <Spacer h={2} />
+              <Spacer h={1} />
               <Input
                 placeholder="Fullname"
                 width="100%"
@@ -175,6 +197,54 @@ const Signup = observer(() => {
                 Signup
               </Button>
               <Spacer h={1} />
+              <Divider>OR</Divider>
+              <Spacer />
+              <FacebookLogin
+                appId="575710046478104"
+                autoLoad={true}
+                fields="name,email,picture"
+                // onClick={componentClicked}
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <Button
+                    icon={<Facebook color="#fff" />}
+                    type="abort"
+                    style={{ backgroundColor: '#3b5998', color: '#fff' }}
+                    width="100%"
+                    onClick={renderProps.onClick}
+                  >
+                    Continue with Facebook
+                  </Button>
+                )}
+              />
+              <Spacer />
+              <TwitterLogin>
+                <Button
+                  style={{ backgroundColor: '#1D9BF0', color: '#fff' }}
+                  icon={<Twitter color="#fff" />}
+                  width="100%"
+                  type="abort"
+                >
+                  Continue with Twitter
+                </Button>
+              </TwitterLogin>
+              <Spacer />
+              <Github
+                className="git-button"
+                disabled
+                clientId="ac56fad434a3a3c1561e"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+              >
+                <Button
+                  icon={<GithubIcon color="#fff" />}
+                  width="100%"
+                  type="abort"
+                  style={{ backgroundColor: '#171515', color: '#fff' }}
+                >
+                  Continue to Github
+                </Button>
+              </Github>
               <Text font="14px">
                 Have an account? &nbsp;
                 <Link href="/login" color underline>
