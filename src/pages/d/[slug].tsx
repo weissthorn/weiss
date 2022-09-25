@@ -78,8 +78,12 @@ const Discussion = observer(() => {
     router.isReady
       ? getDiscussion(slug).then((data: any) => {
           if (data.id) {
-            getComments(data.id).then((_comments) => {
-              _comments.length ? scrollToDiv(hash) : null;
+            getComments(data.id).then((res) => {
+              res.data.length
+                ? setTimeout(() => {
+                    scrollToDiv(hash);
+                  }, 1000)
+                : null;
             });
             updateDiscussion({ id: data.id, view: data.view + 1 });
           }
@@ -99,8 +103,6 @@ const Discussion = observer(() => {
       comment: commentNumber,
       replyId
     });
-
-    console.log(reply);
   };
 
   const report = async (discussionId: string, type: string) => {
@@ -132,7 +134,7 @@ const Discussion = observer(() => {
 
   const scrollToDiv = (id: string) => {
     const divElement: any = document.getElementById(id);
-    divElement.scrollIntoView({ behavior: 'smooth' });
+    divElement ? divElement.scrollIntoView({ behavior: 'smooth' }) : null;
   };
 
   const saveComment = async () => {
@@ -148,7 +150,10 @@ const Discussion = observer(() => {
           if (res.success) {
             getComments(discussion.id!).then(() => {
               toggleModal(!modal);
-              scrollToDiv(res.data.slug);
+              setContent('');
+              setTimeout(() => {
+                scrollToDiv(res.data.slug);
+              }, 1000);
             });
           } else {
             toast.error('Unable to save comment.');
@@ -172,8 +177,16 @@ const Discussion = observer(() => {
         .then((res: any) => {
           if (res.success) {
             getComments(discussion.id!).then(() => {
-              toggleModal(!modal);
-              scrollToDiv(res.data.slug);
+              toggleReply({
+                modal: false,
+                replyId: '',
+                username: '',
+                comment: 0
+              });
+              setContent('');
+              setTimeout(() => {
+                scrollToDiv(res.data.slug);
+              }, 1000);
             });
           } else {
             toast.error('Unable to save reply.');

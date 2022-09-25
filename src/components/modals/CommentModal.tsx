@@ -18,7 +18,7 @@ type editorProps = {
   save: (value: any) => void;
 };
 
-const ReplyModal = observer((props: editorProps) => {
+const CommentModal = observer((props: editorProps) => {
   const {
     loading,
     content,
@@ -38,7 +38,7 @@ const ReplyModal = observer((props: editorProps) => {
   const [_height, _setHeight] = useState('150px');
 
   const toggleFullScreen = () => {
-    if (editor.current.requestFullscreen) {
+    if (!document.fullscreenElement && editor.current.requestFullscreen) {
       setWidth('100%');
       setHeight('100vh');
       _setHeight('80vh');
@@ -47,7 +47,7 @@ const ReplyModal = observer((props: editorProps) => {
   };
 
   const closeFullscreen = () => {
-    if (document.exitFullscreen) {
+    if (document.fullscreenElement && document.exitFullscreen) {
       setWidth('720px');
       setHeight('auto');
       _setHeight('150px');
@@ -108,4 +108,4 @@ const ReplyModal = observer((props: editorProps) => {
   );
 });
 
-export default ReplyModal;
+export default CommentModal;

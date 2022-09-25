@@ -54,7 +54,9 @@ const EditorModal = observer((props: editorProps) => {
       setWidth('700px');
       setHeight('auto');
       _setHeight('150px');
-      document.exitFullscreen();
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
     }
   };
 
