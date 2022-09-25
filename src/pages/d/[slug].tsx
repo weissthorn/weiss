@@ -279,7 +279,10 @@ const Discussion = observer(() => {
         ''
       )}
 
-      <Navbar title={discussion.title} description={discussion.title} />
+      <Navbar
+        title={removeBanWords(discussion.title)}
+        description={removeBanWords(discussion.title)}
+      />
 
       <div className="page-container top-100">
         <div className="discussion-container">
@@ -452,7 +455,7 @@ const Discussion = observer(() => {
                   </Text>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: discussion.content
+                      __html: removeBanWords(discussion.content)
                     }}
                   ></div>
                   <Tooltip
