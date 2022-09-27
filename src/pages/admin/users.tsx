@@ -138,7 +138,7 @@ const Admin = observer(() => {
           <Table width={'100%'} data={users}>
             <Table.Column prop="name" label="Name" className="capitalize" />
             <Table.Column prop="role" label="Role" />
-            <Table.Column prop="status" label="Status" render={renderStatus} />
+            {/* <Table.Column prop="_" label="Status" render={renderStatus} /> */}
             <Table.Column
               // width={220}
               prop="createdAt"

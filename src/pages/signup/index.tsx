@@ -61,7 +61,7 @@ const Signup = observer(() => {
       setUser({ ...user, username: val });
       setStatus('loading');
       setTimeout(async () => {
-        await checkUsername(val).then((res) => {
+        await checkUsername(val).then((res: any) => {
           if (res?.success) {
             setStatus('success');
           } else {

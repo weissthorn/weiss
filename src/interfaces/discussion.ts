@@ -8,7 +8,7 @@ export interface discussionProp {
   description?: string;
   content?: string;
   comment?: number;
-  categoryId?: string;
+  categoryId?: any;
   category?: categoryProp;
   profile?: userProp;
   authRequired?: boolean;

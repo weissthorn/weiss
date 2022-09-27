@@ -135,12 +135,9 @@ const Reply = (props: replyProp) => {
             width={'100%'}
             initialVisible
             title={
-              <Text small font={'14px'}>
-                {' '}
-                {replies?.length > 1
-                  ? replies?.length + ' Replies'
-                  : replies?.length + ' Reply'}
-              </Text>
+              replies?.length > 1
+                ? replies?.length + ' Replies'
+                : replies?.length + ' Reply'
             }
           >
             {replies?.length

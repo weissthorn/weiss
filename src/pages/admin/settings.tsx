@@ -80,9 +80,9 @@ const Settings = observer(() => {
         <Sidebar active="settings" />
 
         <main className="main for-admin">
-          <Collapse.Group width={'100%'}>
+          <Collapse.Group width={'100%'} className="settings">
             <Text h3>Settings</Text>
-            <Collapse title={<h4>Metadata</h4>} initialVisible>
+            <Collapse title={'Metadata'} initialVisible>
               <div className="column">
                 <div className="item">
                   <Text h6>Site favicon</Text>
@@ -180,7 +180,7 @@ const Settings = observer(() => {
                 </div>
               </div>
             </Collapse>
-            <Collapse title={<h4>Language</h4>}>
+            <Collapse title={'Language'}>
               <div className="column">
                 <div className="item">
                   <Text h6>Site language</Text>
@@ -215,7 +215,7 @@ const Settings = observer(() => {
                 </div>
               </div>
             </Collapse>
-            <Collapse title={<h4>Social settings</h4>}>
+            <Collapse title={'Social settings'}>
               <div className="column">
                 <div className="item">
                   <Text h6>Github Client ID</Text>
@@ -274,7 +274,7 @@ const Settings = observer(() => {
                 </div>
               </div>
             </Collapse>
-            <Collapse title={<h4>Advert settings</h4>}>
+            <Collapse title={'Advert settings'}>
               <Tabs initialValue="1">
                 <Tabs.Item label="Top" value="1">
                   <Textarea
@@ -370,7 +370,7 @@ const Settings = observer(() => {
                 </Tabs.Item>
               </Tabs>
             </Collapse>
-            <Collapse title={<h4>Email settings</h4>}>
+            <Collapse title={'Email settings'}>
               <div className="column">
                 <div className="item">
                   <Text h6>SMTP host</Text>
@@ -438,7 +438,7 @@ const Settings = observer(() => {
                 </div>
               </div>
             </Collapse>
-            <Collapse title={<h4>Coins settings</h4>}>
+            <Collapse title={'Coins settings'}>
               <Text small>
                 Note: Changing coin values will affect users current value.
               </Text>
@@ -450,7 +450,7 @@ const Settings = observer(() => {
                   <Input
                     htmlType="number"
                     width={'100%'}
-                    value={coin?.login}
+                    value={coin?.login.toString()}
                     onChange={(e: any) =>
                       setSettings({
                         ...settings,
@@ -468,7 +468,7 @@ const Settings = observer(() => {
                   <Input
                     htmlType="number"
                     width={'100%'}
-                    value={coin?.discussion}
+                    value={coin?.discussion.toString()}
                     onChange={(e: any) =>
                       setSettings({
                         ...settings,
@@ -486,7 +486,7 @@ const Settings = observer(() => {
                   <Input
                     htmlType="number"
                     width={'100%'}
-                    value={coin?.comment}
+                    value={coin?.comment.toString()}
                     onChange={(e: any) =>
                       setSettings({
                         ...settings,
@@ -504,7 +504,7 @@ const Settings = observer(() => {
                   <Input
                     htmlType="number"
                     width={'100%'}
-                    value={coin?.bestAnswer}
+                    value={coin?.bestAnswer.toString()}
                     onChange={(e: any) =>
                       setSettings({
                         ...settings,
@@ -530,7 +530,7 @@ const Settings = observer(() => {
                 </div>
               </div>
             </Collapse>
-            <Collapse title={<h4>Ban words</h4>}>
+            <Collapse title={'Ban words'}>
               <Textarea
                 placeholder="Type words separate with comma"
                 width="100%"

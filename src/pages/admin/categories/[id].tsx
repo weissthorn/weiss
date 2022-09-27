@@ -29,7 +29,8 @@ const EditCategory = observer(() => {
 
   useEffect(() => {
     getModerators();
-    router.isReady ? getCategory(id) : null;
+    let _id: any = id;
+    router.isReady ? getCategory(_id) : null;
   }, [router]);
 
   const save = async () => {

@@ -1,5 +1,5 @@
 export interface settingsProp {
-  language?: string;
+  language?: string | string[];
   siteFavicon?: string;
   siteLogo?: string;
   siteName?: string;
@@ -14,10 +14,10 @@ export interface settingsProp {
     password: string;
   };
   coin?: {
-    login: number;
-    discussion: number;
-    comment: number;
-    bestAnswer: number;
+    login?: number;
+    discussion?: number;
+    comment?: number;
+    bestAnswer?: number;
   };
   banWords?: string;
   status?: string;
