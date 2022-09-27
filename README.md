@@ -1,10 +1,8 @@
 # Weiss
 
-Forum based on NextJS and NodeJS
+Modern, Minimalistic Discussion Software
 
-### DO NOT use. Development in progress
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/581c2e2f9e544b38b22c74377f118711)](https://www.codacy.com/gh/weissthorn/weiss/dashboard?utm_source=github.com&utm_medium=referral&utm_content=weissthorn/weiss&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b434e4594827418681e9fbe21566b45e)](https://www.codacy.com/gh/weissthorn/weiss/dashboard?utm_source=github.com&utm_medium=referral&utm_content=weissthorn/weiss&utm_campaign=Badge_Grade)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ### Prerequisite
@@ -44,11 +42,20 @@ yarn dev
 - &#x2611; Coin and reward
 - &#x2611; Reports and flag
 - &#x2611; Advert settings
-- &#x2611; Analytics, pageviews and post views.
-- &#x2611; Ban words.
+- &#x2611; Analytics, pageviews and post views
+- &#x2611; Ban words
+- &#x2610; Docker image
+- &#x2610; Kubernetes
+- &#x2610; Digital ocean marketplace
+- &#x2610; AWS marketplace
+- &#x2610; Softacoulous installer
 
 ### How to contribute
 
-### [Changelog](CHANGELOG.md)
+Fork the code, update and make a pull request.
 
 ### [License](LICENSE)
+
+### Maintainers
+
+[Olalekan Animashaun](https://github.com/kimolalekan)

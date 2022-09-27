@@ -33,7 +33,6 @@ import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import NotificationStore from 'stores/notification';
-// import { useAnalytics } from './Analytics';
 
 type navbarProps = {
   title?: string;
@@ -44,7 +43,6 @@ type navbarProps = {
 
 const Navbar = observer((props: navbarProps) => {
   const token = useToken();
-  // const trackPage = useAnalytics();
   const router = useRouter();
   const cookie = parseCookies();
   const [theme, setTheme] = useState('weiss-light');
@@ -63,7 +61,6 @@ const Navbar = observer((props: navbarProps) => {
   useEffect(() => {
     cookie && cookie.theme ? setTheme(cookie.theme) : '';
     getSettings();
-    // trackPage();
     token.id ? getUnreadNotification(token.id) : null;
   }, [theme, token]);
 

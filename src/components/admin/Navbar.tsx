@@ -42,6 +42,7 @@ const Navbar = observer((props: navbarProps) => {
   useEffect(() => {
     cookie && cookie.theme ? setTheme(cookie.theme) : '';
     getSettings();
+    token.id ? getUnreadNotification(token.id) : null;
   }, [theme, token]);
 
   const switchTheme = (val: string) => {

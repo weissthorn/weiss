@@ -104,6 +104,7 @@ const User = observer(() => {
 
             {discussions.map((item: any) => (
               <MinimalPost
+                key={item.id}
                 title={item.title}
                 slug={item.slug}
                 category={item.category?.title}
