@@ -20,4 +20,5 @@ export interface settingsProp {
     bestAnswer: number;
   };
   banWords?: string;
+  status?: string;
 }

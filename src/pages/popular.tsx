@@ -76,9 +76,17 @@ const Home = observer(() => {
             </NextLink>
           }
           advert={
-            <div
-              dangerouslySetInnerHTML={{ __html: settings.advert?.left! }}
-            ></div>
+            settings.advert?.left ? (
+              <Card>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: settings.advert?.left!
+                  }}
+                ></div>
+              </Card>
+            ) : (
+              ''
+            )
           }
         />
         <main className="main with-right">
@@ -160,11 +168,17 @@ const Home = observer(() => {
         <aside>
           <div className="sidenav">
             <Contributors />
-            <Card>
-              <div
-                dangerouslySetInnerHTML={{ __html: settings.advert?.right! }}
-              ></div>
-            </Card>
+            {settings.advert?.right ? (
+              <Card>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: settings.advert?.right!
+                  }}
+                ></div>
+              </Card>
+            ) : (
+              ''
+            )}
           </div>
         </aside>
       </div>

@@ -54,7 +54,6 @@ const Discussion = observer(() => {
   const [
     {
       loading,
-      page,
       total,
       limit,
       commentLoading,
@@ -565,13 +564,17 @@ const Discussion = observer(() => {
                   ''
                 )}
 
-                <Card>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: settings.advert?.right!
-                    }}
-                  ></div>
-                </Card>
+                {settings.advert?.right ? (
+                  <Card>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: settings.advert?.right!
+                      }}
+                    ></div>
+                  </Card>
+                ) : (
+                  ''
+                )}
                 <Spacer h={4} />
               </div>
             </aside>

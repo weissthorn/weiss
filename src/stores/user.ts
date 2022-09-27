@@ -34,6 +34,25 @@ export default class UserStore {
     this.user = data;
   };
 
+  @action setup = async (body: userProp) => {
+    let url = `${API_URL}/user/setup`;
+    this.loading = true;
+    return await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        apikey: API_KEY
+      },
+      body: JSON.stringify(body)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.loading = false;
+        return res;
+      })
+      .catch((err) => console.log(err));
+  };
+
   @action signup = async (body: userProp) => {
     let url = `${API_URL}/user/create`;
     this.loading = true;

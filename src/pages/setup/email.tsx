@@ -46,10 +46,15 @@ const EmailSetup = observer(() => {
         bestAnswer: 5
       };
 
-      const _settings = { ...settings, ...{ coin }, status: 'completed' };
+      const _settings = {
+        ...settings,
+        ...{ coin },
+        banWords: 'motherfucker, bullshit, fuck, shit',
+        status: 'completed'
+      };
 
       await userStore
-        .signup({ ...admin, ...{ coin: 1 }, ...{ status: 'active' } })
+        .setup({ ...admin, ...{ coin: 1, status: 'active', role: 'admin' } })
         .then(async (res: any) => {
           await categoryStore.newCategory({
             title: 'General',
@@ -59,12 +64,17 @@ const EmailSetup = observer(() => {
           });
 
           if (res.success) {
-            const { name, email, role } = res.data;
+            const { name, id, role, photo, username } = res.data;
             destroyCookie(null, '_w_setup');
-            setCookie(null, '_w_auth', JSON.stringify({ name, email, role }), {
-              maxAge: 30 * 24 * 60 * 60,
-              path: '/'
-            });
+            setCookie(
+              null,
+              '_w_auth',
+              JSON.stringify({ name, id, role, photo, username }),
+              {
+                maxAge: 30 * 24 * 60 * 60,
+                path: '/'
+              }
+            );
 
             await create(_settings).then((res) => {
               router.push('/admin');

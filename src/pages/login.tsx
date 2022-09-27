@@ -124,7 +124,7 @@ const Login = observer(() => {
                 Log in
               </Button>
               <Spacer />
-              <Divider>OR</Divider>
+              {/* <Divider>OR</Divider>
               <Spacer />
               <FacebookLogin
                 appId="575710046478104"
@@ -171,8 +171,8 @@ const Login = observer(() => {
                 >
                   Continue to Github
                 </Button>
-              </Github>
-              {/* <Spacer h={1} /> */}
+              </Github> */}
+
               <Text font={'14px'}>
                 Forgotten Password? &nbsp;
                 <Link href="/forgot" color underline>

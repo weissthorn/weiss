@@ -183,6 +183,17 @@ const Category = observer(() => {
         <aside>
           <div className="sidenav fluid">
             <Contributors />
+            {settings.advert?.right ? (
+              <Card>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: settings.advert?.right!
+                  }}
+                ></div>
+              </Card>
+            ) : (
+              ''
+            )}
           </div>
         </aside>
       </div>

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 import SettingsStore from 'stores/settings';
 
-const SetupVerify = observer((props: any) => {
+const AdminVerify = observer((props: any) => {
   const router = useRouter();
   const [{ settings, getSettings }] = React.useState(() => new SettingsStore());
 
@@ -11,7 +11,7 @@ const SetupVerify = observer((props: any) => {
     router.isReady
       ? getSettings().then((settings: any) => {
           let { data } = settings;
-          data && data.status === 'completed' ? goTo('/') : '';
+          data && data.status !== 'completed' ? goTo('/setup') : '';
         })
       : null;
   }, [router]);
@@ -20,11 +20,11 @@ const SetupVerify = observer((props: any) => {
     router.push(value);
   };
 
-  if (settings.siteName && settings.status === 'completed') {
-    return <></>;
-  } else {
+  if (settings && settings.siteName && settings.language) {
     return <div>{props.children}</div>;
+  } else {
+    return <></>;
   }
 });
 
-export default SetupVerify;
+export default AdminVerify;

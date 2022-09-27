@@ -197,7 +197,7 @@ const Signup = observer(() => {
                 Signup
               </Button>
               <Spacer h={1} />
-              <Divider>OR</Divider>
+              {/* <Divider>OR</Divider>
               <Spacer />
               <FacebookLogin
                 appId="575710046478104"
@@ -244,7 +244,7 @@ const Signup = observer(() => {
                 >
                   Continue to Github
                 </Button>
-              </Github>
+              </Github> */}
               <Text font="14px">
                 Have an account? &nbsp;
                 <Link href="/login" color underline>
@@ -253,6 +253,7 @@ const Signup = observer(() => {
               </Text>
             </Card>
           </div>
+          <Spacer h={3} />
         </div>
       </div>
     </div>

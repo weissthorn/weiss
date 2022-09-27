@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 2323",
+    "dev": "next dev -p 4111",
     "build": "next build",
-    "start": "next start -p 2323",
+    "start": "next start -p 4111",
     "lint": "next lint",
     "start_db": "rethinkdb --bind all",
     "test:e2e": "playwright test"

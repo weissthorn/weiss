@@ -73,8 +73,12 @@ const Setup = observer(() => {
                 onChange={(val) => handleSettings({ language: val })}
               >
                 <Select.Option value="en">English</Select.Option>
-                <Select.Option value="fr">French</Select.Option>
-                <Select.Option value="es">Spanish</Select.Option>
+                <Select.Option value="fr" disabled>
+                  French <Text small>(coming soon)</Text>
+                </Select.Option>
+                <Select.Option value="es" disabled>
+                  Spanish <Text small>(coming soon)</Text>
+                </Select.Option>
               </Select>
               <Spacer h={1.5} />
               <Input

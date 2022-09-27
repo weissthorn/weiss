@@ -145,13 +145,17 @@ const User = observer(() => {
           <div className="item">
             <aside>
               <div className="sidenav">
-                <Card shadow type="secondary">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: settings.advert?.right!
-                    }}
-                  ></div>
-                </Card>
+                {settings.advert?.right ? (
+                  <Card>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: settings.advert?.right!
+                      }}
+                    ></div>
+                  </Card>
+                ) : (
+                  ''
+                )}
               </div>
             </aside>
           </div>

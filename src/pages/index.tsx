@@ -19,7 +19,7 @@ import useToken from 'components/Token';
 import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import Contributors from 'components/Contributors';
-import isSetup from 'components/Setup';
+import AdminVerify from 'components/admin/AdminVerify';
 
 const Home = observer(() => {
   const token = useToken();
@@ -30,7 +30,6 @@ const Home = observer(() => {
   const [modal, toggleModal] = useState(false);
 
   useEffect(() => {
-    isSetup();
     getSettings();
     getDiscussions();
   }, [token]);
@@ -57,7 +56,7 @@ const Home = observer(() => {
   };
 
   return (
-    <div>
+    <AdminVerify>
       <Navbar
         title={settings.siteName}
         description={settings.siteDescription}
@@ -75,9 +74,15 @@ const Home = observer(() => {
             </NextLink>
           }
           advert={
-            <div
-              dangerouslySetInnerHTML={{ __html: settings.advert?.left! }}
-            ></div>
+            settings.advert?.left ? (
+              <Card>
+                <div
+                  dangerouslySetInnerHTML={{ __html: settings.advert?.left! }}
+                ></div>
+              </Card>
+            ) : (
+              ''
+            )
           }
         />
         <main className="main with-right">
@@ -159,15 +164,21 @@ const Home = observer(() => {
         <aside>
           <div className="sidenav">
             <Contributors />
-            <Card>
-              <div
-                dangerouslySetInnerHTML={{ __html: settings.advert?.right! }}
-              ></div>
-            </Card>
+            {settings.advert?.right ? (
+              <Card>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: settings.advert?.right!
+                  }}
+                ></div>
+              </Card>
+            ) : (
+              ''
+            )}
           </div>
         </aside>
       </div>
-    </div>
+    </AdminVerify>
   );
 });
 
