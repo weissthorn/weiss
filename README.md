@@ -48,7 +48,6 @@ yarn dev
 - &#x2610; Kubernetes
 - &#x2610; Digital ocean marketplace
 - &#x2610; AWS marketplace
-- &#x2610; Softacoulous installer
 
 ### How to contribute
 
