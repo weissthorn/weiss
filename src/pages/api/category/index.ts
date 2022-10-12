@@ -16,24 +16,26 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
         offset = offset - limit;
       }
 
-      await Category.then(async (data: any) => {
-        let category: any = [];
-        await asyncForEach(data, async (item: any) => {
-          await Discussion.orderBy(r.desc('createdAt'))
-            .filter({ categoryId: item.slug })
-            .then((m: any) => {
-              item = {
-                ...item,
-                discussion: m.length
-              };
-              category.push(item);
-            });
-        }).finally(() => {
-          res
-            .status(200)
-            .json({ success: true, data: category, count: category.length });
-        });
-      }).catch((err: any) => signale.fatal(err));
+      await Category.orderBy(r.asc('createdAt'))
+        .then(async (data: any) => {
+          let category: any = [];
+          await asyncForEach(data, async (item: any) => {
+            await Discussion.orderBy(r.desc('createdAt'))
+              .filter({ categoryId: item.slug })
+              .then((m: any) => {
+                item = {
+                  ...item,
+                  discussion: m.length
+                };
+                category.push(item);
+              });
+          }).finally(() => {
+            res
+              .status(200)
+              .json({ success: true, data: category, count: category.length });
+          });
+        })
+        .catch((err: any) => signale.fatal(err));
     } else {
       res.send(auth);
     }

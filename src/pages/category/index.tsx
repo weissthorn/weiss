@@ -20,32 +20,29 @@ const Category = observer(() => {
       <div className="page-container top-100">
         <h2>Categories</h2>
         <Grid.Container gap={1} mb="100px">
-          {categories
-            .slice()
-            .reverse()
-            .map((item) => (
-              <Grid xs={24} md={8} key={item.id}>
-                <NextLink href={`/category/${item.slug}`}>
-                  <Link width="100%">
-                    <Card
-                      type={'default'}
-                      width="100%"
-                      style={{ background: item.color }}
-                      className="text-category"
+          {categories.slice().map((item) => (
+            <Grid xs={24} md={8} key={item.id}>
+              <NextLink href={`/category/${item.slug}`}>
+                <Link width="100%">
+                  <Card
+                    type={'default'}
+                    width="100%"
+                    style={{ background: item.color }}
+                    className="text-category"
+                  >
+                    <Text
+                      h4
+                      my={0}
+                      // style={{ textTransform: 'uppercase' }}
                     >
-                      <Text
-                        h4
-                        my={0}
-                        // style={{ textTransform: 'uppercase' }}
-                      >
-                        {item.title}
-                      </Text>
-                      <Text p>{item.description}</Text>
-                    </Card>
-                  </Link>
-                </NextLink>
-              </Grid>
-            ))}
+                      {item.title}
+                    </Text>
+                    <Text p>{item.description}</Text>
+                  </Card>
+                </Link>
+              </NextLink>
+            </Grid>
+          ))}
         </Grid.Container>
       </div>
     </div>
