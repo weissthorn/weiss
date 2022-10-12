@@ -1,7 +1,14 @@
-'use strict';
-const config = require('./config');
+const config = {
+  api: {
+    host: process.env.NEXT_PUBLIC_DB_HOST,
+    db: process.env.NEXT_PUBLIC_DB_NAME,
+    port: process.env.NEXT_PUBLIC_DB_PORT
+  }
+};
+
 const validator = require('validator');
 const thinky = require('thinky')(config.api);
+
 const r = thinky.r;
 const type = thinky.type;
 
@@ -256,6 +263,17 @@ Pageview.ensureIndex('type');
 Pageview.ensureIndex('createdAt');
 Pageview.ensureIndex('updatedAt');
 
+// const initModel = () => {
+//   thinky.dbReady().then((data: any) => {
+//     if (!data) {
+//       console.log(config.api);
+
+//       r.dbCreate(config.api.db);
+//     }
+//   });
+// };
+
+// initModel();
 export {
   r,
   User,

@@ -1,5 +1,3 @@
-//DB config
-
 export default {
   api: {
     host: process.env.NEXT_PUBLIC_DB_HOST,
