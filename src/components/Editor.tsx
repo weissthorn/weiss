@@ -7,6 +7,7 @@ import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Mention from './Mention';
 
 type editorProp = {
+  lang?: any;
   height?: string;
   value?: string;
   placeholder?: string;
@@ -17,7 +18,7 @@ const Editor = (prop: editorProp) => {
   return (
     <div style={{ marginBottom: 15 }}>
       <SunEditor
-        lang="en"
+        lang={prop.lang}
         height={prop.height}
         placeholder={prop.placeholder ? prop.placeholder : 'Type here....'}
         setOptions={{

@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import Editor from 'components/Editor';
 
 type editorProps = {
+  lang: string;
   loading: boolean;
   content?: string;
   show: boolean;
@@ -20,6 +21,7 @@ type editorProps = {
 
 const ReplyModal = observer((props: editorProps) => {
   const {
+    lang,
     loading,
     content,
     show,
@@ -82,6 +84,7 @@ const ReplyModal = observer((props: editorProps) => {
             </Text>
             <Spacer />
             <Editor
+              lang={lang}
               height={_height}
               value={content}
               onChange={(value) => {

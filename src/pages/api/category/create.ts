@@ -9,7 +9,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     if (auth.success) {
       req.body.slug = slugify(req.body.title, {
         replacement: '-', // replace spaces with replacement character, defaults to `-`
-        remove: undefined, // remove characters that match regex, defaults to `undefined`
+        remove: /[*+~.()'"!:@#]/g, // remove characters that match regex, defaults to `undefined`
         lower: true, // convert to lower case, defaults to `false`
         strict: false, // strip special characters except replacement, defaults to `false`
         locale: 'vi' // language code of the locale to use

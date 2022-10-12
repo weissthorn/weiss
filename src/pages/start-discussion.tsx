@@ -10,18 +10,22 @@ import useToken from 'components/Token';
 import { useRouter } from 'next/router';
 import Editor from 'components/Editor';
 import CategoryStore from 'stores/category';
+import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const StartDiscussion = observer(() => {
   const token = useToken();
   const router = useRouter();
   const { channel } = router.query;
   const [content, setContent] = useState('');
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ categories, getCategories }] = useState(() => new CategoryStore());
   const [{ loading, discussion, setDiscussion, newDiscussion }] = useState(
     () => new DiscussionStore()
   );
 
   useEffect(() => {
+    getSettings();
     token.id ? getCategories() : null;
     router.isReady
       ? setDiscussion({ ...discussion, categoryId: channel })
@@ -75,10 +79,24 @@ const StartDiscussion = observer(() => {
       ) : (
         ''
       )}
-      <Navbar title="Start a Discussion" description="Start a Discussion" />
+      <Navbar
+        title={useTranslation({
+          lang: settings.language ? settings.language : 'en',
+          value: 'Start a discussion'
+        })}
+        description={useTranslation({
+          lang: settings.language ? settings.language : 'en',
+          value: 'Start a discussion'
+        })}
+      />
       <div className="page-container top-100">
         <div className="notification-container">
-          <Text h3>Start a Discussion</Text>
+          <Text h3>
+            <Translation
+              lang={settings.language ? settings.language : 'en'}
+              value="Start a discussion"
+            />
+          </Text>
           <Spacer />
           <div className="discuss-grid">
             <div className="item">
@@ -109,6 +127,7 @@ const StartDiscussion = observer(() => {
             </div>
           </div>
           <Editor
+            lang={settings.language}
             value={content}
             height="200px"
             placeholder="Type something memorable..."

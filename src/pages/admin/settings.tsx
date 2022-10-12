@@ -530,7 +530,7 @@ const Settings = observer(() => {
                 </div>
               </div>
             </Collapse>
-            <Collapse title={'Ban words'}>
+            <Collapse title={'Banned words'}>
               <Textarea
                 placeholder="Type words separate with comma"
                 width="100%"

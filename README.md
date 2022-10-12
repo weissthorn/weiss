@@ -18,13 +18,19 @@ Modern, Minimalistic Discussion Software
 ### Installation
 
 ```
-yarn dev
+yarn
 ```
 
 ### Development
 
 ```
 yarn dev
+```
+
+### Production
+
+```
+yarn production
 ```
 
 ### Roadmap

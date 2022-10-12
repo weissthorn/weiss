@@ -582,6 +582,7 @@ const Discussion = observer(() => {
         </div>
 
         <CommentModal
+          lang={settings.language}
           loading={commentLoading}
           content={content}
           show={modal}
@@ -592,6 +593,7 @@ const Discussion = observer(() => {
         />
 
         <ReplyModal
+          lang={settings.language}
           loading={commentLoading}
           content={content}
           show={reply.modal}

@@ -1,5 +1,5 @@
 export interface settingsProp {
-  language?: string | string[];
+  language?: string | string[] | any;
   siteFavicon?: string;
   siteLogo?: string;
   siteName?: string;

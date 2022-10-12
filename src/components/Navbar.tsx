@@ -33,6 +33,7 @@ import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import NotificationStore from 'stores/notification';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 type navbarProps = {
   title?: string;
@@ -95,7 +96,12 @@ const Navbar = observer((props: navbarProps) => {
     <div>
       <Popover.Item>
         <NextLink href={`/u/${token.username}`}>
-          <Link>Profile</Link>
+          <Link>
+            <Translation
+              lang={settings.language ? settings.language : 'en'}
+              value="Profile"
+            />
+          </Link>
         </NextLink>
       </Popover.Item>
       <Popover.Item line />
@@ -103,7 +109,12 @@ const Navbar = observer((props: navbarProps) => {
         <>
           <Popover.Item>
             <NextLink href="/admin">
-              <Link>Admin</Link>
+              <Link>
+                <Translation
+                  lang={settings.language ? settings.language : 'en'}
+                  value="Admin"
+                />
+              </Link>
             </NextLink>
           </Popover.Item>
           <Popover.Item line />
@@ -119,7 +130,11 @@ const Navbar = observer((props: navbarProps) => {
       <Popover.Item line />
       <Popover.Item>
         <Link href="#" icon onClick={logout}>
-          Log out <Spacer w={0.5} inline />
+          <Translation
+            lang={settings.language ? settings.language : 'en'}
+            value="Log out"
+          />{' '}
+          <Spacer w={0.5} inline />
         </Link>
       </Popover.Item>
     </div>
@@ -130,14 +145,20 @@ const Navbar = observer((props: navbarProps) => {
       <Popover.Item>
         <Link onClick={() => switchTheme('weiss-light')}>
           <Sun size={15} /> <Spacer w={0.5} />
-          Light
+          <Translation
+            lang={settings.language ? settings.language : 'en'}
+            value="Light"
+          />
         </Link>
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
         <Link onClick={() => switchTheme('weiss-dark')}>
           <Moon size={15} /> <Spacer w={0.5} />
-          Dark
+          <Translation
+            lang={settings.language ? settings.language : 'en'}
+            value="Dark"
+          />
         </Link>
       </Popover.Item>
     </>
@@ -156,12 +177,22 @@ const Navbar = observer((props: navbarProps) => {
 
           <Text p>
             <NextLink href="/start-discussion">
-              <Link>Start a Discussion</Link>
+              <Link>
+                <Translation
+                  lang={settings.language ? settings.language : 'en'}
+                  value="Start a discussion"
+                />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/">
-              <Link>Discussions</Link>
+              <Link>
+                <Translation
+                  lang={settings.language ? settings.language : 'en'}
+                  value="Discussions"
+                />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
@@ -171,18 +202,33 @@ const Navbar = observer((props: navbarProps) => {
           </Text>
           <Text p>
             <NextLink href="/members">
-              <Link>Members</Link>
+              <Link>
+                <Translation
+                  lang={settings.language ? settings.language : 'en'}
+                  value="Members"
+                />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href={`/u/${token.username}`}>
-              <Link>Profile</Link>
+              <Link>
+                <Translation
+                  lang={settings.language ? settings.language : 'en'}
+                  value="Profile"
+                />
+              </Link>
             </NextLink>
           </Text>
           {token.role === 'admin' ? (
             <Text p>
               <NextLink href="/admin">
-                <Link>Admin</Link>
+                <Link>
+                  <Translation
+                    lang={settings.language ? settings.language : 'en'}
+                    value="Admin"
+                  />
+                </Link>
               </NextLink>
             </Text>
           ) : (
@@ -195,7 +241,11 @@ const Navbar = observer((props: navbarProps) => {
           </Text>
           <Text p>
             <Link href="#" icon onClick={logout}>
-              Log out <Spacer w={0.5} inline />
+              <Translation
+                lang={settings.language ? settings.language : 'en'}
+                value="Log out"
+              />{' '}
+              <Spacer w={0.5} inline />
             </Link>
           </Text>
         </div>
@@ -261,7 +311,13 @@ const Navbar = observer((props: navbarProps) => {
 
             <div>
               <Tabs initialValue="1" leftSpace="0">
-                <Tabs.Item value="1" label="Discussion">
+                <Tabs.Item
+                  value="1"
+                  label={useTranslation({
+                    lang: settings.language ? settings.language : 'en',
+                    value: 'Discussion'
+                  })}
+                >
                   {discussions.map((item) => (
                     <div key={item.id}>
                       <NextLink href={`/d/${item.slug}`}>
@@ -330,7 +386,12 @@ const Navbar = observer((props: navbarProps) => {
             </Grid>
             <Grid xs={0} md={10}>
               <NextLink href="/">
-                <Link>Discussions</Link>
+                <Link>
+                  <Translation
+                    lang={settings.language ? settings.language : 'en'}
+                    value="Discussions"
+                  />
+                </Link>
               </NextLink>
 
               <Spacer inline />
@@ -339,7 +400,12 @@ const Navbar = observer((props: navbarProps) => {
               </NextLink>
               <Spacer inline />
               <NextLink href="/members">
-                <Link>Members</Link>
+                <Link>
+                  <Translation
+                    lang={settings.language ? settings.language : 'en'}
+                    value="Members"
+                  />
+                </Link>
               </NextLink>
             </Grid>
             <Grid xs={8} md={0}>

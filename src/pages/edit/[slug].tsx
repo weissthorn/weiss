@@ -10,18 +10,21 @@ import useToken from 'components/Token';
 import { useRouter } from 'next/router';
 import Editor from 'components/Editor';
 import CategoryStore from 'stores/category';
+import SettingsStore from 'stores/settings';
 
-const StartDiscussion = observer(() => {
+const EditDiscussion = observer(() => {
   const token = useToken();
   const router = useRouter();
   const { slug } = router.query;
   const [content, setContent] = useState('');
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ categories, getCategories }] = useState(() => new CategoryStore());
   const [
     { loading, discussion, setDiscussion, updateDiscussion, getDiscussion }
   ] = useState(() => new DiscussionStore());
 
   useEffect(() => {
+    getSettings();
     token.id ? getCategories() : null;
     router.isReady
       ? getDiscussion(slug).then((data) => {
@@ -114,6 +117,7 @@ const StartDiscussion = observer(() => {
           </div>
           {discussion.content ? (
             <Editor
+              lang={settings.language}
               value={content}
               height="200px"
               placeholder="Type something memorable..."
@@ -141,4 +145,4 @@ const StartDiscussion = observer(() => {
   );
 });
 
-export default StartDiscussion;
+export default EditDiscussion;
