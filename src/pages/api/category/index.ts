@@ -30,6 +30,11 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
                 category.push(item);
               });
           }).finally(() => {
+            category = category.sort(
+              (a: any, b: any) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            );
             res
               .status(200)
               .json({ success: true, data: category, count: category.length });
