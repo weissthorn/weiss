@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Spacer, Text, Link, Button, Input, Card } from '@geist-ui/core';
+import { Spacer, Text, Link, Button, Input, Card, Image } from '@geist-ui/core';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
@@ -50,7 +50,7 @@ const Verify = observer(() => {
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
-                <img src={`/storage/${settings.siteLogo}`} />
+                <Image src={`/storage/${settings.siteLogo}`} />
               ) : (
                 <Text h2 width={'100%'}>
                   {settings.siteName}

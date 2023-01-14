@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Spacer, Text, Button, Input, Card, Textarea } from '@geist-ui/core';
+import {
+  Spacer,
+  Text,
+  Button,
+  Input,
+  Card,
+  Textarea,
+  Image
+} from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { setCookie, parseCookies } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
-import { ChevronLeft, ChevronRight, Image } from '@geist-ui/icons';
+import { ChevronLeft, ChevronRight, Image as Picture } from '@geist-ui/icons';
 import Navbar from 'components/Navbar';
 import SetupVerify from 'components/admin/SetupVerify';
 import SettingsStore from 'stores/settings';
@@ -91,7 +99,7 @@ const MetaSetup = observer(() => {
             <Card shadow width="100%">
               <Text h3>Site metadata</Text>
               <Spacer h={2} />
-              <Button icon={<Image />} auto>
+              <Button icon={<Picture />} auto>
                 Upload logo
                 <input
                   type="file"
@@ -101,7 +109,7 @@ const MetaSetup = observer(() => {
               </Button>{' '}
               <Spacer inline />
               {settings.siteLogo ? (
-                <img
+                <Image
                   src={`/storage/${settings.siteLogo}`}
                   style={{ width: 'auto', height: 20 }}
                 />

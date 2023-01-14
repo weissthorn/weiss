@@ -6,7 +6,7 @@ import {
   Button,
   Input,
   Card,
-  Divider
+  Divider, Image
 } from '@geist-ui/core';
 import dynamic from 'next/dynamic';
 const Github = dynamic(() => import('react-login-github'), {
@@ -74,7 +74,7 @@ const Login = observer(() => {
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
-                <img src={`/storage/${settings.siteLogo}`} />
+                <Image src={`/storage/${settings.siteLogo}`} />
               ) : (
                 <Text h2 width={'100%'}>
                   {settings.siteName}

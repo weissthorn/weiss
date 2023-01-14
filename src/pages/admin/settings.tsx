@@ -8,9 +8,10 @@ import {
   Textarea,
   Tabs,
   Spacer,
+  Image,
   Select
 } from '@geist-ui/core';
-import { Image } from '@geist-ui/icons';
+import { Image as Picture } from '@geist-ui/icons';
 import AdminNavbar from 'components/admin/Navbar';
 import Sidebar from 'components/admin/Sidebar';
 import SettingsStore from 'stores/settings';
@@ -88,7 +89,7 @@ const Settings = observer(() => {
                   <Text h6>Site favicon</Text>
                 </div>
                 <div className="item">
-                  <Button icon={<Image />} width="170px">
+                  <Button icon={<Picture />} width="170px">
                     Upload favicon
                     <input
                       type="file"
@@ -99,7 +100,7 @@ const Settings = observer(() => {
                   </Button>
                   <Spacer inline />
                   {settings.siteFavicon ? (
-                    <img
+                    <Image
                       src={`/storage/${settings.siteFavicon}`}
                       style={{ width: 'auto', height: 20 }}
                     />
@@ -124,7 +125,7 @@ const Settings = observer(() => {
                   </Button>
                   <Spacer inline />
                   {settings.siteLogo ? (
-                    <img
+                    <Image
                       src={`/storage/${settings.siteLogo}`}
                       style={{ width: 'auto', height: 20 }}
                     />

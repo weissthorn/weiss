@@ -5,10 +5,9 @@ import {
   Link,
   Button,
   Input,
-  Grid,
   Card,
   Loading,
-  Divider,
+  Image,
   Tooltip
 } from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
@@ -116,7 +115,7 @@ const Signup = observer(() => {
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
-                <img src={`/storage/${settings.siteLogo}`} />
+                <Image src={`/storage/${settings.siteLogo}`} />
               ) : (
                 <Text h2 width={'100%'}>
                   {settings.siteName}
