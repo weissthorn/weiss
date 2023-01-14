@@ -366,7 +366,14 @@ const Navbar = observer((props: navbarProps) => {
         ''
       )}
 
-      <Card shadow width="100%" style={{ display: hide ? 'none' : 'inherit' }}>
+      <Card
+        shadow
+        width="100%"
+        className="without-radius"
+        style={{
+          display: hide ? 'none' : 'inherit'
+        }}
+      >
         <div className="inner">
           <Grid.Container gap={0}>
             <Grid xs={16} md={4}>

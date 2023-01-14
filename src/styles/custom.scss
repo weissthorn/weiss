@@ -380,6 +380,10 @@ body {
     }
   }
 
+  .without-radius {
+    border-radius: 0 !important;
+  }
+
   .editor-container {
     position: fixed;
     left: 0;

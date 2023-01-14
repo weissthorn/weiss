@@ -155,7 +155,12 @@ const Navbar = observer((props: navbarProps) => {
         <link rel="icon" href={`/storage/${settings.siteFavicon}`} />
       </Head>
 
-      <Card shadow width="100%" style={{ display: hide ? 'none' : 'inherit' }}>
+      <Card
+        shadow
+        width="100%"
+        className="without-radius"
+        style={{ display: hide ? 'none' : 'inherit' }}
+      >
         <div className="inner">
           <Grid.Container gap={0}>
             <Grid xs={18} md={5}>
