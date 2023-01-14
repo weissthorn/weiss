@@ -114,7 +114,7 @@ const Settings = observer(() => {
                   <Text h6>Site logo</Text>
                 </div>
                 <div className="item">
-                  <Button icon={<Image />} width="170px">
+                  <Button icon={<Picture />} width="170px">
                     Upload logo
                     <input
                       type="file"
