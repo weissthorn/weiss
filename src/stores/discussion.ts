@@ -69,6 +69,21 @@ export default class DiscussionStore {
       .catch((err) => console.log(err));
   };
 
+  @action deleteDiscussion = async (body: discussionProp) => {
+    let url = `${API_URL}/discussion/delete`;
+
+    return await fetch(url, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify(body)
+    })
+      .then((res) => res.json())
+      .then((res: resProp) => {
+        return res;
+      })
+      .catch((err) => console.log(err));
+  };
+
   @action
   getDiscussions = async () => {
     let uri = `${API_URL}/discussion?page=${this.page}&limit=${this.limit}`;

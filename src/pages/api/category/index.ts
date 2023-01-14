@@ -20,7 +20,7 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
         .then(async (data: any) => {
           let category: any = [];
           await asyncForEach(data, async (item: any) => {
-            await Discussion.orderBy(r.desc('createdAt'))
+            await Discussion.orderBy(r.asc('createdAt'))
               .filter({ categoryId: item.slug })
               .then((m: any) => {
                 item = {
@@ -30,11 +30,6 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
                 category.push(item);
               });
           }).finally(() => {
-            category = category.sort(
-              (a: any, b: any) =>
-                new Date(b.createdAt).getTime() -
-                new Date(a.createdAt).getTime()
-            );
             res
               .status(200)
               .json({ success: true, data: category, count: category.length });

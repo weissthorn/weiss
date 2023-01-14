@@ -172,6 +172,10 @@ const Navbar = observer((props: navbarProps) => {
                   )}
                 </Link>
               </NextLink>
+              <Spacer inline />
+              <NextLink href="/">
+                <Link>Go to Discussions</Link>
+              </NextLink>
             </Grid>
             <Grid xs={6} md={0}>
               <Badge.Anchor>
