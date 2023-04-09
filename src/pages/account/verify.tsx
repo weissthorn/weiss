@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Verify = observer(() => {
   const router = useRouter();
@@ -29,10 +30,20 @@ const Verify = observer(() => {
           maxAge: 2 * 60 * 60,
           path: '/'
         });
-        toast.success('Please verify account to continue.');
+        toast.success(
+          useTranslation({
+            lang: settings?.language,
+            value: 'Please verify account to continue.'
+          })
+        );
         router.push('/account/confirm');
       } else {
-        toast.error(res.message);
+        toast.error(
+          useTranslation({
+            lang: settings?.language,
+            value: 'Unable to verify user. Please try again later'
+          })
+        );
       }
     });
   };
@@ -40,8 +51,14 @@ const Verify = observer(() => {
   return (
     <div className="polkadot">
       <Navbar
-        title="Account verification"
-        description="Account verification"
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Account verification'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Account verification'
+        })}
         hide
       />
       <Toaster />
@@ -59,10 +76,18 @@ const Verify = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Account verification</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Account verification"
+                />
+              </Text>
               <Spacer h={2} />
               <Input
-                placeholder="Email address"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Email address'
+                })}
                 width="100%"
                 scale={4 / 3}
                 onChange={(e) =>
@@ -77,12 +102,17 @@ const Verify = observer(() => {
                 loading={loading}
                 onClick={verifyEmail}
               >
-                Continue &rarr;
+                <Translation lang={settings?.language} value="Continue" />{' '}
+                &nbsp; &rarr;
               </Button>
 
               <Text font={'14px'}>
                 <Link href="/login" underline>
-                  &larr; Back to Login
+                  &larr; &nbsp;
+                  <Translation
+                    lang={settings?.language}
+                    value="Back to login"
+                  />
                 </Link>
               </Text>
             </Card>

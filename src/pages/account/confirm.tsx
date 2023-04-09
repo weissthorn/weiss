@@ -17,6 +17,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Confirm = observer(() => {
   const cookie = parseCookies();
@@ -34,20 +35,34 @@ const Confirm = observer(() => {
   }, []);
 
   const verify = async () => {
-    if (Number(code) !== _code.code) {
-      toast.error('Code is incorrect or expired.');
+    if (Number(code) !== _code?.code) {
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Code is incorrect or expired.'
+        })
+      );
     } else {
-      await getUser(_code.data!).then(async (res: any) => {
+      await getUser(_code?.data!).then(async (res: any) => {
         if (res.success) {
-          await updateUser({ id: _code.data, status: 'active' });
+          await updateUser({ id: _code?.data, status: 'active' });
           destroyCookie(null, '_w_code');
 
           toast.success(
-            'Account verified successfully! Please sign in to continue.'
+            useTranslation({
+              lang: settings?.language,
+              value:
+                'Account verified successfully! Please sign in to continue.'
+            })
           );
           router.push('/login');
         } else {
-          toast.error('Unable to verify user. Please try again later');
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Unable to verify user. Please try again later'
+            })
+          );
         }
       });
     }
@@ -56,8 +71,14 @@ const Confirm = observer(() => {
   return (
     <div className="polkadot">
       <Navbar
-        title="Account verification"
-        description="Account verification"
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Account verification'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Account verification'
+        })}
         hide
       />
       <Toaster />
@@ -75,17 +96,21 @@ const Confirm = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Input
+              <Input.Password
                 className="uppercase"
                 width="100%"
-                scale={4 / 3}
+                scale={2}
                 onChange={(e) => setCode(e.target.value)}
               >
-                Enter code sent to your email
-              </Input>
+                <Translation
+                  lang={settings?.language}
+                  value="Enter code sent to your email"
+                />
+              </Input.Password>
               <Spacer h={1.5} />
               <Button shadow type="secondary" width="100%" onClick={verify}>
-                Continue &rarr;
+                <Translation lang={settings?.language} value="Continue" />{' '}
+                &nbsp; &rarr;
               </Button>
             </Card>
           </div>

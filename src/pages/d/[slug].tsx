@@ -14,7 +14,8 @@ import {
   Image,
   Loading
 } from '@geist-ui/core';
-import moment from 'moment';
+import { formatDistance } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import { ChevronDown, Lock, Eye, Heart, HeartFill } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
@@ -32,6 +33,7 @@ import ReplyModal from 'components/modals/ReplyModal';
 import CommentStore from 'stores/comment';
 import SettingsStore from 'stores/settings';
 import LikeStore from 'stores/like';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Discussion = observer(() => {
   const token = useToken();
@@ -126,12 +128,35 @@ const Discussion = observer(() => {
       (res: any) => {
         toast.dismiss(t);
         if (res.success) {
-          toast.success('Discussion reported!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Discussion reported!'
+            })
+          );
         } else {
-          toast.success('Error occured. Please try again!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Error occured. Please try again!'
+            })
+          );
         }
       }
     );
+  };
+
+  const lang = settings?.language;
+
+  const renderDate = (value: any) => {
+    const date = value
+      ? formatDistance(new Date(value), new Date(), {
+          addSuffix: true,
+          locale:
+            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
   };
 
   const reports = [
@@ -264,10 +289,17 @@ const Discussion = observer(() => {
             <Card shadow>
               <div className="center">
                 <Lock size={30} />
-                <Text>You are required to login to access this page</Text>
+                <Text>
+                  <Translation
+                    lang={settings?.language}
+                    value={'You are required to login to access this page'}
+                  />
+                </Text>
                 <Spacer />
                 <Link href="/login">
-                  <Button type="secondary">Sign in</Button>
+                  <Button type="secondary">
+                    <Translation lang={settings?.language} value={'Sign in'} />
+                  </Button>
                 </Link>
                 <Spacer />
               </div>
@@ -286,7 +318,9 @@ const Discussion = observer(() => {
       <div className="page-container top-100">
         <div className="discussion-container">
           {loading ? (
-            <Loading>Loading</Loading>
+            <Loading>
+              <Translation lang={settings?.language} value="Loading" />
+            </Loading>
           ) : (
             <div className="item">
               <Text h2>{removeBanWords(discussion.title)} </Text>
@@ -294,7 +328,8 @@ const Discussion = observer(() => {
                 <div className="item">
                   <NextLink href={`/category/${category?.slug}`}>
                     <Link font={'14px'}>
-                      Category:&nbsp;
+                      <Translation lang={settings?.language} value="Category" />
+                      :&nbsp;
                       <span style={{ color: category?.color }}>
                         {category?.title}
                       </span>
@@ -304,7 +339,12 @@ const Discussion = observer(() => {
                     <span>
                       -{' '}
                       <NextLink href={`/edit/${discussion.slug}`}>
-                        <Link font={'14px'}>Edit discussion</Link>
+                        <Link font={'14px'}>
+                          <Translation
+                            lang={settings?.language}
+                            value="Edit discussion"
+                          />
+                        </Link>
                       </NextLink>
                     </span>
                   ) : (
@@ -323,7 +363,7 @@ const Discussion = observer(() => {
                                   href="#"
                                   onClick={() => report(discussion.id!, item)}
                                 >
-                                  {item}
+                                  {useTranslation({ lang: lang, value: item })}
                                 </Link>
                               </Popover.Item>
                             ))}
@@ -331,7 +371,10 @@ const Discussion = observer(() => {
                         }
                       >
                         <Text className="pointer" font={'14px'}>
-                          Report
+                          <Translation
+                            lang={settings?.language}
+                            value="Report"
+                          />
                         </Text>
                       </Popover>
                     </>
@@ -360,7 +403,9 @@ const Discussion = observer(() => {
                     </Text>
                     <Spacer inline />
                     <ButtonDropdown type="secondary" scale={0.5} w={'50px'}>
-                      <ButtonDropdown.Item main>Share</ButtonDropdown.Item>
+                      <ButtonDropdown.Item main>
+                        <Translation lang={settings?.language} value="Share" />
+                      </ButtonDropdown.Item>
                       <ButtonDropdown.Item>
                         <Link
                           target="_blank"
@@ -420,10 +465,16 @@ const Discussion = observer(() => {
                             >
                               <Text p>
                                 <span className="capitalize">
-                                  {profile?.role}
+                                  <Translation
+                                    lang={settings?.language}
+                                    value={profile?.role}
+                                  />
                                 </span>{' '}
-                                - {profile?.coin} coin
-                                {pluralize(profile?.coin!)}
+                                - {profile?.coin}{' '}
+                                <Translation
+                                  lang={settings?.language}
+                                  value={`Coin${pluralize(profile?.coin!)}`}
+                                />
                               </Text>
                             </User>
                           </Link>
@@ -450,7 +501,7 @@ const Discussion = observer(() => {
                       <Link>{profile?.name}</Link>
                     </NextLink>
                     &nbsp;&nbsp;
-                    <Text small>{moment(discussion.createdAt).fromNow()}</Text>
+                    <Text small>{renderDate(discussion.createdAt)}</Text>
                   </Text>
                   <div
                     dangerouslySetInnerHTML={{
@@ -459,7 +510,10 @@ const Discussion = observer(() => {
                   ></div>
                   <Tooltip
                     placement="right"
-                    text="Click on the number count to who see liked."
+                    text={useTranslation({
+                      lang: settings?.language,
+                      value: 'Click on the number count to who see liked.'
+                    })}
                   >
                     {discussion.id ? (
                       <span
@@ -510,14 +564,24 @@ const Discussion = observer(() => {
                     className="reply-btn"
                     onClick={() => toggleModal(!modal)}
                   >
-                    Reply
+                    <Translation lang={settings?.language} value="Reply" />
                   </Text>
                 </div>
               </div>
               <Spacer />
-              {commentLoading ? <Loading>Loading Replies</Loading> : ''}
+              {commentLoading ? (
+                <Loading>
+                  <Translation
+                    lang={settings?.language}
+                    value="Loading replies"
+                  />
+                </Loading>
+              ) : (
+                ''
+              )}
               {comments.map((item: any, key) => (
                 <Reply
+                  lang={settings?.language}
                   key={item.id}
                   id={item.slug}
                   activeUser={token.id!}
@@ -544,7 +608,7 @@ const Discussion = observer(() => {
               {total >= limit ? (
                 <div className="pagination">
                   <Button type="abort" iconRight={<ChevronDown />}>
-                    Load more
+                    <Translation lang={settings?.language} value="Load more" />
                   </Button>
                 </div>
               ) : (
@@ -557,6 +621,7 @@ const Discussion = observer(() => {
               <div className="sidenav max-width">
                 {discussion.id ? (
                   <Recommendation
+                    lang={settings?.language}
                     title={discussion.title!}
                     category={discussion.categoryId!}
                   />

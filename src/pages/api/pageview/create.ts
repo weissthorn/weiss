@@ -27,7 +27,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
             });
           }
         })
-        .catch((err: any) => signale.fatal(err));
+        .catch((err: any) => {
+          // signale.fatal(err);
+        });
     } else {
       res.send(auth);
     }

@@ -17,7 +17,14 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
           if (match) {
             delete data.password;
-            data.status === 'banned'
+            data.status === 'suspended'
+              ? res.send({
+                  success: false,
+                  status: 'suspended',
+                  message:
+                    'Account is suspended. Please contact the community admin.'
+                })
+              : data.status === 'banned'
               ? res.send({
                   success: false,
                   status: 'banned',

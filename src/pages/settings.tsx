@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import {
   Spacer,
   Text,
@@ -26,6 +26,8 @@ import UserStore from 'stores/user';
 import useToken from 'components/Token';
 import { validateEmail } from 'components/api/utils';
 import Auth from 'components/Auth';
+import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Settings = observer(() => {
   const token = useToken();
@@ -34,6 +36,7 @@ const Settings = observer(() => {
     password: '',
     newPassword: ''
   });
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [
     {
       loading,
@@ -49,6 +52,7 @@ const Settings = observer(() => {
   ] = useState(() => new UserStore());
 
   useEffect(() => {
+    getSettings();
     token.id
       ? getUser(token.id).then((res: any) => {
           if (res.success) {
@@ -78,7 +82,9 @@ const Settings = observer(() => {
   };
 
   const handleUpload = async (id: string) => {
-    let t = toast.loading('Uploading image....');
+    let t = toast.loading(
+      useTranslation({ lang: settings?.language, value: 'Uploading image....' })
+    );
 
     let upload: any = document.querySelector(id);
 
@@ -108,7 +114,12 @@ const Settings = observer(() => {
               }
             );
             toast.dismiss(t);
-            toast.success('Image uploaded successfully!');
+            toast.success(
+              useTranslation({
+                lang: settings?.language,
+                value: 'Image uploaded successfully!'
+              })
+            );
             Router.reload();
           });
         } else {
@@ -127,13 +138,33 @@ const Settings = observer(() => {
   const save = async () => {
     const { name, email, username, password } = user;
     if (!name || name?.length < 3) {
-      toast.error('Fullname is too short.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Fullname is too short.'
+        })
+      );
     } else if (!username || username?.length < 3) {
-      toast.error('Username is too short. Minimum character is three.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Username is too short. Minimum character is three.'
+        })
+      );
     } else if (validateEmail(email) === false) {
-      toast.error('Invalid email address');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Invalid email address'
+        })
+      );
     } else if (!password || password?.length < 3) {
-      toast.error('Current password is required to make changes.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Current password is required to make changes.'
+        })
+      );
     } else {
       await updateAccount(user).then((res: any) => {
         if (res.success) {
@@ -150,7 +181,12 @@ const Settings = observer(() => {
 
           setUser({ ...user, password: '' });
 
-          toast.success('Account updated successfully!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Account updated successfully!'
+            })
+          );
         } else {
           toast.error(res.message);
         }
@@ -161,18 +197,38 @@ const Settings = observer(() => {
   const savePassword = async () => {
     const { password, newPassword } = _password;
     if (!newPassword || newPassword?.length < 3) {
-      toast.error('Password is too short! Minimum character is six.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Password is too short! Minimum character is six.'
+        })
+      );
     } else if (!password) {
-      toast.error('Current password is required to make changes.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Current password is required to make changes.'
+        })
+      );
     } else {
       const data = { id: user.id, newPassword, password };
 
       await updatePassword(data).then((res: any) => {
         if (res.success) {
           setPassword({ password: '', newPassword: '' });
-          toast.success('Password updated successfully!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Password updated successfully!'
+            })
+          );
         } else {
-          toast.error(res.message);
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Unable to change password. Please try again.'
+            })
+          );
         }
       });
     }
@@ -180,13 +236,27 @@ const Settings = observer(() => {
 
   return (
     <Auth>
-      <Navbar title="Account settings" description="Account settings" />
+      <Navbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Account settings'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Account settings'
+        })}
+      />
       <Toaster />
       <div className="page-container top-100">
         <Grid.Container width="100%" justify="center" mb="100px">
           <Grid xs={24} lg={10}>
             <Card shadow width="100%">
-              <Text h3>Account settings </Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Account settings"
+                />
+              </Text>
               <Spacer h={2} />
               <div className="pagination">
                 <Avatar
@@ -198,7 +268,7 @@ const Settings = observer(() => {
                 />
                 <Spacer h={1.5} />
                 <Button icon={<Image />} auto>
-                  Upload photo
+                  <Translation lang={settings?.language} value="Upload photo" />
                   <input
                     type="file"
                     className="file-upload"
@@ -208,20 +278,24 @@ const Settings = observer(() => {
                 </Button>
               </div>
               <Tabs initialValue="1">
-                <Tabs.Item label="Change details" value="1">
+                <Tabs.Item
+                  label={useTranslation({
+                    lang: settings?.language,
+                    value: 'Change details'
+                  })}
+                  value="1"
+                >
                   <Input
-                    placeholder="Fullname"
                     width="100%"
                     scale={4 / 3}
                     value={user.name}
                     onChange={(e) => setUser({ ...user, name: e.target.value })}
                   >
-                    Fullname
+                    <Translation lang={settings?.language} value="Fullname" />
                   </Input>
                   <Spacer h={1.5} />
                   <Input
                     value={user.username}
-                    placeholder="Username"
                     width="100%"
                     scale={4 / 3}
                     iconClickable
@@ -251,11 +325,10 @@ const Settings = observer(() => {
                       )
                     }
                   >
-                    Username
+                    <Translation lang={settings?.language} value="Username" />
                   </Input>
                   <Spacer h={1.5} />
                   <Input
-                    placeholder="Email"
                     width="100%"
                     scale={4 / 3}
                     value={user.email}
@@ -263,18 +336,23 @@ const Settings = observer(() => {
                       setUser({ ...user, email: e.target.value })
                     }
                   >
-                    Email
+                    <Translation lang={settings?.language} value="Email" />
                   </Input>
                   <Spacer h={1.5} />
                   <Input.Password
-                    placeholder="Type current password to update changes"
+                    placeholder={useTranslation({
+                      lang: settings?.language,
+                      value: 'Type current password to update changes'
+                    })}
                     width="100%"
                     scale={4 / 3}
                     value={user.password}
                     onChange={(e) =>
                       setUser({ ...user, password: e.target.value })
                     }
-                  />
+                  >
+                    <Translation lang={settings?.language} value="Password" />
+                  </Input.Password>
                   <Spacer h={1.5} />
                   <Button
                     shadow
@@ -286,14 +364,23 @@ const Settings = observer(() => {
                     }
                     onClick={save}
                   >
-                    Save
+                    <Translation lang={settings?.language} value="Save" />
                   </Button>
                 </Tabs.Item>
-                <Tabs.Item label="Change password" value="2">
+                <Tabs.Item
+                  label={useTranslation({
+                    lang: settings?.language,
+                    value: 'Change password'
+                  })}
+                  value="2"
+                >
                   <div>
                     <Spacer h={1.5} />
                     <Input.Password
-                      placeholder="Type new password"
+                      placeholder={useTranslation({
+                        lang: settings?.language,
+                        value: 'Type new password'
+                      })}
                       width="100%"
                       scale={4 / 3}
                       value={_password.newPassword}
@@ -307,7 +394,10 @@ const Settings = observer(() => {
                   </div>
                   <Spacer h={1.5} />
                   <Input.Password
-                    placeholder="Type current password to update changes"
+                    placeholder={useTranslation({
+                      lang: settings?.language,
+                      value: 'Type current password to update changes'
+                    })}
                     width="100%"
                     scale={4 / 3}
                     value={_password.password}
@@ -329,7 +419,7 @@ const Settings = observer(() => {
                     }
                     onClick={savePassword}
                   >
-                    Save
+                    <Translation lang={settings?.language} value="Save" />
                   </Button>
                 </Tabs.Item>
               </Tabs>

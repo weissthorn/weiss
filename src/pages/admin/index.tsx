@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import moment from 'moment';
+import { format } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import { Card, Text, Grid, Input } from '@geist-ui/core';
 import CountUp from 'react-countup';
 import dynamic from 'next/dynamic';
@@ -12,9 +14,13 @@ import Sidebar from 'components/admin/Sidebar';
 import Auth from 'components/admin/Auth';
 import DateModal from 'components/modals/DateModal';
 import AnalyticsStore from 'stores/analytics';
+import SettingsStore from 'stores/settings';
+import { useTranslation, Translation } from 'components/intl/Translation';
 
 const Dashboard = observer(() => {
   const [modal, toggleDate] = useState(false);
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
+
   const [
     {
       loading,
@@ -26,6 +32,7 @@ const Dashboard = observer(() => {
       getPageviews
     }
   ] = useState(() => new AnalyticsStore());
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -35,6 +42,7 @@ const Dashboard = observer(() => {
   ]);
 
   useEffect(() => {
+    getSettings();
     let from = moment(date[0].startDate).format('YYYY-MM-DD');
     let to = moment(date[0].endDate).format('YYYY-MM-DD');
     getUsers(from, to);
@@ -53,15 +61,24 @@ const Dashboard = observer(() => {
 
   const series = [
     {
-      name: 'Users',
+      name: useTranslation({
+        lang: settings?.language,
+        value: 'Users'
+      }),
       data: users.map((item: any) => item.count)
     },
     {
-      name: 'Discussions',
+      name: useTranslation({
+        lang: settings?.language,
+        value: 'Discussions'
+      }),
       data: discussions.map((item: any) => item.count)
     },
     {
-      name: 'Pageviews',
+      name: useTranslation({
+        lang: settings?.language,
+        value: 'Pageviews'
+      }),
       data: pageviews.map((item: any) => item.count)
     }
   ];
@@ -106,28 +123,68 @@ const Dashboard = observer(() => {
 
   return (
     <Auth>
-      <Navbar title="Dashboard" description="Dashboard" />
+      <Navbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Dashboard'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Dashboard'
+        })}
+      />
       <DateModal
         show={modal}
         date={date}
+        lang={settings?.language}
         toggleModal={() => toggleDate(!modal)}
         setDate={setDate}
         actionTrigger={processAnalytics}
       />
       <div className="page-container top-100">
-        <Sidebar active="dashboard" />
+        <Sidebar active="dashboard" lang={settings?.language} />
 
         <main className="main for-admin">
           <div className="dashboard-header">
             <div className="item">
-              <Text h3>Dashboard</Text>
+              <Text h3>
+                <Translation lang={settings?.language} value="Dashboard" />
+              </Text>
+              <Text>
+                {format(new Date(), 'MMM d, yyyy', {
+                  locale:
+                    settings?.language === 'es'
+                      ? es
+                      : settings?.language === 'fr'
+                      ? fr
+                      : settings?.language === 'en'
+                      ? en
+                      : null
+                })}
+              </Text>
             </div>
             <div className="item">
               <Input
                 width="100%"
-                placeholder={`${moment(date[0].startDate).format(
-                  'MMM D, YYYY'
-                )} - ${moment(date[0].endDate).format('MMM D, YYYY')}`}
+                placeholder={`${format(date[0].startDate, 'MMM d, yyyy', {
+                  locale:
+                    settings?.language === 'es'
+                      ? es
+                      : settings?.language === 'fr'
+                      ? fr
+                      : settings?.language === 'en'
+                      ? en
+                      : null
+                })} - ${format(date[0].endDate, 'MMM d, yyyy', {
+                  locale:
+                    settings?.language === 'es'
+                      ? es
+                      : settings?.language === 'fr'
+                      ? fr
+                      : settings?.language === 'en'
+                      ? en
+                      : null
+                })}`}
                 onClick={() => toggleDate(true)}
               />
             </div>
@@ -140,7 +197,7 @@ const Dashboard = observer(() => {
                   <CountUp prefix="" start={0} end={userTotal} separator="," />
                 </Text>
                 <Text h6 my={0}>
-                  Users
+                  <Translation lang={settings?.language} value="Users" />
                 </Text>
               </Card>
             </Grid>
@@ -155,7 +212,7 @@ const Dashboard = observer(() => {
                   />
                 </Text>
                 <Text h6 my={0}>
-                  Discussions
+                  <Translation lang={settings?.language} value="Discussions" />
                 </Text>
               </Card>
             </Grid>
@@ -170,7 +227,7 @@ const Dashboard = observer(() => {
                   />
                 </Text>
                 <Text h6 my={0}>
-                  Pageviews
+                  <Translation lang={settings?.language} value="Pageviews" />
                 </Text>
               </Card>
             </Grid>

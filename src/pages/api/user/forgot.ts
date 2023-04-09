@@ -17,7 +17,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
           } else {
             res.send({
               success: false,
-              message: 'Email does not exists in our record.'
+              message: 'Email does not exist in our record.'
             });
           }
         })

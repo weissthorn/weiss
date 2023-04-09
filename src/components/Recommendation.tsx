@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import NextLink from 'next/link';
+import { format } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import { Text, Link, Spacer, Loading } from '@geist-ui/core';
 import DiscussionStore from 'stores/discussion';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 type recommendProps = {
   title: string;
   category: string;
+  lang: string;
 };
 
 const Recommendation = observer((props: recommendProps) => {
@@ -23,9 +27,27 @@ const Recommendation = observer((props: recommendProps) => {
     return val;
   };
 
+  const renderDate = (value: any) => {
+    const date: any = value
+      ? format(new Date(value), 'MMM d, yyyy @ h:mm a', {
+          locale:
+            props.lang === 'es'
+              ? es
+              : props.lang === 'fr'
+              ? fr
+              : props.lang === 'en'
+              ? en
+              : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
+  };
+
   return (
     <>
-      <Text h4>Recommend Discussions</Text>
+      <Text h4>
+        <Translation lang={props.lang} value="Recommend Discussions" />
+      </Text>
       {loading ? <Loading /> : ''}
 
       {discussions

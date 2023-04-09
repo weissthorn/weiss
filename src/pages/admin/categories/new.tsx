@@ -17,25 +17,39 @@ import Sidebar from 'components/admin/Sidebar';
 import Auth from 'components/admin/Auth';
 import CategoryStore from 'stores/category';
 import UserStore from 'stores/user';
+import SettingsStore from 'stores/settings';
+import { useTranslation, Translation } from 'components/intl/Translation';
 
 const CreateCategory = observer(() => {
   const router = useRouter();
   const [showColor, toggleColor] = useState(false);
   const [{ users, getModerators }] = useState(() => new UserStore());
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ loading, category, setCategory, newCategory }] = useState(
     () => new CategoryStore()
   );
   const { title, description, color, authRequired, moderator } = category;
 
   useEffect(() => {
+    getSettings();
     getModerators();
   }, []);
 
   const save = async () => {
     if (!title || title.length < 3) {
-      toast.error('Title is too short. ');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Title is too short.'
+        })
+      );
     } else if (!description) {
-      toast.error('Description is required');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Description is required'
+        })
+      );
     } else {
       setCategory({
         ...category,
@@ -46,10 +60,18 @@ const CreateCategory = observer(() => {
 
       await newCategory(category).then((res: any) => {
         if (res.success) {
-          toast.success('Category created successfully!');
+          useTranslation({
+            lang: settings?.language,
+            value: 'Category created successfully!'
+          });
           router.push(`/admin/categories/${res.data.slug}`);
         } else {
-          toast.error(res.message);
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Unable to create category. Please try again!'
+            })
+          );
         }
       });
     }
@@ -58,16 +80,32 @@ const CreateCategory = observer(() => {
   return (
     <Auth>
       <Toaster />
-      <AdminNavbar title="Add Category" description="Add Category" />
+      <AdminNavbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Add category'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Add category'
+        })}
+      />
 
       <div className="page-container top-100">
-        <Sidebar active="categories" />
+        <Sidebar active="categories" lang={settings?.language} />
 
         <main className="main for-admin">
           <div className="boxed">
-            <h3>Create a Category</h3>
+            <h3>
+              <Translation
+                lang={settings?.language}
+                value="Create a Category"
+              />
+            </h3>
             <Spacer />
-            <Text>Color </Text>
+            <Text>
+              <Translation lang={settings?.language} value="Color" />
+            </Text>
 
             <div
               onClick={() => toggleColor(!showColor)}
@@ -98,7 +136,9 @@ const CreateCategory = observer(() => {
               ''
             )}
 
-            <Text>Title</Text>
+            <Text>
+              <Translation lang={settings?.language} value="Title" />
+            </Text>
             <Input
               width={'100%'}
               value={title}
@@ -106,7 +146,9 @@ const CreateCategory = observer(() => {
                 setCategory({ ...category, ...{ title: e.target.value } })
               }
             />
-            <Text>Description</Text>
+            <Text>
+              <Translation lang={settings?.language} value="Description" />
+            </Text>
             <Textarea
               width={'100%'}
               value={category.description}
@@ -115,9 +157,14 @@ const CreateCategory = observer(() => {
               }
             />
             <Spacer />
-            <Text>Moderators</Text>
+            <Text>
+              <Translation lang={settings?.language} value="Moderators" />
+            </Text>
             <Select
-              placeholder="Choose one or more"
+              placeholder={useTranslation({
+                lang: settings?.language,
+                value: 'Choose one or more'
+              })}
               multiple
               width={'100%'}
               onChange={(val) => setCategory({ ...category, moderator: val })}
@@ -140,7 +187,14 @@ const CreateCategory = observer(() => {
                 }
                 mb={'5px'}
               />
-              <Text small> &nbsp;Authentication required</Text>
+              <Text small>
+                {' '}
+                &nbsp;
+                <Translation
+                  lang={settings?.language}
+                  value="Authentication required"
+                />
+              </Text>
             </Text>
             <Button
               loading={loading}
@@ -148,7 +202,7 @@ const CreateCategory = observer(() => {
               width="100%"
               onClick={save}
             >
-              Save
+              <Translation lang={settings?.language} value="Save" />
             </Button>
           </div>
         </main>

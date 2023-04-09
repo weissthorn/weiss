@@ -33,7 +33,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
                         type: 'post',
                         sender: data.userId,
                         receiver: ds.userId,
-                        message: `${p.name} liked your post.`,
+                        name: p.name,
+                        filterType: 'like-post',
                         action: `${ds.slug}`
                       });
                       await notify.save().then(() => {});

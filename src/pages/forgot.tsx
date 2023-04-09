@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Forgot = observer(() => {
   const router = useRouter();
@@ -27,17 +28,37 @@ const Forgot = observer(() => {
           maxAge: 2 * 60 * 60,
           path: '/'
         });
-        toast.success('Please verify account to continue.');
+        toast.success(
+          useTranslation({
+            lang: settings?.language,
+            value: 'Please verify account to continue.'
+          })
+        );
         router.push('/reset');
       } else {
-        toast.error(res.message);
+        toast.error(
+          useTranslation({
+            lang: settings?.language,
+            value: res.message
+          })
+        );
       }
     });
   };
 
   return (
     <div className="polkadot">
-      <Navbar title="Forgot password" description="Forgot password" hide />
+      <Navbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Account recovery'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Account recovery'
+        })}
+        hide
+      />
       <Toaster />
       <div>
         <div className="page-container top-100">
@@ -53,12 +74,20 @@ const Forgot = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Password retrieval</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Account recovery"
+                />
+              </Text>
               <Spacer h={2} />
               <Input
-                placeholder="Email address"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Email address'
+                })}
                 width="100%"
-                scale={4 / 3}
+                scale={2}
                 onChange={(e) =>
                   setUser({ ...user, ...{ email: e.target.value } })
                 }
@@ -69,14 +98,20 @@ const Forgot = observer(() => {
                 type="secondary"
                 width="100%"
                 loading={loading}
-                onClick={resetPass}
+                onClick={() => {
+                  user.email ? resetPass() : false;
+                }}
               >
-                Reset Password
+                <Translation lang={settings?.language} value="Reset password" />
               </Button>
 
               <Text font={'14px'}>
                 <Link href="/login" underline>
-                  &larr; Back to Login
+                  &larr;
+                  <Translation
+                    lang={settings?.language}
+                    value="Back to login"
+                  />
                 </Link>
               </Text>
             </Card>

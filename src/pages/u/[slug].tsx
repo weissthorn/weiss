@@ -7,7 +7,8 @@ import {
   Card,
   Loading
 } from '@geist-ui/core';
-import moment from 'moment';
+import { format } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import Navbar from 'components/Navbar';
@@ -19,6 +20,7 @@ import MinimalPost from 'components/MinimalPost';
 import SettingsStore from 'stores/settings';
 import { pluralize, formatNumber } from 'components/api/utils';
 import DiscussionStore from 'stores/discussion';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const User = observer(() => {
   const token = useToken();
@@ -42,6 +44,18 @@ const User = observer(() => {
         })
       : null;
   }, [router]);
+
+  const lang = settings.language;
+
+  const renderDate = (value: any) => {
+    const date: any = value
+      ? format(new Date(value), 'MMM d, yyyy @ h:mm a', {
+          locale:
+            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
+  };
 
   const paginate = (val: number) => {
     setPage(val);
@@ -74,16 +88,24 @@ const User = observer(() => {
                 {user.name}
               </Text>
               <Text small>
-                Joined {moment(user.createdAt).format('MMM D, YYYY')}
+                <Translation lang={settings?.language} value="Joined" />{' '}
+                {renderDate(user.createdAt)}
               </Text>
               <Spacer w={1} inline />
               <Text small>
-                {formatNumber(user.discussion!)} Discussion
-                {pluralize(user.discussion!)}
+                {formatNumber(user.discussion!)}{' '}
+                <Translation
+                  lang={settings?.language}
+                  value={`Discussion${pluralize(user.discussion!)}`}
+                />
               </Text>
               <Spacer w={1} inline />
               <Text small>
-                {formatNumber(user.coin!)} Coin{pluralize(user.coin!)}
+                {formatNumber(user.coin!)}{' '}
+                <Translation
+                  lang={settings?.language}
+                  value={`Coin${pluralize(user.coin!)}`}
+                />
               </Text>
             </div>
           </div>
@@ -96,7 +118,14 @@ const User = observer(() => {
           <div className="item">
             {loading ? (
               <div>
-                <Loading>Loading discussions</Loading>
+                <Loading>
+                  <Translation lang={settings?.language} value={`Loading`} />
+                  &nbsp;
+                  <Translation
+                    lang={settings?.language}
+                    value={`Discussions`}
+                  />
+                </Loading>
               </div>
             ) : (
               ''
@@ -104,6 +133,7 @@ const User = observer(() => {
 
             {discussions.map((item: any) => (
               <MinimalPost
+                lang={settings?.language}
                 key={item.id}
                 title={item.title}
                 slug={item.slug}
@@ -116,7 +146,10 @@ const User = observer(() => {
               <div className="center">
                 <Spacer h={3} />
                 <Text h4 className="center">
-                  No discussion
+                  <Translation
+                    lang={settings?.language}
+                    value={`No Discussion`}
+                  />
                 </Text>
               </div>
             ) : (

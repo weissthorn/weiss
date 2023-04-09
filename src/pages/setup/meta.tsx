@@ -16,14 +16,17 @@ import { ChevronLeft, ChevronRight, Image as Picture } from '@geist-ui/icons';
 import Navbar from 'components/Navbar';
 import SetupVerify from 'components/admin/SetupVerify';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const MetaSetup = observer(() => {
   const cookie = parseCookies();
   const router = useRouter();
   const [store] = useState(() => new SettingsStore());
-  const { admin, setAdmin, settings, setSettings, uploadImage } = store;
+  const { admin, setAdmin, settings, setSettings, getSettings, uploadImage } =
+    store;
 
   useEffect(() => {
+    getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
   }, []);
@@ -97,10 +100,12 @@ const MetaSetup = observer(() => {
             </Text>
 
             <Card shadow width="100%">
-              <Text h3>Site metadata</Text>
+              <Text h3>
+                <Translation lang={settings?.language} value="Site metadata" />
+              </Text>
               <Spacer h={2} />
               <Button icon={<Picture />} auto>
-                Upload logo
+                <Translation lang={settings?.language} value="Upload logo" />
                 <input
                   type="file"
                   className="file-upload"
@@ -118,7 +123,10 @@ const MetaSetup = observer(() => {
               )}
               <Spacer h={1.5} />
               <Input
-                placeholder="Site Name"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Site name'
+                })}
                 width="100%"
                 scale={4 / 3}
                 value={settings.siteName}
@@ -131,7 +139,10 @@ const MetaSetup = observer(() => {
               />
               <Spacer h={1.5} />
               <Textarea
-                placeholder="Site Description"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Site description'
+                })}
                 width="100%"
                 scale={4 / 3}
                 value={settings.siteDescription}
@@ -149,7 +160,7 @@ const MetaSetup = observer(() => {
                 width="48%"
                 icon={<ChevronLeft />}
               >
-                Back
+                <Translation lang={settings?.language} value="Back" />
               </Button>
               <Button
                 shadow
@@ -159,7 +170,8 @@ const MetaSetup = observer(() => {
                 iconRight={<ChevronRight />}
                 onClick={_next}
               >
-                Continue (3 / 3)
+                <Translation lang={settings?.language} value="Continue" />{' '}
+                &nbsp;(3 / 3)
               </Button>
             </Card>
           </div>

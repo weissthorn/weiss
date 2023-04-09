@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Reset = observer(() => {
   const cookie = parseCookies();
@@ -30,7 +31,12 @@ const Reset = observer(() => {
 
   const verifyAccount = () => {
     if (Number(code) !== _code.code) {
-      toast.error('Code is incorrect or expired.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Code is incorrect or expired.'
+        })
+      );
     } else {
       setVerify(true);
     }
@@ -38,17 +44,32 @@ const Reset = observer(() => {
 
   const updatePass = async () => {
     if (user.password !== _password) {
-      toast.error('Passwords does not matched!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Passwords does not matched!'
+        })
+      );
     } else {
       await getUser(_code.data!).then(async (res: any) => {
         if (res.success) {
           await updateUser({ id: res.data.id, password: user.password });
           destroyCookie(null, '_w_code');
 
-          toast.success('Password reset successfully!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Password reset successfully!'
+            })
+          );
           router.push('/login');
         } else {
-          toast.error('Unable to update user. Please try again later');
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Unable to update user. Please try again later.'
+            })
+          );
         }
       });
     }
@@ -56,7 +77,17 @@ const Reset = observer(() => {
 
   return (
     <div className="polkadot">
-      <Navbar title="Forgot password" description="Forgot password" hide />
+      <Navbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Account recovery'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Account recovery'
+        })}
+        hide
+      />
       <Toaster />
       <div>
         <div className="page-container top-100">
@@ -72,7 +103,12 @@ const Reset = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Reset your password</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value={'Reset your password'}
+                />
+              </Text>
               <Spacer h={2} />
               {verify === false ? (
                 <>
@@ -82,7 +118,10 @@ const Reset = observer(() => {
                     scale={4 / 3}
                     onChange={(e) => setCode(e.target.value)}
                   >
-                    Enter code sent to your email
+                    <Translation
+                      lang={settings?.language}
+                      value={'Enter code sent to your email'}
+                    />
                   </Input>
                   <Spacer h={1.5} />
                   <Button
@@ -92,13 +131,17 @@ const Reset = observer(() => {
                     loading={loading}
                     onClick={verifyAccount}
                   >
-                    Continue &rarr;
+                    <Translation lang={settings?.language} value={'Continue'} />{' '}
+                    &nbsp;&rarr;
                   </Button>
                 </>
               ) : (
                 <>
                   <Input.Password
-                    placeholder="New Password"
+                    placeholder={useTranslation({
+                      lang: settings?.language,
+                      value: 'New Password'
+                    })}
                     width="100%"
                     scale={4 / 3}
                     onChange={(e) =>
@@ -107,7 +150,10 @@ const Reset = observer(() => {
                   />
                   <Spacer h={1.5} />
                   <Input.Password
-                    placeholder="Retype Password"
+                    placeholder={useTranslation({
+                      lang: settings?.language,
+                      value: 'Retype Password'
+                    })}
                     width="100%"
                     scale={4 / 3}
                     onChange={(e) => setPassword(e.target.value)}
@@ -120,7 +166,10 @@ const Reset = observer(() => {
                     loading={loading}
                     onClick={updatePass}
                   >
-                    Reset Password
+                    <Translation
+                      lang={settings?.language}
+                      value={'Reset password'}
+                    />
                   </Button>
                 </>
               )}

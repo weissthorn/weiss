@@ -4,6 +4,11 @@ import { Spacer, Button, Select, Popover, Text } from '@geist-ui/core';
 import { Maximize, Minimize, XCircleFill } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import Editor from 'components/Editor';
+import {
+  Translation,
+  useReplyTranslation,
+  useTranslation
+} from 'components/intl/Translation';
 
 type editorProps = {
   lang: string;
@@ -79,7 +84,11 @@ const ReplyModal = observer((props: editorProps) => {
             </div>
             <Text>
               {replyUsername
-                ? `In reply to @${replyUsername} comment #${commentNumber}`
+                ? useReplyTranslation({
+                    lang: props.lang,
+                    value: `In reply to (@${replyUsername})`,
+                    number: commentNumber
+                  })
                 : ''}
             </Text>
             <Spacer />
@@ -91,14 +100,15 @@ const ReplyModal = observer((props: editorProps) => {
                 actionTrigger(value);
               }}
             />
+
             {isAuthenticate ? (
               <Button loading={loading} type="success-light" onClick={save}>
-                Send Reply
+                <Translation lang={props.lang} value="Send reply" />
               </Button>
             ) : (
               <Link href="/login">
                 <Button loading={loading} type="success-light">
-                  Sign in to Reply
+                  <Translation lang={props.lang} value="Sign in to Reply" />
                 </Button>
               </Link>
             )}

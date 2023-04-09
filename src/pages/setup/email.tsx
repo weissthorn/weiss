@@ -11,6 +11,7 @@ import { validateEmail } from 'components/api/utils';
 import UserStore from 'stores/user';
 import CategoryStore from 'stores/category';
 import SetupVerify from 'components/admin/SetupVerify';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const EmailSetup = observer(() => {
   const cookie = parseCookies();
@@ -18,10 +19,19 @@ const EmailSetup = observer(() => {
   const [userStore] = useState(() => new UserStore());
   const [categoryStore] = useState(() => new CategoryStore());
   const [store] = useState(() => new SettingsStore());
-  const { loading, admin, setAdmin, settings, setSettings, create } = store;
+  const {
+    loading,
+    admin,
+    setAdmin,
+    settings,
+    setSettings,
+    getSettings,
+    create
+  } = store;
   const { email } = settings;
 
   useEffect(() => {
+    getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
   }, []);
@@ -85,7 +95,7 @@ const EmailSetup = observer(() => {
   };
 
   return (
-    <SetupVerify>
+    <>
       <Navbar
         title="Email settings - Setup Weiss"
         description="Email settings - Setup Weiss"
@@ -100,12 +110,17 @@ const EmailSetup = observer(() => {
             </Text>
 
             <Card shadow width="100%">
-              <Text h3>Email settings</Text>
+              <Text h3>
+                <Translation lang={settings?.language} value="Email settings" />
+              </Text>
               <Spacer h={2} />
 
               <Input
                 htmlType="url"
-                placeholder="SMTP Host"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'SMTP host'
+                })}
                 width="100%"
                 scale={4 / 3}
                 value={email?.host}
@@ -120,7 +135,10 @@ const EmailSetup = observer(() => {
               />
               <Spacer h={1.5} />
               <Input
-                placeholder="SMTP Email"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'SMTP user/email'
+                })}
                 width="100%"
                 scale={4 / 3}
                 value={email?.email}
@@ -135,7 +153,10 @@ const EmailSetup = observer(() => {
               />
               <Spacer h={1.5} />
               <Input.Password
-                placeholder="SMTP Password"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'SMTP password'
+                })}
                 width="100%"
                 scale={4 / 3}
                 value={email?.password}
@@ -155,7 +176,7 @@ const EmailSetup = observer(() => {
                 width="48%"
                 icon={<ChevronLeft />}
               >
-                Back
+                <Translation lang={settings?.language} value="Back" />
               </Button>
               <Button
                 loading={loading}
@@ -165,13 +186,13 @@ const EmailSetup = observer(() => {
                 ml={'5px'}
                 onClick={save}
               >
-                Save &amp; Launch
+                <Translation lang={settings?.language} value="Save & launch" />
               </Button>
             </Card>
           </div>
         </div>
       </div>
-    </SetupVerify>
+    </>
   );
 });
 

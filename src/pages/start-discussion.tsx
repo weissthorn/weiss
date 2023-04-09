@@ -35,11 +35,26 @@ const StartDiscussion = observer(() => {
   const save = async () => {
     const { title, categoryId } = discussion;
     if (!title) {
-      toast.error('Title is too short!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Title is too short!'
+        })
+      );
     } else if (!categoryId) {
-      toast.error('Please choose a category!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Please choose a category!'
+        })
+      );
     } else if (!content) {
-      toast.error('Content is blank.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Content is blank.'
+        })
+      );
     } else {
       let data = {
         ...discussion,
@@ -51,7 +66,12 @@ const StartDiscussion = observer(() => {
         if (res.success) {
           router.push(`/d/${res.data.slug}`);
         } else {
-          toast.error('Error creating post! Please try again.');
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Error creating post! Please try again.'
+            })
+          );
         }
       });
     }
@@ -66,10 +86,17 @@ const StartDiscussion = observer(() => {
             <Card shadow>
               <div className="center">
                 <Lock size={30} />
-                <Text>You are required to login to access this page</Text>
+                <Text>
+                  <Translation
+                    lang={settings?.language}
+                    value={'You are required to login to access this page'}
+                  />
+                </Text>
                 <Spacer />
                 <Link href="/login">
-                  <Button type="secondary">Sign in</Button>
+                  <Button type="secondary">
+                    <Translation lang={settings?.language} value={'Sign in'} />
+                  </Button>
                 </Link>
                 <Spacer />
               </div>
@@ -79,13 +106,14 @@ const StartDiscussion = observer(() => {
       ) : (
         ''
       )}
+
       <Navbar
         title={useTranslation({
-          lang: settings.language ? settings.language : 'en',
+          lang: settings?.language,
           value: 'Start a discussion'
         })}
         description={useTranslation({
-          lang: settings.language ? settings.language : 'en',
+          lang: settings?.language,
           value: 'Start a discussion'
         })}
       />
@@ -93,8 +121,11 @@ const StartDiscussion = observer(() => {
         <div className="notification-container">
           <Text h3>
             <Translation
-              lang={settings.language ? settings.language : 'en'}
-              value="Start a discussion"
+              lang={settings?.language}
+              value={useTranslation({
+                lang: settings?.language,
+                value: 'Start a discussion'
+              })}
             />
           </Text>
           <Spacer />
@@ -102,7 +133,10 @@ const StartDiscussion = observer(() => {
             <div className="item">
               <Input
                 width="100%"
-                placeholder="Discussion Title"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Discussion Title'
+                })}
                 onChange={(e) =>
                   setDiscussion({ ...discussion, title: e.target.value })
                 }
@@ -112,7 +146,10 @@ const StartDiscussion = observer(() => {
               <Select
                 disableMatchWidth={true}
                 width={'100%'}
-                placeholder="Choose a Category"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Choose a Category'
+                })}
                 value={discussion.categoryId}
                 onChange={(val) =>
                   setDiscussion({ ...discussion, categoryId: val })
@@ -130,18 +167,24 @@ const StartDiscussion = observer(() => {
             lang={settings.language}
             value={content}
             height="200px"
-            placeholder="Type something memorable..."
+            placeholder={useTranslation({
+              lang: settings?.language,
+              value: 'Type something memorable...'
+            })}
             onChange={(val) => setContent(val)}
           />
 
           {token.id ? (
             <Button loading={loading} type="secondary-light" onClick={save}>
-              Publish
+              <Translation lang={settings?.language} value={'Publish'} />
             </Button>
           ) : (
             <Link href="/login">
               <Button loading={loading} type="secondary-light">
-                Sign in to publish
+                <Translation
+                  lang={settings?.language}
+                  value={'Sign in to publish'}
+                />
               </Button>
             </Link>
           )}

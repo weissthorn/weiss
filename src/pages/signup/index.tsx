@@ -33,6 +33,7 @@ import useToken from 'components/Token';
 import { validateEmail } from 'components/api/utils';
 import Router from 'next/router';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Signup = observer(() => {
   const token = useToken();
@@ -47,7 +48,7 @@ const Signup = observer(() => {
   }, [token]);
 
   const responseFacebook = (response) => {
-    console.log(response);
+    // console.log(response);
   };
 
   const onSuccess = () => {};
@@ -76,13 +77,33 @@ const Signup = observer(() => {
   const save = async () => {
     const { name, email, username, password } = user;
     if (!name || name?.length < 3) {
-      toast.error('Fullname is too short.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Fullname is too short.'
+        })
+      );
     } else if (!username || username?.length < 3) {
-      toast.error('Username is too short. Minimum character is three.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Username is too short. Minimum character is three.'
+        })
+      );
     } else if (validateEmail(email) === false) {
-      toast.error('Invalid email address');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Invalid email address'
+        })
+      );
     } else if (!password || password?.length < 3) {
-      toast.error('Password is too short. Minimum character is six.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Password is too short. Minimum character is six.'
+        })
+      );
     } else {
       await signup(user).then((res: any) => {
         if (res.success) {
@@ -96,11 +117,20 @@ const Signup = observer(() => {
             }
           );
           toast.success(
-            'Account created successfully! Please verify account to continue.'
+            useTranslation({
+              lang: settings?.language,
+              value:
+                'Account created successfully! Please verify account to continue.'
+            })
           );
           Router.push('/signup/verify');
         } else {
-          toast.error(res.message);
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: res.message
+            })
+          );
         }
       });
     }
@@ -108,7 +138,14 @@ const Signup = observer(() => {
 
   return (
     <div>
-      <Navbar title="Signup" description="Signup" hide />
+      <Navbar
+        title={useTranslation({ lang: settings?.language, value: 'Signup' })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Signup'
+        })}
+        hide
+      />
       <Toaster />
       <div className="polkadot">
         <div className="page-container top-30">
@@ -124,10 +161,18 @@ const Signup = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Create your account</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Create your account"
+                />
+              </Text>
               <Spacer h={1} />
               <Input
-                placeholder="Fullname"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Fullname'
+                })}
                 width="100%"
                 scale={4 / 3}
                 onChange={(e) => {
@@ -136,7 +181,10 @@ const Signup = observer(() => {
               />
               <Spacer h={1.5} />
               <Input
-                placeholder="Username"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Username'
+                })}
                 width="100%"
                 scale={4 / 3}
                 iconClickable
@@ -146,7 +194,10 @@ const Signup = observer(() => {
                   status === 'success' ? (
                     <Tooltip
                       placement="topEnd"
-                      text="Username is available."
+                      text={useTranslation({
+                        lang: settings?.language,
+                        value: 'Username is available.'
+                      })}
                       type="success"
                     >
                       <CheckInCircleFill color="#0070F3" />
@@ -154,7 +205,10 @@ const Signup = observer(() => {
                   ) : status === 'error' ? (
                     <Tooltip
                       placement="topEnd"
-                      text="Username is not available. Try another name."
+                      text={useTranslation({
+                        lang: settings?.language,
+                        value: 'Username is not available. Try another name.'
+                      })}
                       trigger="click"
                       type="error"
                     >
@@ -169,7 +223,10 @@ const Signup = observer(() => {
               />
               <Spacer h={1.5} />
               <Input
-                placeholder="Email"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Email'
+                })}
                 width="100%"
                 scale={4 / 3}
                 onChange={(e) => {
@@ -178,7 +235,10 @@ const Signup = observer(() => {
               />
               <Spacer h={1.5} />
               <Input.Password
-                placeholder="Password"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Password'
+                })}
                 width="100%"
                 scale={4 / 3}
                 onChange={(e) => {
@@ -193,7 +253,7 @@ const Signup = observer(() => {
                 loading={loading}
                 onClick={save}
               >
-                Signup
+                <Translation lang={settings?.language} value="Signup" />
               </Button>
               <Spacer h={1} />
               {/* <Divider>OR</Divider>
@@ -245,9 +305,13 @@ const Signup = observer(() => {
                 </Button>
               </Github> */}
               <Text font="14px">
-                Have an account? &nbsp;
+                <Translation
+                  lang={settings?.language}
+                  value="Have an account?"
+                />{' '}
+                &nbsp;
                 <Link href="/login" color underline>
-                  Login here
+                  <Translation lang={settings?.language} value="Login here" />
                 </Link>
               </Text>
             </Card>

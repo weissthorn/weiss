@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Spacer, Text, Card, Loading, Button, Avatar } from '@geist-ui/core';
 import { ChevronDown } from '@geist-ui/icons';
+import { formatDistance } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import NotificationStore from 'stores/notification';
@@ -8,10 +10,21 @@ import useToken from 'components/Token';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import Auth from 'components/Auth';
+import {
+  Translation,
+  useLikedPostTranslation,
+  useLikedCommentTranslation,
+  useLikedReplyTranslation,
+  useRepliedCommentTranslation,
+  useRepliedPostTranslation,
+  useTranslation
+} from 'components/intl/Translation';
+import SettingsStore from 'stores/settings';
 
 const Notifications = observer(() => {
   const token = useToken();
   const router = useRouter();
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [
     {
       loading,
@@ -27,6 +40,7 @@ const Notifications = observer(() => {
   ] = useState(() => new NotificationStore());
 
   useEffect(() => {
+    getSettings();
     token.id ? getNotifications(token.id, false) : null;
   }, [token]);
 
@@ -48,9 +62,56 @@ const Notifications = observer(() => {
     });
   };
 
+  const lang = settings?.language;
+
+  const renderDate = (value: any) => {
+    const date = value
+      ? formatDistance(new Date(value), new Date(), {
+          addSuffix: true,
+          locale:
+            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
+  };
+
   const paginate = () => {
     setPage(page + 1);
     getNotifications(token.id!, true);
+  };
+
+  const renderNotifications = (name: string, type: string) => {
+    if (type === 'like-post') {
+      return useLikedPostTranslation({
+        name,
+        lang: settings?.language,
+        value: ''
+      });
+    } else if (type === 'like-comment') {
+      return useLikedCommentTranslation({
+        name,
+        lang: settings?.language,
+        value: ''
+      });
+    } else if (type === 'like-reply') {
+      return useLikedReplyTranslation({
+        name,
+        lang: settings?.language,
+        value: ''
+      });
+    } else if (type === 'reply-post') {
+      return useRepliedPostTranslation({
+        name,
+        lang: settings?.language,
+        value: ''
+      });
+    } else if (type === 'reply-comment') {
+      return useRepliedCommentTranslation({
+        name,
+        lang: settings?.language,
+        value: ''
+      });
+    }
   };
 
   const notification = notifications.map((item) => (
@@ -77,10 +138,10 @@ const Notifications = observer(() => {
           </div>
           <div className="two">
             <Text p className="text">
-              {item.message}
+              {renderNotifications(item?.name, item?.filterType)}
             </Text>
             <Text small className="date">
-              {moment(item.createdAt).fromNow()}
+              {renderDate(item.createdAt)}
             </Text>
           </div>
         </div>
@@ -90,12 +151,26 @@ const Notifications = observer(() => {
 
   return (
     <Auth>
-      <Navbar title="Notifications" description="Notifications" />
+      <Navbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Notifications'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Notifications'
+        })}
+      />
       <div className="page-container top-100">
         <div className="notification-container">
           <div className="column">
             <div>
-              <Text h3>Notifications</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value={'Notifications'}
+                />
+              </Text>
             </div>
             <div>
               <Button
@@ -104,17 +179,29 @@ const Notifications = observer(() => {
                 loading={loading}
                 onClick={readAll}
               >
-                Mark all read
+                <Translation
+                  lang={settings?.language}
+                  value={'Mark all read'}
+                />
               </Button>
             </div>
           </div>
 
           <Spacer h={2} />
           {notification}
-          {loading ? <Loading>Loading </Loading> : ''}
+          {loading ? (
+            <Loading>
+              <Translation lang={settings?.language} value={'Loading'} />
+            </Loading>
+          ) : (
+            ''
+          )}
           {!loading && notifications.length === 0 ? (
             <Text h4 className="center">
-              No notification
+              <Translation
+                lang={settings?.language}
+                value={'No notification'}
+              />
             </Text>
           ) : (
             ''
@@ -128,7 +215,7 @@ const Notifications = observer(() => {
                 iconRight={<ChevronDown />}
                 onClick={paginate}
               >
-                Load more
+                <Translation lang={settings?.language} value={'Load more'} />
               </Button>
             ) : (
               ''

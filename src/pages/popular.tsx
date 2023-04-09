@@ -21,6 +21,7 @@ import useToken from 'components/Token';
 import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import Contributors from 'components/Contributors';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Home = observer(() => {
   const token = useToken();
@@ -71,7 +72,10 @@ const Home = observer(() => {
           button={
             <NextLink href={'/start-discussion'}>
               <Button type="secondary" style={{ textTransform: 'unset' }}>
-                Start a Discussion
+                <Translation
+                  lang={settings?.language}
+                  value="Start a discussion"
+                />
               </Button>
             </NextLink>
           }
@@ -99,7 +103,10 @@ const Home = observer(() => {
             <div className="mobile">
               <NextLink href={'/start-discussion'}>
                 <Button type="secondary" style={{ textTransform: 'unset' }}>
-                  Start a Discussion
+                  <Translation
+                    lang={settings?.language}
+                    value="Start a discussion"
+                  />
                 </Button>
               </NextLink>
               <Spacer />
@@ -110,27 +117,40 @@ const Home = observer(() => {
 
           <div className="custom-tab">
             <NextLink href="/popular">
-              <Link className="active">Popular</Link>
+              <Link className="active">
+                {' '}
+                <Translation lang={settings?.language} value="Popular" />
+              </Link>
             </NextLink>
             <NextLink href="/">
-              <Link>Recents</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Recent" />
+              </Link>
             </NextLink>
             <NextLink href="/unanswered">
-              <Link>Unanswered</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Unanswered" />
+              </Link>
             </NextLink>
           </div>
 
           {loading ? (
             <div>
               <Spacer h={3} />
-              <Loading>Loading discussions</Loading>
+              <Loading>
+                <Translation lang={settings?.language} value="Loading" />
+                &nbsp;
+                <Translation lang={settings?.language} value="Discussions" />
+              </Loading>
             </div>
           ) : (
             ''
           )}
+
           {discussions.map((item) => (
             <Post
               key={item.id}
+              lang={settings?.language}
               category={item.category?.title}
               slug={item.slug}
               avatar={

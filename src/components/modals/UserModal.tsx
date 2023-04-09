@@ -1,17 +1,19 @@
 import { Badge, Modal, Text, Select, Spacer, Divider } from '@geist-ui/core';
 import { userProp } from 'interfaces/user';
 import moment from 'moment';
+import { useTranslation, Translation } from 'components/intl/Translation';
 
 type userModalProps = {
   loading: boolean;
   show: boolean;
+  lang: string;
   data: userProp;
   toggleModal: () => void;
   actionTrigger: (value: any) => void;
 };
 
 const UserModal = (props: userModalProps) => {
-  const { loading, show, data, toggleModal, actionTrigger } = props;
+  const { loading, show, lang, data, toggleModal, actionTrigger } = props;
   return (
     <>
       <Modal
@@ -24,52 +26,87 @@ const UserModal = (props: userModalProps) => {
           <Text h3 className="capitalize">
             {data.name}
           </Text>
-          <Text>Username: @{data.username}</Text>
-          <Text>Email: {data.email}</Text>
-          <Text>Role: {data.role}</Text>
           <Text>
-            Date joined: {moment(data.createdAt).format('MMM D, YYYY')}
+            <Translation lang={lang} value="Username" />: @{data.username}
           </Text>
-          Status:{' '}
+          <Text>
+            <Translation lang={lang} value="Email" />: {data.email}
+          </Text>
+          <Text>
+            <Translation lang={lang} value="Role" />: {data.role}
+          </Text>
+          <Text>
+            <Translation lang={lang} value="Date joined" />:{' '}
+            {moment(data.createdAt).format('MMM D, YYYY')}
+          </Text>
+          <Translation lang={lang} value="Status" />:{' '}
           {data.status === 'active' ? (
-            <Badge type="success">{data.status}</Badge>
+            <Badge type="success">
+              <Translation lang={lang} value="Active" />
+            </Badge>
+          ) : data.status === 'banned' ? (
+            <Badge type="error">
+              <Translation lang={lang} value="Banned" />
+            </Badge>
+          ) : data.status === 'pending' ? (
+            <Badge type="warning">
+              <Translation lang={lang} value="Disabled" />
+            </Badge>
           ) : (
-            <Badge type="error">{data.status}</Badge>
+            ''
           )}
           <Spacer />
-          <Divider>Actions</Divider>
+          <Divider>
+            <Translation lang={lang} value="Action" />
+          </Divider>
           <Spacer />
           <div className="column">
-            <div className="item">Change status: </div>
+            <div className="item">
+              <Translation lang={lang} value="Change status" />:{' '}
+            </div>
             <div className="item">
               <Select
                 placeholder="Choose one"
                 value={data.status}
                 onChange={(value) => actionTrigger({ ...data, status: value })}
               >
-                <Select.Option value="active">Active</Select.Option>
-                <Select.Option value="banned">Banned</Select.Option>
-                <Select.Option value="pending">Disabled</Select.Option>
+                <Select.Option value="active">
+                  <Translation lang={lang} value="Active" />
+                </Select.Option>
+                <Select.Option value="banned">
+                  <Translation lang={lang} value="Banned" />
+                </Select.Option>
+                <Select.Option value="pending">
+                  <Translation lang={lang} value="Disabled" />
+                </Select.Option>
               </Select>
             </div>
           </div>
           <div className="column">
-            <div className="item">Change role: </div>
+            <div className="item">
+              <Translation lang={lang} value="Change role" />:{' '}
+            </div>
             <div className="item">
               <Select
                 placeholder="Choose one"
                 value={data.role}
                 onChange={(value) => actionTrigger({ ...data, role: value })}
               >
-                <Select.Option value="member">Member</Select.Option>
-                <Select.Option value="moderator">Moderator</Select.Option>
-                <Select.Option value="admin">Admin</Select.Option>
+                <Select.Option value="member">
+                  <Translation lang={lang} value="Member" />
+                </Select.Option>
+                <Select.Option value="moderator">
+                  <Translation lang={lang} value="Moderator" />
+                </Select.Option>
+                <Select.Option value="admin">
+                  <Translation lang={lang} value="Admin" />
+                </Select.Option>
               </Select>
             </div>
           </div>
         </Modal.Content>
         <Modal.Action loading={loading} passive onClick={toggleModal}>
-          Close
+          <Translation lang={lang} value="Close" />
         </Modal.Action>
       </Modal>
     </>

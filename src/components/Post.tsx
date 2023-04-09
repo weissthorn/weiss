@@ -1,7 +1,9 @@
 import { Popover, Text, Link, Avatar, Spacer, User } from '@geist-ui/core';
 import NextLink from 'next/link';
-import moment from 'moment';
+import { format } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import { pluralize } from './api/utils';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 type postProps = {
   title?: string;
@@ -11,9 +13,11 @@ type postProps = {
   category?: string;
   comment?: number;
   date?: Date | string;
+  lang: string;
 };
+
 const Post = (props: postProps) => {
-  const { title, avatar, slug, category, comment, author, date } = props;
+  const { title, avatar, slug, category, comment, author, date, lang } = props;
 
   const ellipsis = (val: string) => {
     val = val.length >= 50 ? val.substring(0, 50) + '....' : val;
@@ -24,11 +28,21 @@ const Post = (props: postProps) => {
     <div style={{ padding: '0 10px' }}>
       <Link color href="#">
         <User src={avatar} name={author}>
-          Moderator
+          <Translation lang={props.lang} value={'Moderator'} />
         </User>
       </Link>
     </div>
   );
+
+  const renderDate = (value: any) => {
+    const date: any = value
+      ? format(new Date(value), 'MMM d, yyyy @ h:mm a', {
+          locale:
+            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
+  };
 
   return (
     <NextLink href={`/d/${slug}`}>
@@ -48,11 +62,15 @@ const Post = (props: postProps) => {
             </Text>
             <Spacer w={1} inline />
             <Text span className="date">
-              {moment(date).format('MMM Do, YYYY')}
+              {renderDate(date)}
             </Text>
             <Spacer w={1} inline />
             <Text span className="comment">
-              {comment} Comment{pluralize(comment!)}
+              {comment}{' '}
+              {useTranslation({
+                lang: props.lang,
+                value: `Comment${pluralize(comment!)}`
+              })}
             </Text>
           </div>
         </div>

@@ -16,22 +16,31 @@ import UserStore from 'stores/user';
 import useToken from 'components/Token';
 import { useRouter } from 'next/router';
 import moment from 'moment';
+import SettingsStore from 'stores/settings';
 import { pluralize, formatNumber } from 'components/api/utils';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Members = observer(() => {
   const token = useToken();
   const router = useRouter();
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ loading, page, limit, total, users, setPage, getUsers }] = useState(
     () => new UserStore()
   );
 
   useEffect(() => {
+    getSettings();
     getUsers();
   }, [token]);
 
   const paginate = () => {
     setPage(page + 1);
     getUsers();
+  };
+
+  const dateFormat = (value: any) => {
+    var lang = moment(value).locale(settings?.language);
+    return lang.format('MMM D, YYYY');
   };
 
   const user = users.map((item) => (
@@ -55,16 +64,24 @@ const Members = observer(() => {
                 <small>@{item.username}</small>
               </Text>
               <Text small>
-                Joined {moment(item.createdAt).format('MMM D, YYYY')}
+                <Translation lang={settings?.language} value="Joined" />{' '}
+                {dateFormat(item.createdAt)}
               </Text>
               <Spacer inline />
               <Text small>
-                {formatNumber(item.discussion!)} Discussion
-                {pluralize(item.discussion!)}
+                {formatNumber(item.discussion!)}{' '}
+                {useTranslation({
+                  lang: settings?.language,
+                  value: `Discussion${pluralize(item.discussion!)}`
+                })}
               </Text>
               <Spacer inline />
               <Text small>
-                {formatNumber(item.coin!)} Coin{pluralize(item.coin!)}
+                {formatNumber(item.coin!)}{' '}
+                {useTranslation({
+                  lang: settings?.language,
+                  value: `Coin${pluralize(item.coin!)}`
+                })}
               </Text>
             </div>
           </div>
@@ -80,12 +97,20 @@ const Members = observer(() => {
         <div className="notification-container">
           <div className="column">
             <div>
-              <Text h3>Members</Text>
+              <Text h3>
+                <Translation lang={settings?.language} value={'Members'} />
+              </Text>
             </div>
           </div>
 
           <Spacer h={2} />
-          {loading ? <Loading>Loading </Loading> : user}
+          {loading ? (
+            <Loading>
+              <Translation lang={settings?.language} value="Loading" />
+            </Loading>
+          ) : (
+            user
+          )}
 
           <Spacer />
 

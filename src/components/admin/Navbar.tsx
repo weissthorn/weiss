@@ -20,6 +20,7 @@ import { useRouter } from 'next/router';
 import useToken from '../Token';
 import SettingsStore from 'stores/settings';
 import NotificationStore from 'stores/notification';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 type navbarProps = {
   title: string;
@@ -65,7 +66,9 @@ const Navbar = observer((props: navbarProps) => {
     <div>
       <Popover.Item>
         <NextLink href={`/u/${token.username}`}>
-          <Link>Profile</Link>
+          <Link>
+            <Translation lang={settings?.language} value="Profile" />
+          </Link>
         </NextLink>
       </Popover.Item>
       <Popover.Item line />
@@ -73,7 +76,9 @@ const Navbar = observer((props: navbarProps) => {
         <>
           <Popover.Item>
             <NextLink href="/admin">
-              <Link>Admin</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Admin" />
+              </Link>
             </NextLink>
           </Popover.Item>
           <Popover.Item line />
@@ -82,12 +87,15 @@ const Navbar = observer((props: navbarProps) => {
         ''
       )}
       <Popover.Item>
-        <Link href="/settings">Settings</Link>
+        <Link href="/settings">
+          <Translation lang={settings?.language} value="Settings" />
+        </Link>
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
         <Link href="#" icon onClick={logout}>
-          Log out <Spacer w={0.5} inline />
+          <Translation lang={settings?.language} value="Log out" />{' '}
+          <Spacer w={0.5} inline />
         </Link>
       </Popover.Item>
     </div>
@@ -98,14 +106,14 @@ const Navbar = observer((props: navbarProps) => {
       <Popover.Item>
         <Link onClick={() => switchTheme('weiss-light')}>
           <Sun size={15} /> <Spacer w={0.5} />
-          Light
+          <Translation lang={settings?.language} value="Light" />
         </Link>
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
         <Link onClick={() => switchTheme('weiss-dark')}>
           <Moon size={15} /> <Spacer w={0.5} />
-          Dark
+          <Translation lang={settings?.language} value="Dark" />
         </Link>
       </Popover.Item>
     </>
@@ -122,13 +130,17 @@ const Navbar = observer((props: navbarProps) => {
 
       <Text p>
         <NextLink href={`/u/${token.username}`}>
-          <Link>Profile</Link>
+          <Link>
+            <Translation lang={settings?.language} value="Profile" />
+          </Link>
         </NextLink>
       </Text>
       {token.role === 'admin' ? (
         <Text p>
           <NextLink href="/admin">
-            <Link>Admin</Link>
+            <Link>
+              <Translation lang={settings?.language} value="Admin" />
+            </Link>
           </NextLink>
         </Text>
       ) : (
@@ -136,12 +148,15 @@ const Navbar = observer((props: navbarProps) => {
       )}
       <Text p>
         <NextLink href="/settings">
-          <Link>Settings</Link>
+          <Link>
+            <Translation lang={settings?.language} value="Settings" />
+          </Link>
         </NextLink>
       </Text>
       <Text p>
         <Link href="#" icon onClick={logout}>
-          Log out <Spacer w={0.5} inline />
+          <Translation lang={settings?.language} value="Log out" />{' '}
+          <Spacer w={0.5} inline />
         </Link>
       </Text>
     </div>
@@ -163,7 +178,7 @@ const Navbar = observer((props: navbarProps) => {
       >
         <div className="inner">
           <Grid.Container gap={0}>
-            <Grid xs={18} md={5}>
+            <Grid xs={18} md={6}>
               <NextLink href="/">
                 <Link>
                   {settings.siteLogo ? (
@@ -179,7 +194,12 @@ const Navbar = observer((props: navbarProps) => {
               </NextLink>
               <Spacer inline />
               <NextLink href="/">
-                <Link>Go to Discussions</Link>
+                <Link>
+                  <Translation
+                    lang={settings?.language}
+                    value="Go to Discussions"
+                  />
+                </Link>
               </NextLink>
             </Grid>
             <Grid xs={6} md={0}>

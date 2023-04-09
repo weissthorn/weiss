@@ -1,9 +1,12 @@
 import { Text, Spacer } from '@geist-ui/core';
 import Link from 'next/link';
-import moment from 'moment';
+import { format } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
 import { pluralize } from './api/utils';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 type postProps = {
+  lang: string;
   title: string;
   comment?: number;
   slug: string;
@@ -12,7 +15,17 @@ type postProps = {
 };
 
 const MinimalPost = (props: postProps) => {
-  const { title, comment, category, slug, date } = props;
+  const { lang, title, comment, category, slug, date } = props;
+
+  const renderDate = (value: any) => {
+    const date: any = value
+      ? format(new Date(value), 'MMM d, yyyy @ h:mm a', {
+          locale:
+            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
+  };
 
   return (
     <Link href={`/d/${slug}`}>
@@ -26,11 +39,15 @@ const MinimalPost = (props: postProps) => {
           </Text>
           <Spacer w={1} inline />
           <Text span className="date">
-            {moment(date).format('MMM Do, YYYY')}
+            {renderDate(date)}
           </Text>
           <Spacer w={1} inline />
           <Text span className="comment">
-            {comment} Comment{pluralize(comment!)}
+            {comment}{' '}
+            {useTranslation({
+              lang: lang,
+              value: `Comment${pluralize(comment!)}`
+            })}
           </Text>
         </div>
       </div>

@@ -18,6 +18,8 @@ import Auth from 'components/admin/Auth';
 import DiscussionStore from 'stores/discussion';
 import { discussionProp } from 'interfaces/discussion';
 import toast, { Toaster } from 'react-hot-toast';
+import SettingsStore from 'stores/settings';
+import { useTranslation, Translation } from 'components/intl/Translation';
 
 const Discussions = observer(() => {
   const [
@@ -33,8 +35,10 @@ const Discussions = observer(() => {
       searchDiscussion
     }
   ] = useState(() => new DiscussionStore());
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
 
   useEffect(() => {
+    getSettings();
     getDiscussions();
   }, []);
 
@@ -53,21 +57,37 @@ const Discussions = observer(() => {
   const handleChange = async (status: string, id: string) => {
     await updateDiscussion({ status, id }).then((res: any) => {
       if (res.success) {
-        toast.success('Discussion status updated');
+        toast.success(
+          useTranslation({
+            lang: settings?.language,
+            value: 'Discussion status updated'
+          })
+        );
         getDiscussions();
       } else {
-        toast.error('Unable to update status! Please try again later.');
+        toast.error(
+          useTranslation({
+            lang: settings?.language,
+            value: 'Unable to update status! Please try again later.'
+          })
+        );
       }
     });
   };
 
   const renderStatus = (value: string) => {
     return value === 'answered' ? (
-      <Badge type="success">{value}</Badge>
+      <Badge type="success">
+        <Translation lang={settings?.language} value="Answered" />
+      </Badge>
     ) : value === 'unanswered' ? (
-      <Badge type="warning">{value}</Badge>
+      <Badge type="warning">
+        <Translation lang={settings?.language} value="Unanswered" />
+      </Badge>
     ) : value === 'banned' ? (
-      <Badge type="error">{value}</Badge>
+      <Badge type="error">
+        <Translation lang={settings?.language} value="Banned" />
+      </Badge>
     ) : (
       <></>
     );
@@ -76,7 +96,10 @@ const Discussions = observer(() => {
   const renderView = (value: string, rowData: discussionProp) => {
     return (
       <Link target={'_blank'} icon href={`/d/${rowData.slug}`}>
-        View
+        {useTranslation({
+          lang: settings?.language,
+          value: 'View'
+        })}
       </Link>
     );
   };
@@ -84,27 +107,52 @@ const Discussions = observer(() => {
   const renderAction = (value: string, rowData: discussionProp) => {
     return (
       <Select
-        placeholder="Change status"
+        placeholder={useTranslation({
+          lang: settings?.language,
+          value: 'Change status'
+        })}
         value={value}
         onChange={(value: any) => handleChange(value, rowData.id!)}
       >
-        <Select.Option value="answered">Answered</Select.Option>
-        <Select.Option value="unanswered">Unanswered</Select.Option>
-        <Select.Option value="banned">Banned</Select.Option>
+        <Select.Option value="answered">
+          <Translation lang={settings?.language} value="Answered" />
+        </Select.Option>
+        <Select.Option value="unanswered">
+          <Translation lang={settings?.language} value="Unanswered" />
+        </Select.Option>
+        <Select.Option value="banned">
+          <Translation lang={settings?.language} value="Banned" />
+        </Select.Option>
       </Select>
     );
   };
 
   return (
     <Auth>
-      <AdminNavbar title="Discussions" description="Discussions" />
+      <AdminNavbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Discussions'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Discussions'
+        })}
+      />
       <Toaster />
       <div className="page-container top-100">
-        <Sidebar active="discussions" />
+        <Sidebar active="discussions" lang={settings?.language} />
 
         <main className="main for-admin">
           <SearchHeading
-            title={`Discussions (${discussions.length})`}
+            placeholder={`${useTranslation({
+              lang: settings?.language,
+              value: 'Search....'
+            })}`}
+            title={`${useTranslation({
+              lang: settings?.language,
+              value: 'Discussions'
+            })} (${discussions.length})`}
             onChange={handleSearch}
           />
 
@@ -115,16 +163,44 @@ const Discussions = observer(() => {
               view: item.view?.toString()
             }))}
           >
-            <Table.Column prop="title" label="Title" />
-            <Table.Column prop="view" label="View" />
-            <Table.Column prop="status" label="status" render={renderStatus} />
-            <Table.Column prop="action" label="action" render={renderAction} />
+            <Table.Column
+              prop="title"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Title'
+              })}
+            />
+            <Table.Column
+              prop="view"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'View'
+              })}
+            />
+            <Table.Column
+              prop="status"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Status'
+              })}
+              render={renderStatus}
+            />
+            <Table.Column
+              prop="action"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Action'
+              })}
+              render={renderAction}
+            />
             <Table.Column prop="updatedAt" label="" render={renderView} />
           </Table>
 
           {loading ? (
             <Text>
-              <Loading>Loading</Loading>
+              <Loading>
+                <Translation lang={settings?.language} value="Loading" />
+              </Loading>
             </Text>
           ) : (
             ''

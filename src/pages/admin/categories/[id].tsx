@@ -17,17 +17,21 @@ import Sidebar from 'components/admin/Sidebar';
 import Auth from 'components/admin/Auth';
 import CategoryStore from 'stores/category';
 import UserStore from 'stores/user';
+import SettingsStore from 'stores/settings';
+import { useTranslation, Translation } from 'components/intl/Translation';
 
 const EditCategory = observer(() => {
   const router = useRouter();
   const { id } = router.query;
   const [showColor, toggleColor] = useState(false);
   const [{ users, getModerators }] = useState(() => new UserStore());
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ loading, category, setCategory, getCategory, updateCategory }] =
     useState(() => new CategoryStore());
   const { title, description, color, authRequired, moderator } = category;
 
   useEffect(() => {
+    getSettings();
     getModerators();
     let _id: any = id;
     router.isReady ? getCategory(_id) : null;
@@ -35,9 +39,19 @@ const EditCategory = observer(() => {
 
   const save = async () => {
     if (!title || title.length < 3) {
-      toast.error('Title is too short. ');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Title is too short.'
+        })
+      );
     } else if (!description) {
-      toast.error('Description is required');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Description is required'
+        })
+      );
     } else {
       setCategory({
         ...category,
@@ -48,9 +62,19 @@ const EditCategory = observer(() => {
 
       await updateCategory(category).then((res: any) => {
         if (res.success) {
-          toast.success('Category updated successfully!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Category updated successfully'
+            })
+          );
         } else {
-          toast.error(res.message);
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Unable to update category. Please try again!'
+            })
+          );
         }
       });
     }
@@ -59,16 +83,29 @@ const EditCategory = observer(() => {
   return (
     <Auth>
       <Toaster />
-      <AdminNavbar title="Edit a category" description="Edit a category" />
+      <AdminNavbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Edit category'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Edit category'
+        })}
+      />
 
       <div className="page-container top-100">
-        <Sidebar active="categories" />
+        <Sidebar active="categories" lang={settings?.language} />
 
         <main className="main for-admin">
           <div className="boxed">
-            <h3>Edit category</h3>
+            <h3>
+              <Translation lang={settings?.language} value="Edit category" />
+            </h3>
             <Spacer />
-            <Text>Color </Text>
+            <Text>
+              <Translation lang={settings?.language} value="Color" />
+            </Text>
 
             <div
               onClick={() => toggleColor(!showColor)}
@@ -99,7 +136,9 @@ const EditCategory = observer(() => {
               ''
             )}
 
-            <Text>Title</Text>
+            <Text>
+              <Translation lang={settings?.language} value="Title" />
+            </Text>
             <Input
               width={'100%'}
               value={title}
@@ -107,7 +146,9 @@ const EditCategory = observer(() => {
                 setCategory({ ...category, ...{ title: e.target.value } })
               }
             />
-            <Text>Description</Text>
+            <Text>
+              <Translation lang={settings?.language} value="Description" />
+            </Text>
             <Textarea
               width={'100%'}
               value={description}
@@ -116,9 +157,14 @@ const EditCategory = observer(() => {
               }
             />
             <Spacer />
-            <Text>Moderators</Text>
+            <Text>
+              <Translation lang={settings?.language} value="Moderators" />
+            </Text>
             <Select
-              placeholder="Choose one or more"
+              placeholder={useTranslation({
+                lang: settings?.language,
+                value: 'Choose one or more'
+              })}
               multiple
               value={moderator}
               width={'100%'}
@@ -142,7 +188,14 @@ const EditCategory = observer(() => {
                 }
                 mb={'5px'}
               />
-              <Text small> &nbsp;Authentication required</Text>
+              <Text small>
+                {' '}
+                &nbsp;
+                <Translation
+                  lang={settings?.language}
+                  value="Authentication required"
+                />
+              </Text>
             </Text>
             <Button
               loading={loading}
@@ -150,7 +203,7 @@ const EditCategory = observer(() => {
               width="100%"
               onClick={save}
             >
-              Save
+              <Translation lang={settings?.language} value="Save" />
             </Button>
           </div>
         </main>

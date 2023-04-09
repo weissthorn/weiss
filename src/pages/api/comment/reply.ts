@@ -42,7 +42,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
                       const notify = new Notification({
                         sender: data.userId,
                         receiver: d.userId,
-                        message: `${p.name} replied to your comment.`,
+                        name: p.name,
+                        filterType: 'reply-comment',
                         action: `${d.slug}#${data.slug}`
                       });
                       await notify.save().then(() => {});

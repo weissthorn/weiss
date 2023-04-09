@@ -6,7 +6,8 @@ import {
   Button,
   Input,
   Card,
-  Divider, Image
+  Divider,
+  Image
 } from '@geist-ui/core';
 import dynamic from 'next/dynamic';
 const Github = dynamic(() => import('react-login-github'), {
@@ -19,7 +20,7 @@ import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
-
+import { Translation, useTranslation } from 'components/intl/Translation';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 import { Facebook, Twitter, Github as GithubIcon } from '@geist-ui/icons';
@@ -29,13 +30,14 @@ const Login = observer(() => {
   const [status, setStatus] = useState('');
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ loading, user, setUser, login }] = useState(() => new UserStore());
+  const { email, password } = user;
 
   useEffect(() => {
     getSettings();
   }, [status]);
 
   const responseFacebook = (response) => {
-    console.log(response);
+    // console.log(response);
   };
 
   const onSuccess = () => {};
@@ -43,7 +45,6 @@ const Login = observer(() => {
   const onFailure = () => {};
 
   const signIn = async () => {
-    const { email, password } = user;
     await login({ email, password }).then((res: any) => {
       if (res.success) {
         const { name, id, role, photo, username } = res.data;
@@ -56,18 +57,32 @@ const Login = observer(() => {
             path: '/'
           }
         );
-        toast.success('Successfully signed in!');
+        toast.success(
+          useTranslation({
+            lang: settings?.language,
+            value: 'Successfully signed in!'
+          })
+        );
         router.push('/');
       } else {
         setStatus(res.status);
-        toast.error(res.message);
+        toast.error(
+          useTranslation({ lang: settings?.language, value: res.message })
+        );
       }
     });
   };
 
   return (
     <div className="polkadot">
-      <Navbar title="Login" description="Login" hide />
+      <Navbar
+        title={useTranslation({ lang: settings?.language, value: 'Log In' })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Log In'
+        })}
+        hide
+      />
       <Toaster />
       <div>
         <div className="page-container top-50">
@@ -83,21 +98,36 @@ const Login = observer(() => {
             </div>
 
             <Card width="100%">
-              <Text h3>Sign into your account</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Sign into your account"
+                />
+              </Text>
+
               {status === 'inactive' ? (
                 <Text>
-                  Account is inactive. Click{' '}
+                  <Translation
+                    lang={settings?.language}
+                    value="Account is inactive."
+                  />
+                  <Translation lang={settings?.language} value="Click" />{' '}
                   <Link href="/account/verify" color>
-                    here
+                    <Translation
+                      lang={settings?.language}
+                      value="Click here to verify your account."
+                    />
                   </Link>{' '}
-                  to verify account.
                 </Text>
               ) : (
                 ''
               )}
               <Spacer h={2} />
               <Input
-                placeholder="Email or username"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Email or username'
+                })}
                 width="100%"
                 scale={4 / 3}
                 onChange={(e) =>
@@ -106,7 +136,10 @@ const Login = observer(() => {
               />
               <Spacer h={1.5} />
               <Input.Password
-                placeholder="Password"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Password'
+                })}
                 width="100%"
                 scale={4 / 3}
                 onChange={(e) =>
@@ -119,9 +152,11 @@ const Login = observer(() => {
                 type="secondary"
                 width="100%"
                 loading={loading}
-                onClick={signIn}
+                onClick={() => {
+                  email && password ? signIn() : null;
+                }}
               >
-                Log in
+                <Translation lang={settings?.language} value="Log In" />
               </Button>
               <Spacer />
               {/* <Divider>OR</Divider>
@@ -174,16 +209,21 @@ const Login = observer(() => {
               </Github> */}
 
               <Text font={'14px'}>
-                Forgotten Password? &nbsp;
+                <Translation
+                  lang={settings?.language}
+                  value="Forgotten Password?"
+                />
+                &nbsp;
                 <Link href="/forgot" color underline>
-                  Reset here
+                  <Translation lang={settings?.language} value="Reset here" />{' '}
                 </Link>
               </Text>
 
               <Text font={'14px'}>
-                Not a member? &nbsp;
+                <Translation lang={settings?.language} value="Not a member?" />
+                &nbsp;
                 <Link href="/signup" color underline>
-                  Signup here
+                  <Translation lang={settings?.language} value="Signup here" />
                 </Link>
               </Text>
             </Card>

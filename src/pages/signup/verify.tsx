@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Verify = observer(() => {
   const cookie = parseCookies();
@@ -25,7 +26,12 @@ const Verify = observer(() => {
 
   const verify = async () => {
     if (Number(code) !== _code.code) {
-      toast.error('Code is incorrect or expired.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Code is incorrect or expired.'
+        })
+      );
     } else {
       await getUser(_code.data!).then(async (res: any) => {
         if (res.success) {
@@ -42,10 +48,20 @@ const Verify = observer(() => {
             }
           );
 
-          toast.success('Account verified successfully!');
+          toast.success(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Account verified successfully!'
+            })
+          );
           router.push('/');
         } else {
-          toast.error('Unable to verify user. Please try again later');
+          toast.error(
+            useTranslation({
+              lang: settings?.language,
+              value: 'Unable to verify user. Please try again later.'
+            })
+          );
         }
       });
     }
@@ -54,8 +70,14 @@ const Verify = observer(() => {
   return (
     <div className="polkadot">
       <Navbar
-        title="Account verification"
-        description="Account verification"
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Account verification'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Account verification'
+        })}
         hide
       />
       <Toaster />
@@ -73,7 +95,12 @@ const Verify = observer(() => {
             </div>
 
             <Card shadow width="100%">
-              <Text h3>Verify your account</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Account verification"
+                />
+              </Text>
               <Spacer h={2} />
               <Input
                 className="uppercase"
@@ -81,11 +108,15 @@ const Verify = observer(() => {
                 scale={4 / 3}
                 onChange={(e) => setCode(e.target.value)}
               >
-                Enter code sent to your email
+                <Translation
+                  lang={settings?.language}
+                  value="Enter code sent to your email"
+                />
               </Input>
               <Spacer h={1.5} />
               <Button shadow type="secondary" width="100%" onClick={verify}>
-                Continue &rarr;
+                <Translation lang={settings?.language} value="Continue" />{' '}
+                &nbsp;&rarr;
               </Button>
             </Card>
           </div>

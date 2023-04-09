@@ -20,6 +20,7 @@ import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import useToken from 'components/Token';
 import Contributors from 'components/Contributors';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Category = observer(() => {
   const token = useToken();
@@ -79,10 +80,17 @@ const Category = observer(() => {
             <Card shadow>
               <div className="center">
                 <Lock size={30} />
-                <Text>You are required to login to access this page</Text>
+                <Text>
+                  <Translation
+                    lang={settings?.language}
+                    value="You are required to login to access this page"
+                  />
+                </Text>
                 <Spacer />
                 <Link href="/login">
-                  <Button type="secondary">Sign in</Button>
+                  <Button type="secondary">
+                    <Translation lang={settings?.language} value={'Sign in'} />
+                  </Button>
                 </Link>
                 <Spacer />
               </div>
@@ -114,7 +122,10 @@ const Category = observer(() => {
           button={
             <Link href={`/start-discussion?channel=${category.slug}`}>
               <Button type="secondary" style={{ textTransform: 'unset' }}>
-                Start a Discussion
+                <Translation
+                  lang={settings?.language}
+                  value="Start a discussion"
+                />
               </Button>
             </Link>
           }
@@ -125,7 +136,11 @@ const Category = observer(() => {
           {loading ? (
             <div>
               <Spacer h={3} />
-              <Loading>Loading discussions</Loading>
+              <Loading>
+                <Translation lang={settings?.language} value="Loading" />
+                &nbsp;
+                <Translation lang={settings?.language} value="discussions" />
+              </Loading>
             </div>
           ) : (
             ''
@@ -135,7 +150,10 @@ const Category = observer(() => {
             <div className="mobile">
               <Link href={`/start-discussion?channel=${category.slug}`}>
                 <Button type="secondary" style={{ textTransform: 'unset' }}>
-                  Start a Discussion
+                  <Translation
+                    lang={settings?.language}
+                    value="Start a discussion"
+                  />
                 </Button>
               </Link>
               <Spacer />
@@ -146,6 +164,7 @@ const Category = observer(() => {
 
           {discussions.map((item) => (
             <Post
+              lang={settings?.language}
               key={item.id}
               category={item.category?.title}
               slug={item.slug}
@@ -160,6 +179,7 @@ const Category = observer(() => {
               date={item.createdAt}
             />
           ))}
+
           {total >= limit ? (
             <div className="pagination">
               <Pagination
@@ -182,7 +202,7 @@ const Category = observer(() => {
         </main>
         <aside>
           <div className="sidenav fluid">
-            <Contributors />
+            <Contributors lang={settings?.language} />
             {settings.advert?.right ? (
               <Card>
                 <div

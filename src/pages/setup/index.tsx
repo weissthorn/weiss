@@ -9,14 +9,16 @@ import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from 'components/api/utils';
 import { setCookie, parseCookies } from 'nookies';
 import SetupVerify from 'components/admin/SetupVerify';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const Setup = observer(() => {
   const cookie = parseCookies();
   const router = useRouter();
   const [store] = useState(() => new SettingsStore());
-  const { admin, setAdmin, settings, setSettings } = store;
+  const { admin, setAdmin, settings, setSettings, getSettings } = store;
 
   useEffect(() => {
+    getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
   }, []);
@@ -29,13 +31,33 @@ const Setup = observer(() => {
     const { username, email, password } = admin;
 
     if (!settings.language) {
-      toast.error('Please select a language!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Please select a language'
+        })
+      );
     } else if (!username || username.length < 3) {
-      toast.error('Username is too short!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Username is too short. Minimum character is three.'
+        })
+      );
     } else if (validateEmail(email) === false) {
-      toast.error('Invalid email address!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Invalid email address'
+        })
+      );
     } else if (!password || password.length < 6) {
-      toast.error('Password is too short! Minimum character is six.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Password is too short. Minimum character is six.'
+        })
+      );
     } else {
       admin.name = admin.username;
       const setup = { settings, admin };
@@ -63,26 +85,58 @@ const Setup = observer(() => {
             </Text>
 
             <Card shadow width="100%">
-              <Text h3>Welcome, Let's setup blazingly!</Text>
+              <Text h3>
+                <Translation
+                  lang={settings?.language}
+                  value="Welcome, Let's setup blazingly!"
+                />
+              </Text>
               <Spacer h={2} />
               <Select
                 scale={4 / 3}
-                placeholder="Select language"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Select language'
+                })}
                 width="100%"
                 value={settings.language}
                 onChange={(val) => handleSettings({ language: val })}
               >
-                <Select.Option value="en">English</Select.Option>
-                <Select.Option value="fr" disabled>
-                  French <Text small>(coming soon)</Text>
+                <Select.Option value="en">
+                  <Translation lang={settings?.language} value="English" />
                 </Select.Option>
-                <Select.Option value="es" disabled>
-                  Spanish <Text small>(coming soon)</Text>
+                <Select.Option value="fr">
+                  <Translation lang={settings?.language} value="French" />{' '}
+                  <Text small>
+                    (
+                    <Translation
+                      lang={settings?.language}
+                      value="coming soon"
+                    />
+                    )
+                  </Text>
+                </Select.Option>
+                <Select.Option value="es">
+                  <Translation lang={settings?.language} value="Spanish" />{' '}
+                  <Text small>
+                    (
+                    <Translation
+                      lang={settings?.language}
+                      value="coming soon"
+                    />
+                    )
+                  </Text>
                 </Select.Option>
               </Select>
               <Spacer h={1.5} />
               <Input
-                placeholder="Admin Username"
+                placeholder={`${useTranslation({
+                  lang: settings?.language,
+                  value: 'Admin'
+                })} ${useTranslation({
+                  lang: settings?.language,
+                  value: 'Username'
+                })}`}
                 width="100%"
                 scale={4 / 3}
                 value={admin.username}
@@ -93,7 +147,13 @@ const Setup = observer(() => {
               <Spacer h={1.5} />
               <Input
                 htmlType={'email'}
-                placeholder="Admin Email"
+                placeholder={`${useTranslation({
+                  lang: settings?.language,
+                  value: 'Admin'
+                })} ${useTranslation({
+                  lang: settings?.language,
+                  value: 'Email'
+                })}`}
                 width="100%"
                 scale={4 / 3}
                 value={admin.email}
@@ -101,7 +161,13 @@ const Setup = observer(() => {
               />
               <Spacer h={1.5} />
               <Input.Password
-                placeholder="Admin Password"
+                placeholder={`${useTranslation({
+                  lang: settings?.language,
+                  value: 'Admin'
+                })} ${useTranslation({
+                  lang: settings?.language,
+                  value: 'Password'
+                })}`}
                 width="100%"
                 scale={4 / 3}
                 value={admin.password}
@@ -117,7 +183,8 @@ const Setup = observer(() => {
                 iconRight={<ChevronRight />}
                 onClick={_next}
               >
-                Continue (2/3)
+                <Translation lang={settings?.language} value="Continue" />{' '}
+                &nbsp;(2/3)
               </Button>
             </Card>
           </div>

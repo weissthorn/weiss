@@ -16,9 +16,12 @@ import Sidebar from 'components/admin/Sidebar';
 import Auth from 'components/admin/Auth';
 import CategoryStore from 'stores/category';
 import UserStore from 'stores/user';
+import SettingsStore from 'stores/settings';
+import { useTranslation, Translation } from 'components/intl/Translation';
 
 const Categories = observer(() => {
   const [{ users, getModerators }] = useState(() => new UserStore());
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [
     {
       loading,
@@ -33,6 +36,7 @@ const Categories = observer(() => {
   ] = useState(() => new CategoryStore());
 
   useEffect(() => {
+    getSettings();
     getModerators();
     getCategories();
   }, []);
@@ -59,11 +63,14 @@ const Categories = observer(() => {
     getCategories();
   };
 
+  const renderAuth = (value: string) => {
+    return <Translation lang={settings?.language} value={value} />;
+  };
   const renderAction = (value: string, rowData: any) => {
     return (
       <Link href={`/admin/categories/${rowData.slug}`}>
         <Button type="secondary" ghost auto scale={0.5}>
-          Edit
+          <Translation lang={settings?.language} value="Edit" />
         </Button>
       </Link>
     );
@@ -71,33 +78,84 @@ const Categories = observer(() => {
 
   return (
     <Auth>
-      <AdminNavbar title="Categories" description="Categories" />
+      <AdminNavbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Categories'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Categories'
+        })}
+      />
 
       <div className="page-container top-100">
-        <Sidebar active="categories" />
+        <Sidebar active="categories" lang={settings?.language} />
 
         <main className="main for-admin">
           <SearchHeading
-            title={`Categories (${categories.length})`}
+            title={`${useTranslation({
+              lang: settings?.language,
+              value: 'Categories'
+            })} (${categories.length})`}
+            placeholder={useTranslation({
+              lang: settings?.language,
+              value: 'Search....'
+            })}
             onChange={handleSearch}
           />
           <Link href="/admin/categories/new">
             <Button type="secondary" auto scale={0.7} icon={<Plus />}>
-              Add
+              <Translation lang={settings?.language} value="Add" />
             </Button>
           </Link>
           <Spacer />
           <Table width={'100%'} data={categories}>
-            <Table.Column prop="title" label="Title" />
-            <Table.Column prop="color" label="color" render={renderColor} />
-            <Table.Column prop="discussion" label="discussions" />
-            <Table.Column prop="authRequired" label="Authentication" />
-            <Table.Column prop="action" label="action" render={renderAction} />
+            <Table.Column
+              prop="title"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Title'
+              })}
+            />
+            <Table.Column
+              prop="color"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Color'
+              })}
+              render={renderColor}
+            />
+            <Table.Column
+              prop="discussion"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Discussions'
+              })}
+            />
+            <Table.Column
+              prop="authRequired"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Authentication'
+              })}
+              render={renderAuth}
+            />
+            <Table.Column
+              prop="action"
+              label={useTranslation({
+                lang: settings?.language,
+                value: 'Action'
+              })}
+              render={renderAction}
+            />
           </Table>
 
           {loading ? (
             <Text>
-              <Loading>Loading</Loading>
+              <Loading>
+                <Translation lang={settings?.language} value="Loading" />
+              </Loading>
             </Text>
           ) : (
             ''

@@ -116,7 +116,7 @@ const Report = thinky.createModel('reports', {
 
 const Notification = thinky.createModel('notifications', {
   slug: type.string(),
-  message: type.string(),
+  name: type.string(),
   sender: type.string(),
   receiver: type.string(),
   action: type.string(),

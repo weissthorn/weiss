@@ -36,7 +36,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
                             type: 'post',
                             sender: data.userId,
                             receiver: d.userId,
-                            message: `${p.name} liked your reply.`,
+                            name: p.name,
+                            filterType: 'like-reply',
                             action: `${disc.slug}#${d.slug}`
                           });
                           await notify.save().then(() => {});
@@ -49,7 +50,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
               } else {
                 res.send({
                   success: false,
-                  message: 'Failed. Please try again later.'
+                  message: 'Error occured. Please try again later.'
                 });
               }
             });

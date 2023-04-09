@@ -9,10 +9,13 @@ import {
   Collapse
 } from '@geist-ui/core';
 import { Heart, HeartFill } from '@geist-ui/icons';
-import moment from 'moment';
 import NextLink from 'next/link';
+import { formatDistance } from 'date-fns';
+import { es, fr, en } from 'date-fns/locale';
+import { Translation, useTranslation } from './intl/Translation';
 
 type replyProp = {
+  lang: string;
   id: string;
   activeUser: string;
   name?: string;
@@ -31,6 +34,7 @@ type replyProp = {
 const Reply = (props: replyProp) => {
   const {
     id,
+    lang,
     activeUser,
     name,
     role,
@@ -52,6 +56,17 @@ const Reply = (props: replyProp) => {
     } else {
       return false;
     }
+  };
+
+  const renderDate = (value: any) => {
+    const date = value
+      ? formatDistance(new Date(value), new Date(), {
+          addSuffix: true,
+          locale:
+            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+        })
+      : '';
+    return <span className="locale-time">{date}</span>;
   };
 
   return (
@@ -77,7 +92,7 @@ const Reply = (props: replyProp) => {
       <div className="item">
         <Text h5>
           {name} &nbsp;
-          <Text small>{moment(date).fromNow()}</Text>
+          <Text small>{renderDate(date)}</Text>
         </Text>
         <div
           style={{ margin: 0, position: 'relative', top: -10 }}
@@ -86,7 +101,10 @@ const Reply = (props: replyProp) => {
         <div style={{ margin: 0 }}>
           <Tooltip
             placement="right"
-            text="Click on the number count to who see liked."
+            text={useTranslation({
+              lang: lang,
+              value: 'Click on the number count to who see liked.'
+            })}
           >
             <span className="pointer" onClick={() => likeTrigger(id)}>
               {isActiveLiked(likes) ? (
@@ -125,7 +143,7 @@ const Reply = (props: replyProp) => {
           </Tooltip>
 
           <Text small className="reply-btn" onClick={() => replyTrigger()}>
-            Reply
+            <Translation lang={lang} value="Reply" />
           </Text>
         </div>
 
@@ -136,8 +154,10 @@ const Reply = (props: replyProp) => {
             initialVisible
             title={
               replies?.length > 1
-                ? replies?.length + ' Replies'
-                : replies?.length + ' Reply'
+                ? replies?.length +
+                  ` ${useTranslation({ lang: lang, value: 'Replies' })}`
+                : replies?.length +
+                  ` ${useTranslation({ lang: lang, value: 'Reply' })}`
             }
           >
             {replies?.length
@@ -179,7 +199,7 @@ const Reply = (props: replyProp) => {
                     <div className="item">
                       <Text h5>
                         {i.author.name} &nbsp;
-                        <Text small>{moment(i.createdAt).fromNow()}</Text>
+                        <Text small>{renderDate(i.createdAt)}</Text>
                       </Text>
                       <div
                         style={{ margin: 0, position: 'relative', top: -10 }}
@@ -187,7 +207,10 @@ const Reply = (props: replyProp) => {
                       ></div>
                       <Tooltip
                         placement="right"
-                        text="Click on the number count to who see liked."
+                        text={useTranslation({
+                          lang: lang,
+                          value: 'Click on the number count to who see liked.'
+                        })}
                       >
                         <span
                           className="pointer"

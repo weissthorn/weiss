@@ -5,6 +5,7 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
 });
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Mention from './Mention';
+import { useTranslation } from './intl/Translation';
 
 type editorProp = {
   lang?: any;
@@ -20,7 +21,11 @@ const Editor = (prop: editorProp) => {
       <SunEditor
         lang={prop.lang}
         height={prop.height}
-        placeholder={prop.placeholder ? prop.placeholder : 'Type here....'}
+        placeholder={
+          prop.placeholder
+            ? prop.placeholder
+            : useTranslation({ lang: prop.lang, value: 'Type here...' })
+        }
         setOptions={{
           resizingBar: false,
           // plugins: [Mention],

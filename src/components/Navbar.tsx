@@ -97,10 +97,7 @@ const Navbar = observer((props: navbarProps) => {
       <Popover.Item>
         <NextLink href={`/u/${token.username}`}>
           <Link>
-            <Translation
-              lang={settings.language ? settings.language : 'en'}
-              value="Profile"
-            />
+            <Translation lang={settings?.language} value="Profile" />
           </Link>
         </NextLink>
       </Popover.Item>
@@ -110,10 +107,7 @@ const Navbar = observer((props: navbarProps) => {
           <Popover.Item>
             <NextLink href="/admin">
               <Link>
-                <Translation
-                  lang={settings.language ? settings.language : 'en'}
-                  value="Admin"
-                />
+                <Translation lang={settings?.language} value="Admin" />
               </Link>
             </NextLink>
           </Popover.Item>
@@ -124,16 +118,15 @@ const Navbar = observer((props: navbarProps) => {
       )}
       <Popover.Item>
         <NextLink href="/settings">
-          <Link>Settings</Link>
+          <Link>
+            <Translation lang={settings?.language} value="Settings" />
+          </Link>
         </NextLink>
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
         <Link href="#" icon onClick={logout}>
-          <Translation
-            lang={settings.language ? settings.language : 'en'}
-            value="Log out"
-          />{' '}
+          <Translation lang={settings?.language} value="Log out" />{' '}
           <Spacer w={0.5} inline />
         </Link>
       </Popover.Item>
@@ -145,20 +138,14 @@ const Navbar = observer((props: navbarProps) => {
       <Popover.Item>
         <Link onClick={() => switchTheme('weiss-light')}>
           <Sun size={15} /> <Spacer w={0.5} />
-          <Translation
-            lang={settings.language ? settings.language : 'en'}
-            value="Light"
-          />
+          <Translation lang={settings?.language} value="Light" />
         </Link>
       </Popover.Item>
       <Popover.Item line />
       <Popover.Item>
         <Link onClick={() => switchTheme('weiss-dark')}>
           <Moon size={15} /> <Spacer w={0.5} />
-          <Translation
-            lang={settings.language ? settings.language : 'en'}
-            value="Dark"
-          />
+          <Translation lang={settings?.language} value="Dark" />
         </Link>
       </Popover.Item>
     </>
@@ -179,7 +166,7 @@ const Navbar = observer((props: navbarProps) => {
             <NextLink href="/start-discussion">
               <Link>
                 <Translation
-                  lang={settings.language ? settings.language : 'en'}
+                  lang={settings?.language}
                   value="Start a discussion"
                 />
               </Link>
@@ -188,35 +175,28 @@ const Navbar = observer((props: navbarProps) => {
           <Text p>
             <NextLink href="/">
               <Link>
-                <Translation
-                  lang={settings.language ? settings.language : 'en'}
-                  value="Discussions"
-                />
+                <Translation lang={settings?.language} value="Discussions" />
               </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/category">
-              <Link>Categories</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Categories" />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/members">
               <Link>
-                <Translation
-                  lang={settings.language ? settings.language : 'en'}
-                  value="Members"
-                />
+                <Translation lang={settings?.language} value="Members" />
               </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href={`/u/${token.username}`}>
               <Link>
-                <Translation
-                  lang={settings.language ? settings.language : 'en'}
-                  value="Profile"
-                />
+                <Translation lang={settings?.language} value="Profile" />
               </Link>
             </NextLink>
           </Text>
@@ -224,10 +204,7 @@ const Navbar = observer((props: navbarProps) => {
             <Text p>
               <NextLink href="/admin">
                 <Link>
-                  <Translation
-                    lang={settings.language ? settings.language : 'en'}
-                    value="Admin"
-                  />
+                  <Translation lang={settings?.language} value="Admin" />
                 </Link>
               </NextLink>
             </Text>
@@ -236,15 +213,14 @@ const Navbar = observer((props: navbarProps) => {
           )}
           <Text p>
             <NextLink href="/settings">
-              <Link>Settings</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Settings" />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <Link href="#" icon onClick={logout}>
-              <Translation
-                lang={settings.language ? settings.language : 'en'}
-                value="Log out"
-              />{' '}
+              <Translation lang={settings?.language} value="Log out" />{' '}
               <Spacer w={0.5} inline />
             </Link>
           </Text>
@@ -253,27 +229,37 @@ const Navbar = observer((props: navbarProps) => {
         <>
           <Text p>
             <NextLink href="/">
-              <Link>Discussions</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Discussions" />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/category">
-              <Link>Categories</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Categories" />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/members">
-              <Link>Members</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Members" />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/signup">
-              <Link>Signup</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Signup" />
+              </Link>
             </NextLink>
           </Text>
           <Text p>
             <NextLink href="/login">
-              <Link>Login</Link>
+              <Link>
+                <Translation lang={settings?.language} value="Login" />
+              </Link>
             </NextLink>
           </Text>
         </>
@@ -303,7 +289,10 @@ const Navbar = observer((props: navbarProps) => {
               scale={4 / 3}
               width="100%"
               iconRight={<Search />}
-              placeholder="Search discussion, user, email....."
+              placeholder={useTranslation({
+                lang: settings.language ? settings.language : '',
+                value: 'Search discussion, user, email.....'
+              })}
               clearable
               onChange={(e) => handleSearch(e.target.value)}
             />
@@ -314,7 +303,7 @@ const Navbar = observer((props: navbarProps) => {
                 <Tabs.Item
                   value="1"
                   label={useTranslation({
-                    lang: settings.language ? settings.language : 'en',
+                    lang: settings?.language,
                     value: 'Discussion'
                   })}
                 >
@@ -330,7 +319,13 @@ const Navbar = observer((props: navbarProps) => {
                     </div>
                   ))}
                 </Tabs.Item>
-                <Tabs.Item value="2" label="User">
+                <Tabs.Item
+                  value="2"
+                  label={useTranslation({
+                    lang: settings?.language,
+                    value: 'User'
+                  })}
+                >
                   <Spacer h={2} />
                   {users.map((item) => (
                     <div key={item.id}>
@@ -394,24 +389,20 @@ const Navbar = observer((props: navbarProps) => {
             <Grid xs={0} md={10}>
               <NextLink href="/">
                 <Link>
-                  <Translation
-                    lang={settings.language ? settings.language : 'en'}
-                    value="Discussions"
-                  />
+                  <Translation lang={settings?.language} value="Discussions" />
                 </Link>
               </NextLink>
 
               <Spacer inline />
               <NextLink href="/category">
-                <Link>Categories</Link>
+                <Link>
+                  <Translation lang={settings?.language} value="Categories" />
+                </Link>
               </NextLink>
               <Spacer inline />
               <NextLink href="/members">
                 <Link>
-                  <Translation
-                    lang={settings.language ? settings.language : 'en'}
-                    value="Members"
-                  />
+                  <Translation lang={settings?.language} value="Members" />
                 </Link>
               </NextLink>
             </Grid>
@@ -504,11 +495,15 @@ const Navbar = observer((props: navbarProps) => {
                   </span>
                   <Spacer w={2} inline />
                   <NextLink href="/signup">
-                    <Link>Signup</Link>
+                    <Link>
+                      <Translation lang={settings?.language} value="Signup" />
+                    </Link>
                   </NextLink>
                   <Spacer w={2} inline />
                   <NextLink href="/login">
-                    <Link>Login</Link>
+                    <Link>
+                      <Translation lang={settings?.language} value="Login" />
+                    </Link>
                   </NextLink>
                 </>
               )}

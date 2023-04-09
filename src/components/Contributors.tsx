@@ -4,8 +4,12 @@ import NextLink from 'next/link';
 import { Text, Link, User, Spacer, Loading } from '@geist-ui/core';
 import UserStore from 'stores/user';
 import { pluralize } from './api/utils';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
-const Contributors = observer(() => {
+type contributorProps = {
+  lang: string;
+};
+const Contributors = observer((props: contributorProps) => {
   const [{ loading, users, getContributors }] = useState(() => new UserStore());
 
   useEffect(() => {
@@ -14,7 +18,9 @@ const Contributors = observer(() => {
 
   return (
     <>
-      <Text h3>Top Contributors</Text>
+      <Text h3>
+        <Translation lang={props.lang} value="Top Contributors" />
+      </Text>
       {loading ? <Loading /> : ''}
       {users.map((item) => (
         <NextLink key={item.id} href={`/u/${item.username}`}>
@@ -26,9 +32,16 @@ const Contributors = observer(() => {
               name={item.name}
             >
               <Text small>
-                {item.discussion} Discussion{pluralize(item.discussion!)}{' '}
-                &nbsp;- {item.coin} Coin
-                {pluralize(item.coin!)}
+                {item.discussion}{' '}
+                {useTranslation({
+                  lang: props.lang,
+                  value: `Discussion${pluralize(item.discussion!)}`
+                })}{' '}
+                &nbsp;- {item.coin}{' '}
+                {useTranslation({
+                  lang: props.lang,
+                  value: `Coin${pluralize(item.coin!)}`
+                })}
               </Text>
             </User>
           </Link>

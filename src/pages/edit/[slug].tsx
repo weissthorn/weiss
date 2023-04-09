@@ -20,6 +20,7 @@ import Editor from 'components/Editor';
 import CategoryStore from 'stores/category';
 import SettingsStore from 'stores/settings';
 import { resProp } from 'interfaces/res';
+import { Translation, useTranslation } from 'components/intl/Translation';
 
 const EditDiscussion = observer(() => {
   const token = useToken();
@@ -64,11 +65,26 @@ const EditDiscussion = observer(() => {
   const save = async () => {
     const { title, categoryId } = discussion;
     if (!title) {
-      toast.error('Title is too short!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Title is too short!'
+        })
+      );
     } else if (!categoryId) {
-      toast.error('Please choose a category!');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Please choose a category!'
+        })
+      );
     } else if (!content) {
-      toast.error('Content is blank.');
+      toast.error(
+        useTranslation({
+          lang: settings?.language,
+          value: 'Content is blank.'
+        })
+      );
     } else {
       let data = {
         id: discussion.id,
@@ -96,10 +112,17 @@ const EditDiscussion = observer(() => {
             <Card shadow>
               <div className="center">
                 <Lock size={30} />
-                <Text>You are required to login to access this page</Text>
+                <Text>
+                  <Translation
+                    lang={settings?.language}
+                    value="You are required to login to access this page"
+                  />
+                </Text>
                 <Spacer />
                 <Link href="/login">
-                  <Button type="secondary">Sign in</Button>
+                  <Button type="secondary">
+                    <Translation lang={settings?.language} value={'Sign in'} />
+                  </Button>
                 </Link>
                 <Spacer />
               </div>
@@ -109,32 +132,53 @@ const EditDiscussion = observer(() => {
       ) : (
         ''
       )}
-      <Navbar title="Edit Discussion" description="Edit Discussion" />
+      <Navbar
+        title={useTranslation({
+          lang: settings?.language,
+          value: 'Edit discussion'
+        })}
+        description={useTranslation({
+          lang: settings?.language,
+          value: 'Edit discussion'
+        })}
+      />
       <Modal visible={modal} disableBackdropClick>
-        <Modal.Title>Delete Discussion</Modal.Title>
+        <Modal.Title>
+          <Translation lang={settings?.language} value={'Delete discussion'} />
+        </Modal.Title>
         <Modal.Content>
-          <p className="center">Are you sure you want to delete?</p>
+          <p className="center">
+            <Translation
+              lang={settings?.language}
+              value={'Are you sure you want to delete?'}
+            />
+          </p>
         </Modal.Content>
         <Modal.Action passive onClick={() => toggleModal(false)}>
-          Cancel
+          <Translation lang={settings?.language} value={'Cancel'} />
         </Modal.Action>
         <Modal.Action
           style={{ color: '#cb0000' }}
           loading={loading}
           onClick={() => deletePost(discussion.id)}
         >
-          Yes, Delete
+          <Translation lang={settings?.language} value={'Yes, Delete'} />
         </Modal.Action>
       </Modal>
       <div className="page-container top-100">
         <div className="notification-container">
-          <Text h3>Edit Discussion</Text>
+          <Text h3>
+            <Translation lang={settings?.language} value={'Edit discussion'} />
+          </Text>
           <Spacer />
           <div className="discuss-grid">
             <div className="item">
               <Input
                 width="100%"
-                placeholder="Discussion Title"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Discussion Title'
+                })}
                 value={discussion.title}
                 onChange={(e) =>
                   setDiscussion({ ...discussion, title: e.target.value })
@@ -145,7 +189,10 @@ const EditDiscussion = observer(() => {
               <Select
                 disableMatchWidth={true}
                 width={'100%'}
-                placeholder="Choose a Category"
+                placeholder={useTranslation({
+                  lang: settings?.language,
+                  value: 'Choose a Category'
+                })}
                 value={discussion.categoryId}
                 onChange={(val) =>
                   setDiscussion({ ...discussion, categoryId: val })
@@ -161,10 +208,13 @@ const EditDiscussion = observer(() => {
           </div>
           {discussion.content ? (
             <Editor
-              lang={settings.language}
+              lang={settings?.language}
               value={content}
               height="200px"
-              placeholder="Type something memorable..."
+              placeholder={useTranslation({
+                lang: settings?.language,
+                value: 'Type something memorable...'
+              })}
               onChange={(val) => setContent(val)}
             />
           ) : (
@@ -174,7 +224,7 @@ const EditDiscussion = observer(() => {
           {token.id ? (
             <>
               <Button loading={loading} type="secondary-light" onClick={save}>
-                Save
+                <Translation lang={settings?.language} value="Save" />
               </Button>
               <Button
                 type="abort"
@@ -186,7 +236,10 @@ const EditDiscussion = observer(() => {
           ) : (
             <Link href="/login">
               <Button loading={loading} type="secondary-light">
-                Sign in to publish
+                <Translation
+                  lang={settings?.language}
+                  value={'Sign in to publish'}
+                />
               </Button>
             </Link>
           )}

@@ -19,7 +19,10 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
               .then(() => {
                 res
                   .status(200)
-                  .json({ success: true, data: 'Account Updated' });
+                  .json({
+                    success: true,
+                    data: 'Account updated successfully!'
+                  });
               });
           } else {
             res.send({
