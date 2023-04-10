@@ -18,7 +18,7 @@ const Auth = (props: any) => {
       });
       router.push('/no-auth');
     }
-  }, [router]);
+  }, [router, cookie]);
 
   if (user.role !== 'admin') {
     // router.push('/login');

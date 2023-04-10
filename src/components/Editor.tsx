@@ -4,7 +4,7 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false
 });
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
-import Mention from './Mention';
+
 import { useTranslation } from './intl/Translation';
 
 type editorProp = {
@@ -28,7 +28,6 @@ const Editor = (prop: editorProp) => {
         }
         setOptions={{
           resizingBar: false,
-          // plugins: [Mention],
           buttonList: [
             [
               'formatBlock',

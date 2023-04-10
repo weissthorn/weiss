@@ -13,5 +13,5 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-      - name: Install packages && run lint
-        run: yarn && yarn lint
+      - name: Install packages && build
+        run: yarn && yarn build

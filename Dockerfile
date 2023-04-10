@@ -1,6 +1,8 @@
 # Base on offical Node.js Alpine image
 FROM rethinkdb:latest
 
+ENTRYPOINT ["rethinkdb", "--bind", "all"]
+
 RUN useradd -ms /bin/bash weiss
 
 # Set working directory
@@ -41,5 +43,7 @@ EXPOSE 2323
 # The node user is provided in the Node.js Alpine base image
 USER weiss
 
-# Run npm start script with PM2 when container starts
+
+
+# Run yarn start script with PM2 when container starts
 CMD [ "pm2-runtime", "yarn", "--", "start" ]
