@@ -8,7 +8,7 @@ import {
   Loading
 } from '@geist-ui/core';
 import { format } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import Navbar from 'components/Navbar';
@@ -51,7 +51,13 @@ const User = observer(() => {
     const date: any = value
       ? format(new Date(value), 'MMM d, yyyy @ h:mm a', {
           locale:
-            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+            lang === 'es'
+              ? es
+              : lang === 'fr'
+              ? fr
+              : lang === 'en'
+              ? enUS
+              : null
         })
       : '';
     return <span className="locale-time">{date}</span>;

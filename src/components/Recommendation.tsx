@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import NextLink from 'next/link';
 import { format } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import { Text, Link, Spacer, Loading } from '@geist-ui/core';
 import DiscussionStore from 'stores/discussion';
 import { Translation, useTranslation } from 'components/intl/Translation';
@@ -36,7 +36,7 @@ const Recommendation = observer((props: recommendProps) => {
               : props.lang === 'fr'
               ? fr
               : props.lang === 'en'
-              ? en
+              ? enUS
               : null
         })
       : '';

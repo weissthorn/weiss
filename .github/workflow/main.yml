@@ -1,0 +1,17 @@
+name: Build Pipeline
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+      - name: Install packages && run lint
+        run: yarn && yarn lint

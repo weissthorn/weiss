@@ -9,7 +9,9 @@
     "lint": "next lint",
     "production": "yarn build && pm2 start npm --name weiss -- run start",
     "start_db": "rethinkdb --bind all",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "docker-build": "docker build -t weiss .",
+    "docker-run": "docker run -i -t weiss:latest"
   },
   "dependencies": {
     "@geist-ui/core": "^2.3.8",

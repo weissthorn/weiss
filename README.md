@@ -3,11 +3,12 @@
 Modern, Minimalistic Discussion Software
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b434e4594827418681e9fbe21566b45e)](https://www.codacy.com/gh/weissthorn/weiss/dashboard?utm_source=github.com&utm_medium=referral&utm_content=weissthorn/weiss&utm_campaign=Badge_Grade)
+![git workflow](https://github.com/weissthorn/weiss/actions/workflows/main.yml/badge.svg?branch=main)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ### Prerequisite
 
-- [NodeJS 12 LTS upward](https://github.com/nvm-sh/nvm/blob/master/README.md)
+- [NodeJS 16 LTS upward](https://github.com/nvm-sh/nvm/blob/master/README.md)
 - [RethinkDB 2.4 upward](https://rethinkdb.com/docs/install/)
 
 ![image5](./public/screenshots/5.png)

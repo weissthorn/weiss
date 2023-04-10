@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import moment from 'moment';
 import { format } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import { Card, Text, Grid, Input } from '@geist-ui/core';
 import CountUp from 'react-countup';
 import dynamic from 'next/dynamic';
@@ -158,7 +158,7 @@ const Dashboard = observer(() => {
                       : settings?.language === 'fr'
                       ? fr
                       : settings?.language === 'en'
-                      ? en
+                      ? enUS
                       : null
                 })}
               </Text>
@@ -173,7 +173,7 @@ const Dashboard = observer(() => {
                       : settings?.language === 'fr'
                       ? fr
                       : settings?.language === 'en'
-                      ? en
+                      ? enUS
                       : null
                 })} - ${format(date[0].endDate, 'MMM d, yyyy', {
                   locale:
@@ -182,7 +182,7 @@ const Dashboard = observer(() => {
                       : settings?.language === 'fr'
                       ? fr
                       : settings?.language === 'en'
-                      ? en
+                      ? enUS
                       : null
                 })}`}
                 onClick={() => toggleDate(true)}

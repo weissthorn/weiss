@@ -11,7 +11,7 @@ import {
 } from '@geist-ui/core';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import { format } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import AdminNavbar from 'components/admin/Navbar';
 import SearchHeading from 'components/SearchHeading';
 import Sidebar from 'components/admin/Sidebar';
@@ -100,7 +100,7 @@ const Reports = observer(() => {
               : settings?.language === 'fr'
               ? fr
               : settings?.language === 'en'
-              ? en
+              ? enUS
               : null
         })
       : '';

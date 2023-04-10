@@ -8,6 +8,8 @@ export interface notificationProp {
   action?: string;
   read?: boolean;
   type?: string;
+  name?: string;
+  filterType?: string;
   user?: any;
   createdAt?: string;
   updatedAt?: string;

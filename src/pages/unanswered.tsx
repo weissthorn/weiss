@@ -191,7 +191,7 @@ const Home = observer(() => {
 
         <aside>
           <div className="sidenav">
-            <Contributors />
+            <Contributors lang={settings?.language} />
             {settings.advert?.right ? (
               <Card>
                 <div

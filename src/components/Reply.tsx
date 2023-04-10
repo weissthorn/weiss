@@ -11,7 +11,7 @@ import {
 import { Heart, HeartFill } from '@geist-ui/icons';
 import NextLink from 'next/link';
 import { formatDistance } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import { Translation, useTranslation } from './intl/Translation';
 
 type replyProp = {
@@ -63,7 +63,13 @@ const Reply = (props: replyProp) => {
       ? formatDistance(new Date(value), new Date(), {
           addSuffix: true,
           locale:
-            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+            lang === 'es'
+              ? es
+              : lang === 'fr'
+              ? fr
+              : lang === 'en'
+              ? enUS
+              : null
         })
       : '';
     return <span className="locale-time">{date}</span>;

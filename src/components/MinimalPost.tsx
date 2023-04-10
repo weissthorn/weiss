@@ -1,7 +1,7 @@
 import { Text, Spacer } from '@geist-ui/core';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import { pluralize } from './api/utils';
 import { Translation, useTranslation } from 'components/intl/Translation';
 
@@ -21,7 +21,13 @@ const MinimalPost = (props: postProps) => {
     const date: any = value
       ? format(new Date(value), 'MMM d, yyyy @ h:mm a', {
           locale:
-            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+            lang === 'es'
+              ? es
+              : lang === 'fr'
+              ? fr
+              : lang === 'en'
+              ? enUS
+              : null
         })
       : '';
     return <span className="locale-time">{date}</span>;

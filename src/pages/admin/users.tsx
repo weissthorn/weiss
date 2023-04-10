@@ -20,7 +20,7 @@ import { userProp } from 'interfaces/user';
 import toast, { Toaster } from 'react-hot-toast';
 import Auth from 'components/admin/Auth';
 import { format } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import SettingsStore from 'stores/settings';
 import { useTranslation, Translation } from 'components/intl/Translation';
 
@@ -96,7 +96,7 @@ const Admin = observer(() => {
               : settings?.language === 'fr'
               ? fr
               : settings?.language === 'en'
-              ? en
+              ? enUS
               : null
         })
       : '';

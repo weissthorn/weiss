@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Spacer, Text, Card, Loading, Button, Avatar } from '@geist-ui/core';
 import { ChevronDown } from '@geist-ui/icons';
 import { formatDistance } from 'date-fns';
-import { es, fr, en } from 'date-fns/locale';
+import { es, fr, enUS } from 'date-fns/locale';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import NotificationStore from 'stores/notification';
@@ -69,7 +69,13 @@ const Notifications = observer(() => {
       ? formatDistance(new Date(value), new Date(), {
           addSuffix: true,
           locale:
-            lang === 'es' ? es : lang === 'fr' ? fr : lang === 'en' ? en : null
+            lang === 'es'
+              ? es
+              : lang === 'fr'
+              ? fr
+              : lang === 'en'
+              ? enUS
+              : null
         })
       : '';
     return <span className="locale-time">{date}</span>;
