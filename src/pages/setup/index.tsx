@@ -70,7 +70,7 @@ const Setup = observer(() => {
   };
 
   return (
-    <>
+    <SetupVerify>
       <Navbar
         title="Welcome - Setup Weiss"
         description="Welcome - Setup Weiss"
@@ -106,26 +106,25 @@ const Setup = observer(() => {
                   <Translation lang={settings?.language} value="English" />
                 </Select.Option>
                 <Select.Option value="fr">
-                  <Translation lang={settings?.language} value="French" />{' '}
-                  <Text small>
-                    (
-                    <Translation
-                      lang={settings?.language}
-                      value="coming soon"
-                    />
-                    )
-                  </Text>
+                  <Translation lang={settings?.language} value="French" />
                 </Select.Option>
                 <Select.Option value="es">
-                  <Translation lang={settings?.language} value="Spanish" />{' '}
-                  <Text small>
-                    (
-                    <Translation
-                      lang={settings?.language}
-                      value="coming soon"
-                    />
-                    )
-                  </Text>
+                  <Translation lang={settings?.language} value="Spanish" />
+                </Select.Option>
+                <Select.Option value="de">
+                  <Translation lang={settings?.language} value="German" />
+                </Select.Option>
+                <Select.Option value="cn">
+                  <Translation lang={settings?.language} value="Chinese" />
+                </Select.Option>
+                <Select.Option value="ja">
+                  <Translation lang={settings?.language} value="Japanese" />
+                </Select.Option>
+                <Select.Option value="ko">
+                  <Translation lang={settings?.language} value="Korean" />
+                </Select.Option>
+                <Select.Option value="ru">
+                  <Translation lang={settings?.language} value="Russian" />
                 </Select.Option>
               </Select>
               <Spacer h={1.5} />
@@ -190,7 +189,7 @@ const Setup = observer(() => {
           </div>
         </div>
       </div>
-    </>
+    </SetupVerify>
   );
 });
 

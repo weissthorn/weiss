@@ -95,7 +95,7 @@ const EmailSetup = observer(() => {
   };
 
   return (
-    <>
+    <SetupVerify>
       <Navbar
         title="Email settings - Setup Weiss"
         description="Email settings - Setup Weiss"
@@ -192,7 +192,7 @@ const EmailSetup = observer(() => {
           </div>
         </div>
       </div>
-    </>
+    </SetupVerify>
   );
 });
 
