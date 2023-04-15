@@ -1,9 +1,9 @@
 import { Text, Spacer } from '@geist-ui/core';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import { pluralize } from './api/utils';
-import { Translation, useTranslation } from 'components/intl/Translation';
+import { useTranslation } from 'components/intl/Translation';
 
 type postProps = {
   lang: string;
@@ -35,6 +35,8 @@ const MinimalPost = (props: postProps) => {
               ? zhCN
               : lang === 'ja'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';

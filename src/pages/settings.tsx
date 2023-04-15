@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Spacer,
   Text,
@@ -88,7 +88,7 @@ const Settings = observer(() => {
 
     let upload: any = document.querySelector(id);
 
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append('file', upload.files[0]);
     let file = '';
     await uploadImage('logo', formData)

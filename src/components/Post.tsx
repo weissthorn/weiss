@@ -1,7 +1,7 @@
 import { Popover, Text, Link, Avatar, Spacer, User } from '@geist-ui/core';
 import NextLink from 'next/link';
 import { format } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import { pluralize } from './api/utils';
 import { Translation, useTranslation } from 'components/intl/Translation';
 
@@ -18,11 +18,6 @@ type postProps = {
 
 const Post = (props: postProps) => {
   const { title, avatar, slug, category, comment, author, date, lang } = props;
-
-  const ellipsis = (val: string) => {
-    val = val.length >= 50 ? val.substring(0, 50) + '....' : val;
-    return val;
-  };
 
   const content = () => (
     <div style={{ padding: '0 10px' }}>
@@ -52,6 +47,8 @@ const Post = (props: postProps) => {
               ? zhCN
               : lang === 'ja'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';

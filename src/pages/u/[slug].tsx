@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Text,
   Pagination,
@@ -8,22 +8,19 @@ import {
   Loading
 } from '@geist-ui/core';
 import { format } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import Navbar from 'components/Navbar';
-import EditorModal from 'components/modals/EditorModal';
-import useToken from 'components/Token';
 import UserStore from 'stores/user';
 import { useRouter } from 'next/router';
 import MinimalPost from 'components/MinimalPost';
 import SettingsStore from 'stores/settings';
 import { pluralize, formatNumber } from 'components/api/utils';
 import DiscussionStore from 'stores/discussion';
-import { Translation, useTranslation } from 'components/intl/Translation';
+import { Translation } from 'components/intl/Translation';
 
 const User = observer(() => {
-  const token = useToken();
   const router = useRouter();
   const { slug } = router.query;
   const [id, setId] = useState('');
@@ -65,6 +62,8 @@ const User = observer(() => {
               ? zhCN
               : lang === 'jp'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';

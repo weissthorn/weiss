@@ -34,7 +34,7 @@ const Settings = observer(() => {
 
     let upload: any = document.querySelector(id);
 
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append('file', upload.files[0]);
 
     await uploadImage('logo', formData)
@@ -269,6 +269,9 @@ const Settings = observer(() => {
                     </Select.Option>
                     <Select.Option value="ja">
                       <Translation lang={settings?.language} value="Japanese" />
+                    </Select.Option>
+                    <Select.Option value="ko">
+                      <Translation lang={settings?.language} value="Korean" />
                     </Select.Option>
                     <Select.Option value="ru">
                       <Translation lang={settings?.language} value="Russian" />

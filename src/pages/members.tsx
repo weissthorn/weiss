@@ -13,7 +13,7 @@ import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import { format } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import UserStore from 'stores/user';
 import useToken from 'components/Token';
 import { useRouter } from 'next/router';
@@ -58,6 +58,8 @@ const Members = observer(() => {
               ? zhCN
               : lang === 'ja'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';

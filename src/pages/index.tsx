@@ -9,8 +9,7 @@ import {
   Loading
 } from '@geist-ui/core';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
-import { useRouter } from 'next/router';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { observer } from 'mobx-react-lite';
 import Navbar from 'components/Navbar';
 import Post from 'components/Post';
@@ -20,7 +19,7 @@ import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import Contributors from 'components/Contributors';
 import AdminVerify from 'components/admin/AdminVerify';
-import { Translation, useTranslation } from 'components/intl/Translation';
+import { Translation } from 'components/intl/Translation';
 
 const Home = observer(() => {
   const token = useToken();

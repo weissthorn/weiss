@@ -3,9 +3,8 @@ import { Spacer, Text, Button } from '@geist-ui/core';
 import Navbar from 'components/Navbar';
 import Link from 'next/link';
 import SettingsStore from 'stores/settings';
-import { Translation, useTranslation } from 'components/intl/Translation';
+import { Translation } from 'components/intl/Translation';
 import { ChevronLeft } from '@geist-ui/icons';
-import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 
 const PageNotFound = () => {

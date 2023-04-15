@@ -46,14 +46,13 @@ yarn production
 - &#x2611; Web notification
 - &#x2610; Push notification
 - &#x2611; Theming: Light and Dark
-- &#x2610; Language & Translation (English, French, Arabic, Spanish etc)
+- &#x2611; Language & Translation (English, French, Spanish, Deutsch, Chinese, Japanese, Korean, and Russian)
 - &#x2611; Coin and reward
 - &#x2611; Reports and flag
 - &#x2611; Advert settings
 - &#x2611; Analytics, pageviews and post views
 - &#x2611; Ban words
 - &#x2610; Docker image
-- &#x2610; Kubernetes
 - &#x2610; Digital ocean marketplace
 - &#x2610; AWS marketplace
 

@@ -1,7 +1,7 @@
 import { Badge, Modal, Text, Select, Spacer, Divider } from '@geist-ui/core';
 import { userProp } from 'interfaces/user';
 import moment from 'moment';
-import { useTranslation, Translation } from 'components/intl/Translation';
+import { Translation } from 'components/intl/Translation';
 
 type userModalProps = {
   loading: boolean;

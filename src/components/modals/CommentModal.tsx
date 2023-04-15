@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { Spacer, Button, Select, Popover, Text } from '@geist-ui/core';
+import { Spacer, Button } from '@geist-ui/core';
 import { Maximize, Minimize, XCircleFill } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import Editor from 'components/Editor';
-import { Translation, useTranslation } from 'components/intl/Translation';
+import { Translation } from 'components/intl/Translation';
 
 type editorProps = {
   lang: string;
@@ -27,9 +27,7 @@ const CommentModal = observer((props: editorProps) => {
     content,
     show,
     isAuthenticate,
-    replyId,
-    replyUsername,
-    commentNumber,
+
     actionTrigger,
     toggleModal,
     save
@@ -78,7 +76,7 @@ const CommentModal = observer((props: editorProps) => {
                 }}
               />
             </div>
-
+            <Spacer />
             <Editor
               lang={lang}
               height={_height}

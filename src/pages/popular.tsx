@@ -2,17 +2,15 @@ import { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import {
   Spacer,
-  Text,
   Pagination,
   Link,
   Button,
   Card,
-  User,
   Loading
 } from '@geist-ui/core';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import { useRouter } from 'next/router';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { observer } from 'mobx-react-lite';
 import Navbar from 'components/Navbar';
 import Post from 'components/Post';
@@ -21,7 +19,7 @@ import useToken from 'components/Token';
 import SettingsStore from 'stores/settings';
 import DiscussionStore from 'stores/discussion';
 import Contributors from 'components/Contributors';
-import { Translation, useTranslation } from 'components/intl/Translation';
+import { Translation } from 'components/intl/Translation';
 
 const Home = observer(() => {
   const token = useToken();

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Spacer, Text, Card, Loading, Button, Avatar } from '@geist-ui/core';
 import { ChevronDown } from '@geist-ui/icons';
 import { formatDistance } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import NotificationStore from 'stores/notification';
@@ -83,6 +83,8 @@ const Notifications = observer(() => {
               ? zhCN
               : lang === 'ja'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';

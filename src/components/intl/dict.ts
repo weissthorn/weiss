@@ -6,7 +6,8 @@ const dict = [
     de: 'Licht',
     cn: '亮',
     ja: 'ライト',
-    ru: 'Светлая'
+    ru: 'Светлая',
+    ko: '빛'
   },
   {
     en: 'Dark',
@@ -15,7 +16,8 @@ const dict = [
     de: 'Dunkel',
     cn: '暗',
     ja: 'ダーク',
-    ru: 'Темная'
+    ru: 'Темная',
+    ko: '어둠'
   },
   {
     en: 'Search....',
@@ -24,7 +26,8 @@ const dict = [
     de: 'Suchen....',
     cn: '搜索...',
     ja: '検索....',
-    ru: 'Поиск....'
+    ru: 'Поиск....',
+    ko: '검색....'
   },
   {
     en: 'Search discussion, user, email.....',
@@ -33,7 +36,8 @@ const dict = [
     de: 'Suche nach Diskussionen, Benutzern, E-Mails.....',
     cn: '搜索讨论、用户、电子邮件...',
     ja: 'ディスカッション、ユーザー、メールで検索....',
-    ru: 'Поиск дискуссии, пользователя, электронной почты.....'
+    ru: 'Поиск дискуссии, пользователя, электронной почты.....',
+    ko: '토론, 사용자, 이메일 검색.....'
   },
   {
     en: 'Profile updated successfully',
@@ -42,7 +46,8 @@ const dict = [
     de: 'Profil erfolgreich aktualisiert',
     cn: '个人资料更新成功',
     ja: 'プロフィールが正常に更新されました',
-    ru: 'Профиль успешно обновлен'
+    ru: 'Профиль успешно обновлен',
+    ko: '프로필이 성공적으로 업데이트되었습니다.'
   },
   {
     en: 'Unable to update profile. Please try again.',
@@ -51,7 +56,8 @@ const dict = [
     de: 'Profil kann nicht aktualisiert werden. Bitte versuchen Sie es erneut.',
     cn: '无法更新个人资料，请重试。',
     ja: 'プロフィールを更新できませんでした。もう一度お試しください。',
-    ru: 'Не удалось обновить профиль. Пожалуйста, попробуйте еще раз.'
+    ru: 'Не удалось обновить профиль. Пожалуйста, попробуйте еще раз.',
+    ko: '프로필을 업데이트할 수 없습니다. 다시 시도해주세요.'
   },
   {
     en: 'Profile',
@@ -60,7 +66,8 @@ const dict = [
     de: 'Profil',
     cn: '个人资料',
     ja: 'プロフィール',
-    ru: 'Профиль'
+    ru: 'Профиль',
+    ko: '프로필'
   },
   {
     en: 'Date joined',
@@ -69,7 +76,8 @@ const dict = [
     de: 'Beitrittsdatum',
     cn: '加入日期',
     ja: '参加日',
-    ru: 'Дата регистрации'
+    ru: 'Дата регистрации',
+    ko: '가입 날짜'
   },
   {
     en: 'Admin',
@@ -78,7 +86,8 @@ const dict = [
     de: 'Administrator',
     cn: '管理员',
     ja: '管理者',
-    ru: 'Администратор'
+    ru: 'Администратор',
+    ko: '관리자'
   },
   {
     en: 'Log out',
@@ -87,7 +96,8 @@ const dict = [
     de: 'Abmelden',
     cn: '退出登录',
     ja: 'ログアウト',
-    ru: 'Выйти'
+    ru: 'Выйти',
+    ko: '로그아웃'
   },
   {
     en: 'Start a discussion',
@@ -96,7 +106,8 @@ const dict = [
     de: 'Diskussion starten',
     cn: '开始讨论',
     ja: 'ディスカッションを始める',
-    ru: 'Начать дискуссию'
+    ru: 'Начать дискуссию',
+    ko: '토론 시작하기'
   },
   {
     en: 'Discussion',
@@ -105,7 +116,8 @@ const dict = [
     de: 'Diskussion',
     cn: '讨论',
     ja: 'ディスカッション',
-    ru: 'Дискуссия'
+    ru: 'Дискуссия',
+    ko: '토론'
   },
   {
     en: 'Discussions',
@@ -114,7 +126,8 @@ const dict = [
     de: 'Diskussionen',
     cn: '讨论',
     ja: 'ディスカッション',
-    ru: 'Дискуссии'
+    ru: 'Дискуссии',
+    ko: '토론들'
   },
   {
     en: 'Members',
@@ -123,7 +136,8 @@ const dict = [
     de: 'Mitglieder',
     cn: '成员',
     ja: 'メンバー',
-    ru: 'Участники'
+    ru: 'Участники',
+    ko: '회원들'
   },
   {
     en: 'Member',
@@ -132,7 +146,8 @@ const dict = [
     de: 'Mitglied',
     cn: '成员',
     ja: 'メンバー',
-    ru: 'Участник'
+    ru: 'Участник',
+    ko: '회원'
   },
   {
     en: 'member',
@@ -141,7 +156,8 @@ const dict = [
     de: 'Mitglied',
     cn: '成员',
     ja: 'メンバー',
-    ru: 'участник'
+    ru: 'участник',
+    ko: '회원'
   },
   {
     en: 'comment',
@@ -150,7 +166,8 @@ const dict = [
     de: 'Kommentar',
     cn: '评论',
     ja: 'コメント',
-    ru: 'комментарий'
+    ru: 'комментарий',
+    ko: '댓글'
   },
   {
     en: 'comments',
@@ -159,7 +176,8 @@ const dict = [
     de: 'Kommentare',
     cn: '评论',
     ja: 'コメント',
-    ru: 'комментарии'
+    ru: 'комментарии',
+    ko: '댓글들'
   },
   {
     en: 'Comment',
@@ -168,7 +186,8 @@ const dict = [
     de: 'Kommentar',
     cn: '评论',
     ja: 'コメント',
-    ru: 'Комментарий'
+    ru: 'Комментарий',
+    ko: '댓글'
   },
   {
     en: 'Comments',
@@ -177,7 +196,8 @@ const dict = [
     de: 'Kommentare',
     cn: '评论',
     ja: 'コメント',
-    ru: 'Комментарии'
+    ru: 'Комментарии',
+    ko: '댓글들'
   },
   {
     en: 'reply',
@@ -186,7 +206,8 @@ const dict = [
     de: 'Antwort',
     cn: '回复',
     ja: 'リプライ',
-    ru: 'ответ'
+    ru: 'ответ',
+    ko: '답글'
   },
   {
     en: 'replies',
@@ -195,7 +216,8 @@ const dict = [
     de: 'Antworten',
     cn: '回复',
     ja: 'リプライ',
-    ru: 'ответы'
+    ru: 'ответы',
+    ko: '답글들'
   },
   {
     en: 'Reply',
@@ -204,7 +226,8 @@ const dict = [
     de: 'Antwort',
     cn: '回复',
     ja: 'リプライ',
-    ru: 'Ответ'
+    ru: 'Ответ',
+    ko: '답글'
   },
   {
     en: 'Replies',
@@ -213,7 +236,8 @@ const dict = [
     de: 'Antworten',
     cn: '回复',
     ja: 'リプライ',
-    ru: 'Ответы'
+    ru: 'Ответы',
+    ko: '답글들'
   },
   {
     en: 'like',
@@ -222,7 +246,8 @@ const dict = [
     de: 'Gefällt mir',
     cn: '喜欢',
     ja: 'いいね',
-    ru: 'нравится'
+    ru: 'нравится',
+    ko: '좋아요'
   },
   {
     en: 'liked',
@@ -231,7 +256,8 @@ const dict = [
     de: 'Gefällt mir',
     cn: '已喜欢',
     ja: 'いいね',
-    ru: 'понравилось'
+    ru: 'понравилось',
+    ko: '좋아요 받은 수'
   },
   {
     en: 'moderator',
@@ -240,7 +266,8 @@ const dict = [
     de: 'Moderator',
     cn: '版主',
     ja: 'モデレーター',
-    ru: 'модератор'
+    ru: 'модератор',
+    ko: '운영자'
   },
   {
     en: 'moderators',
@@ -249,7 +276,8 @@ const dict = [
     de: 'Moderatoren',
     cn: '版主',
     ja: 'モデレーター',
-    ru: 'модераторы'
+    ru: 'модераторы',
+    ko: '운영자들'
   },
   {
     en: 'Moderator',
@@ -258,7 +286,8 @@ const dict = [
     de: 'Moderator',
     cn: '版主',
     ja: 'モデレーター',
-    ru: 'Модератор'
+    ru: 'Модератор',
+    ko: '운영자'
   },
   {
     en: 'Moderators',
@@ -267,7 +296,8 @@ const dict = [
     de: 'Moderatoren',
     cn: '版主',
     ja: 'モデレーター',
-    ru: 'Модераторы'
+    ru: 'Модераторы',
+    ko: '운영자들'
   },
   {
     en: 'Loading',
@@ -276,7 +306,8 @@ const dict = [
     de: 'Laden',
     cn: '加载中',
     ja: 'ロード中',
-    ru: 'Загрузка'
+    ru: 'Загрузка',
+    ko: '로딩 중'
   },
   {
     en: 'Settings',
@@ -285,7 +316,8 @@ const dict = [
     de: 'Einstellungen',
     cn: '设置',
     ja: '設定',
-    ru: 'Настройки'
+    ru: 'Настройки',
+    ko: '설정'
   },
   {
     en: 'Top Contributors',
@@ -294,7 +326,8 @@ const dict = [
     de: 'Top-Beiträger',
     cn: '顶级贡献者',
     ja: 'トップの貢献者',
-    ru: 'Топовые участники'
+    ru: 'Топовые участники',
+    ko: '최고 기여자들'
   },
   {
     en: 'Recommend Discussions',
@@ -303,7 +336,8 @@ const dict = [
     de: 'Empfohlene Diskussionen',
     cn: '推荐讨论',
     ja: 'お勧めのディスカッション',
-    ru: 'Рекомендуемые дискуссии'
+    ru: 'Рекомендуемые дискуссии',
+    ko: '추천 토론들'
   },
   {
     en: 'Share',
@@ -312,7 +346,8 @@ const dict = [
     de: 'Teilen',
     cn: '分享',
     ja: '共有',
-    ru: 'Поделиться'
+    ru: 'Поделиться',
+    ko: '공유'
   },
   {
     en: 'Email',
@@ -321,7 +356,8 @@ const dict = [
     de: 'E-Mail',
     cn: '电子邮件',
     ja: 'メール',
-    ru: 'Электронная почта'
+    ru: 'Электронная почта',
+    ko: '이메일'
   },
   {
     en: 'Report',
@@ -330,7 +366,8 @@ const dict = [
     de: 'Melden',
     cn: '举报',
     ja: '報告する',
-    ru: 'Пожаловаться'
+    ru: 'Пожаловаться',
+    ko: '신고'
   },
   {
     en: 'Reports',
@@ -339,7 +376,8 @@ const dict = [
     de: 'Meldungen',
     cn: '举报',
     ja: '報告',
-    ru: 'Жалобы'
+    ru: 'Жалобы',
+    ko: '신고들'
   },
   {
     en: 'Edit discussion',
@@ -348,7 +386,8 @@ const dict = [
     de: 'Diskussion bearbeiten',
     cn: '编辑讨论',
     ja: 'ディスカッションを編集',
-    ru: 'Редактировать дискуссию'
+    ru: 'Редактировать дискуссию',
+    ko: '토론 수정'
   },
   {
     en: 'Category',
@@ -357,7 +396,8 @@ const dict = [
     de: 'Kategorie',
     cn: '分类',
     ja: 'カテゴリ',
-    ru: 'Категория'
+    ru: 'Категория',
+    ko: '카테고리'
   },
   {
     en: 'Categories',
@@ -366,7 +406,8 @@ const dict = [
     de: 'Kategorien',
     cn: '分类',
     ja: 'カテゴリ',
-    ru: 'Категории'
+    ru: 'Категории',
+    ko: '카테고리들'
   },
   {
     en: 'Reply',
@@ -375,7 +416,8 @@ const dict = [
     de: 'Antwort',
     cn: '回复',
     ja: 'リプライ',
-    ru: 'Ответ'
+    ru: 'Ответ',
+    ko: '답글'
   },
   {
     en: 'Replies',
@@ -384,7 +426,8 @@ const dict = [
     de: 'Antworten',
     cn: '回复',
     ja: 'リプライ',
-    ru: 'Ответы'
+    ru: 'Ответы',
+    ko: '답글들'
   },
   {
     en: 'Click on the number count to who see liked.',
@@ -393,7 +436,8 @@ const dict = [
     de: 'Klicken Sie auf die Anzahl, um zu sehen, wer es gemocht hat.',
     cn: '点击数字查看谁点赞。',
     ja: 'いいねしたユーザーを見るには数字をクリックしてください',
-    ru: 'Нажмите на число, чтобы увидеть, кто лайкнул.'
+    ru: 'Нажмите на число, чтобы увидеть, кто лайкнул.',
+    ko: '좋아요를 본 사람 수를 보려면 숫자를 클릭하세요.'
   },
   {
     en: 'Inappropiate content',
@@ -402,7 +446,8 @@ const dict = [
     de: 'Unangemessener Inhalt',
     cn: '不当内容',
     ja: '不適切な内容',
-    ru: 'Неприемлемый контент'
+    ru: 'Неприемлемый контент',
+    ko: '부적절한 내용'
   },
   {
     en: 'Fraud or Spam',
@@ -411,7 +456,8 @@ const dict = [
     de: 'Betrug oder Spam',
     cn: '欺诈或垃圾信息',
     ja: '詐欺またはスパム',
-    ru: 'Мошенничество или спам'
+    ru: 'Мошенничество или спам',
+    ko: '사기 또는 스팸'
   },
   {
     en: 'False information',
@@ -420,7 +466,8 @@ const dict = [
     de: 'Falsche Informationen',
     cn: '虚假信息',
     ja: '虚偽の情報',
-    ru: 'Ложная информация'
+    ru: 'Ложная информация',
+    ko: '거짓 정보'
   },
   {
     en: 'Nudity',
@@ -429,7 +476,8 @@ const dict = [
     de: 'Nacktheit',
     cn: '裸露',
     ja: 'ヌード',
-    ru: 'Нагота'
+    ru: 'Нагота',
+    ko: '노출'
   },
   {
     en: 'Hate speech',
@@ -438,7 +486,8 @@ const dict = [
     de: 'Hassrede',
     cn: '仇恨言论',
     ja: '憎悪的な発言',
-    ru: 'Речь ненависти'
+    ru: 'Речь ненависти',
+    ko: '혐오 발언'
   },
   {
     en: 'Violence',
@@ -447,7 +496,8 @@ const dict = [
     de: 'Gewalt',
     cn: '暴力',
     ja: '暴力',
-    ru: 'Насилие'
+    ru: 'Насилие',
+    ko: '폭력'
   },
   {
     en: 'Harassment',
@@ -456,7 +506,8 @@ const dict = [
     de: 'Belästigung',
     cn: '骚扰',
     ja: '嫌がらせ',
-    ru: 'Харассмент'
+    ru: 'Харассмент',
+    ko: '학대'
   },
   {
     en: 'Terrorism',
@@ -465,7 +516,8 @@ const dict = [
     de: 'Terrorismus',
     cn: '恐怖主义',
     ja: 'テロリズム',
-    ru: 'Терроризм'
+    ru: 'Терроризм',
+    ko: '테러'
   },
   {
     en: 'Suicide or self injury',
@@ -474,7 +526,8 @@ const dict = [
     de: 'Suizid oder Selbstverletzung',
     cn: '自杀或自残',
     ja: '自殺または自傷行為',
-    ru: 'Самоубийство или самоповреждение'
+    ru: 'Самоубийство или самоповреждение',
+    ko: '자살 또는 자해'
   },
   {
     en: 'Child abuse',
@@ -483,7 +536,8 @@ const dict = [
     de: 'Kindesmissbrauch',
     cn: '虐待儿童',
     ja: '児童虐待',
-    ru: 'Детское насилие'
+    ru: 'Детское насилие',
+    ko: '아동 학대'
   },
   {
     en: 'Coin',
@@ -492,7 +546,8 @@ const dict = [
     de: 'Münze',
     cn: '硬币',
     ja: 'コイン',
-    ru: 'Монета'
+    ru: 'Монета',
+    ko: '코인'
   },
   {
     en: 'Coins',
@@ -501,7 +556,8 @@ const dict = [
     de: 'Münzen',
     cn: '硬币',
     ja: 'コイン',
-    ru: 'Монеты'
+    ru: 'Монеты',
+    ko: '코인들'
   },
   {
     en: 'Discussion Title',
@@ -510,7 +566,8 @@ const dict = [
     de: 'Diskussionstitel',
     cn: '讨论标题',
     ja: 'ディスカッションタイトル',
-    ru: 'Заголовок дискуссии'
+    ru: 'Заголовок дискуссии',
+    ko: '토론 제목'
   },
   {
     en: 'Choose a Category',
@@ -519,7 +576,8 @@ const dict = [
     de: 'Wählen Sie eine Kategorie',
     cn: '选择分类',
     ja: 'カテゴリを選択',
-    ru: 'Выберите категорию'
+    ru: 'Выберите категорию',
+    ko: '카테고리 선택'
   },
   {
     en: 'Type here...',
@@ -528,7 +586,8 @@ const dict = [
     de: 'Hier eingeben...',
     cn: '在这里输入...',
     ja: 'ここに入力...',
-    ru: 'Печатайте здесь...'
+    ru: 'Печатайте здесь...',
+    ko: '여기에 입력하세요...'
   },
   {
     en: 'Type something memorable....',
@@ -537,7 +596,8 @@ const dict = [
     de: 'Etwas Unvergessliches eingeben...',
     cn: '输入一些值得记住的内容...',
     ja: '印象に残る何かを入力してください...',
-    ru: 'Введите что-то запоминающееся...'
+    ru: 'Введите что-то запоминающееся...',
+    ko: '기억에 남는 내용을 입력하세요...'
   },
   {
     en: 'Publish',
@@ -546,7 +606,8 @@ const dict = [
     de: 'Veröffentlichen',
     cn: '发布',
     ja: '公開',
-    ru: 'Опубликовать'
+    ru: 'Опубликовать',
+    ko: '게시'
   },
   {
     en: 'Sign in',
@@ -555,7 +616,8 @@ const dict = [
     de: 'Anmelden',
     cn: '登录',
     ja: 'サインイン',
-    ru: 'Войти'
+    ru: 'Войти',
+    ko: '로그인'
   },
   {
     en: 'Mark all read',
@@ -564,7 +626,8 @@ const dict = [
     de: 'Alle als gelesen markieren',
     cn: '全部标记为已读',
     ja: '全て既読にする',
-    ru: 'Отметить все как прочитанное'
+    ru: 'Отметить все как прочитанное',
+    ko: '모두 읽음 표시'
   },
   {
     en: 'No notification',
@@ -573,7 +636,8 @@ const dict = [
     de: 'Keine Benachrichtigungen',
     cn: '无通知',
     ja: '通知なし',
-    ru: 'Нет уведомлений'
+    ru: 'Нет уведомлений',
+    ko: '알림 없음'
   },
   {
     en: 'Sign in to publish',
@@ -582,7 +646,8 @@ const dict = [
     de: 'Anmelden, um zu veröffentlichen',
     cn: '登录以发布',
     ja: '公開するにはサインインしてください',
-    ru: 'Войдите, чтобы опубликовать'
+    ru: 'Войдите, чтобы опубликовать',
+    ko: '게시하려면 로그인하세요'
   },
   {
     en: 'Type something memorable...',
@@ -591,7 +656,8 @@ const dict = [
     de: 'Etwas Unvergessliches eingeben...',
     cn: '输入一些值得记住的内容...',
     ja: '印象に残る何かを入力してください...',
-    ru: 'Введите что-то запоминающееся...'
+    ru: 'Введите что-то запоминающееся...',
+    ko: '기억에 남는 내용을 입력하세요...'
   },
   {
     en: 'Please select a language',
@@ -600,7 +666,8 @@ const dict = [
     de: 'Bitte wählen Sie eine Sprache',
     cn: '请选择语言',
     ja: '言語を選択してください',
-    ru: 'Пожалуйста, выберите язык'
+    ru: 'Пожалуйста, выберите язык',
+    ko: '언어를 선택하세요'
   },
   {
     en: 'Popular',
@@ -609,7 +676,8 @@ const dict = [
     de: 'Beliebt',
     cn: '热门',
     ja: '人気',
-    ru: 'Популярные'
+    ru: 'Популярные',
+    ko: '인기'
   },
   {
     en: 'Recent',
@@ -618,7 +686,8 @@ const dict = [
     de: 'Aktuell',
     cn: '最近',
     ja: '最近',
-    ru: 'Недавние'
+    ru: 'Недавние',
+    ko: '최근'
   },
   {
     en: 'Unanswered',
@@ -627,7 +696,8 @@ const dict = [
     de: 'Unbeantwortet',
     cn: '未解答',
     ja: '未解決',
-    ru: 'Без ответа'
+    ru: 'Без ответа',
+    ko: '미답변'
   },
   {
     en: 'Joined',
@@ -636,7 +706,8 @@ const dict = [
     de: 'Beigetreten',
     cn: '加入',
     ja: '参加した',
-    ru: 'Присоединился'
+    ru: 'Присоединился',
+    ko: '가입일'
   },
   {
     en: 'Go to Discussions',
@@ -645,7 +716,8 @@ const dict = [
     de: 'Zu Diskussionen gehen',
     cn: '前往讨论',
     ja: 'ディスカッションに移動',
-    ru: 'Перейти к дискуссиям'
+    ru: 'Перейти к дискуссиям',
+    ko: '토론으로 이동'
   },
   {
     en: 'Unable to update status! Please try again later.',
@@ -654,7 +726,8 @@ const dict = [
     de: 'Aktualisierung des Status nicht möglich! Bitte versuchen Sie es später erneut.',
     cn: '无法更新状态！请稍后再试。',
     ja: 'ステータスを更新できませんでした！後でもう一度お試しください。',
-    ru: 'Не удалось обновить статус! Пожалуйста, повторите попытку позже.'
+    ru: 'Не удалось обновить статус! Пожалуйста, повторите попытку позже.',
+    ko: '상태 업데이트를 할 수 없습니다! 나중에 다시 시도하세요.'
   },
   {
     en: 'Discussion status updated',
@@ -663,7 +736,8 @@ const dict = [
     de: 'Diskussionsstatus aktualisiert',
     cn: '讨论状态已更新',
     ja: 'ディスカッションステータスが更新されました',
-    ru: 'Статус дискуссии обновлен'
+    ru: 'Статус дискуссии обновлен',
+    ko: '토론 상태가 업데이트되었습니다'
   },
   {
     en: 'No Discussion',
@@ -672,7 +746,8 @@ const dict = [
     de: 'Keine Diskussionen',
     cn: '无讨论',
     ja: 'ディスカッションがありません',
-    ru: 'Нет дискуссий'
+    ru: 'Нет дискуссий',
+    ko: '토론 없음'
   },
   {
     en: 'Notification',
@@ -681,7 +756,8 @@ const dict = [
     de: 'Benachrichtigung',
     cn: '通知',
     ja: '通知',
-    ru: 'Уведомление'
+    ru: 'Уведомление',
+    ko: '알림'
   },
   {
     en: 'Notifications',
@@ -690,7 +766,8 @@ const dict = [
     de: 'Benachrichtigungen',
     cn: '通知',
     ja: '通知',
-    ru: 'Уведомления'
+    ru: 'Уведомления',
+    ko: '알림들'
   },
   {
     en: 'Mark All Read',
@@ -699,7 +776,8 @@ const dict = [
     de: 'Alle als gelesen markieren',
     cn: '全部标记为已读',
     ja: '全て既読にする',
-    ru: 'Отметить все как прочитанное'
+    ru: 'Отметить все как прочитанное',
+    ko: '모두 읽음 표시'
   },
   {
     en: 'Cancel',
@@ -708,7 +786,8 @@ const dict = [
     de: 'Abbrechen',
     cn: '取消',
     ja: 'キャンセル',
-    ru: 'Отменить'
+    ru: 'Отменить',
+    ko: '취소'
   },
   {
     en: 'Yes, Delete',
@@ -717,7 +796,8 @@ const dict = [
     de: 'Ja, Löschen',
     cn: '是的，删除',
     ja: 'はい、削除',
-    ru: 'Да, удалить'
+    ru: 'Да, удалить',
+    ko: '예, 삭제'
   },
   {
     en: 'Delete discussion',
@@ -726,7 +806,8 @@ const dict = [
     de: 'Diskussion löschen',
     cn: '删除讨论',
     ja: 'ディスカッションを削除',
-    ru: 'Удалить дискуссию'
+    ru: 'Удалить дискуссию',
+    ko: '토론 삭제'
   },
   {
     en: 'Are you sure you want to delete?',
@@ -735,7 +816,8 @@ const dict = [
     de: 'Sind Sie sicher, dass Sie löschen möchten?',
     cn: '确定要删除吗？',
     ja: '削除してもよろしいですか？',
-    ru: 'Вы уверены, что хотите удалить?'
+    ru: 'Вы уверены, что хотите удалить?',
+    ko: '정말로 삭제하시겠습니까?'
   },
   {
     en: 'Oops! Page not found or has been deleted.',
@@ -744,7 +826,8 @@ const dict = [
     de: 'Ups! Seite nicht gefunden oder wurde gelöscht.',
     cn: '哎呀！页面未找到或已被删除。',
     ja: 'おっと！ページが見つかりませんでしたまたは削除されました。',
-    ru: 'Ой! Страница не найдена или была удалена.'
+    ru: 'Ой! Страница не найдена или была удалена.',
+    ko: '이런! 페이지를 찾을 수 없거나 삭제되었습니다.'
   },
   {
     en: 'Back to home',
@@ -753,7 +836,8 @@ const dict = [
     de: 'Zurück zur Startseite',
     cn: '返回首页',
     ja: 'ホームに戻る',
-    ru: 'Вернуться на главную'
+    ru: 'Вернуться на главную',
+    ko: '홈으로 돌아가기'
   },
   {
     en: 'Page not found',
@@ -762,7 +846,8 @@ const dict = [
     de: 'Seite nicht gefunden',
     cn: '页面未找到',
     ja: 'ページが見つかりません',
-    ru: 'Страница не найдена'
+    ru: 'Страница не найдена',
+    ko: '페이지를 찾을 수 없음'
   },
   {
     en: 'Account verified successfully! Please sign in to continue.',
@@ -771,7 +856,8 @@ const dict = [
     de: 'Konto erfolgreich verifiziert! Bitte melden Sie sich an, um fortzufahren.',
     cn: '帐号验证成功！请登录以继续。',
     ja: 'アカウントが正常に確認されました！続行するにはサインインしてください。',
-    ru: 'Аккаунт успешно подтвержден! Пожалуйста, войдите, чтобы продолжить.'
+    ru: 'Аккаунт успешно подтвержден! Пожалуйста, войдите, чтобы продолжить.',
+    ko: '계정이 성공적으로 인증되었습니다! 계속하려면 로그인하세요.'
   },
   {
     en: 'Account settings',
@@ -780,7 +866,8 @@ const dict = [
     de: 'Kontoeinstellungen',
     cn: '帐号设置',
     ja: 'アカウント設定',
-    ru: 'Настройки аккаунта'
+    ru: 'Настройки аккаунта',
+    ko: '계정 설정'
   },
   {
     en: 'In reply to [] comment',
@@ -789,7 +876,8 @@ const dict = [
     de: 'Als Antwort auf [] Kommentar',
     cn: '回复[]评论',
     ja: '[]のコメントに返信中',
-    ru: 'В ответ на [] комментарий'
+    ru: 'В ответ на [] комментарий',
+    ko: '[] 댓글에 대한 답글'
   },
   {
     en: 'Send reply',
@@ -798,7 +886,8 @@ const dict = [
     de: 'Antwort senden',
     cn: '发送回复',
     ja: '返信を送信',
-    ru: 'Отправить ответ'
+    ru: 'Отправить ответ',
+    ko: '답글 보내기'
   },
   {
     en: 'User',
@@ -807,7 +896,8 @@ const dict = [
     de: 'Benutzer',
     cn: '用户',
     ja: 'ユーザー',
-    ru: 'Пользователь'
+    ru: 'Пользователь',
+    ko: '사용자'
   },
   {
     en: 'Pageviews',
@@ -816,7 +906,8 @@ const dict = [
     de: 'Seitenaufrufe',
     cn: '页面浏览量',
     ja: 'ページビュー',
-    ru: 'Просмотры страницы'
+    ru: 'Просмотры страницы',
+    ko: '페이지뷰'
   },
   {
     en: 'Dashboard',
@@ -825,7 +916,8 @@ const dict = [
     de: 'Dashboard',
     cn: '仪表盘',
     ja: 'ダッシュボード',
-    ru: 'Панель управления'
+    ru: 'Панель управления',
+    ko: '대시보드'
   },
   {
     en: 'Name',
@@ -834,7 +926,8 @@ const dict = [
     de: 'Name',
     cn: '名称',
     ja: '名前',
-    ru: 'Имя'
+    ru: 'Имя',
+    ko: '이름'
   },
   {
     en: 'Date',
@@ -843,7 +936,8 @@ const dict = [
     de: 'Datum',
     cn: '日期',
     ja: '日付',
-    ru: 'Дата'
+    ru: 'Дата',
+    ko: '날짜'
   },
   {
     en: 'Role',
@@ -852,7 +946,8 @@ const dict = [
     de: 'Rolle',
     cn: '角色',
     ja: '役割',
-    ru: 'Роль'
+    ru: 'Роль',
+    ko: '역할'
   },
   {
     en: 'Actions',
@@ -861,7 +956,8 @@ const dict = [
     de: 'Aktionen',
     cn: '操作',
     ja: 'アクション',
-    ru: 'Действия'
+    ru: 'Действия',
+    ko: '동작들'
   },
   {
     en: 'Action',
@@ -870,7 +966,8 @@ const dict = [
     de: 'Aktion',
     cn: '操作',
     ja: 'アクション',
-    ru: 'Действие'
+    ru: 'Действие',
+    ko: '동작'
   },
   {
     en: 'Edit',
@@ -879,7 +976,8 @@ const dict = [
     de: 'Bearbeiten',
     cn: '编辑',
     ja: '編集',
-    ru: 'Редактировать'
+    ru: 'Редактировать',
+    ko: '편집'
   },
   {
     en: 'View',
@@ -888,7 +986,8 @@ const dict = [
     de: 'Anzeigen',
     cn: '查看',
     ja: '表示',
-    ru: 'Просмотр'
+    ru: 'Просмотр',
+    ko: '보기'
   },
   {
     en: 'Username',
@@ -897,7 +996,8 @@ const dict = [
     de: 'Benutzername',
     cn: '用户名',
     ja: 'ユーザー名',
-    ru: 'Имя пользователя'
+    ru: 'Имя пользователя',
+    ko: '사용자 이름'
   },
   {
     en: 'Status',
@@ -906,7 +1006,8 @@ const dict = [
     de: 'Status',
     cn: '状态',
     ja: 'ステータス',
-    ru: 'Статус'
+    ru: 'Статус',
+    ko: '상태'
   },
   {
     en: 'Active',
@@ -915,7 +1016,8 @@ const dict = [
     de: 'Aktiv',
     cn: '活跃',
     ja: 'アクティブ',
-    ru: 'Активный'
+    ru: 'Активный',
+    ko: '활성화됨'
   },
   {
     en: 'Banned',
@@ -924,7 +1026,8 @@ const dict = [
     de: 'Gesperrt',
     cn: '已封禁',
     ja: '禁止',
-    ru: 'Заблокирован'
+    ru: 'Заблокирован',
+    ko: '금지됨'
   },
   {
     en: 'Users',
@@ -933,7 +1036,8 @@ const dict = [
     de: 'Benutzer',
     cn: '用户',
     ja: 'ユーザー',
-    ru: 'Пользователи'
+    ru: 'Пользователи',
+    ko: '사용자들'
   },
   {
     en: 'Disabled',
@@ -942,7 +1046,8 @@ const dict = [
     de: 'Deaktiviert',
     cn: '已禁用',
     ja: '無効',
-    ru: 'Отключен'
+    ru: 'Отключен',
+    ko: '비활성화됨'
   },
   {
     en: 'Close',
@@ -951,7 +1056,8 @@ const dict = [
     de: 'Schließen',
     cn: '关闭',
     ja: '閉じる',
-    ru: 'Закрыть'
+    ru: 'Закрыть',
+    ko: '닫기'
   },
   {
     en: 'Member since',
@@ -960,7 +1066,8 @@ const dict = [
     de: 'Mitglied seit',
     cn: '会员自',
     ja: '登録日',
-    ru: 'Участник с'
+    ru: 'Участник с',
+    ko: '가입일'
   },
   {
     en: 'Change details',
@@ -969,7 +1076,8 @@ const dict = [
     de: 'Details ändern',
     cn: '更改详细信息',
     ja: '詳細を変更',
-    ru: 'Изменить данные'
+    ru: 'Изменить данные',
+    ko: '상세정보 변경'
   },
   {
     en: 'Change password',
@@ -978,7 +1086,8 @@ const dict = [
     de: 'Passwort ändern',
     cn: '更改密码',
     ja: 'パスワードを変更',
-    ru: 'Изменить пароль'
+    ru: 'Изменить пароль',
+    ko: '비밀번호 변경'
   },
   {
     en: 'Type current password to update changes',
@@ -987,7 +1096,8 @@ const dict = [
     de: 'Aktuelle Passwort eingeben, um Änderungen zu aktualisieren',
     cn: '输入当前密码以更新更改',
     ja: '変更を更新するには現在のパスワードを入力してください',
-    ru: 'Введите текущий пароль для обновления изменений'
+    ru: 'Введите текущий пароль для обновления изменений',
+    ko: '변경 사항을 업데이트하려면 현재 비밀번호를 입력하세요'
   },
   {
     en: 'Type new password',
@@ -996,7 +1106,8 @@ const dict = [
     de: 'Neues Passwort eingeben',
     cn: '输入新密码',
     ja: '新しいパスワードを入力してください',
-    ru: 'Введите новый пароль'
+    ru: 'Введите новый пароль',
+    ko: '새로운 비밀번호 입력'
   },
   {
     en: 'Upload photo',
@@ -1005,7 +1116,8 @@ const dict = [
     de: 'Foto hochladen',
     cn: '上传照片',
     ja: '写真をアップロード',
-    ru: 'Загрузить фото'
+    ru: 'Загрузить фото',
+    ko: '사진 업로드'
   },
   {
     en: 'Change status',
@@ -1014,7 +1126,8 @@ const dict = [
     de: 'Status ändern',
     cn: '更改状态',
     ja: 'ステータスを変更',
-    ru: 'Изменить статус'
+    ru: 'Изменить статус',
+    ko: '상태 변경'
   },
   {
     en: 'Change role',
@@ -1023,7 +1136,8 @@ const dict = [
     de: 'Rolle ändern',
     cn: '更改角色',
     ja: '役割を変更',
-    ru: 'Изменить роль'
+    ru: 'Изменить роль',
+    ko: '역할 변경'
   },
   {
     en: 'Title',
@@ -1032,7 +1146,8 @@ const dict = [
     de: 'Titel',
     cn: '标题',
     ja: 'タイトル',
-    ru: 'Заголовок'
+    ru: 'Заголовок',
+    ko: '제목'
   },
   {
     en: 'Answered',
@@ -1041,7 +1156,8 @@ const dict = [
     de: 'Beantwortet',
     cn: '已回答',
     ja: '回答済み',
-    ru: 'Отвечен'
+    ru: 'Отвечен',
+    ko: '답변됨'
   },
   {
     en: 'Administrator',
@@ -1050,7 +1166,8 @@ const dict = [
     de: 'Administrator',
     cn: '管理员',
     ja: '管理者',
-    ru: 'Администратор'
+    ru: 'Администратор',
+    ko: '관리자'
   },
   {
     en: 'admin',
@@ -1059,7 +1176,8 @@ const dict = [
     de: 'admin',
     cn: '管理员',
     ja: '管理者',
-    ru: 'админ'
+    ru: 'админ',
+    ko: '관리자'
   },
   {
     en: 'Type',
@@ -1068,7 +1186,8 @@ const dict = [
     de: 'Typ',
     cn: '类型',
     ja: 'タイプ',
-    ru: 'Тип'
+    ru: 'Тип',
+    ko: '종류'
   },
   {
     en: 'Color',
@@ -1077,7 +1196,8 @@ const dict = [
     de: 'Farbe',
     cn: '颜色',
     ja: '色',
-    ru: 'Цвет'
+    ru: 'Цвет',
+    ko: '색상'
   },
   {
     en: 'Add',
@@ -1086,7 +1206,8 @@ const dict = [
     de: 'Hinzufügen',
     cn: '添加',
     ja: '追加',
-    ru: 'Добавить'
+    ru: 'Добавить',
+    ko: '추가'
   },
   {
     en: 'Title is too short.',
@@ -1095,7 +1216,8 @@ const dict = [
     de: 'Titel ist zu kurz.',
     cn: '标题太短。',
     ja: 'タイトルが短すぎます。',
-    ru: 'Заголовок слишком короткий.'
+    ru: 'Заголовок слишком короткий.',
+    ko: '제목이 너무 짧습니다.'
   },
   {
     en: 'Description is required',
@@ -1104,7 +1226,8 @@ const dict = [
     de: 'Beschreibung ist erforderlich',
     cn: '描述是必需的',
     ja: '説明が必要です',
-    ru: 'Требуется описание'
+    ru: 'Требуется описание',
+    ko: '설명이 필요합니다'
   },
   {
     en: 'Category created successfully!',
@@ -1113,7 +1236,8 @@ const dict = [
     de: 'Kategorie erfolgreich erstellt!',
     cn: '分类创建成功！',
     ja: 'カテゴリが正常に作成されました！',
-    ru: 'Категория успешно создана!'
+    ru: 'Категория успешно создана!',
+    ko: '카테고리가 성공적으로 생성되었습니다!'
   },
   {
     en: 'Unable to create category. Please try again!',
@@ -1122,7 +1246,38 @@ const dict = [
     de: 'Kategorie konnte nicht erstellt werden. Bitte versuchen Sie es erneut!',
     cn: '无法创建分类。请重试！',
     ja: 'カテゴリを作成できませんでした。後でもう一度お試しください！',
-    ru: 'Не удалось создать категорию. Пожалуйста, повторите попытку!'
+    ru: 'Не удалось создать категорию. Пожалуйста, повторите попытку!',
+    ko: '카테고리를 생성할 수 없습니다. 다시 시도하세요!'
+  },
+  {
+    en: 'Comment is blank!',
+    es: '¡El comentario está en blanco!',
+    fr: 'Le commentaire est vide !',
+    de: 'Kommentar ist leer!',
+    cn: '评论空白',
+    ja: 'コメントは空白です！',
+    ru: 'Комментарий пуст!',
+    ko: '댓글이 비어 있습니다!'
+  },
+  {
+    en: 'Unable to save reply.',
+    es: 'No se puede guardar la respuesta.',
+    fr: "Impossible d'enregistrer la réponse.",
+    de: 'Antwort kann nicht gespeichert werden.',
+    cn: '无法保存回复。',
+    ja: '返信を保存できません。',
+    ru: 'Не удалось сохранить ответ.',
+    ko: '답장을 저장할 수 없습니다.'
+  },
+  {
+    en: 'Unable to save comment.',
+    es: 'No se puede guardar el comentario.',
+    fr: "Impossible d'enregistrer le commentaire.",
+    de: 'Kommentar kann nicht gespeichert werden.',
+    cn: '无法保存评论。',
+    ja: 'コメントを保存できません。',
+    ru: 'Не удалось сохранить комментарий.',
+    ko: '댓글을 저장할 수 없습니다.'
   },
   {
     en: 'Edit category',
@@ -1131,7 +1286,8 @@ const dict = [
     de: 'Kategorie bearbeiten',
     cn: '编辑分类',
     ja: 'カテゴリの編集',
-    ru: 'Редактировать категорию'
+    ru: 'Редактировать категорию',
+    ko: '카테고리 편집'
   },
   {
     en: 'Category updated successfully',
@@ -1140,7 +1296,8 @@ const dict = [
     de: 'Kategorie erfolgreich aktualisiert',
     cn: '分类更新成功',
     ja: 'カテゴリが正常に更新されました',
-    ru: 'Категория успешно обновлена!'
+    ru: 'Категория успешно обновлена!',
+    ko: '카테고리가 성공적으로 업데이트되었습니다'
   },
   {
     en: 'Unable to update category. Please try again!',
@@ -1149,9 +1306,19 @@ const dict = [
     de: 'Kategorie konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut!',
     cn: '无法更新分类。请重试！',
     ja: 'カテゴリを更新できませんでした。後でもう一度お試しください！',
-    ru: 'Не удалось обновить категорию. Пожалуйста, повторите попытку!'
+    ru: 'Не удалось обновить категорию. Пожалуйста, повторите попытку!',
+    ko: '카테고리를 업데이트할 수 없습니다. 다시 시도하세요!'
   },
-  { en: 'yes', es: 'sí', fr: 'oui', de: 'ja', cn: '是', ja: 'はい', ru: 'да' },
+  {
+    en: 'yes',
+    es: 'sí',
+    fr: 'oui',
+    de: 'ja',
+    cn: '是',
+    ja: 'はい',
+    ru: 'да',
+    ko: '예'
+  },
   {
     en: 'no',
     es: 'no',
@@ -1159,7 +1326,8 @@ const dict = [
     de: 'nein',
     cn: '否',
     ja: 'いいえ',
-    ru: 'нет'
+    ru: 'нет',
+    ko: '아니오'
   },
   {
     en: 'Apply filter',
@@ -1168,7 +1336,8 @@ const dict = [
     de: 'Filter anwenden',
     cn: '应用过滤器',
     ja: 'フィルターを適用する',
-    ru: 'Применить фильтр'
+    ru: 'Применить фильтр',
+    ko: '필터 적용'
   },
   {
     en: 'Incorrect email/username or password!',
@@ -1177,7 +1346,8 @@ const dict = [
     de: 'Falsche E-Mail/Benutzername oder Passwort!',
     cn: '电子邮件/用户名或密码不正确！',
     ja: 'メール/ユーザー名またはパスワードが正しくありません！',
-    ru: 'Неправильный адрес электронной почты/имя пользователя или пароль!'
+    ru: 'Неправильный адрес электронной почты/имя пользователя или пароль!',
+    ko: '잘못된 이메일/사용자명 또는 비밀번호입니다!'
   },
   {
     en: 'Account is banned. Please contact the community admin.',
@@ -1186,7 +1356,8 @@ const dict = [
     de: 'Konto ist gesperrt. Bitte kontaktieren Sie den Community-Administrator.',
     cn: '帐号已被封禁。请联系社区管理员。',
     ja: 'アカウントが禁止されています。コミュニティの管理者に連絡してください。',
-    ru: 'Аккаунт заблокирован. Пожалуйста, свяжитесь с администратором сообщества.'
+    ru: 'Аккаунт заблокирован. Пожалуйста, свяжитесь с администратором сообщества.',
+    ko: '계정이 금지되었습니다. 커뮤니티 관리자에게 문의하세요.'
   },
   {
     en: 'Account is inactive. Please verify account.',
@@ -1195,7 +1366,8 @@ const dict = [
     de: 'Konto ist inaktiv. Bitte verifizieren Sie Ihr Konto.',
     cn: '帐号处于非活跃状态。请验证帐号。',
     ja: 'アカウントが無効です。アカウントを確認してください。',
-    ru: 'Аккаунт неактивен. Пожалуйста, подтвердите аккаунт.'
+    ru: 'Аккаунт неактивен. Пожалуйста, подтвердите аккаунт.',
+    ko: '계정이 비활성화되었습니다. 계정을 인증하세요.'
   },
   {
     en: 'Account is inactive.',
@@ -1204,7 +1376,8 @@ const dict = [
     de: 'Konto ist inaktiv.',
     cn: '帐号处于非活跃状态。',
     ja: 'アカウントが無効です。',
-    ru: 'Аккаунт неактивен.'
+    ru: 'Аккаунт неактивен.',
+    ko: '계정이 비활성화되었습니다.'
   },
   {
     en: 'Successfully signed in!',
@@ -1213,7 +1386,8 @@ const dict = [
     de: 'Anmeldung erfolgreich!',
     cn: '登录成功！',
     ja: 'サインインに成功しました！',
-    ru: 'Успешно вошли!'
+    ru: 'Успешно вошли!',
+    ko: '로그인이 성공적으로 완료되었습니다!'
   },
   {
     en: 'Account is suspended. Please contact the community admin.',
@@ -1222,7 +1396,8 @@ const dict = [
     de: 'Konto ist gesperrt. Bitte kontaktieren Sie den Community-Administrator.',
     cn: '帐号已被暂停。请联系社区管理员。',
     ja: 'アカウントが一時停止されています。コミュニティの管理者に連絡してください。',
-    ru: 'Аккаунт приостановлен. Пожалуйста, свяжитесь с администратором сообщества.'
+    ru: 'Аккаунт приостановлен. Пожалуйста, свяжитесь с администратором сообщества.',
+    ko: '계정이 정지되었습니다. 커뮤니티 관리자에게 문의하세요.'
   },
   {
     en: 'Click here to verify your account.',
@@ -1231,7 +1406,8 @@ const dict = [
     de: 'Klicken Sie hier, um Ihr Konto zu verifizieren.',
     cn: '点击这里验证您的帐号。',
     ja: 'アカウントを確認するにはここをクリックしてください。',
-    ru: 'Нажмите здесь, чтобы подтвердить свой аккаунт.'
+    ru: 'Нажмите здесь, чтобы подтвердить свой аккаунт.',
+    ko: '계정을 인증하려면 여기를 클릭하세요.'
   },
   {
     en: 'Please verify account to continue.',
@@ -1240,7 +1416,8 @@ const dict = [
     de: 'Bitte verifizieren Sie Ihr Konto, um fortzufahren.',
     cn: '请验证帐号以继续。',
     ja: '続行するにはアカウントを確認してください。',
-    ru: 'Пожалуйста, подтвердите аккаунт, чтобы продолжить.'
+    ru: 'Пожалуйста, подтвердите аккаунт, чтобы продолжить.',
+    ko: '계정을 인증하세요.'
   },
   {
     en: 'Unable to verify user. Please try again later.',
@@ -1249,7 +1426,8 @@ const dict = [
     de: 'Benutzer konnte nicht verifiziert werden. Bitte versuchen Sie es später erneut.',
     cn: '无法验证用户。请稍后再试。',
     ja: 'ユーザーの確認ができませんでした。後でもう一度お試しください。',
-    ru: 'Не удалось подтвердить пользователя. Пожалуйста, повторите попытку позже.'
+    ru: 'Не удалось подтвердить пользователя. Пожалуйста, повторите попытку позже.',
+    ko: '사용자 인증에 실패했습니다. 나중에 다시 시도하세요.'
   },
   {
     en: 'Account verified successfully! Please sign in to continue.',
@@ -1258,7 +1436,8 @@ const dict = [
     de: 'Konto erfolgreich verifiziert! Bitte melden Sie sich an, um fortzufahren.',
     cn: '帐号验证成功！请登录以继续。',
     ja: 'アカウントが正常に確認されました！続行するにはサインインしてください。',
-    ru: 'Аккаунт успешно подтвержден! Пожалуйста, войдите, чтобы продолжить.'
+    ru: 'Аккаунт успешно подтвержден! Пожалуйста, войдите, чтобы продолжить.',
+    ko: '계정이 성공적으로 인증되었습니다! 계속하려면 로그인하세요.'
   },
   {
     en: 'Email does not exist in our record.',
@@ -1267,7 +1446,8 @@ const dict = [
     de: 'E-Mail existiert nicht in unseren Aufzeichnungen.',
     cn: '电子邮件在我们的记录中不存在。',
     ja: '記録に存在しないメールアドレスです。',
-    ru: 'Адрес электронной почты не существует в наших записях.'
+    ru: 'Адрес электронной почты не существует в наших записях.',
+    ko: '이메일이 기록에 없습니다.'
   },
   {
     en: 'Account recovery',
@@ -1276,7 +1456,8 @@ const dict = [
     de: 'Kontowiederherstellung',
     cn: '帐号恢复',
     ja: 'アカウントの復旧',
-    ru: 'Восстановление аккаунта'
+    ru: 'Восстановление аккаунта',
+    ko: '계정 복구'
   },
   {
     en: 'Email already exist! Please try password reset or verify your account.',
@@ -1285,7 +1466,8 @@ const dict = [
     de: 'E-Mail existiert bereits! Bitte versuchen Sie es mit dem Zurücksetzen des Passworts oder verifizieren Sie Ihr Konto.',
     cn: '电子邮件已存在！请尝试重置密码或验证您的帐号。',
     ja: 'メールアドレスはすでに存在しています！パスワードのリセットを試すか、アカウントを確認してください。',
-    ru: 'Адрес электронной почты уже существует! Пожалуйста, попробуйте сбросить пароль или подтвердите свой аккаунт.'
+    ru: 'Адрес электронной почты уже существует! Пожалуйста, попробуйте сбросить пароль или подтвердите свой аккаунт.',
+    ko: '이미 이메일이 존재합니다! 비밀번호 재설정 또는 계정을 인증하세요.'
   },
   {
     en: 'Failed. Please try again later.',
@@ -1294,7 +1476,8 @@ const dict = [
     de: 'Fehlgeschlagen. Bitte versuchen Sie es später erneut.',
     cn: '失败。请稍后再试。',
     ja: '失敗しました。後でもう一度お試しください。',
-    ru: 'Не удалось. Пожалуйста, повторите попытку позже.'
+    ru: 'Не удалось. Пожалуйста, повторите попытку позже.',
+    ko: '실패했습니다. 나중에 다시 시도하세요.'
   },
   {
     en: 'Uploading image....',
@@ -1303,7 +1486,8 @@ const dict = [
     de: 'Bild wird hochgeladen....',
     cn: '正在上传图片....',
     ja: '画像をアップロード中....',
-    ru: 'Загрузка изображения....'
+    ru: 'Загрузка изображения....',
+    ko: '이미지 업로드 중....'
   },
   {
     en: 'Image uploaded successfully!',
@@ -1312,7 +1496,8 @@ const dict = [
     de: 'Bild erfolgreich hochgeladen!',
     cn: '图片上传成功！',
     ja: '画像が正常にアップロードされました！',
-    ru: 'Изображение успешно загружено!'
+    ru: 'Изображение успешно загружено!',
+    ko: '이미지가 성공적으로 업로드되었습니다!'
   },
   {
     en: 'Current password is required to make changes.',
@@ -1321,7 +1506,8 @@ const dict = [
     de: 'Aktuelles Passwort ist erforderlich, um Änderungen vorzunehmen.',
     cn: '需要当前密码以进行更改。',
     ja: '変更を行うには現在のパスワードが必要です。',
-    ru: 'Текущий пароль требуется для внесения изменений.'
+    ru: 'Текущий пароль требуется для внесения изменений.',
+    ko: '변경 사항을 적용하려면 현재 비밀번호를 입력하세요.'
   },
   {
     en: 'Account updated successfully!',
@@ -1330,7 +1516,8 @@ const dict = [
     de: 'Konto erfolgreich aktualisiert!',
     cn: '帐号更新成功！',
     ja: 'アカウントが正常に更新されました',
-    ru: 'Аккаунт успешно обновлен!'
+    ru: 'Аккаунт успешно обновлен!',
+    ko: '계정이 성공적으로 업데이트되었습니다!'
   },
   {
     en: 'Unable to make changes! Current password is incorrect.',
@@ -1339,7 +1526,8 @@ const dict = [
     de: 'Änderungen konnten nicht vorgenommen werden! Aktuelles Passwort ist falsch.',
     cn: '无法进行更改！当前密码不正确。',
     ja: '変更を行えませんでした！現在のパスワードが正しくありません。',
-    ru: 'Невозможно внести изменения! Текущий пароль неверен.'
+    ru: 'Невозможно внести изменения! Текущий пароль неверен.',
+    ko: '변경 사항을 적용할 수 없습니다! 현재 비밀번호가 일치하지 않습니다.'
   },
   {
     en: 'Password is too short! Minimum character is six.',
@@ -1348,7 +1536,8 @@ const dict = [
     de: 'Passwort ist zu kurz! Mindestens sechs Zeichen erforderlich.',
     cn: '密码太短！最少六个字符。',
     ja: 'パスワードが短すぎます！最小6文字以上を入力してください。',
-    ru: 'Пароль слишком короткий! Минимальное количество символов - шесть.'
+    ru: 'Пароль слишком короткий! Минимальное количество символов - шесть.',
+    ko: '비밀번호가 너무 짧습니다! 최소 6자 이상이어야 합니다.'
   },
   {
     en: 'Password updated successfully!',
@@ -1357,7 +1546,8 @@ const dict = [
     de: 'Passwort erfolgreich aktualisiert!',
     cn: '密码更新成功！',
     ja: 'パスワードが正常に更新されました！',
-    ru: 'Пароль успешно обновлен!'
+    ru: 'Пароль успешно обновлен!',
+    ko: '비밀번호가 성공적으로 업데이트되었습니다!'
   },
   {
     en: 'Unable to change password. Please try again.',
@@ -1366,7 +1556,8 @@ const dict = [
     de: 'Passwort konnte nicht geändert werden. Bitte versuchen Sie es erneut.',
     cn: '无法更改密码。请重试。',
     ja: 'パスワードを変更できません。もう一度お試しください。',
-    ru: 'Не удалось изменить пароль. Пожалуйста, попробуйте снова.'
+    ru: 'Не удалось изменить пароль. Пожалуйста, попробуйте снова.',
+    ko: '비밀번호를 변경할 수 없습니다. 다시 시도해주세요.'
   },
   {
     en: 'Add category',
@@ -1375,7 +1566,8 @@ const dict = [
     de: 'Kategorie hinzufügen',
     cn: '添加分类',
     ja: 'カテゴリを追加',
-    ru: 'Добавить категорию'
+    ru: 'Добавить категорию',
+    ko: '카테고리 추가'
   },
   {
     en: 'Create a category',
@@ -1384,7 +1576,8 @@ const dict = [
     de: 'Kategorie erstellen',
     cn: '创建分类',
     ja: 'カテゴリを作成',
-    ru: 'Создать категорию'
+    ru: 'Создать категорию',
+    ko: '카테고리 생성'
   },
   {
     en: 'Authentication',
@@ -1393,7 +1586,8 @@ const dict = [
     de: 'Authentifizierung',
     cn: '身份验证',
     ja: '認証',
-    ru: 'Аутентификация'
+    ru: 'Аутентификация',
+    ko: '인증'
   },
   {
     en: 'No',
@@ -1402,9 +1596,19 @@ const dict = [
     de: 'Nein',
     cn: '否',
     ja: 'いいえ',
-    ru: 'Нет'
+    ru: 'Нет',
+    ko: '아니요'
   },
-  { en: 'Yes', es: 'Sí', fr: 'Oui', de: 'Ja', cn: '是', ja: 'はい', ru: 'Да' },
+  {
+    en: 'Yes',
+    es: 'Sí',
+    fr: 'Oui',
+    de: 'Ja',
+    cn: '是',
+    ja: 'はい',
+    ru: 'Да',
+    ko: '예'
+  },
   {
     en: 'Create a Category',
     es: 'Crear una categoría',
@@ -1412,7 +1616,8 @@ const dict = [
     de: 'Kategorie erstellen',
     cn: '创建分类',
     ja: 'カテゴリを作成',
-    ru: 'Создать категорию'
+    ru: 'Создать категорию',
+    ko: '카테고리 생성'
   },
   {
     en: 'Authentication required',
@@ -1421,7 +1626,8 @@ const dict = [
     de: 'Authentifizierung erforderlich',
     cn: '需要身份验证',
     ja: '認証が必要です',
-    ru: 'Требуется аутентификация'
+    ru: 'Требуется аутентификация',
+    ko: '인증이 필요합니다'
   },
   {
     en: 'Save',
@@ -1430,7 +1636,8 @@ const dict = [
     de: 'Speichern',
     cn: '保存',
     ja: '保存',
-    ru: 'Сохранить'
+    ru: 'Сохранить',
+    ko: '저장'
   },
   {
     en: 'Choose one or more',
@@ -1439,7 +1646,8 @@ const dict = [
     de: 'Eine oder mehrere auswählen',
     cn: '选择一个或多个',
     ja: '1つ以上選択してください',
-    ru: 'Выберите одну или несколько'
+    ru: 'Выберите одну или несколько',
+    ko: '하나 이상 선택'
   },
   {
     en: 'Description',
@@ -1448,7 +1656,8 @@ const dict = [
     de: 'Beschreibung',
     cn: '描述',
     ja: '説明',
-    ru: 'Описание'
+    ru: 'Описание',
+    ko: '설명'
   },
   {
     en: 'Edit category',
@@ -1457,7 +1666,8 @@ const dict = [
     de: 'Kategorie bearbeiten',
     cn: '编辑分类',
     ja: 'カテゴリを編集',
-    ru: 'Редактировать категорию'
+    ru: 'Редактировать категорию',
+    ko: '카테고리 편집'
   },
   {
     en: 'Metadata',
@@ -1466,7 +1676,8 @@ const dict = [
     de: 'Metadaten',
     cn: '元数据',
     ja: 'メタデータ',
-    ru: 'Метаданные'
+    ru: 'Метаданные',
+    ko: '메타데이터'
   },
   {
     en: 'Site favicon',
@@ -1475,7 +1686,8 @@ const dict = [
     de: 'Seiten-Favicon',
     cn: '站点图标',
     ja: 'サイトのファビコン',
-    ru: 'Иконка сайта'
+    ru: 'Иконка сайта',
+    ko: '사이트 파비콘'
   },
   {
     en: 'Site logo',
@@ -1484,7 +1696,8 @@ const dict = [
     de: 'Seiten-Logo',
     cn: '站点标志',
     ja: 'サイトのロゴ',
-    ru: 'Логотип сайта'
+    ru: 'Логотип сайта',
+    ko: '사이트 로고'
   },
   {
     en: 'Site name',
@@ -1493,7 +1706,8 @@ const dict = [
     de: 'Seitenname',
     cn: '站点名称',
     ja: 'サイト名',
-    ru: 'Имя сайта'
+    ru: 'Имя сайта',
+    ko: '사이트 이름'
   },
   {
     en: 'Site description',
@@ -1502,7 +1716,8 @@ const dict = [
     de: 'Seitenbeschreibung',
     cn: '站点描述',
     ja: 'サイトの説明',
-    ru: 'Описание сайта'
+    ru: 'Описание сайта',
+    ko: '사이트 설명'
   },
   {
     en: 'Site metadata',
@@ -1511,7 +1726,8 @@ const dict = [
     de: 'Seiten-Metadaten',
     cn: '站点元数据',
     ja: 'サイトのメタデータ',
-    ru: 'Метаданные сайта'
+    ru: 'Метаданные сайта',
+    ko: '사이트 메타데이터'
   },
   {
     en: 'Site language',
@@ -1520,7 +1736,8 @@ const dict = [
     de: 'Seitensprache',
     cn: '站点语言',
     ja: 'サイトの言語',
-    ru: 'Язык сайта'
+    ru: 'Язык сайта',
+    ko: '사이트 언어'
   },
   {
     en: 'Language',
@@ -1529,7 +1746,8 @@ const dict = [
     de: 'Sprache',
     cn: '语言',
     ja: '言語',
-    ru: 'Язык'
+    ru: 'Язык',
+    ko: '언어'
   },
   {
     en: 'Back',
@@ -1538,7 +1756,8 @@ const dict = [
     de: 'Zurück',
     cn: '返回',
     ja: '戻る',
-    ru: 'Назад'
+    ru: 'Назад',
+    ko: '뒤로'
   },
   {
     en: 'Advert code',
@@ -1547,7 +1766,8 @@ const dict = [
     de: 'Anzeigen-Code',
     cn: '广告代码',
     ja: '広告コード',
-    ru: 'Рекламный код'
+    ru: 'Рекламный код',
+    ko: '광고 코드'
   },
   {
     en: 'Save & launch',
@@ -1556,7 +1776,8 @@ const dict = [
     de: 'Speichern & starten',
     cn: '保存并启动',
     ja: '保存して起動',
-    ru: 'Сохранить и запустить'
+    ru: 'Сохранить и запустить',
+    ko: '저장 및 런칭'
   },
   {
     en: 'English',
@@ -1565,7 +1786,8 @@ const dict = [
     de: 'Englisch',
     cn: '英语',
     ja: '英語',
-    ru: 'Английский'
+    ru: 'Английский',
+    ko: '영어'
   },
   {
     en: 'French',
@@ -1574,7 +1796,8 @@ const dict = [
     de: 'Französisch',
     cn: '法语',
     ja: 'フランス語',
-    ru: 'Французский'
+    ru: 'Французский',
+    ko: '프랑스어'
   },
   {
     en: 'Spanish',
@@ -1583,7 +1806,8 @@ const dict = [
     de: 'Spanisch',
     cn: '西班牙语',
     ja: 'スペイン語',
-    ru: 'Испанский'
+    ru: 'Испанский',
+    ko: '스페인어'
   },
   {
     en: 'German',
@@ -1592,7 +1816,8 @@ const dict = [
     de: 'Deutsch',
     cn: '德语',
     ja: 'ドイツ人',
-    ru: 'Немецкий'
+    ru: 'Немецкий',
+    ko: '독일어'
   },
   {
     en: 'Chinese',
@@ -1601,7 +1826,8 @@ const dict = [
     de: 'Chinesisch',
     cn: '普通话',
     ja: '北京語',
-    ru: 'Китайский'
+    ru: 'Китайский',
+    ko: '중국어'
   },
   {
     en: 'Japanese',
@@ -1610,7 +1836,18 @@ const dict = [
     de: 'Japanisch',
     cn: '日本人',
     ja: '日本',
-    ru: 'Японский'
+    ru: 'Японский',
+    ko: '일본어'
+  },
+  {
+    en: 'Korean',
+    es: 'Coreano',
+    fr: 'Coréen',
+    de: 'Koreanisch',
+    cn: '韩国人',
+    ja: '韓国語',
+    ru: 'Корейский',
+    ko: '한국어'
   },
   {
     en: 'Russian',
@@ -1619,7 +1856,8 @@ const dict = [
     de: 'Russisch',
     cn: '俄语',
     ja: 'ロシア',
-    ru: 'Русский'
+    ru: 'Русский',
+    ko: '러시아어'
   },
   {
     en: 'en',
@@ -1628,7 +1866,8 @@ const dict = [
     de: 'en',
     cn: '英语',
     ja: 'en',
-    ru: 'en'
+    ru: 'en',
+    ko: 'en'
   },
   {
     en: 'fr',
@@ -1637,7 +1876,8 @@ const dict = [
     de: 'fr',
     cn: '法语',
     ja: 'fr',
-    ru: 'fr'
+    ru: 'fr',
+    ko: 'fr'
   },
   {
     en: 'es',
@@ -1646,7 +1886,8 @@ const dict = [
     de: 'es',
     cn: '西班牙语',
     ja: 'es',
-    ru: 'es'
+    ru: 'es',
+    ko: 'es'
   },
   {
     en: 'coming soon',
@@ -1655,7 +1896,8 @@ const dict = [
     de: 'Demnächst verfügbar',
     cn: '即将推出',
     ja: '近日公開',
-    ru: 'скоро'
+    ru: 'скоро',
+    ko: '곧 출시 예정'
   },
   {
     en: 'Settings updated successfully',
@@ -1664,7 +1906,8 @@ const dict = [
     de: 'Einstellungen erfolgreich aktualisiert',
     cn: '设置更新成功',
     ja: '設定が正常に更新されました',
-    ru: 'Настройки успешно обновлены'
+    ru: 'Настройки успешно обновлены',
+    ko: '설정이 성공적으로 업데이트되었습니다.'
   },
   {
     en: 'Error updating settings! Please try again.',
@@ -1673,7 +1916,8 @@ const dict = [
     de: 'Fehler beim Aktualisieren der Einstellungen! Bitte versuchen Sie es erneut.',
     cn: '更新设置出错！请重试。',
     ja: '設定の更新中にエラーが発生しました。もう一度お試しください。',
-    ru: 'Ошибка при обновлении настроек! Пожалуйста, попробуйте снова.'
+    ru: 'Ошибка при обновлении настроек! Пожалуйста, попробуйте снова.',
+    ko: '설정 업데이트 오류! 다시 시도해주세요.'
   },
   {
     en: 'Social settings',
@@ -1682,7 +1926,8 @@ const dict = [
     de: 'Soziale Einstellungen',
     cn: '社交设置',
     ja: 'ソーシャル設定',
-    ru: 'Настройки социальных сетей'
+    ru: 'Настройки социальных сетей',
+    ko: '소셜 설정'
   },
   {
     en: 'Advert settings',
@@ -1691,7 +1936,8 @@ const dict = [
     de: 'Anzeigeneinstellungen',
     cn: '广告设置',
     ja: '広告設定',
-    ru: 'Настройки рекламы'
+    ru: 'Настройки рекламы',
+    ko: '광고 설정'
   },
   {
     en: "Note: Changing coin values will affect users' current value.",
@@ -1700,7 +1946,8 @@ const dict = [
     de: 'Hinweis: Die Änderung der Münzwerte wirkt sich auf den aktuellen Wert der Benutzer aus.',
     cn: '注意：更改硬币值将影响用户的当前值。',
     ja: '注：コインの値を変更すると、ユーザーの現在の値に影響します。',
-    ru: 'Примечание: Изменение значения монеты повлияет на текущее значение пользователей.'
+    ru: 'Примечание: Изменение значения монеты повлияет на текущее значение пользователей.',
+    ko: '참고: 코인 값 변경은 사용자의 현재 값을 영향을 미칩니다.'
   },
   {
     en: 'Top',
@@ -1709,7 +1956,8 @@ const dict = [
     de: 'Oben',
     cn: '顶部',
     ja: '上部',
-    ru: 'Сверху'
+    ru: 'Сверху',
+    ko: '상단'
   },
   {
     en: 'Left side',
@@ -1718,7 +1966,8 @@ const dict = [
     de: 'Linke Seite',
     cn: '左侧',
     ja: '左側',
-    ru: 'Слева'
+    ru: 'Слева',
+    ko: '왼쪽'
   },
   {
     en: 'Right side',
@@ -1727,7 +1976,8 @@ const dict = [
     de: 'Rechte Seite',
     cn: '右侧',
     ja: '右側',
-    ru: 'Справа'
+    ru: 'Справа',
+    ko: '오른쪽'
   },
   {
     en: 'Inner',
@@ -1736,7 +1986,8 @@ const dict = [
     de: 'Innen',
     cn: '内部',
     ja: '内側',
-    ru: 'Внутри'
+    ru: 'Внутри',
+    ko: '안쪽'
   },
   {
     en: 'Please provide SMTP host',
@@ -1745,7 +1996,8 @@ const dict = [
     de: 'Bitte geben Sie den SMTP-Host an',
     cn: '请提供SMTP主机',
     ja: 'SMTPホストを入力してください',
-    ru: 'Пожалуйста, укажите SMTP-хост'
+    ru: 'Пожалуйста, укажите SMTP-хост',
+    ko: 'SMTP 호스트를 제공해주세요.'
   },
   {
     en: 'Email settings',
@@ -1754,7 +2006,8 @@ const dict = [
     de: 'E-Mail-Einstellungen',
     cn: '电子邮件设置',
     ja: 'メール設定',
-    ru: 'Настройки электронной почты'
+    ru: 'Настройки электронной почты',
+    ko: '이메일 설정'
   },
   {
     en: 'Advert Code',
@@ -1763,7 +2016,8 @@ const dict = [
     de: 'Anzeigencode',
     cn: '广告代码',
     ja: '広告コード',
-    ru: 'Рекламный код'
+    ru: 'Рекламный код',
+    ko: '광고 코드'
   },
   {
     en: 'SMTP host',
@@ -1772,7 +2026,8 @@ const dict = [
     de: 'SMTP-Host',
     cn: 'SMTP主机',
     ja: 'SMTPホスト',
-    ru: 'SMTP-хост'
+    ru: 'SMTP-хост',
+    ko: 'SMTP 호스트'
   },
   {
     en: 'SMTP user/email',
@@ -1781,7 +2036,8 @@ const dict = [
     de: 'SMTP-Benutzer/E-Mail',
     cn: 'SMTP用户/电子邮件',
     ja: 'SMTPユーザー/メール',
-    ru: 'SMTP-пользователь/почта'
+    ru: 'SMTP-пользователь/почта',
+    ko: 'SMTP 사용자/이메일'
   },
   {
     en: 'SMTP password',
@@ -1790,7 +2046,8 @@ const dict = [
     de: 'SMTP-Passwort',
     cn: 'SMTP密码',
     ja: 'SMTPパスワード',
-    ru: 'SMTP-пароль'
+    ru: 'SMTP-пароль',
+    ko: 'SMTP 비밀번호'
   },
   {
     en: 'Reward settings',
@@ -1799,7 +2056,8 @@ const dict = [
     de: 'Belohnungseinstellungen',
     cn: '奖励设置',
     ja: '報酬の設定',
-    ru: 'Настройки вознаграждения'
+    ru: 'Настройки вознаграждения',
+    ko: '보상 설정'
   },
   {
     en: 'Note: Changing coin values will affect users current value',
@@ -1808,7 +2066,8 @@ const dict = [
     de: 'Hinweis: Die Änderung der Münzwerte wirkt sich auf den aktuellen Wert der Benutzer aus',
     cn: '注意：更改硬币值将影响用户的当前值。',
     ja: '注：コインの値を変更すると、ユーザーの現在の値に影響します。',
-    ru: 'Примечание: Изменение значения монеты повлияет на текущее значение пользователей.'
+    ru: 'Примечание: Изменение значения монеты повлияет на текущее значение пользователей.',
+    ko: '참고: 코인 값 변경은 사용자의 현재 값을 영향을 미칩니다.'
   },
   {
     en: 'Login reward',
@@ -1817,7 +2076,8 @@ const dict = [
     de: 'Belohnung für Anmeldung',
     cn: '登录奖励',
     ja: 'ログイン報酬',
-    ru: 'Награда за вход'
+    ru: 'Награда за вход',
+    ko: '로그인 보상'
   },
   {
     en: 'Discussion reward',
@@ -1826,7 +2086,8 @@ const dict = [
     de: 'Belohnung für Diskussionen',
     cn: '讨论奖励',
     ja: 'ディスカッション報酬',
-    ru: 'Награда за обсуждение'
+    ru: 'Награда за обсуждение',
+    ko: '토론 보상'
   },
   {
     en: 'Comment reward',
@@ -1835,7 +2096,8 @@ const dict = [
     de: 'Belohnung für Kommentare',
     cn: '评论奖励',
     ja: 'コメント報酬',
-    ru: 'Награда за комментарий'
+    ru: 'Награда за комментарий',
+    ko: '댓글 보상'
   },
   {
     en: 'Best answer reward',
@@ -1844,7 +2106,8 @@ const dict = [
     de: 'Belohnung für beste Antwort',
     cn: '最佳答案奖励',
     ja: 'ベストアンサー報酬',
-    ru: 'Награда за лучший ответ'
+    ru: 'Награда за лучший ответ',
+    ko: '최고 답변 보상'
   },
   {
     en: 'Banned words',
@@ -1853,7 +2116,8 @@ const dict = [
     de: 'Gesperrte Wörter',
     cn: '禁用词汇',
     ja: '禁止ワード',
-    ru: 'Запрещенные слова'
+    ru: 'Запрещенные слова',
+    ko: '금지된 단어'
   },
   {
     en: 'Sign into your account',
@@ -1862,7 +2126,8 @@ const dict = [
     de: 'Melden Sie sich in Ihrem Konto an',
     cn: '登录您的帐户',
     ja: 'アカウントにサインイン',
-    ru: 'Войдите в свою учетную запись'
+    ru: 'Войдите в свою учетную запись',
+    ko: '계정에 로그인'
   },
   {
     en: 'Email or username',
@@ -1871,7 +2136,8 @@ const dict = [
     de: 'E-Mail oder Benutzername',
     cn: '电子邮件或用户名',
     ja: 'メールアドレスまたはユーザー名',
-    ru: 'Эл. адрес или имя пользователя'
+    ru: 'Эл. адрес или имя пользователя',
+    ko: '이메일 또는 사용자 이름'
   },
   {
     en: 'Password',
@@ -1880,7 +2146,18 @@ const dict = [
     de: 'Passwort',
     cn: '密码',
     ja: 'パスワード',
-    ru: 'Пароль'
+    ru: 'Пароль',
+    ko: '비밀번호'
+  },
+  {
+    en: 'Login',
+    es: 'Iniciar',
+    fr: 'Se connecter',
+    de: 'Anmelden',
+    cn: '登录',
+    ja: 'ログイン',
+    ru: 'Войти',
+    ko: '로그인'
   },
   {
     en: 'Log In',
@@ -1889,7 +2166,8 @@ const dict = [
     de: 'Anmelden',
     cn: '登录',
     ja: 'ログイン',
-    ru: 'Войти'
+    ru: 'Войти',
+    ko: '로그인'
   },
   {
     en: 'Forgotten Password?',
@@ -1898,7 +2176,8 @@ const dict = [
     de: 'Passwort vergessen?',
     cn: '忘记密码？',
     ja: 'パスワードをお忘れですか？',
-    ru: 'Забыли пароль?'
+    ru: 'Забыли пароль?',
+    ko: '비밀번호를 잊으셨나요?'
   },
   {
     en: 'Reset here',
@@ -1907,7 +2186,8 @@ const dict = [
     de: 'Hier zurücksetzen',
     cn: '在这里重置',
     ja: 'こちらでリセット',
-    ru: 'Сбросить здесь'
+    ru: 'Сбросить здесь',
+    ko: '여기에서 초기화'
   },
   {
     en: 'Not a member?',
@@ -1916,7 +2196,8 @@ const dict = [
     de: 'Noch kein Mitglied?',
     cn: '还不是会员？',
     ja: 'メンバーではありませんか？',
-    ru: 'Еще не зарегистрированы?'
+    ru: 'Еще не зарегистрированы?',
+    ko: '회원이 아니신가요?'
   },
   {
     en: 'Signup',
@@ -1925,7 +2206,8 @@ const dict = [
     de: 'Registrieren',
     cn: '注册',
     ja: '新規登録',
-    ru: 'Зарегистрироваться'
+    ru: 'Зарегистрироваться',
+    ko: '가입'
   },
   {
     en: 'Signup here',
@@ -1934,7 +2216,8 @@ const dict = [
     de: 'Hier registrieren',
     cn: '在这里注册',
     ja: 'こちらでサインアップ',
-    ru: 'Зарегистрироваться здесь'
+    ru: 'Зарегистрироваться здесь',
+    ko: '여기에서 가입'
   },
   {
     en: 'Password retrieval',
@@ -1943,7 +2226,8 @@ const dict = [
     de: 'Passwort-Wiederherstellung',
     cn: '密码找回',
     ja: 'パスワードの取得',
-    ru: 'Восстановление пароля'
+    ru: 'Восстановление пароля',
+    ko: '비밀번호 복구'
   },
   {
     en: 'Email address',
@@ -1952,7 +2236,8 @@ const dict = [
     de: 'E-Mail-Adresse',
     cn: '电子邮件地址',
     ja: 'メールアドレス',
-    ru: 'Адрес электронной почты'
+    ru: 'Адрес электронной почты',
+    ko: '이메일 주소'
   },
   {
     en: 'Reset password',
@@ -1961,7 +2246,8 @@ const dict = [
     de: 'Passwort zurücksetzen',
     cn: '重置密码',
     ja: 'パスワードをリセット',
-    ru: 'Сброс пароля'
+    ru: 'Сброс пароля',
+    ko: '비밀번호 초기화'
   },
   {
     en: 'Back to login',
@@ -1970,7 +2256,8 @@ const dict = [
     de: 'Zurück zur Anmeldung',
     cn: '返回登录',
     ja: 'ログインに戻る',
-    ru: 'Вернуться к входу'
+    ru: 'Вернуться к входу',
+    ko: '로그인으로 돌아가기'
   },
   {
     en: 'Reset your password',
@@ -1979,7 +2266,8 @@ const dict = [
     de: 'Passwort zurücksetzen',
     cn: '重置您的密码',
     ja: 'パスワードをリセットしてください',
-    ru: 'Сброс пароля'
+    ru: 'Сброс пароля',
+    ko: '비밀번호를 재설정하세요'
   },
   {
     en: 'Select language',
@@ -1988,7 +2276,8 @@ const dict = [
     de: 'Sprache auswählen',
     cn: '选择语言',
     ja: '言語を選択してください',
-    ru: 'Выберите язык'
+    ru: 'Выберите язык',
+    ko: '언어 선택'
   },
   {
     en: 'Continue',
@@ -1997,7 +2286,8 @@ const dict = [
     de: 'Weiter',
     cn: '继续',
     ja: '続ける',
-    ru: 'Продолжить'
+    ru: 'Продолжить',
+    ko: '계속'
   },
   {
     en: 'Welcome',
@@ -2006,7 +2296,8 @@ const dict = [
     de: 'Willkommen',
     cn: '欢迎',
     ja: 'ようこそ',
-    ru: 'Добро пожаловать'
+    ru: 'Добро пожаловать',
+    ko: '환영합니다'
   },
   {
     en: "Welcome, Let's setup blazingly!",
@@ -2015,7 +2306,8 @@ const dict = [
     de: 'Willkommen, lassen Sie uns die Einrichtung starten!',
     cn: '欢迎，让我们快速设置！',
     ja: 'ようこそ、簡単にセットアップしましょう！',
-    ru: 'Добро пожаловать! Давайте настроим все настройки!'
+    ru: 'Добро пожаловать! Давайте настроим все настройки!',
+    ko: '환영합니다, 빠르게 설정해봅시다!'
   },
   {
     en: 'Enter code sent to your email',
@@ -2024,7 +2316,8 @@ const dict = [
     de: 'Geben Sie den an Ihre E-Mail gesendeten Code ein',
     cn: '输入发送到您电子邮件的代码',
     ja: 'メールで送信されたコードを入力してください',
-    ru: 'Введите код, отправленный на вашу электронную почту'
+    ru: 'Введите код, отправленный на вашу электронную почту',
+    ko: '이메일로 전송된 코드를 입력하세요'
   },
   {
     en: 'New Password',
@@ -2033,7 +2326,8 @@ const dict = [
     de: 'Neues Passwort',
     cn: '新密码',
     ja: '新しいパスワード',
-    ru: 'Новый пароль'
+    ru: 'Новый пароль',
+    ko: '새 비밀번호'
   },
   {
     en: 'Retype Password',
@@ -2042,7 +2336,8 @@ const dict = [
     de: 'Passwort erneut eingeben',
     cn: '重新输入密码',
     ja: 'パスワードを再入力',
-    ru: 'Повторите пароль'
+    ru: 'Повторите пароль',
+    ko: '비밀번호 재입력'
   },
   {
     en: 'Code is incorrect or expired.',
@@ -2051,7 +2346,8 @@ const dict = [
     de: 'Code ist falsch oder abgelaufen.',
     cn: '代码不正确或已过期。',
     ja: 'コードが間違っているか期限が切れています。',
-    ru: 'Код неверен или истек срок действия.'
+    ru: 'Код неверен или истек срок действия.',
+    ko: '코드가 잘못되었거나 만료되었습니다.'
   },
   {
     en: 'Passwords does not matched!',
@@ -2060,7 +2356,8 @@ const dict = [
     de: 'Passwörter stimmen nicht überein!',
     cn: '密码不匹配！',
     ja: 'パスワードが一致しません！',
-    ru: 'Пароли не совпадают!'
+    ru: 'Пароли не совпадают!',
+    ko: '비밀번호가 일치하지 않습니다!'
   },
   {
     en: 'Password reset successfully!',
@@ -2069,7 +2366,8 @@ const dict = [
     de: 'Passwort erfolgreich zurückgesetzt!',
     cn: '密码重置成功！',
     ja: 'パスワードのリセットが成功しました！',
-    ru: 'Пароль успешно сброшен!'
+    ru: 'Пароль успешно сброшен!',
+    ko: '비밀번호가 성공적으로 재설정되었습니다!'
   },
   {
     en: 'Unable to update user. Please try again later.',
@@ -2078,7 +2376,8 @@ const dict = [
     de: 'Benutzer konnte nicht aktualisiert werden. Bitte versuchen Sie es später erneut.',
     cn: '无法更新用户。请稍后重试。',
     ja: 'ユーザーの更新に失敗しました。後でもう一度お試しください。',
-    ru: 'Не удалось обновить пользователя. Повторите попытку позже.'
+    ru: 'Не удалось обновить пользователя. Повторите попытку позже.',
+    ko: '사용자 업데이트를 할 수 없습니다. 나중에 다시 시도해주세요.'
   },
   {
     en: 'Account created successfully! Please verify account to continue.',
@@ -2087,7 +2386,8 @@ const dict = [
     de: 'Konto erfolgreich erstellt! Bitte überprüfen Sie Ihr Konto, um fortzufahren.',
     cn: '帐户创建成功！请验证帐户以继续。',
     ja: 'アカウントの作成に成功しました！続行するにはアカウントを確認してください。',
-    ru: 'Учетная запись успешно создана! Пожалуйста, подтвердите учетную запись, чтобы продолжить.'
+    ru: 'Учетная запись успешно создана! Пожалуйста, подтвердите учетную запись, чтобы продолжить.',
+    ko: '계정이 성공적으로 생성되었습니다! 계정을 확인하려면 계속 진행하세요.'
   },
   {
     en: 'Create your account',
@@ -2096,7 +2396,8 @@ const dict = [
     de: 'Erstellen Sie Ihr Konto',
     cn: '创建您的帐户',
     ja: 'アカウントの作成',
-    ru: 'Создайте свою учетную запись'
+    ru: 'Создайте свою учетную запись',
+    ko: '계정 생성하기'
   },
   {
     en: 'Account verification',
@@ -2105,7 +2406,8 @@ const dict = [
     de: 'Kontoverifizierung',
     cn: '帐户验证',
     ja: 'アカウントの確認',
-    ru: 'Подтверждение учетной записи'
+    ru: 'Подтверждение учетной записи',
+    ko: '계정 확인'
   },
   {
     en: 'Fullname',
@@ -2114,7 +2416,8 @@ const dict = [
     de: 'Vollständiger Name',
     cn: '全名',
     ja: 'フルネーム',
-    ru: 'Полное имя'
+    ru: 'Полное имя',
+    ko: '성명'
   },
   {
     en: 'Username is available.',
@@ -2123,7 +2426,8 @@ const dict = [
     de: 'Benutzername ist verfügbar.',
     cn: '用户名可用。',
     ja: 'ユーザー名は使用可能です。',
-    ru: 'Имя пользователя доступно.'
+    ru: 'Имя пользователя доступно.',
+    ko: '사용자 이름이 사용 가능합니다.'
   },
   {
     en: 'Username is not available. Try another name.',
@@ -2132,7 +2436,8 @@ const dict = [
     de: 'Benutzername ist nicht verfügbar. Bitte versuchen Sie einen anderen Namen.',
     cn: '用户名不可用。请尝试其他名称。',
     ja: 'ユーザー名は利用できません。別の名前を試してください。',
-    ru: 'Имя пользователя недоступно. Попробуйте другое имя.'
+    ru: 'Имя пользователя недоступно. Попробуйте другое имя.',
+    ko: '사용자 이름이 사용 불가능합니다. 다른 이름을 시도하세요.'
   },
   {
     en: 'Have an account?',
@@ -2141,7 +2446,8 @@ const dict = [
     de: 'Sie haben bereits ein Konto?',
     cn: '已有帐户？',
     ja: 'アカウントをお持ちですか？',
-    ru: 'Уже есть аккаунт?'
+    ru: 'Уже есть аккаунт?',
+    ko: '계정이 이미 있나요?'
   },
   {
     en: 'Login here',
@@ -2150,7 +2456,8 @@ const dict = [
     de: 'Hier anmelden',
     cn: '在这里登录',
     ja: 'こちらでログイン',
-    ru: 'Войти здесь'
+    ru: 'Войти здесь',
+    ko: '여기에서 로그인'
   },
   {
     en: 'Fullname is too short.',
@@ -2159,7 +2466,8 @@ const dict = [
     de: 'Vollständiger Name ist zu kurz.',
     cn: '全名太短。',
     ja: 'フルネームが短すぎます。',
-    ru: 'Слишком короткое полное имя.'
+    ru: 'Слишком короткое полное имя.',
+    ko: '성명이 너무 짧습니다.'
   },
   {
     en: 'Username is too short. Minimum character is three.',
@@ -2168,7 +2476,8 @@ const dict = [
     de: 'Benutzername ist zu kurz. Mindestens drei Zeichen erforderlich.',
     cn: '用户名太短。最少三个字符。',
     ja: 'ユーザー名が短すぎます。最小3文字以上を入力してください。',
-    ru: 'Имя пользователя слишком короткое. Минимальное количество символов - три.'
+    ru: 'Имя пользователя слишком короткое. Минимальное количество символов - три.',
+    ko: '사용자 이름이 너무 짧습니다. 최소 3자 이상이어야 합니다.'
   },
   {
     en: 'Invalid email address',
@@ -2177,7 +2486,8 @@ const dict = [
     de: 'Ungültige E-Mail-Adresse',
     cn: '无效的电子邮件地址',
     ja: '無効なメールアドレスです。',
-    ru: 'Недопустимый адрес электронной почты'
+    ru: 'Недопустимый адрес электронной почты',
+    ko: '유효하지 않은 이메일 주소입니다.'
   },
   {
     en: 'Password is too short. Minimum character is six.',
@@ -2186,7 +2496,8 @@ const dict = [
     de: 'Passwort ist zu kurz. Mindestens sechs Zeichen erforderlich.',
     cn: '密码太短。最少六个字符。',
     ja: 'パスワードが短すぎます。最小6文字以上を入力してください。',
-    ru: 'Пароль слишком короткий. Минимальное количество символов - шесть.'
+    ru: 'Пароль слишком короткий. Минимальное количество символов - шесть.',
+    ko: '비밀번호가 너무 짧습니다. 최소 6자 이상이어야 합니다.'
   },
   {
     en: 'Verify your account',
@@ -2195,7 +2506,8 @@ const dict = [
     de: 'Verifizieren Sie Ihr Konto',
     cn: '验证您的帐户',
     ja: 'アカウントの確認',
-    ru: 'Подтвердите свою учетную запись'
+    ru: 'Подтвердите свою учетную запись',
+    ko: '계정을 확인하세요'
   },
   {
     en: 'Unable to verify user. Please try again later',
@@ -2204,7 +2516,8 @@ const dict = [
     de: 'Benutzer konnte nicht verifiziert werden. Bitte versuchen Sie es später erneut.',
     cn: '无法验证用户。请稍后重试。',
     ja: 'ユーザーの確認に失敗しました。後でもう一度お試しください。',
-    ru: 'Не удалось подтвердить пользователя. Повторите попытку позже'
+    ru: 'Не удалось подтвердить пользователя. Повторите попытку позже',
+    ko: '사용자 확인이 불가능합니다. 나중에 다시 시도해주세요.'
   },
   {
     en: 'Account verified successfully!',
@@ -2213,7 +2526,8 @@ const dict = [
     de: 'Konto erfolgreich verifiziert!',
     cn: '帐户验证成功！',
     ja: 'アカウントの確認に成功しました！',
-    ru: 'Учетная запись успешно подтверждена!'
+    ru: 'Учетная запись успешно подтверждена!',
+    ko: '계정이 성공적으로 확인되었습니다!'
   },
   {
     en: 'Type words separate with comma',
@@ -2222,7 +2536,8 @@ const dict = [
     de: 'Geben Sie Wörter durch Kommas getrennt ein',
     cn: '以逗号分隔单词',
     ja: '単語をカンマで区切って入力してください',
-    ru: 'Введите слова, разделенные запятыми'
+    ru: 'Введите слова, разделенные запятыми',
+    ko: '단어를 쉼표로 구분하여 입력하세요'
   },
   {
     en: 'Upload favicon',
@@ -2231,7 +2546,8 @@ const dict = [
     de: 'Favicon hochladen',
     cn: '上传网站图标',
     ja: 'ファビコンをアップロード',
-    ru: 'Загрузите иконку сайта'
+    ru: 'Загрузите иконку сайта',
+    ko: '파비콘 업로드'
   },
   {
     en: 'Upload logo',
@@ -2240,7 +2556,8 @@ const dict = [
     de: 'Logo hochladen',
     cn: '上传标志',
     ja: 'ロゴをアップロード',
-    ru: 'Загрузите логотип'
+    ru: 'Загрузите логотип',
+    ko: '로고 업로드'
   },
   {
     en: 'Unable to save comment.',
@@ -2249,7 +2566,8 @@ const dict = [
     de: 'Kommentar konnte nicht gespeichert werden.',
     cn: '无法保存评论。',
     ja: 'コメントを保存できませんでした。',
-    ru: 'Не удалось сохранить комментарий.'
+    ru: 'Не удалось сохранить комментарий.',
+    ko: '댓글 저장 실패'
   },
   {
     en: 'Error occured. Please try again!',
@@ -2258,7 +2576,8 @@ const dict = [
     de: 'Fehler aufgetreten. Bitte versuchen Sie es erneut!',
     cn: '错误发生。请重试！',
     ja: 'エラーが発生しました。もう一度お試しください！',
-    ru: 'Произошла ошибка. Пожалуйста, повторите попытку!'
+    ru: 'Произошла ошибка. Пожалуйста, повторите попытку!',
+    ko: '오류가 발생했습니다. 다시 시도해주세요!'
   },
   {
     en: 'Discussion reported!',
@@ -2267,7 +2586,8 @@ const dict = [
     de: 'Diskussion gemeldet!',
     cn: '讨论已举报！',
     ja: 'ディスカッションが報告されました！',
-    ru: 'Обсуждение сообщено!'
+    ru: 'Обсуждение сообщено!',
+    ko: '토론이 신고되었습니다!'
   },
   {
     en: 'Reporting....',
@@ -2276,7 +2596,8 @@ const dict = [
     de: 'Melden....',
     cn: '正在举报....',
     ja: '報告中....',
-    ru: 'Отправка отчета....'
+    ru: 'Отправка отчета....',
+    ko: '신고 중....'
   },
   {
     en: 'Error creating post! Please try again.',
@@ -2285,7 +2606,8 @@ const dict = [
     de: 'Fehler beim Erstellen des Beitrags! Bitte versuchen Sie es erneut.',
     cn: '错误创建帖子！请重试。',
     ja: '投稿の作成にエラーが発生しました！もう一度お試しください。',
-    ru: 'Ошибка создания записи! Пожалуйста, повторитепопытку.'
+    ru: 'Ошибка создания записи! Пожалуйста, повторитепопытку.',
+    ko: '게시물 생성 오류! 다시 시도해주세요.'
   },
   {
     en: 'Title is too short!',
@@ -2294,7 +2616,8 @@ const dict = [
     de: 'Der Titel ist zu kurz!',
     cn: '标题太短！',
     ja: 'タイトルが短すぎます！',
-    ru: 'Заголовок слишком короткий!'
+    ru: 'Заголовок слишком короткий!',
+    ko: '제목이 너무 짧습니다!'
   },
   {
     en: 'Please choose a category!',
@@ -2303,7 +2626,8 @@ const dict = [
     de: 'Bitte wählen Sie eine Kategorie!',
     cn: '请选择一个分类！',
     ja: 'カテゴリを選択してください！',
-    ru: 'Пожалуйста, выберите категорию!'
+    ru: 'Пожалуйста, выберите категорию!',
+    ko: '카테고리를 선택해주세요!'
   },
   {
     en: 'Content is blank.',
@@ -2312,7 +2636,8 @@ const dict = [
     de: 'Der Inhalt ist leer.',
     cn: '内容为空。',
     ja: 'コンテンツが空白です。',
-    ru: 'Содержимое пусто.'
+    ru: 'Содержимое пусто.',
+    ko: '내용이 비어 있습니다.'
   },
   {
     en: 'You are required to login to access this page',
@@ -2321,7 +2646,8 @@ const dict = [
     de: 'Sie müssen sich anmelden, um auf diese Seite zuzugreifen.',
     cn: '您需要登录才能访问此页面',
     ja: 'このページにアクセスするにはログインが必要です',
-    ru: 'Для доступа к этой странице требуется вход в систему'
+    ru: 'Для доступа к этой странице требуется вход в систему',
+    ko: '이 페이지에 접근하려면 로그인이 필요합니다'
   },
   {
     en: 'Sign in',
@@ -2330,7 +2656,8 @@ const dict = [
     de: 'Anmelden',
     cn: '登录',
     ja: 'サインイン',
-    ru: 'Войти'
+    ru: 'Войти',
+    ko: '로그인'
   }
 ];
 

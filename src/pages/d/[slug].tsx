@@ -15,7 +15,7 @@ import {
   Loading
 } from '@geist-ui/core';
 import { formatDistance } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import { ChevronDown, Lock, Eye, Heart, HeartFill } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
@@ -167,6 +167,8 @@ const Discussion = observer(() => {
               ? zhCN
               : lang === 'ja'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';
@@ -193,7 +195,7 @@ const Discussion = observer(() => {
 
   const saveComment = async () => {
     if (!content) {
-      toast.error('Comment is blank!');
+      toast.error(useTranslation({ lang: lang, value: 'Comment is blank!' }));
     } else {
       await newComment({
         comment: content,
@@ -210,7 +212,9 @@ const Discussion = observer(() => {
               }, 1000);
             });
           } else {
-            toast.error('Unable to save comment.');
+            toast.error(
+              useTranslation({ lang: lang, value: 'Unable to save comment.' })
+            );
           }
         })
         .catch((err) => console.log(err));
@@ -219,7 +223,7 @@ const Discussion = observer(() => {
 
   const saveReply = async () => {
     if (!content) {
-      toast.error('Comment is blank!');
+      toast.error(useTranslation({ lang: lang, value: 'Comment is blank!' }));
     } else {
       await newReply({
         comment: content,
@@ -243,7 +247,9 @@ const Discussion = observer(() => {
               }, 1000);
             });
           } else {
-            toast.error('Unable to save reply.');
+            toast.error(
+              useTranslation({ lang: lang, value: 'Unable to save reply.' })
+            );
           }
         })
         .catch((err) => console.log(err));

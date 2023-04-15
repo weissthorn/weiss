@@ -18,13 +18,15 @@ const useReplyTranslation = (props: translationProps) => {
   } else if (props.lang === 'fr') {
     return `En réponse au commentaire de ${name} #${props.number}`;
   } else if (props.lang === 'de') {
-    return `${props.name} hat auf deinen Beitrag geantwortet.`;
+    return `Als Antwort auf @${props.name} Kommentar #${props.number}`;
   } else if (props.lang === 'ru') {
-    return `${props.name} ответила на твой пост.`;
+    return `В ответ на комментарий @${props.name} #${props.number}`;
   } else if (props.lang === 'cn') {
-    return `${props.name} 回复了你的帖子`;
-  } else if (props.lang === 'jp') {
-    return `${props.name} があなたの投稿に返信しました。`;
+    return `回复@${props.name} 评论 #${props.number}`;
+  } else if (props.lang === 'ja') {
+    return `@${props.name} コメント #${props.number} への返信`;
+  } else if (props.lang === 'ko') {
+    return `@${props.name} 댓글 #${props.number}에 대한 회신`;
   }
 };
 
@@ -41,8 +43,10 @@ const useRepliedPostTranslation = (props: translationProps) => {
     return `${props.name} ответила на твой пост.`;
   } else if (props.lang === 'cn') {
     return `${props.name} 回复了你的帖子`;
-  } else if (props.lang === 'jp') {
+  } else if (props.lang === 'ja') {
     return `${props.name} があなたの投稿に返信しました。`;
+  } else if (props.lang === 'ko') {
+    return `${props.name} 이 귀하의 게시물에 답장했습니다 .`;
   }
 };
 
@@ -59,8 +63,10 @@ const useRepliedCommentTranslation = (props: translationProps) => {
     return `${props.name} ответила на ваш комментарий.`;
   } else if (props.lang === 'cn') {
     return `${props.name} 回复了你的评论`;
-  } else if (props.lang === 'jp') {
+  } else if (props.lang === 'ja') {
     return `${props.name} があなたのコメントに返信しました。`;
+  } else if (props.lang === 'ko') {
+    return `${props.name} 이 귀하의 의견에 답변했습니다.`;
   }
 };
 
@@ -77,8 +83,10 @@ const useLikedReplyTranslation = (props: translationProps) => {
     return `${props.name} понравился твой ответ.`;
   } else if (props.lang === 'cn') {
     return `${props.name} 喜欢你的回复`;
-  } else if (props.lang === 'jp') {
+  } else if (props.lang === 'ja') {
     return `${props.name} はあなたの返事を気に入りました`;
+  } else if (props.lang === 'ko') {
+    return `${props.name} 은 귀하의 답변을 좋아했습니다.`;
   }
 };
 
@@ -95,8 +103,10 @@ const useLikedCommentTranslation = (props: translationProps) => {
     return `${props.name}  понравился ваш комментарий.`;
   } else if (props.lang === 'cn') {
     return `${props.name} 喜欢你的评论。`;
-  } else if (props.lang === 'jp') {
+  } else if (props.lang === 'ja') {
     return `${props.name} はあなたのコメントが気に入りました。`;
+  } else if (props.lang === 'ko') {
+    return `${props.name} 은 귀하의 의견을 좋아했습니다.`;
   }
 };
 
@@ -113,8 +123,10 @@ const useLikedPostTranslation = (props: translationProps) => {
     return `${props.name} понравился твой пост.`;
   } else if (props.lang === 'cn') {
     return `${props.name} 喜欢你的帖子`;
-  } else if (props.lang === 'jp') {
+  } else if (props.lang === 'ja') {
     return `${props.name} はあなたの投稿が好きでした`;
+  } else if (props.lang === 'ko') {
+    return `${props.name} 이 게시물을 좋아합니다`;
   }
 };
 

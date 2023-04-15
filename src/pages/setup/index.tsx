@@ -70,7 +70,7 @@ const Setup = observer(() => {
   };
 
   return (
-    <SetupVerify>
+    <>
       <Navbar
         title="Welcome - Setup Weiss"
         description="Welcome - Setup Weiss"
@@ -190,7 +190,7 @@ const Setup = observer(() => {
           </div>
         </div>
       </div>
-    </SetupVerify>
+    </>
   );
 });
 

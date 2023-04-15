@@ -11,7 +11,7 @@ import {
 import { Heart, HeartFill } from '@geist-ui/icons';
 import NextLink from 'next/link';
 import { formatDistance } from 'date-fns';
-import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
 import { Translation, useTranslation } from './intl/Translation';
 
 type replyProp = {
@@ -77,6 +77,8 @@ const Reply = (props: replyProp) => {
               ? zhCN
               : lang === 'ja'
               ? ja
+              : lang === 'ko'
+              ? ko
               : null
         })
       : '';
