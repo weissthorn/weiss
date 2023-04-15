@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import moment from 'moment';
 import { format } from 'date-fns';
-import { es, fr, enUS } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
 import { Card, Text, Grid, Input } from '@geist-ui/core';
 import CountUp from 'react-countup';
 import dynamic from 'next/dynamic';
@@ -121,6 +121,8 @@ const Dashboard = observer(() => {
     .map((item: any) => item.count)
     .reduce((a: number, b: number) => a + b, 0);
 
+  const lang = settings.language;
+
   return (
     <Auth>
       <Navbar
@@ -136,7 +138,7 @@ const Dashboard = observer(() => {
       <DateModal
         show={modal}
         date={date}
-        lang={settings?.language}
+        lang={lang}
         toggleModal={() => toggleDate(!modal)}
         setDate={setDate}
         actionTrigger={processAnalytics}
@@ -150,39 +152,43 @@ const Dashboard = observer(() => {
               <Text h3>
                 <Translation lang={settings?.language} value="Dashboard" />
               </Text>
-              <Text>
-                {format(new Date(), 'MMM d, yyyy', {
-                  locale:
-                    settings?.language === 'es'
-                      ? es
-                      : settings?.language === 'fr'
-                      ? fr
-                      : settings?.language === 'en'
-                      ? enUS
-                      : null
-                })}
-              </Text>
             </div>
             <div className="item">
               <Input
                 width="100%"
                 placeholder={`${format(date[0].startDate, 'MMM d, yyyy', {
                   locale:
-                    settings?.language === 'es'
+                    lang === 'es'
                       ? es
-                      : settings?.language === 'fr'
+                      : lang === 'fr'
                       ? fr
-                      : settings?.language === 'en'
+                      : lang === 'en'
                       ? enUS
+                      : lang === 'ru'
+                      ? ru
+                      : lang === 'de'
+                      ? de
+                      : lang === 'cn'
+                      ? zhCN
+                      : lang === 'ja'
+                      ? ja
                       : null
                 })} - ${format(date[0].endDate, 'MMM d, yyyy', {
                   locale:
-                    settings?.language === 'es'
+                    lang === 'es'
                       ? es
-                      : settings?.language === 'fr'
+                      : lang === 'fr'
                       ? fr
-                      : settings?.language === 'en'
+                      : lang === 'en'
                       ? enUS
+                      : lang === 'ru'
+                      ? ru
+                      : lang === 'de'
+                      ? de
+                      : lang === 'cn'
+                      ? zhCN
+                      : lang === 'ja'
+                      ? ja
                       : null
                 })}`}
                 onClick={() => toggleDate(true)}

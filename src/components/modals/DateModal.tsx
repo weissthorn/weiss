@@ -17,6 +17,7 @@ type dateModalProps = {
 const DateModal = (props: dateModalProps) => {
   const { show, date, lang, toggleModal, setDate, actionTrigger } = props;
   const mobile = useMediaQuery('mobile');
+  const isCnLang = lang === 'cn' ? 'zhCN' : lang;
 
   return (
     <>
@@ -29,7 +30,7 @@ const DateModal = (props: dateModalProps) => {
       >
         <Modal.Content>
           <DateRange
-            locale={locales[lang]}
+            locale={locales[isCnLang]}
             onChange={(item: any) => setDate([item.selection])}
             // showSelectionPreview={true}
             // moveRangeOnFirstSelection={false}

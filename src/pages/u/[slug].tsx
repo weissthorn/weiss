@@ -8,7 +8,7 @@ import {
   Loading
 } from '@geist-ui/core';
 import { format } from 'date-fns';
-import { es, fr, enUS } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import Navbar from 'components/Navbar';
@@ -57,6 +57,14 @@ const User = observer(() => {
               ? fr
               : lang === 'en'
               ? enUS
+              : lang === 'ru'
+              ? ru
+              : lang === 'de'
+              ? de
+              : lang === 'cn'
+              ? zhCN
+              : lang === 'jp'
+              ? ja
               : null
         })
       : '';

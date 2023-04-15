@@ -86,6 +86,7 @@ const ReplyModal = observer((props: editorProps) => {
               {replyUsername
                 ? useReplyTranslation({
                     lang: props.lang,
+                    name: replyUsername,
                     value: `In reply to (@${replyUsername})`,
                     number: commentNumber
                   })

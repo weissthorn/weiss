@@ -78,12 +78,7 @@ const CommentModal = observer((props: editorProps) => {
                 }}
               />
             </div>
-            <Text>
-              {replyUsername
-                ? `In reply to (@${replyUsername}) comment #${commentNumber}`
-                : ''}
-            </Text>
-            <Spacer />
+
             <Editor
               lang={lang}
               height={_height}

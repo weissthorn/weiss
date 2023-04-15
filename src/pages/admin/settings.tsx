@@ -261,6 +261,18 @@ const Settings = observer(() => {
                     <Select.Option value="es">
                       <Translation lang={settings?.language} value="Spanish" />
                     </Select.Option>
+                    <Select.Option value="de">
+                      <Translation lang={settings?.language} value="German" />
+                    </Select.Option>
+                    <Select.Option value="cn">
+                      <Translation lang={settings?.language} value="Chinese" />
+                    </Select.Option>
+                    <Select.Option value="ja">
+                      <Translation lang={settings?.language} value="Japanese" />
+                    </Select.Option>
+                    <Select.Option value="ru">
+                      <Translation lang={settings?.language} value="Russian" />
+                    </Select.Option>
                   </Select>
                 </div>
               </div>

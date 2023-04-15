@@ -19,7 +19,7 @@ const Editor = (prop: editorProp) => {
   return (
     <div style={{ marginBottom: 15 }}>
       <SunEditor
-        lang={prop.lang}
+        lang={prop.lang === 'cn' ? 'zh_cn' : prop.lang}
         height={prop.height}
         placeholder={
           prop.placeholder
@@ -50,7 +50,7 @@ const Editor = (prop: editorProp) => {
           ]
         }}
         defaultValue={prop.value}
-        onChange={prop.onChange}
+        onChange={() => prop.onChange(prop.value)}
       />
     </div>
   );

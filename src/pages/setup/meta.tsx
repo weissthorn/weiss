@@ -36,7 +36,7 @@ const MetaSetup = observer(() => {
 
     let upload: any = document.querySelector('.file-upload');
 
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append('file', upload.files[0]);
 
     await uploadImage('logo', formData)

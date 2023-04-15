@@ -1,7 +1,7 @@
 # Base on offical Node.js Alpine image
 FROM rethinkdb:latest
 
-ENTRYPOINT ["rethinkdb", "--bind", "all"]
+# ENTRYPOINT /etc/init.d/rethinkdb restart
 
 RUN useradd -ms /bin/bash weiss
 
@@ -42,8 +42,6 @@ EXPOSE 2323
 # Run container as non-root (unprivileged) user
 # The node user is provided in the Node.js Alpine base image
 USER weiss
-
-
 
 # Run yarn start script with PM2 when container starts
 CMD [ "pm2-runtime", "yarn", "--", "start" ]

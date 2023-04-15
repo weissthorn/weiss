@@ -1,7 +1,7 @@
 import { Popover, Text, Link, Avatar, Spacer, User } from '@geist-ui/core';
 import NextLink from 'next/link';
 import { format } from 'date-fns';
-import { es, fr, enUS } from 'date-fns/locale';
+import { es, fr, enUS, de, ja, ru, zhCN } from 'date-fns/locale';
 import { pluralize } from './api/utils';
 import { Translation, useTranslation } from 'components/intl/Translation';
 
@@ -44,6 +44,14 @@ const Post = (props: postProps) => {
               ? fr
               : lang === 'en'
               ? enUS
+              : lang === 'ru'
+              ? ru
+              : lang === 'de'
+              ? de
+              : lang === 'cn'
+              ? zhCN
+              : lang === 'ja'
+              ? ja
               : null
         })
       : '';

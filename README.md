@@ -4,6 +4,7 @@ Modern, Minimalistic Discussion Software
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b434e4594827418681e9fbe21566b45e)](https://www.codacy.com/gh/weissthorn/weiss/dashboard?utm_source=github.com&utm_medium=referral&utm_content=weissthorn/weiss&utm_campaign=Badge_Grade)
 ![git workflow](https://github.com/weissthorn/weiss/actions/workflows/main.yml/badge.svg?branch=main)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/kimolalekan/weiss)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ### Prerequisite

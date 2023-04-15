@@ -45,12 +45,12 @@ const formatNumber = (value: number) => {
 };
 
 const validateEmail = (email: any) => {
-  var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 };
 
 const withAuth = async (req: any) => {
-  var allowlist: string[] | any = process.env.NEXT_PUBLIC_CLIENT_ORIGINS;
+  let allowlist: string[] | any = process.env.NEXT_PUBLIC_CLIENT_ORIGINS;
   allowlist = allowlist.split(',');
 
   if (allowlist.indexOf(req.headers.host) !== -1) {
