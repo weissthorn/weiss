@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "preinstall": "bash setup.sh",
+    "setup": "bash setup.sh",
     "dev": "next dev -p 2323",
     "build": "next build",
     "start": "next start -p 2323",

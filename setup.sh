@@ -54,5 +54,5 @@ sudo ln -s /etc/nginx/sites-available/weiss.conf /etc/nginx/sites-enabled/weiss.
 
 if ! type "man" > /dev/null; then
   echo "Installing ssl certificate for $domain"
-  sudo certbot certonly --standalone -d your_domain
+  sudo certbot certonly --standalone -d $domain
 fi
