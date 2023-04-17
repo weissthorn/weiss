@@ -27,34 +27,36 @@ const Setup = observer(() => {
     setSettings({ ...settings, ...val });
   };
 
+  const lang = settings?.language ? settings?.language : 'en';
+
   const _next = async () => {
     const { username, email, password } = admin;
 
     if (!settings.language) {
       toast.error(
         useTranslation({
-          lang: settings?.language,
+          lang: lang,
           value: 'Please select a language'
         })
       );
     } else if (!username || username.length < 3) {
       toast.error(
         useTranslation({
-          lang: settings?.language,
+          lang: lang,
           value: 'Username is too short. Minimum character is three.'
         })
       );
     } else if (validateEmail(email) === false) {
       toast.error(
         useTranslation({
-          lang: settings?.language,
+          lang: lang,
           value: 'Invalid email address'
         })
       );
     } else if (!password || password.length < 6) {
       toast.error(
         useTranslation({
-          lang: settings?.language,
+          lang: lang,
           value: 'Password is too short. Minimum character is six.'
         })
       );
@@ -87,7 +89,7 @@ const Setup = observer(() => {
             <Card shadow width="100%">
               <Text h3>
                 <Translation
-                  lang={settings?.language}
+                  lang={lang}
                   value="Welcome, Let's setup blazingly!"
                 />
               </Text>
@@ -95,7 +97,7 @@ const Setup = observer(() => {
               <Select
                 scale={4 / 3}
                 placeholder={useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Select language'
                 })}
                 width="100%"
@@ -103,37 +105,37 @@ const Setup = observer(() => {
                 onChange={(val) => handleSettings({ language: val })}
               >
                 <Select.Option value="en">
-                  <Translation lang={settings?.language} value="English" />
+                  <Translation lang={lang} value="English" />
                 </Select.Option>
                 <Select.Option value="fr">
-                  <Translation lang={settings?.language} value="French" />
+                  <Translation lang={lang} value="French" />
                 </Select.Option>
                 <Select.Option value="es">
-                  <Translation lang={settings?.language} value="Spanish" />
+                  <Translation lang={lang} value="Spanish" />
                 </Select.Option>
                 <Select.Option value="de">
-                  <Translation lang={settings?.language} value="German" />
+                  <Translation lang={lang} value="German" />
                 </Select.Option>
                 <Select.Option value="cn">
-                  <Translation lang={settings?.language} value="Chinese" />
+                  <Translation lang={lang} value="Chinese" />
                 </Select.Option>
                 <Select.Option value="ja">
-                  <Translation lang={settings?.language} value="Japanese" />
+                  <Translation lang={lang} value="Japanese" />
                 </Select.Option>
                 <Select.Option value="ko">
-                  <Translation lang={settings?.language} value="Korean" />
+                  <Translation lang={lang} value="Korean" />
                 </Select.Option>
                 <Select.Option value="ru">
-                  <Translation lang={settings?.language} value="Russian" />
+                  <Translation lang={lang} value="Russian" />
                 </Select.Option>
               </Select>
               <Spacer h={1.5} />
               <Input
                 placeholder={`${useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Admin'
                 })} ${useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Username'
                 })}`}
                 width="100%"
@@ -147,10 +149,10 @@ const Setup = observer(() => {
               <Input
                 htmlType={'email'}
                 placeholder={`${useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Admin'
                 })} ${useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Email'
                 })}`}
                 width="100%"
@@ -161,10 +163,10 @@ const Setup = observer(() => {
               <Spacer h={1.5} />
               <Input.Password
                 placeholder={`${useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Admin'
                 })} ${useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Password'
                 })}`}
                 width="100%"
@@ -182,8 +184,7 @@ const Setup = observer(() => {
                 iconRight={<ChevronRight />}
                 onClick={_next}
               >
-                <Translation lang={settings?.language} value="Continue" />{' '}
-                &nbsp;(2/3)
+                <Translation lang={lang} value="Continue" /> &nbsp;(2/3)
               </Button>
             </Card>
           </div>

@@ -36,6 +36,8 @@ const EmailSetup = observer(() => {
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
   }, []);
 
+  const lang = settings?.language ? settings?.language : 'en';
+
   const handleSettings = (val: any) => {
     setSettings({ ...settings, ...val });
   };
@@ -111,14 +113,14 @@ const EmailSetup = observer(() => {
 
             <Card shadow width="100%">
               <Text h3>
-                <Translation lang={settings?.language} value="Email settings" />
+                <Translation lang={lang} value="Email settings" />
               </Text>
               <Spacer h={2} />
 
               <Input
                 htmlType="url"
                 placeholder={useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'SMTP host'
                 })}
                 width="100%"
@@ -136,7 +138,7 @@ const EmailSetup = observer(() => {
               <Spacer h={1.5} />
               <Input
                 placeholder={useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'SMTP user/email'
                 })}
                 width="100%"
@@ -154,7 +156,7 @@ const EmailSetup = observer(() => {
               <Spacer h={1.5} />
               <Input.Password
                 placeholder={useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'SMTP password'
                 })}
                 width="100%"
@@ -176,7 +178,7 @@ const EmailSetup = observer(() => {
                 width="48%"
                 icon={<ChevronLeft />}
               >
-                <Translation lang={settings?.language} value="Back" />
+                <Translation lang={lang} value="Back" />
               </Button>
               <Button
                 loading={loading}
@@ -186,7 +188,7 @@ const EmailSetup = observer(() => {
                 ml={'5px'}
                 onClick={save}
               >
-                <Translation lang={settings?.language} value="Save & launch" />
+                <Translation lang={lang} value="Save & launch" />
               </Button>
             </Card>
           </div>

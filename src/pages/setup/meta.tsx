@@ -29,7 +29,9 @@ const MetaSetup = observer(() => {
     getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
-  }, []);
+  }, [settings]);
+
+  const lang = settings?.language ? settings?.language : 'en';
 
   const handleUpload = async () => {
     let t = toast.loading('Uploading image....');
@@ -101,11 +103,11 @@ const MetaSetup = observer(() => {
 
             <Card shadow width="100%">
               <Text h3>
-                <Translation lang={settings?.language} value="Site metadata" />
+                <Translation lang={lang} value="Site metadata" />
               </Text>
               <Spacer h={2} />
               <Button icon={<Picture />} auto>
-                <Translation lang={settings?.language} value="Upload logo" />
+                <Translation lang={lang} value="Upload logo" />
                 <input
                   type="file"
                   className="file-upload"
@@ -124,7 +126,7 @@ const MetaSetup = observer(() => {
               <Spacer h={1.5} />
               <Input
                 placeholder={useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Site name'
                 })}
                 width="100%"
@@ -140,7 +142,7 @@ const MetaSetup = observer(() => {
               <Spacer h={1.5} />
               <Textarea
                 placeholder={useTranslation({
-                  lang: settings?.language,
+                  lang: lang,
                   value: 'Site description'
                 })}
                 width="100%"
@@ -160,7 +162,7 @@ const MetaSetup = observer(() => {
                 width="48%"
                 icon={<ChevronLeft />}
               >
-                <Translation lang={settings?.language} value="Back" />
+                <Translation lang={lang} value="Back" />
               </Button>
               <Button
                 shadow
@@ -170,8 +172,7 @@ const MetaSetup = observer(() => {
                 iconRight={<ChevronRight />}
                 onClick={_next}
               >
-                <Translation lang={settings?.language} value="Continue" />{' '}
-                &nbsp;(3 / 3)
+                <Translation lang={lang} value="Continue" /> &nbsp;(3 / 3)
               </Button>
             </Card>
           </div>
