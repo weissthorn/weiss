@@ -61,7 +61,7 @@ const withAuth = async (req: any) => {
       return { success: true };
     }
   } else {
-    return { success: false, message: 'Unathorized access' };
+    return { success: false, message: 'Unauthorized access' };
   }
 };
 
