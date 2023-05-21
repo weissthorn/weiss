@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { parseCookies } from 'nookies';
 import { userProp } from 'interfaces/user';
 

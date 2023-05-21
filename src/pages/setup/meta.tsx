@@ -29,7 +29,7 @@ const MetaSetup = observer(() => {
     getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
-  }, [settings]);
+  }, []);
 
   const lang = settings?.language ? settings?.language : 'en';
 

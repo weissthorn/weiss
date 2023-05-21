@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import dynamic from 'next/dynamic';
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false
@@ -6,6 +5,7 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 
 import { useTranslation } from './intl/Translation';
+import { useEffect } from 'react';
 
 type editorProp = {
   lang?: any;
@@ -16,6 +16,7 @@ type editorProp = {
 };
 
 const Editor = (prop: editorProp) => {
+  useEffect(() => {}, [prop]);
   return (
     <div style={{ marginBottom: 15 }}>
       <SunEditor
@@ -49,11 +50,12 @@ const Editor = (prop: editorProp) => {
             ]
           ]
         }}
-        defaultValue={prop.value}
+        setContents={prop.value}
+        // defaultValue={prop.value}
         onChange={() => prop.onChange(prop.value)}
       />
     </div>
   );
 };
 
-export default memo(Editor);
+export default Editor;
