@@ -1,5 +1,4 @@
 
-
 # Empty the .env file
 echo "" >  .env.local
 
@@ -20,7 +19,7 @@ EOF
 
 echo "" >  .env.local
 
-echo -n "Enter domain or subdomain: " 
+echo -n "Enter domain or subdomain: "
 read domain
 
 cat << EOF >> /etc/nginx/sites-available/weiss.conf

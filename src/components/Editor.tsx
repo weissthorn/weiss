@@ -50,8 +50,8 @@ const Editor = (prop: editorProp) => {
             ]
           ]
         }}
-        setContents={prop.value}
-        // defaultValue={prop.value}
+        // setContents={prop.value}
+        defaultValue={prop.value}
         onChange={() => prop.onChange(prop.value)}
       />
     </div>

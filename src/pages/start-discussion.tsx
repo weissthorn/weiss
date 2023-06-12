@@ -5,6 +5,7 @@ import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
+import { toJS } from 'mobx';
 import DiscussionStore from 'stores/discussion';
 import useToken from 'components/Token';
 import { useRouter } from 'next/router';
@@ -74,6 +75,8 @@ const StartDiscussion = observer(() => {
       });
     }
   };
+
+  console.table(toJS(discussion));
 
   return (
     <div>
