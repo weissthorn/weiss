@@ -19,19 +19,10 @@ const EmailSetup = observer(() => {
   const [userStore] = useState(() => new UserStore());
   const [categoryStore] = useState(() => new CategoryStore());
   const [store] = useState(() => new SettingsStore());
-  const {
-    loading,
-    admin,
-    setAdmin,
-    settings,
-    setSettings,
-    getSettings,
-    create
-  } = store;
+  const { loading, admin, setAdmin, settings, setSettings, create } = store;
   const { email } = settings;
 
   useEffect(() => {
-    getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
     setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
   }, []);
@@ -77,7 +68,6 @@ const EmailSetup = observer(() => {
 
           if (res.success) {
             const { name, id, role, photo, username } = res.data;
-            destroyCookie(null, '_w_setup');
             setCookie(
               null,
               '_w_auth',
@@ -89,6 +79,7 @@ const EmailSetup = observer(() => {
             );
 
             await create(_settings).then((res) => {
+              destroyCookie(null, '_w_setup');
               router.push('/admin');
             });
           }

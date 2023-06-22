@@ -26,9 +26,8 @@ const MetaSetup = observer(() => {
     store;
 
   useEffect(() => {
-    getSettings();
     let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
-    setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
+    setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : false;
   }, []);
 
   const lang = settings?.language ? settings?.language : 'en';
@@ -70,9 +69,7 @@ const MetaSetup = observer(() => {
   const _next = async () => {
     const { siteName, siteDescription } = settings;
 
-    if (!settings.siteLogo) {
-      toast.error('Please add a logo');
-    } else if (!siteName || siteName.length < 3) {
+    if (!siteName || siteName.length < 3) {
       toast.error('Username is too short!');
     } else if (!siteDescription || siteDescription.length < 10) {
       toast.error('Description is too short! Minimum character is 10.');
@@ -106,23 +103,30 @@ const MetaSetup = observer(() => {
                 <Translation lang={lang} value="Site metadata" />
               </Text>
               <Spacer h={2} />
-              <Button icon={<Picture />} auto>
-                <Translation lang={lang} value="Upload logo" />
-                <input
-                  type="file"
-                  className="file-upload"
-                  onChange={handleUpload}
-                />
-              </Button>{' '}
-              <Spacer inline />
-              {settings.siteLogo ? (
-                <Image
-                  src={`/storage/${settings.siteLogo}`}
-                  style={{ width: 'auto', height: 20 }}
-                />
-              ) : (
-                ''
-              )}
+              <div className="discussion-container">
+                <div>
+                  <Button icon={<Picture />} auto>
+                    <Translation lang={lang} value="Upload logo" />
+                    <input
+                      type="file"
+                      className="file-upload"
+                      onChange={handleUpload}
+                    />
+                  </Button>
+                </div>
+                <div>
+                  {settings.siteLogo ? (
+                    <Image
+                      src={`/storage/${settings.siteLogo}`}
+                      style={{ width: 'auto', height: 30 }}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </div>
+              <Spacer />
+
               <Spacer h={1.5} />
               <Input
                 placeholder={useTranslation({

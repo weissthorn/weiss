@@ -1,5 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Spacer, Text, Button, Input, Card, Select } from '@geist-ui/core';
+import {
+  Spacer,
+  Text,
+  Button,
+  Input,
+  Card,
+  Select,
+  Spinner,
+  Loading
+} from '@geist-ui/core';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { ChevronRight } from '@geist-ui/icons';
@@ -15,12 +24,16 @@ const Setup = observer(() => {
   const cookie = parseCookies();
   const router = useRouter();
   const [store] = useState(() => new SettingsStore());
+  const [loading, setLoading] = useState(true);
   const { admin, setAdmin, settings, setSettings, getSettings } = store;
 
   useEffect(() => {
-    getSettings();
-    let setup = cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
-    setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
+    setTimeout(() => {
+      let setup =
+        cookie && cookie._w_setup ? JSON.parse(cookie._w_setup) : null;
+      setup ? (setAdmin(setup.admin), setSettings(setup.settings)) : null;
+      setLoading(false);
+    }, 3000);
   }, []);
 
   const handleSettings = (val: any) => {
@@ -62,6 +75,7 @@ const Setup = observer(() => {
       );
     } else {
       admin.name = admin.username;
+      admin.username = admin.username.toLowerCase();
       const setup = { settings, admin };
       setCookie(null, '_w_setup', JSON.stringify(setup), {
         maxAge: 30 * 24 * 60 * 60,
@@ -80,115 +94,123 @@ const Setup = observer(() => {
       />
       <Toaster />
       <div className="polkadot">
-        <div className="page-container top-100">
-          <div className="boxed">
-            <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
-              Weiss
-            </Text>
-
-            <Card shadow width="100%">
-              <Text h3>
-                <Translation
-                  lang={lang}
-                  value="Welcome, Let's setup blazingly!"
-                />
-              </Text>
-              <Spacer h={2} />
-              <Select
-                scale={4 / 3}
-                placeholder={useTranslation({
-                  lang: lang,
-                  value: 'Select language'
-                })}
-                width="100%"
-                value={settings.language}
-                onChange={(val) => handleSettings({ language: val })}
-              >
-                <Select.Option value="en">
-                  <Translation lang={lang} value="English" />
-                </Select.Option>
-                <Select.Option value="fr">
-                  <Translation lang={lang} value="French" />
-                </Select.Option>
-                <Select.Option value="es">
-                  <Translation lang={lang} value="Spanish" />
-                </Select.Option>
-                <Select.Option value="de">
-                  <Translation lang={lang} value="German" />
-                </Select.Option>
-                <Select.Option value="cn">
-                  <Translation lang={lang} value="Chinese" />
-                </Select.Option>
-                <Select.Option value="ja">
-                  <Translation lang={lang} value="Japanese" />
-                </Select.Option>
-                <Select.Option value="ko">
-                  <Translation lang={lang} value="Korean" />
-                </Select.Option>
-                <Select.Option value="ru">
-                  <Translation lang={lang} value="Russian" />
-                </Select.Option>
-              </Select>
-              <Spacer h={1.5} />
-              <Input
-                placeholder={`${useTranslation({
-                  lang: lang,
-                  value: 'Admin'
-                })} ${useTranslation({
-                  lang: lang,
-                  value: 'Username'
-                })}`}
-                width="100%"
-                scale={4 / 3}
-                value={admin.username}
-                onChange={(e) =>
-                  setAdmin({ ...admin, username: e.target.value })
-                }
-              />
-              <Spacer h={1.5} />
-              <Input
-                htmlType={'email'}
-                placeholder={`${useTranslation({
-                  lang: lang,
-                  value: 'Admin'
-                })} ${useTranslation({
-                  lang: lang,
-                  value: 'Email'
-                })}`}
-                width="100%"
-                scale={4 / 3}
-                value={admin.email}
-                onChange={(e) => setAdmin({ ...admin, email: e.target.value })}
-              />
-              <Spacer h={1.5} />
-              <Input.Password
-                placeholder={`${useTranslation({
-                  lang: lang,
-                  value: 'Admin'
-                })} ${useTranslation({
-                  lang: lang,
-                  value: 'Password'
-                })}`}
-                width="100%"
-                scale={4 / 3}
-                value={admin.password}
-                onChange={(e) =>
-                  setAdmin({ ...admin, password: e.target.value })
-                }
-              />
-              <Spacer h={1.5} />
-              <Button
-                shadow
-                type="secondary"
-                width="100%"
-                iconRight={<ChevronRight />}
-                onClick={_next}
-              >
-                <Translation lang={lang} value="Continue" /> &nbsp;(2/3)
-              </Button>
-            </Card>
+        {loading ? (
+          <div style={{ width: 500, margin: '20% auto' }}>
+            <Loading scale={4}>Initializing</Loading>
           </div>
-        </div>
+        ) : (
+          <div className="page-container top-100">
+            <div className="boxed">
+              <Text h2 width={'100%'} style={{ textAlign: 'center' }}>
+                Weiss
+              </Text>
+
+              <Card shadow width="100%">
+                <Text h3>
+                  <Translation
+                    lang={lang}
+                    value="Welcome, Let's setup blazingly!"
+                  />
+                </Text>
+                <Spacer h={2} />
+                <Select
+                  scale={4 / 3}
+                  placeholder={useTranslation({
+                    lang: lang,
+                    value: 'Select language'
+                  })}
+                  width="100%"
+                  value={settings.language}
+                  onChange={(val) => handleSettings({ language: val })}
+                >
+                  <Select.Option value="en">
+                    <Translation lang={lang} value="English" />
+                  </Select.Option>
+                  <Select.Option value="fr">
+                    <Translation lang={lang} value="French" />
+                  </Select.Option>
+                  <Select.Option value="es">
+                    <Translation lang={lang} value="Spanish" />
+                  </Select.Option>
+                  <Select.Option value="de">
+                    <Translation lang={lang} value="German" />
+                  </Select.Option>
+                  <Select.Option value="cn">
+                    <Translation lang={lang} value="Chinese" />
+                  </Select.Option>
+                  <Select.Option value="ja">
+                    <Translation lang={lang} value="Japanese" />
+                  </Select.Option>
+                  <Select.Option value="ko">
+                    <Translation lang={lang} value="Korean" />
+                  </Select.Option>
+                  <Select.Option value="ru">
+                    <Translation lang={lang} value="Russian" />
+                  </Select.Option>
+                </Select>
+                <Spacer h={1.5} />
+                <Input
+                  placeholder={`${useTranslation({
+                    lang: lang,
+                    value: 'Admin'
+                  })} ${useTranslation({
+                    lang: lang,
+                    value: 'Username'
+                  })}`}
+                  width="100%"
+                  scale={4 / 3}
+                  value={admin.username}
+                  onChange={(e) =>
+                    setAdmin({ ...admin, username: e.target.value })
+                  }
+                />
+                <Spacer h={1.5} />
+                <Input
+                  htmlType={'email'}
+                  placeholder={`${useTranslation({
+                    lang: lang,
+                    value: 'Admin'
+                  })} ${useTranslation({
+                    lang: lang,
+                    value: 'Email'
+                  })}`}
+                  width="100%"
+                  scale={4 / 3}
+                  value={admin.email}
+                  onChange={(e) =>
+                    setAdmin({ ...admin, email: e.target.value })
+                  }
+                />
+                <Spacer h={1.5} />
+                <Input.Password
+                  placeholder={`${useTranslation({
+                    lang: lang,
+                    value: 'Admin'
+                  })} ${useTranslation({
+                    lang: lang,
+                    value: 'Password'
+                  })}`}
+                  width="100%"
+                  scale={4 / 3}
+                  value={admin.password}
+                  onChange={(e) =>
+                    setAdmin({ ...admin, password: e.target.value })
+                  }
+                />
+                <Spacer h={1.5} />
+                <Button
+                  shadow
+                  type="secondary"
+                  width="100%"
+                  iconRight={<ChevronRight />}
+                  onClick={_next}
+                >
+                  <Translation lang={lang} value="Continue" /> &nbsp;(2/3)
+                </Button>
+              </Card>
+            </div>
+          </div>
+        )}
       </div>
     </SetupVerify>
   );

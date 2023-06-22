@@ -263,17 +263,15 @@ Pageview.ensureIndex('type');
 Pageview.ensureIndex('createdAt');
 Pageview.ensureIndex('updatedAt');
 
-// const initModel = () => {
-//   thinky.dbReady().then((data: any) => {
-//     if (!data) {
-//       console.log(config.api);
+const initModel = () => {
+  thinky.dbReady().then((data: any) => {
+    if (data?.dbs_created !== 1) {
+      r.dbCreate(config.api.db);
+    }
+  });
+};
 
-//       r.dbCreate(config.api.db);
-//     }
-//   });
-// };
-
-// initModel();
+initModel();
 export {
   r,
   User,

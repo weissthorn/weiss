@@ -381,7 +381,7 @@ const Navbar = observer((props: navbarProps) => {
                       style={{ width: 'auto', height: 30 }}
                     />
                   ) : (
-                    <Text span>{settings.siteName}</Text>
+                    <Text b>{settings.siteName}</Text>
                   )}
                 </Link>
               </NextLink>

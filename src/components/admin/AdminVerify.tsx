@@ -10,10 +10,10 @@ const AdminVerify = observer((props: any) => {
   React.useEffect(() => {
     router.isReady
       ? getSettings().then((settings: any) => {
-          let { data } = settings;
+          let data: any = settings?.data;
           data && data.status !== 'completed' ? goTo('/setup') : '';
         })
-      : null;
+      : false;
   }, [router]);
 
   const goTo = (value: string) => {

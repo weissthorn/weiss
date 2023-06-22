@@ -7,6 +7,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   await withAuth(req).then(async (auth) => {
     if (auth.success) {
       req.body.slug = slug();
+      req.body.language = req.body.language ? req.body.language : "en";
       let settings = new Settings(req.body);
       await settings
         .save()

@@ -18,6 +18,7 @@ const StartDiscussion = observer(() => {
   const token = useToken();
   const router = useRouter();
   const { channel } = router.query;
+  const [content, setContent] = useState('');
   const [{ settings, getSettings }] = useState(() => new SettingsStore());
   const [{ categories, getCategories }] = useState(() => new CategoryStore());
   const [{ loading, discussion, setDiscussion, newDiscussion }] = useState(
@@ -33,7 +34,7 @@ const StartDiscussion = observer(() => {
   }, [token, router]);
 
   const save = async () => {
-    const { title, categoryId, content } = discussion;
+    const { title, categoryId } = discussion;
     if (!title) {
       toast.error(
         useTranslation({
@@ -58,6 +59,7 @@ const StartDiscussion = observer(() => {
     } else {
       let data = {
         ...discussion,
+        content,
         userId: token.id
       };
 
@@ -75,8 +77,6 @@ const StartDiscussion = observer(() => {
       });
     }
   };
-
-  console.table(toJS(discussion));
 
   return (
     <div>
@@ -166,13 +166,13 @@ const StartDiscussion = observer(() => {
           </div>
           <Editor
             lang={settings.language}
-            value={discussion?.content}
+            value={content}
             height="200px"
             placeholder={useTranslation({
               lang: settings?.language,
               value: 'Type something memorable...'
             })}
-            onChange={(val) => setDiscussion({ ...discussion, content: val })}
+            onChange={(val) => setContent(val)}
           />
 
           {token.id ? (

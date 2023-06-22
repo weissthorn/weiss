@@ -1,11 +1,9 @@
+import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import dynamic from 'next/dynamic';
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false
 });
-import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
-
 import { useTranslation } from './intl/Translation';
-import { useEffect } from 'react';
 
 type editorProp = {
   lang?: any;
@@ -16,7 +14,6 @@ type editorProp = {
 };
 
 const Editor = (prop: editorProp) => {
-  useEffect(() => {}, [prop]);
   return (
     <div style={{ marginBottom: 15 }}>
       <SunEditor
@@ -50,9 +47,8 @@ const Editor = (prop: editorProp) => {
             ]
           ]
         }}
-        // setContents={prop.value}
         defaultValue={prop.value}
-        onChange={() => prop.onChange(prop.value)}
+        onChange={(val) => prop.onChange(val)}
       />
     </div>
   );

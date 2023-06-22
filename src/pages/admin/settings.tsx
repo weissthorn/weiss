@@ -122,27 +122,32 @@ const Settings = observer(() => {
                   </Text>
                 </div>
                 <div className="item">
-                  <Button icon={<Picture />} width="170px">
-                    <Translation
-                      lang={settings?.language}
-                      value="Upload favicon"
-                    />
-                    <input
-                      type="file"
-                      className="file-upload"
-                      id="site-favicon"
-                      onChange={() => handleUpload('#site-favicon')}
-                    />
-                  </Button>
-                  <Spacer inline />
-                  {settings.siteFavicon ? (
-                    <Image
-                      src={`/storage/${settings.siteFavicon}`}
-                      style={{ width: 'auto', height: 20 }}
-                    />
-                  ) : (
-                    ''
-                  )}
+                  <div className="discussion-container">
+                    <div>
+                      <Button icon={<Picture />} width="170px">
+                        <Translation
+                          lang={settings?.language}
+                          value="Upload favicon"
+                        />
+                        <input
+                          type="file"
+                          className="file-upload"
+                          id="site-favicon"
+                          onChange={() => handleUpload('#site-favicon')}
+                        />
+                      </Button>
+                    </div>
+                    <div>
+                      {settings.siteFavicon ? (
+                        <Image
+                          src={`/storage/${settings.siteFavicon}`}
+                          style={{ width: 'auto', height: 30 }}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="column">
@@ -152,27 +157,33 @@ const Settings = observer(() => {
                   </Text>
                 </div>
                 <div className="item">
-                  <Button icon={<Picture />} width="170px">
-                    <Translation
-                      lang={settings?.language}
-                      value="Upload logo"
-                    />
-                    <input
-                      type="file"
-                      className="file-upload"
-                      id="site-logo"
-                      onChange={() => handleUpload('#site-logo')}
-                    />
-                  </Button>
-                  <Spacer inline />
-                  {settings.siteLogo ? (
-                    <Image
-                      src={`/storage/${settings.siteLogo}`}
-                      style={{ width: 'auto', height: 20 }}
-                    />
-                  ) : (
-                    ''
-                  )}
+                  <div className="discussion-container">
+                    <div>
+                      <Button icon={<Picture />} width="170px">
+                        <Translation
+                          lang={settings?.language}
+                          value="Upload logo"
+                        />
+                        <input
+                          type="file"
+                          className="file-upload"
+                          id="site-logo"
+                          onChange={() => handleUpload('#site-logo')}
+                        />
+                      </Button>
+                    </div>
+                    <div>
+                      {settings.siteLogo ? (
+                        <Image
+                          src={`/storage/${settings.siteLogo}`}
+                          style={{ width: 'auto', height: 30 }}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                  </div>
+                  <Spacer />
                 </div>
               </div>
               <div className="column">

@@ -14,7 +14,15 @@ import {
   Badge,
   Image
 } from '@geist-ui/core';
-import { Sun, Moon, Bell, Power, Menu, ChevronDown } from '@geist-ui/icons';
+import {
+  Sun,
+  Moon,
+  Bell,
+  Power,
+  Menu,
+  ChevronDown,
+  ExternalLink
+} from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import useToken from '../Token';
@@ -188,7 +196,7 @@ const Navbar = observer((props: navbarProps) => {
                       style={{ width: 'auto', height: 32 }}
                     />
                   ) : (
-                    <Text span>{settings.siteName}</Text>
+                    <Text b>{settings.siteName}</Text>
                   )}
                 </Link>
               </NextLink>
@@ -199,6 +207,7 @@ const Navbar = observer((props: navbarProps) => {
                     lang={settings?.language}
                     value="Go to Discussions"
                   />
+                  &nbsp;&rarr;
                 </Link>
               </NextLink>
             </Grid>

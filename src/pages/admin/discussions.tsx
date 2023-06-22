@@ -10,7 +10,6 @@ import {
   Text
 } from '@geist-ui/core';
 import { ChevronRightCircle, ChevronLeftCircle } from '@geist-ui/icons';
-import moment from 'moment';
 import AdminNavbar from 'components/admin/Navbar';
 import SearchHeading from 'components/SearchHeading';
 import Sidebar from 'components/admin/Sidebar';

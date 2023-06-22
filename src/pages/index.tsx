@@ -139,7 +139,7 @@ const Home = observer(() => {
           ) : (
             ''
           )}
-          {discussions.map((item) => (
+          {discussions?.map((item) => (
             <Post
               key={item.id}
               lang={settings?.language}

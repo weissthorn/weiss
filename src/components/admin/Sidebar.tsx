@@ -73,7 +73,10 @@ const Sidebar = (props: sidebarProps) => {
         </NextLink>
 
         <NextLink href="/admin/reports">
-          <Link className={`link ${active === 'reports' ? 'active' : ''}`}>
+          <Link
+            href="/admin/reports"
+            className={`link ${active === 'reports' ? 'active' : ''}`}
+          >
             <Tooltip
               text={useTranslation({ lang: lang, value: 'Reports' })}
               placement="right"

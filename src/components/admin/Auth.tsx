@@ -12,7 +12,7 @@ const Auth = (props: any) => {
     let user: any = cookie;
     user = user && user._w_auth ? JSON.parse(user._w_auth) : null;
     setUser(user);
-    if (user.role !== 'admin') {
+    if (user?.role !== 'admin') {
       toast.error('You are not authorized to access this page', {
         duration: 3000
       });
@@ -20,7 +20,7 @@ const Auth = (props: any) => {
     }
   }, [router, cookie]);
 
-  if (user.role !== 'admin') {
+  if (user && user?.role !== 'admin') {
     // router.push('/login');
     return <></>;
   } else {
