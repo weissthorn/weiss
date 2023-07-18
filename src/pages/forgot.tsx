@@ -65,7 +65,7 @@ const Forgot = observer(() => {
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
-                <Image src={`/storage/${settings.siteLogo}`} />
+                <Image src={`/storage/${settings.siteLogo}`} height={'65px'} />
               ) : (
                 <Text h2 width={'100%'}>
                   {settings.siteName}

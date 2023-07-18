@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Spacer, Text, Button, Input, Card, Image } from '@geist-ui/core';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
-import {  parseCookies, destroyCookie } from 'nookies';
+import { parseCookies, destroyCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import UserStore from 'stores/user';
@@ -94,7 +94,7 @@ const Reset = observer(() => {
           <div className="boxed">
             <div className="logo-container center">
               {settings.siteLogo ? (
-                <Image src={`/storage/${settings.siteLogo}`} />
+                <Image src={`/storage/${settings.siteLogo}`} height={'65px'} />
               ) : (
                 <Text h2 width={'100%'}>
                   {settings.siteName}
