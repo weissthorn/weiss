@@ -31,7 +31,7 @@
     "mobx": "^6.6.1",
     "mobx-react-lite": "^3.4.0",
     "moment": "^2.29.3",
-    "next": "12.2.5",
+    "next": "14.1.1",
     "nodemailer": "^6.7.8",
     "nookies": "^2.5.2",
     "plyr": "^3.7.2",
