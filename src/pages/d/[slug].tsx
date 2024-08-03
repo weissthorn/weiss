@@ -16,7 +16,14 @@ import {
 } from '@geist-ui/core';
 import { formatDistance } from 'date-fns';
 import { es, fr, enUS, de, ja, ru, zhCN, ko } from 'date-fns/locale';
-import { ChevronDown, Lock, Eye, Heart, HeartFill } from '@geist-ui/icons';
+import {
+  ChevronDown,
+  Lock,
+  Eye,
+  Heart,
+  HeartFill,
+  AlertTriangleFill
+} from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import CountUp from 'react-countup';
@@ -383,7 +390,7 @@ const Discussion = observer(() => {
                                   href="#"
                                   onClick={() => report(discussion.id!, item)}
                                 >
-                                  {useTranslation({ lang: lang, value: item })}
+                                  {useTranslation({ lang: lang, value: item })}{' '}
                                 </Link>
                               </Popover.Item>
                             ))}
@@ -395,6 +402,15 @@ const Discussion = observer(() => {
                             lang={settings?.language}
                             value="Report"
                           />
+                          <span
+                            style={{
+                              position: 'relative',
+                              top: 3,
+                              paddingLeft: 5
+                            }}
+                          >
+                            <AlertTriangleFill size={15} color="orange" />
+                          </span>
                         </Text>
                       </Popover>
                     </>
@@ -429,9 +445,9 @@ const Discussion = observer(() => {
                       <ButtonDropdown.Item>
                         <Link
                           target="_blank"
-                          href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`}
+                          href={`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}&text=${discussion.title}`}
                         >
-                          <Image src="/images/twitter.svg" height={'18px'} />
+                          <Image src="/images/x.svg" height={'18px'} />
                           &nbsp;&nbsp;{' '}
                           <span style={{ position: 'relative', top: -5 }}>
                             Tweet
@@ -441,7 +457,7 @@ const Discussion = observer(() => {
                       <ButtonDropdown.Item>
                         <Link
                           target="_blank"
-                          href={`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}&text=${discussion.title}`}
+                          href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`}
                         >
                           <Image src="/images/facebook.svg" height={'18px'} />
                           &nbsp;&nbsp;{' '}
@@ -453,7 +469,7 @@ const Discussion = observer(() => {
                       <ButtonDropdown.Item>
                         <Link
                           target="_blank"
-                          href={`mailto:info@example.com?&subject=&cc=&bcc=&body=${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}%0A${discussion.title}`}
+                          href={`mailto:info@example.com?&subject=${discussion.title}&body=${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}%0A${discussion.title}`}
                         >
                           <Image src="/images/mail.svg" height={'18px'} />
                           &nbsp;&nbsp;{' '}

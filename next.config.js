@@ -9,7 +9,7 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
   compiler: {
-    removeConsole: false
+    removeConsole: true
   }
 };
 

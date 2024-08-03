@@ -180,6 +180,12 @@ body {
     opacity: 0;
   }
 
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
   .category-box {
     color: #fff;
     text-align: center;
@@ -712,6 +718,10 @@ body {
     .modal {
       width: 100%;
       max-width: 500px;
+    }
+
+    .category-grid {
+      grid-template-columns: 1fr;
     }
 
     .page-container {

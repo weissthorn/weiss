@@ -17,7 +17,7 @@ NEXT_PUBLIC_API_KEY="$hash"
 NEXT_PUBLIC_CLIENT_ORIGINS="localhost:2323"
 EOF
 
-echo "" >  .env.local
+echo >  .env.local
 
 echo -n "Enter domain or subdomain: "
 read domain

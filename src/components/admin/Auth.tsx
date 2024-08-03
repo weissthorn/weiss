@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
 
-const Auth = (props: any) => {
+
+const Auth = (props: { children: any }) => {
   const router = useRouter();
   const cookie = parseCookies();
   const [user, setUser] = React.useState<any>({ id: '', role: '' });

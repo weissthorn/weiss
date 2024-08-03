@@ -31,9 +31,9 @@ const Category = observer(() => {
         <h2>
           <Translation lang={settings?.language} value="Categories" />
         </h2>
-        <Grid.Container gap={1} mb="100px">
+        <div className="category-grid">
           {categories.slice().map((item) => (
-            <Grid xs={24} md={8} key={item.id}>
+            <div key={item.id}>
               <NextLink href={`/category/${item.slug}`}>
                 <Link width="100%">
                   <Card
@@ -53,9 +53,9 @@ const Category = observer(() => {
                   </Card>
                 </Link>
               </NextLink>
-            </Grid>
+            </div>
           ))}
-        </Grid.Container>
+        </div>
       </div>
     </div>
   );

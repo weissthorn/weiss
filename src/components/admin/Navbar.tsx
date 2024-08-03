@@ -235,7 +235,7 @@ const Navbar = observer((props: navbarProps) => {
               />
               <Spacer w={2} inline />
             </Grid>
-            <Grid xs={0} md={10}>
+            <Grid xs={0} md={12}>
               &nbsp;
             </Grid>
             <Grid xs={0} md={6}>
@@ -274,7 +274,7 @@ const Navbar = observer((props: navbarProps) => {
                 <></>
               )}
             </Grid>
-            <Grid xs={0} lg={1}>
+            {/* <Grid xs={0} lg={1}>
               <Spacer w={3} inline />
               <Popover content={themeMenu}>
                 <Button type="abort" auto scale={2 / 3}>
@@ -287,7 +287,7 @@ const Navbar = observer((props: navbarProps) => {
                   )}
                 </Button>
               </Popover>
-            </Grid>
+            </Grid> */}
           </Grid.Container>
         </div>
       </Card>

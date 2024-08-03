@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    ports:
+      - "2323:2323"
+  db:
+    image: "rethinkdb:latest"

@@ -371,12 +371,13 @@ const Navbar = observer((props: navbarProps) => {
       >
         <div className="inner">
           <Grid.Container gap={0}>
-            <Grid xs={16} md={4}>
+            <Grid xs={16} md={5}>
               <NextLink href="/">
                 <Link>
                   {settings.siteLogo ? (
                     <Image
                       className="site-logo"
+                      alt={settings?.siteName}
                       src={`/storage/${settings.siteLogo}`}
                       style={{ width: 'auto', height: 30 }}
                     />
@@ -386,7 +387,7 @@ const Navbar = observer((props: navbarProps) => {
                 </Link>
               </NextLink>
             </Grid>
-            <Grid xs={0} md={10}>
+            <Grid xs={0} md={13}>
               <NextLink href="/">
                 <Link>
                   <Translation lang={settings?.language} value="Discussions" />
@@ -430,12 +431,9 @@ const Navbar = observer((props: navbarProps) => {
                 ''
               )}
               <Spacer w={3} inline />
-              <Button
-                icon={<Menu />}
-                auto
-                scale={2 / 3}
-                onClick={() => setMenu(!show)}
-              />
+              <span className="pointer" onClick={() => setMenu(!show)}>
+                <Menu />
+              </span>
               <Spacer w={2} inline />
             </Grid>
 
@@ -508,7 +506,7 @@ const Navbar = observer((props: navbarProps) => {
                 </>
               )}
             </Grid>
-            <Grid xs={0} lg={1}>
+            {/* <Grid xs={0} lg={1}>
               <Popover content={themeMenu}>
                 <Button type="abort" auto scale={2 / 3}>
                   {theme === 'weiss-dark' ? (
@@ -520,7 +518,7 @@ const Navbar = observer((props: navbarProps) => {
                   )}
                 </Button>
               </Popover>
-            </Grid>
+            </Grid> */}
           </Grid.Container>
         </div>
       </Card>

@@ -6,12 +6,12 @@
     "setup": "bash setup.sh",
     "dev": "next dev -p 2323",
     "build": "next build",
-    "start": "yarn build && NODE_ENV=production pm2 start client.js -n 'weiss' --update-env",
-    "production": "yarn run build && NODE_ENV=production pm2 reload client.js -n 'weiss' --update-env",
+    "start": "yarn build && NODE_ENV=production node client.js",
+    "start:custom_server": "yarn run build && NODE_ENV=production pm2 start client.js -n 'weiss' --update-env",
     "start_db": "rethinkdb --bind all",
     "test:e2e": "playwright test",
-    "docker-build": "docker build -t weiss .",
-    "docker-run": "docker run -i -t weiss:latest"
+    "docker:build": "docker build -t kimolalekan/weiss .",
+    "docker:run": "docker run -p 2323:8080 kimolalekan/weiss:latest"
   },
   "browserslist": [
     "defaults and supports es6-module",
@@ -46,7 +46,6 @@
     "react-grid-system": "^8.1.4",
     "react-hot-toast": "^2.3.0",
     "react-login-github": "^1.0.8",
-    "react-twitter-login": "^1.5.0",
     "request-ip": "^3.3.0",
     "signale": "^1.4.0",
     "slugify": "^1.6.5",

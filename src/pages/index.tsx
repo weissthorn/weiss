@@ -20,6 +20,7 @@ import DiscussionStore from 'stores/discussion';
 import Contributors from 'components/Contributors';
 import AdminVerify from 'components/admin/AdminVerify';
 import { Translation } from 'components/intl/Translation';
+import CategoryHeader from 'components/CategoryHeader';
 
 const Home = observer(() => {
   const token = useToken();
@@ -93,6 +94,7 @@ const Home = observer(() => {
             style={{ marginBottom: 10 }}
             dangerouslySetInnerHTML={{ __html: settings.advert?.top! }}
           ></div>
+
           {token.id ? (
             <div className="mobile">
               <NextLink href={'/start-discussion'}>
@@ -108,6 +110,8 @@ const Home = observer(() => {
           ) : (
             ''
           )}
+
+          <CategoryHeader />
 
           <div className="custom-tab">
             <NextLink href="/popular">

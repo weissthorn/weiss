@@ -40,7 +40,7 @@ export const weissDark = Themes.createFromDark({
     purple: '#f81ce5',
     alert: '#ff0080',
     magenta: '#eb367f',
-    link: '#3291ff'
+    link: '#fff'
   },
   expressiveness: {
     linkStyle: 'none',
@@ -101,7 +101,7 @@ export const weissLight = Themes.createFromLight({
     purple: '#f81ce5',
     alert: '#ff0080',
     magenta: '#eb367f',
-    link: '#0070f3'
+    link: '#000'
   },
   expressiveness: {
     linkStyle: 'none',

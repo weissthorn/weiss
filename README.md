@@ -9,7 +9,7 @@ Modern, Minimalistic Discussion Software
 
 ### Prerequisite
 
-- [NodeJS 16 LTS upward](https://github.com/nvm-sh/nvm/blob/master/README.md)
+- [NodeJS 18 LTS upward](https://github.com/nvm-sh/nvm/blob/master/README.md)
 - [RethinkDB 2.4 upward](https://rethinkdb.com/docs/install/)
 
 ![image5](./public/screenshots/5.png)

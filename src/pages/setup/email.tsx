@@ -36,7 +36,7 @@ const EmailSetup = observer(() => {
   const save = async () => {
     if (!email?.host) {
       toast.error('Please provide SMTP host');
-    } else if (validateEmail(email?.email) === false) {
+    } else if (!email?.email) {
       toast.error('Invalid email address! Please provide SMTP email');
     } else if (!email.password) {
       toast.error('Please provide SMTP password.');

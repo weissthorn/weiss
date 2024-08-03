@@ -13,7 +13,6 @@ import dynamic from 'next/dynamic';
 const Github = dynamic(() => import('react-login-github'), {
   ssr: false
 });
-import TwitterLogin from 'react-twitter-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
@@ -163,7 +162,7 @@ const Login = observer(() => {
                 <Translation lang={settings?.language} value="Log In" />
               </Button>
               <Spacer />
-              {/* <Divider>OR</Divider>
+              <Divider>OR</Divider>
               <Spacer />
               <FacebookLogin
                 appId="575710046478104"
@@ -173,9 +172,13 @@ const Login = observer(() => {
                 callback={responseFacebook}
                 render={(renderProps) => (
                   <Button
-                    icon={<Facebook color="#fff" />}
+                    icon={<Image src="/images/facebook.svg" height={'30px'} />}
                     type="abort"
-                    style={{ backgroundColor: '#3b5998', color: '#fff' }}
+                    style={{
+                      // backgroundColor: '#3b5998',
+                      color: '#000',
+                      border: '1px solid #ccc'
+                    }}
                     width="100%"
                     onClick={renderProps.onClick}
                   >
@@ -183,17 +186,6 @@ const Login = observer(() => {
                   </Button>
                 )}
               />
-              <Spacer />
-              <TwitterLogin>
-                <Button
-                  style={{ backgroundColor: '#1D9BF0', color: '#fff' }}
-                  icon={<Twitter color="#fff" />}
-                  width="100%"
-                  type="abort"
-                >
-                  Continue with Twitter
-                </Button>
-              </TwitterLogin>
               <Spacer />
               <Github
                 className="git-button"
@@ -203,14 +195,37 @@ const Login = observer(() => {
                 onFailure={onFailure}
               >
                 <Button
-                  icon={<GithubIcon color="#fff" />}
+                  icon={<Image src="/images/google.png" height={'25px'} />}
                   width="100%"
                   type="abort"
-                  style={{ backgroundColor: '#171515', color: '#fff' }}
+                  style={{
+                    color: '#000',
+                    border: '1px solid #ccc'
+                  }}
+                >
+                  Continue to Google
+                </Button>
+              </Github>
+              <Spacer />
+              <Github
+                className="git-button"
+                disabled
+                clientId="ac56fad434a3a3c1561e"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+              >
+                <Button
+                  icon={<Image src="/images/github.png" height={'25px'} />}
+                  width="100%"
+                  type="abort"
+                  style={{
+                    color: '#000',
+                    border: '1px solid #ccc'
+                  }}
                 >
                   Continue to Github
                 </Button>
-              </Github> */}
+              </Github>
 
               <Text font={'14px'}>
                 <Translation
