@@ -309,47 +309,49 @@ const Settings = observer(() => {
             <Collapse
               title={useTranslation({
                 lang: settings?.language,
-                value: 'Social settings'
+                value: 'Security settings'
               })}
             >
               <div className="column">
                 <div className="item">
-                  <Text h6>Github Client ID</Text>
+                  <Text h6>
+                    <Translation
+                      lang={settings?.language}
+                      value="Cloudflare turnstile public key"
+                    />
+                  </Text>
                 </div>
                 <div className="item">
-                  <Input
+                  <Input.Password
                     width={'100%'}
-                    value={settings.github}
+                    value={settings.cloudflarePublicKey}
                     onChange={(e: any) =>
-                      setSettings({ ...settings, github: e.target.value })
+                      setSettings({
+                        ...settings,
+                        cloudflarePublicKey: e.target.value
+                      })
                     }
                   />
                 </div>
               </div>
               <div className="column">
                 <div className="item">
-                  <Text h6>Google Client ID</Text>
+                  <Text h6>
+                    <Translation
+                      lang={settings?.language}
+                      value="Cloudflare turnstile secret key"
+                    />
+                  </Text>
                 </div>
                 <div className="item">
-                  <Input
+                  <Input.Password
                     width={'100%'}
-                    value={settings.google}
+                    value={settings.cloudflareSecretKey}
                     onChange={(e: any) =>
-                      setSettings({ ...settings, google: e.target.value })
-                    }
-                  />
-                </div>
-              </div>
-              <div className="column">
-                <div className="item">
-                  <Text h6>Facebook App ID</Text>
-                </div>
-                <div className="item">
-                  <Input
-                    width={'100%'}
-                    value={settings.facebook}
-                    onChange={(e: any) =>
-                      setSettings({ ...settings, facebook: e.target.value })
+                      setSettings({
+                        ...settings,
+                        cloudflareSecretKey: e.target.value
+                      })
                     }
                   />
                 </div>

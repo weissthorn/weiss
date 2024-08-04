@@ -2652,12 +2652,52 @@ const dict = [
   {
     en: 'Sign in',
     es: 'Registrarse',
-    fr: 'Signer un signe ',
+    fr: 'Signer un signe',
     de: 'Anmelden',
     cn: '登录',
     ja: 'サインイン',
     ru: 'Войти',
     ko: '로그인'
+  },
+  {
+    en: 'Sign in to reply',
+    fr: 'Se connecter pour répondre',
+    es: 'Inicia sesión para responder',
+    de: 'Einloggen um zu antworten',
+    cn: '登录以回复',
+    ja: '返信するにはサインインしてください',
+    ko: '답글을 달려면 로그인하세요',
+    ru: 'Войдите, чтобы ответить'
+  },
+  {
+    en: 'Security settings',
+    fr: 'Paramètres de sécurité',
+    es: 'Configuración de seguridad',
+    de: 'Sicherheitseinstellungen',
+    cn: '安全设置',
+    ja: 'セキュリティ設定',
+    ko: '보안 설정',
+    ru: 'Настройки безопасности'
+  },
+  {
+    en: 'Cloudflare turnstile public key',
+    fr: 'Clé publique du tourniquet Cloudflare',
+    es: 'Clave pública del torniquete de Cloudflare',
+    de: 'Cloudflare-Drehkreuz öffentlicher Schlüssel',
+    cn: 'Cloudflare闸机公钥',
+    ja: 'Cloudflareターンスタイルの公開鍵',
+    ko: 'Cloudflare 회전식 공용 키',
+    ru: 'Публичный ключ турникета Cloudflare'
+  },
+  {
+    en: 'Cloudflare turnstile secret key',
+    fr: 'Clé secrète du tourniquet Cloudflare',
+    es: 'Clave secreta del torniquete de Cloudflare',
+    de: 'Geheimer Schlüssel für Cloudflare-Drehkreuz',
+    cn: 'Cloudflare闸机密钥',
+    ja: 'Cloudflareターンスタイルの秘密キー',
+    ko: 'Cloudflare 회전식 보안키',
+    ru: 'Секретный ключ турникета Cloudflare'
   }
 ];
 

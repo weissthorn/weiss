@@ -13,20 +13,8 @@ import {
 import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
 import toast, { Toaster } from 'react-hot-toast';
-import {
-  CheckInCircle,
-  CheckInCircleFill,
-  XCircleFill,
-  Facebook,
-  Twitter,
-  Github as GithubIcon
-} from '@geist-ui/icons';
-import dynamic from 'next/dynamic';
-const Github = dynamic(() => import('react-login-github'), {
-  ssr: false
-});
-import TwitterLogin from 'react-twitter-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { CheckInCircle, CheckInCircleFill, XCircleFill } from '@geist-ui/icons';
+import Turnstile, { useTurnstile } from 'react-turnstile';
 import Navbar from 'components/Navbar';
 import UserStore from 'stores/user';
 import useToken from 'components/Token';
@@ -38,7 +26,11 @@ import { Translation, useTranslation } from 'components/intl/Translation';
 const Signup = observer(() => {
   const token = useToken();
   const [status, setStatus] = useState('');
-  const [{ settings, getSettings }] = useState(() => new SettingsStore());
+  const [show, showButton] = useState(false);
+  const turnstile = useTurnstile();
+  const [{ settings, getSettings, verifyTurnstile }] = useState(
+    () => new SettingsStore()
+  );
   const [
     { loading, user, setUser, getUser, signup, checkUsername, updateUser }
   ] = useState(() => new UserStore());
@@ -46,14 +38,6 @@ const Signup = observer(() => {
   useEffect(() => {
     getSettings();
   }, [token]);
-
-  const responseFacebook = (response) => {
-    // console.log(response);
-  };
-
-  const onSuccess = () => {};
-
-  const onFailure = () => {};
 
   const processUsername = (val: string) => {
     if (val.length) {
@@ -245,65 +229,33 @@ const Signup = observer(() => {
                   setUser({ ...user, password: e.target.value });
                 }}
               />
-              <Spacer h={1.5} />
-              <Button
-                shadow
-                type="secondary"
-                width="100%"
-                loading={loading}
-                onClick={save}
-              >
-                <Translation lang={settings?.language} value="Signup" />
-              </Button>
               <Spacer h={1} />
-              {/* <Divider>OR</Divider>
-              <Spacer />
-              <FacebookLogin
-                appId="575710046478104"
-                autoLoad={true}
-                fields="name,email,picture"
-                // onClick={componentClicked}
-                callback={responseFacebook}
-                render={(renderProps) => (
-                  <Button
-                    icon={<Facebook color="#fff" />}
-                    type="abort"
-                    style={{ backgroundColor: '#3b5998', color: '#fff' }}
-                    width="100%"
-                    onClick={renderProps.onClick}
-                  >
-                    Continue with Facebook
-                  </Button>
-                )}
-              />
-              <Spacer />
-              <TwitterLogin>
+              <div className="center">
+                <Turnstile
+                  sitekey={settings.cloudflarePublicKey}
+                  onVerify={(token) => {
+                    verifyTurnstile({ token }).then((res: any) => {
+                      if (res.success) {
+                        showButton(true);
+                      } else {
+                        turnstile.reset();
+                      }
+                    });
+                  }}
+                />
+              </div>
+              {show && (
                 <Button
-                  style={{ backgroundColor: '#1D9BF0', color: '#fff' }}
-                  icon={<Twitter color="#fff" />}
+                  shadow
+                  type="secondary"
                   width="100%"
-                  type="abort"
+                  loading={loading}
+                  onClick={save}
                 >
-                  Continue with Twitter
+                  <Translation lang={settings?.language} value="Signup" />
                 </Button>
-              </TwitterLogin>
-              <Spacer />
-              <Github
-                className="git-button"
-                disabled
-                clientId="ac56fad434a3a3c1561e"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-              >
-                <Button
-                  icon={<GithubIcon color="#fff" />}
-                  width="100%"
-                  type="abort"
-                  style={{ backgroundColor: '#171515', color: '#fff' }}
-                >
-                  Continue to Github
-                </Button>
-              </Github> */}
+              )}
+              <Spacer h={1} />
               <Text font="14px">
                 <Translation
                   lang={settings?.language}

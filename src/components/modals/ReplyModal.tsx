@@ -109,7 +109,7 @@ const ReplyModal = observer((props: editorProps) => {
             ) : (
               <Link href="/login">
                 <Button loading={loading} type="success-light">
-                  <Translation lang={props.lang} value="Sign in to Reply" />
+                  <Translation lang={props.lang} value="Sign in to reply" />
                 </Button>
               </Link>
             )}

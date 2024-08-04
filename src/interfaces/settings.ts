@@ -4,9 +4,8 @@ export interface settingsProp {
   siteLogo?: string;
   siteName?: string;
   siteDescription?: string;
-  github?: string;
-  facebook?: string;
-  google?: string;
+  cloudflarePublicKey?: string;
+  cloudflareSecretKey?: string;
   advert?: { top: string; left: string; right: string; inner: string };
   email?: {
     host: string;

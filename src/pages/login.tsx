@@ -1,19 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  Spacer,
-  Text,
-  Link,
-  Button,
-  Input,
-  Card,
-  Divider,
-  Image
-} from '@geist-ui/core';
-import dynamic from 'next/dynamic';
-const Github = dynamic(() => import('react-login-github'), {
-  ssr: false
-});
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { Spacer, Text, Link, Button, Input, Card, Image } from '@geist-ui/core';
+import Turnstile, { useTurnstile } from 'react-turnstile';
 import Navbar from 'components/Navbar';
 import { observer } from 'mobx-react-lite';
 import { setCookie } from 'nookies';
@@ -22,26 +9,21 @@ import { useRouter } from 'next/router';
 import { Translation, useTranslation } from 'components/intl/Translation';
 import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
-import { Facebook, Twitter, Github as GithubIcon } from '@geist-ui/icons';
 
 const Login = observer(() => {
   const router = useRouter();
   const [status, setStatus] = useState('');
-  const [{ settings, getSettings }] = useState(() => new SettingsStore());
+  const [show, showButton] = useState(false);
+  const turnstile = useTurnstile();
+  const [{ settings, getSettings, verifyTurnstile }] = useState(
+    () => new SettingsStore()
+  );
   const [{ loading, user, setUser, login }] = useState(() => new UserStore());
   const { email, password } = user;
 
   useEffect(() => {
     getSettings();
   }, [status]);
-
-  const responseFacebook = (response) => {
-    // console.log(response);
-  };
-
-  const onSuccess = () => {};
-
-  const onFailure = () => {};
 
   const signIn = async () => {
     await login({ email, password }).then((res: any) => {
@@ -85,7 +67,7 @@ const Login = observer(() => {
       <Toaster />
       <div>
         <div className="page-container top-50">
-          <div className="boxed">
+          <div className="boxed mini">
             <div className="logo-container center">
               {settings.siteLogo ? (
                 <Image
@@ -149,84 +131,35 @@ const Login = observer(() => {
                   setUser({ ...user, ...{ password: e.target.value } })
                 }
               />
+              <Spacer h={1} />
+              <div className="center">
+                <Turnstile
+                  sitekey={settings.cloudflarePublicKey}
+                  onVerify={(token) => {
+                    verifyTurnstile({ token }).then((res: any) => {
+                      if (res.success) {
+                        showButton(true);
+                      } else {
+                        turnstile.reset();
+                      }
+                    });
+                  }}
+                />
+              </div>
+              {show && (
+                <Button
+                  shadow
+                  type="secondary"
+                  width="100%"
+                  loading={loading}
+                  onClick={() => {
+                    email && password ? signIn() : null;
+                  }}
+                >
+                  <Translation lang={settings?.language} value="Log In" />
+                </Button>
+              )}
               <Spacer h={1.5} />
-              <Button
-                shadow
-                type="secondary"
-                width="100%"
-                loading={loading}
-                onClick={() => {
-                  email && password ? signIn() : null;
-                }}
-              >
-                <Translation lang={settings?.language} value="Log In" />
-              </Button>
-              <Spacer />
-              <Divider>OR</Divider>
-              <Spacer />
-              <FacebookLogin
-                appId="575710046478104"
-                autoLoad={true}
-                fields="name,email,picture"
-                // onClick={componentClicked}
-                callback={responseFacebook}
-                render={(renderProps) => (
-                  <Button
-                    icon={<Image src="/images/facebook.svg" height={'30px'} />}
-                    type="abort"
-                    style={{
-                      // backgroundColor: '#3b5998',
-                      color: '#000',
-                      border: '1px solid #ccc'
-                    }}
-                    width="100%"
-                    onClick={renderProps.onClick}
-                  >
-                    Continue with Facebook
-                  </Button>
-                )}
-              />
-              <Spacer />
-              <Github
-                className="git-button"
-                disabled
-                clientId="ac56fad434a3a3c1561e"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-              >
-                <Button
-                  icon={<Image src="/images/google.png" height={'25px'} />}
-                  width="100%"
-                  type="abort"
-                  style={{
-                    color: '#000',
-                    border: '1px solid #ccc'
-                  }}
-                >
-                  Continue to Google
-                </Button>
-              </Github>
-              <Spacer />
-              <Github
-                className="git-button"
-                disabled
-                clientId="ac56fad434a3a3c1561e"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-              >
-                <Button
-                  icon={<Image src="/images/github.png" height={'25px'} />}
-                  width="100%"
-                  type="abort"
-                  style={{
-                    color: '#000',
-                    border: '1px solid #ccc'
-                  }}
-                >
-                  Continue to Github
-                </Button>
-              </Github>
-
               <Text font={'14px'}>
                 <Translation
                   lang={settings?.language}

@@ -11,7 +11,9 @@ body {
     min-height: 100vh;
     background-image: radial-gradient(#e3e3e3 1px, transparent 0),
       radial-gradient(#e3e3e3 1px, transparent 0);
-    background-position: 0 0, calc(0.5 * 25px) calc(0.5 * 25px);
+    background-position:
+      0 0,
+      calc(0.5 * 25px) calc(0.5 * 25px);
     background-attachment: fixed;
     background-size: calc(0.5 * 50px) calc(0.5 * 50px);
   }
@@ -164,6 +166,10 @@ body {
   .boxed {
     max-width: 500px;
     margin: 0 auto;
+
+    &.mini {
+      max-width: 400px;
+    }
   }
 
   .file-upload {
@@ -708,6 +714,11 @@ body {
     .main {
       width: 100% !important;
       margin-left: 0;
+
+      &.with-right {
+        padding-left: 0;
+        padding-right: 0;
+      }
 
       &.for-admin {
         width: calc(100% - 50px) !important;

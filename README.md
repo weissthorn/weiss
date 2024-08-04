@@ -38,7 +38,6 @@ yarn production
 ### Roadmap
 
 - &#x2611; User system (member & moderator)
-- &#x2610; Social login (Facebook, Google, Github, Twitter)
 - &#x2611; Communities or categories
 - &#x2611; Post and comment
 - &#x2611; Social share

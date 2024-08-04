@@ -22,7 +22,7 @@ import {
   Eye,
   Heart,
   HeartFill,
-  AlertTriangleFill
+  AlertTriangle
 } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
@@ -397,21 +397,18 @@ const Discussion = observer(() => {
                           </div>
                         }
                       >
-                        <Text className="pointer" font={'14px'}>
+                        <Button
+                          auto
+                          scale={0.2}
+                          type="warning"
+                          font={'13px'}
+                          iconRight={<AlertTriangle size={15} />}
+                        >
                           <Translation
                             lang={settings?.language}
                             value="Report"
                           />
-                          <span
-                            style={{
-                              position: 'relative',
-                              top: 3,
-                              paddingLeft: 5
-                            }}
-                          >
-                            <AlertTriangleFill size={15} color="orange" />
-                          </span>
-                        </Text>
+                        </Button>
                       </Popover>
                     </>
                   ) : (

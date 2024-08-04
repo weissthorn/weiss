@@ -76,6 +76,35 @@ export default class SettingsStore {
       .catch((err) => console.log(err));
   };
 
+  @action verifyTurnstile = async (body: { token: string }) => {
+    let url = `${API_URL}/settings/turnstile`;
+    this.loading = true;
+
+    return await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        apikey: API_KEY
+      },
+      body: JSON.stringify(body)
+    })
+      .then((res) => res.json())
+      .then((res: { success: boolean }) => {
+        if (res.success) {
+          setTimeout(() => {
+            this.loading = false;
+          }, 2000);
+          return res;
+        } else {
+          setTimeout(() => {
+            this.loading = false;
+          }, 2000);
+          return { success: res.success };
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   @action getSettings = async () => {
     let url = `${API_URL}/settings`;
 
