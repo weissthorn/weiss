@@ -1,4 +1,13 @@
 
+setup_env(){
+    if ! command -v yarn &> /dev/null; then
+  npm i -g yarn
+  fi
+
+
+# Install dependencies
+yarn install
+
 # Empty the .env file
 echo "" >  .env.local
 
@@ -16,3 +25,6 @@ NEXT_PUBLIC_API_URL=/api
 NEXT_PUBLIC_API_KEY="$hash"
 NEXT_PUBLIC_CLIENT_ORIGINS="localhost:2323"
 EOF
+}
+
+setup_env

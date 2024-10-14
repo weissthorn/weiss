@@ -1,13 +1,13 @@
 {
   "name": "weiss",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
-    "setup": "bash setup.sh",
+    "setup": "sh next-env.sh",
     "dev": "next dev -p 2323",
     "build": "next build",
-    "start": "yarn build && NODE_ENV=production node client.js",
-    "start:custom_server": "yarn run build && NODE_ENV=production pm2 start client.js -n 'weiss' --update-env",
+    "live": "yarn build && NODE_ENV=production node client.js",
+    "live:restart": "yarn run build && NODE_ENV=production pm2 start client.js -n 'weiss' --update-env",
     "start_db": "rethinkdb --bind all",
     "test:e2e": "playwright test",
     "docker:build": "docker build -t kimolalekan/weiss .",

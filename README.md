@@ -20,7 +20,7 @@ Modern, Minimalistic Discussion Software
 ### Installation
 
 ```
-sh <(curl https://create.tauri.app/sh)
+sh <(curl https://raw.githubusercontent.com/weissthorn/weiss/refs/heads/main/install/setup.sh)
 ```
 
 ### Development
