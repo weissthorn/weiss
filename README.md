@@ -20,7 +20,7 @@ Modern, Minimalistic Discussion Software
 ### Installation
 
 ```
-yarn
+sh <(curl https://create.tauri.app/sh)
 ```
 
 ### Development
