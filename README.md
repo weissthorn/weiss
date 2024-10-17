@@ -1,4 +1,4 @@
-# MinForum
+# Min Forum
 
 Minimalistic and Modern Discussion Software
 
