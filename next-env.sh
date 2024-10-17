@@ -1,3 +1,4 @@
+#!/bin/bash
 
 setup_env(){
     if ! command -v yarn &> /dev/null; then
