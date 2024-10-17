@@ -1,6 +1,6 @@
-# Weiss
+# MinForum
 
-Modern, Minimalistic Discussion Software
+Minimalistic and Modern Discussion Software
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b434e4594827418681e9fbe21566b45e)](https://www.codacy.com/gh/weissthorn/weiss/dashboard?utm_source=github.com&utm_medium=referral&utm_content=weissthorn/weiss&utm_campaign=Badge_Grade)
 ![git workflow](https://github.com/weissthorn/weiss/actions/workflows/main.yml/badge.svg?branch=main)
