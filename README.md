@@ -2,9 +2,9 @@
 
 Minimalistic and Modern Discussion Software
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b434e4594827418681e9fbe21566b45e)](https://www.codacy.com/gh/weissthorn/weiss/dashboard?utm_source=github.com&utm_medium=referral&utm_content=weissthorn/weiss&utm_campaign=Badge_Grade)
-![git workflow](https://github.com/weissthorn/weiss/actions/workflows/main.yml/badge.svg?branch=main)
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/kimolalekan/weiss)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b434e4594827418681e9fbe21566b45e)](https://www.codacy.com/gh/min-forum/min-forum/dashboard?utm_source=github.com&utm_medium=referral&utm_content=min-forum/min-forum&utm_campaign=Badge_Grade)
+![git workflow](https://github.com/min-forum/min-forum/actions/workflows/main.yml/badge.svg?branch=main)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/kimolalekan/min-forum)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ### Prerequisite
@@ -20,7 +20,7 @@ Minimalistic and Modern Discussion Software
 ### Installation
 
 ```
-sh <(curl https://raw.githubusercontent.com/weissthorn/weiss/refs/heads/main/install/setup.sh)
+sh <(curl https://raw.githubusercontent.com/min-forum/min-forum/main/install.sh)
 ```
 
 ### Development
